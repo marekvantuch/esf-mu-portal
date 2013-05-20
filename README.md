@@ -3,6 +3,32 @@ Guacamole-MUNI
 
 A project to integrate Guacamole with MUNI
 
+Technologies
+------------
+Core functionality will be covered by implementing Guacamole (http://guac-dev.org/). 
+It is an open-source library designed to connect to remote desktop from any HTML5 compatible web browser
+through a JAVA based server running on Apache TomCat. This highly lowers the requirements for client computer
+and software, eliminating any required instalation steps for end users and providing seamless connection to 
+the remote machine. 
+
+Overview
+
+Client -> Tunnel -> Remote Desktop
+
+Client
+
+HTML5 Client (Browser) implemented as a Drupal module on the site (independend on client operating system, 
+possibly usable on Android and IOS too).
+
+Tunnel
+
+JAVA based tunnel application running on Linux which provides the tunneling functionality for the HTML5 client. 
+It runs as a service on Apache TomCat server.
+
+Remote Desktop
+
+Any kind of VNC or RDP protocol based server, which provides the end point we are connecting to.
+
 Roadmap
 -------
 
