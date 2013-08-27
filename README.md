@@ -1,7 +1,7 @@
-Guacamole-MUNI
+ESF MU Portal
 ==============
 
-A project to integrate Guacamole with MUNI
+A project to implement a portal for ESF MU
 
 Technologies
 ------------
