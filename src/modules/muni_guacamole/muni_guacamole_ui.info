@@ -1,0 +1,6 @@
+name = MUNI Guacamole UI
+description = UI interface for the MUNI Guacamole module
+package = MUNI
+core = 7.x
+
+files[] = includes/muni_guacamile_ui.admin.inc

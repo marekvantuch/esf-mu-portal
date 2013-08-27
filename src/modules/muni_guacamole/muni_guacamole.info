@@ -1,0 +1,7 @@
+name = MUNI Guacamole
+description = Module for connection between Drupal and Guacamole server
+package = MUNI
+core = 7.x
+
+files[] = includes/muni_guacamole.variable.inc
+files[] = muni_guacamole.install
