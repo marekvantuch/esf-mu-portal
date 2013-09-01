@@ -1,5 +1,5 @@
 name = Green
-description = A simple 2 column layout for ESF project.
+description = Specific ESF project layout.
 preview = preview.png
 template = green-layout
 
