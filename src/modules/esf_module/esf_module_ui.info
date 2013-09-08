@@ -1,0 +1,8 @@
+name = ESF module UI
+description = UI interface for the ESF module
+package = ESF
+core = 7.x
+version = 7.x-1.0
+
+files[] = includes/esf_module_ui.admin.inc
+dependencies[] = esf_module

@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function esf_module_ui_menu() {
+  // Top level "Store" container.
+  $items['admin/config/esf'] = array(
+    'title' => 'ESF Portal',
+    'description' => 'ESF portal related settings.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer esf'),
+    'file path' => drupal_get_path('module', 'system'),
+    'file' => 'system.admin.inc',
+    'weight' => -50,
+  );
+  
+  $items['admin/config/esf/settings'] = array(
+    'title' => 'Settings',
+    'description' => 'Configuration of the general settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('variable_module_form', 'esf_module'),
+    'access arguments' => array('administer esf'),
+    'weight' => 10,
+  );
+  
+  return $items;
+}

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_init()
+ */
+function esf_module_init() {
+  $settings = array(
+    'esf' => array(
+      'protocol' => variable_get_value('aspi_protocol'),
+      'url' => variable_get_value('guacamole_server_url'),
+      'port' => variable_get_value('guacamole_server_port'),
+      )
+    );
+  drupal_add_js($settings, 'setting');
+}
+
+/**
+ * Implements hook_permission().
+ */
+function esf_module_permission() {
+  return array(
+    'administer esf' => array(
+      'title' => t('Administer ESF configuration'),
+      'description' => t('Allows to set or alter settings for Guacamole server'),
+    ),
+  );
+}

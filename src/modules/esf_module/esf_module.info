@@ -1,0 +1,10 @@
+name = ESF module
+description = Module for the ESF Portal project
+package = ESF
+core = 7.x
+version = 7.x-1.0
+
+files[] = esf_module.variable.inc
+files[] = esf_module.install
+dependencies[] = variable
+scripts[] = js/esf_module.js
