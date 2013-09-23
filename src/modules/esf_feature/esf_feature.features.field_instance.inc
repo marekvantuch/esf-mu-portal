@@ -138,6 +138,49 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-legal_subject-field_school_subjects'
+  $field_instances['node-legal_subject-field_school_subjects'] = array(
+    'bundle' => 'legal_subject',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_school_subjects',
+    'label' => 'School Subjects',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-legal_subject-field_weight'
   $field_instances['node-legal_subject-field_weight'] = array(
     'bundle' => 'legal_subject',
@@ -473,6 +516,7 @@ function esf_feature_field_default_field_instances() {
   t('Body');
   t('Code');
   t('Generality');
+  t('School Subjects');
   t('Temporary until weight field is installed');
   t('Weight');
   t('Year');

@@ -12,6 +12,46 @@ function esf_feature_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
+  $export['menu-menu-footer-menu'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'menu-footer-menu',
+    'module' => 'menu',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega_esf' => array(
+        'region' => 'footer',
+        'status' => 1,
+        'theme' => 'omega_esf',
+        'weight' => -9,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['quicktabs-navigation'] = array(
+    'cache' => 1,
+    'custom' => 0,
+    'delta' => 'navigation',
+    'module' => 'quicktabs',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega_esf' => array(
+        'region' => 'navigation',
+        'status' => 1,
+        'theme' => 'omega_esf',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 0,
+  );
+
   $export['system-main'] = array(
     'cache' => -1,
     'custom' => 0,
@@ -62,8 +102,8 @@ function esf_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'omega_esf' => array(
-        'region' => 'navigation',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'omega_esf',
         'weight' => -8,
       ),
@@ -146,6 +186,66 @@ function esf_feature_default_fe_block_settings() {
         'status' => 1,
         'theme' => 'omega_esf',
         'weight' => -11,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['views-jokes-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'jokes-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega_esf' => array(
+        'region' => 'postscript',
+        'status' => 1,
+        'theme' => 'omega_esf',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['views-news-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'news-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega_esf' => array(
+        'region' => 'sidebar',
+        'status' => 1,
+        'theme' => 'omega_esf',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['views-stories-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'stories-block',
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'omega_esf' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega_esf',
+        'weight' => 0,
       ),
     ),
     'title' => '',
