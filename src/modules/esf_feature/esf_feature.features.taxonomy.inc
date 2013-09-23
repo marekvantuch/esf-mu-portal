@@ -9,17 +9,17 @@
  */
 function esf_feature_taxonomy_default_vocabularies() {
   return array(
-    'legal_subject' => array(
-      'name' => 'Legal Subject',
-      'machine_name' => 'legal_subject',
+    'level_of_generality' => array(
+      'name' => 'Level of Generality',
+      'machine_name' => 'level_of_generality',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -10,
     ),
-    'school_subject' => array(
-      'name' => 'School Subject',
-      'machine_name' => 'school_subject',
+    'school_year' => array(
+      'name' => 'School year',
+      'machine_name' => 'school_year',
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',

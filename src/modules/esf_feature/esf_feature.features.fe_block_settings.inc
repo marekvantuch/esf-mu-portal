@@ -85,7 +85,7 @@ function esf_feature_default_fe_block_settings() {
         'region' => 'sidebar',
         'status' => 1,
         'theme' => 'omega_esf',
-        'weight' => -6,
+        'weight' => -9,
       ),
     ),
     'title' => '',
@@ -122,10 +122,10 @@ function esf_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'omega_esf' => array(
-        'region' => 'sidebar',
+        'region' => 'header',
         'status' => 1,
         'theme' => 'omega_esf',
-        'weight' => -7,
+        'weight' => -10,
       ),
     ),
     'title' => '',
@@ -142,10 +142,10 @@ function esf_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'omega_esf' => array(
-        'region' => 'sidebar',
+        'region' => 'header',
         'status' => 1,
         'theme' => 'omega_esf',
-        'weight' => -8,
+        'weight' => -11,
       ),
     ),
     'title' => '',

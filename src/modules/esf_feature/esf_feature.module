@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the ESF Feature feature.
  */
+
+include_once 'esf_feature.features.inc';
