@@ -185,7 +185,7 @@ function esf_feature_field_default_field_instances() {
     'bundle' => 'legal_subject',
     'default_value' => array(
       0 => array(
-        'vname' => 'reference_legal_subject_to_school_subject|default',
+        'vname' => 'reference_school_subject_to_legal_subject|default',
         'vargs' => '[node:nid]',
       ),
     ),
@@ -212,15 +212,16 @@ function esf_feature_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
+        'admin_views_node' => 0,
+        'admin_views_user' => 0,
         'backoffice_content' => 0,
         'jokes' => 0,
         'legal_subjects' => 0,
         'news' => 0,
         'reference_legal_subject_to_school_subject' => 0,
-        'reference_school_subject_to_legal_subject' => 0,
+        'reference_school_subject_to_legal_subject' => 'reference_school_subject_to_legal_subject',
         'school_subjects' => 0,
         'stories' => 0,
-        'weight' => 0,
       ),
       'force_default' => 1,
       'user_register_form' => FALSE,
@@ -486,7 +487,7 @@ function esf_feature_field_default_field_instances() {
     'bundle' => 'school_subject',
     'default_value' => array(
       0 => array(
-        'vname' => 'reference_school_subject_to_legal_subject|default',
+        'vname' => 'reference_legal_subject_to_school_subject|default',
         'vargs' => '[node:nid]',
       ),
     ),
@@ -513,15 +514,16 @@ function esf_feature_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
+        'admin_views_node' => 0,
+        'admin_views_user' => 0,
         'backoffice_content' => 0,
         'jokes' => 0,
         'legal_subjects' => 0,
         'news' => 0,
-        'reference_legal_subject_to_school_subject' => 0,
+        'reference_legal_subject_to_school_subject' => 'reference_legal_subject_to_school_subject',
         'reference_school_subject_to_legal_subject' => 0,
         'school_subjects' => 0,
         'stories' => 0,
-        'weight' => 0,
       ),
       'force_default' => 1,
       'user_register_form' => FALSE,
