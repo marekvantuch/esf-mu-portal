@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ESF Feature UI feature.
+ */
+
+include_once 'esf_feature_ui.features.inc';

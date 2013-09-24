@@ -64,9 +64,11 @@ function esf_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -106,11 +108,11 @@ function esf_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -147,12 +149,9 @@ function esf_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 3,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -181,6 +180,60 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-legal_subject-field_school_subjects_view'
+  $field_instances['node-legal_subject-field_school_subjects_view'] = array(
+    'bundle' => 'legal_subject',
+    'default_value' => array(
+      0 => array(
+        'vname' => 'reference_legal_subject_to_school_subject|default',
+        'vargs' => '[node:nid]',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'viewfield',
+        'settings' => array(),
+        'type' => 'viewfield_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_school_subjects_view',
+    'label' => 'School Subjects View',
+    'required' => 0,
+    'settings' => array(
+      'allowed_views' => array(
+        'backoffice_content' => 0,
+        'jokes' => 0,
+        'legal_subjects' => 0,
+        'news' => 0,
+        'reference_legal_subject_to_school_subject' => 0,
+        'reference_school_subject_to_legal_subject' => 0,
+        'school_subjects' => 0,
+        'stories' => 0,
+        'weight' => 0,
+      ),
+      'force_default' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'viewfield',
+      'settings' => array(),
+      'type' => 'viewfield_select',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-legal_subject-field_weight'
   $field_instances['node-legal_subject-field_weight'] = array(
     'bundle' => 'legal_subject',
@@ -189,11 +242,10 @@ function esf_feature_field_default_field_instances() {
     'description' => 'Temporary until weight field is installed',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -321,7 +373,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -361,11 +413,11 @@ function esf_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -401,11 +453,10 @@ function esf_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
+        'label' => 'hidden',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -430,6 +481,60 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-school_subject-field_legal_subjects_view'
+  $field_instances['node-school_subject-field_legal_subjects_view'] = array(
+    'bundle' => 'school_subject',
+    'default_value' => array(
+      0 => array(
+        'vname' => 'reference_school_subject_to_legal_subject|default',
+        'vargs' => '[node:nid]',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'viewfield',
+        'settings' => array(),
+        'type' => 'viewfield_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_legal_subjects_view',
+    'label' => 'Legal Subjects View',
+    'required' => 0,
+    'settings' => array(
+      'allowed_views' => array(
+        'backoffice_content' => 0,
+        'jokes' => 0,
+        'legal_subjects' => 0,
+        'news' => 0,
+        'reference_legal_subject_to_school_subject' => 0,
+        'reference_school_subject_to_legal_subject' => 0,
+        'school_subjects' => 0,
+        'stories' => 0,
+        'weight' => 0,
+      ),
+      'force_default' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'viewfield',
+      'settings' => array(),
+      'type' => 'viewfield_select',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-school_subject-field_year'
   $field_instances['node-school_subject-field_year'] = array(
     'bundle' => 'school_subject',
@@ -438,11 +543,11 @@ function esf_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -516,7 +621,9 @@ function esf_feature_field_default_field_instances() {
   t('Body');
   t('Code');
   t('Generality');
+  t('Legal Subjects View');
   t('School Subjects');
+  t('School Subjects View');
   t('Temporary until weight field is installed');
   t('Weight');
   t('Year');

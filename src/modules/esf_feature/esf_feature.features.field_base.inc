@@ -102,6 +102,22 @@ function esf_feature_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_legal_subjects_view'
+  $field_bases['field_legal_subjects_view'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_legal_subjects_view',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'viewfield',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'viewfield',
+  );
+
   // Exported field_base: 'field_school_subjects'
   $field_bases['field_school_subjects'] = array(
     'active' => 1,
@@ -125,24 +141,39 @@ function esf_feature_field_default_field_bases() {
     'locked' => 0,
     'module' => 'entityreference',
     'settings' => array(
-      'handler' => 'base',
+      'handler' => 'views',
       'handler_settings' => array(
         'behaviors' => array(
           'views-select-list' => array(
             'status' => 0,
           ),
         ),
-        'sort' => array(
-          'type' => 'none',
-        ),
-        'target_bundles' => array(
-          'school_subject' => 'school_subject',
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'school_subjects',
         ),
       ),
       'target_type' => 'node',
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_school_subjects_view'
+  $field_bases['field_school_subjects_view'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_school_subjects_view',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'viewfield',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'viewfield',
   );
 
   // Exported field_base: 'field_weight'
