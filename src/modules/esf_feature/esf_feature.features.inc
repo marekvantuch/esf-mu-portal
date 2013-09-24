@@ -30,7 +30,7 @@ function esf_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
     'legal_subject' => array(
@@ -38,7 +38,7 @@ function esf_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
     'news' => array(
@@ -46,15 +46,15 @@ function esf_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
     'page' => array(
-      'name' => t('Page'),
+      'name' => t('Stránka'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
     'school_subject' => array(
@@ -62,7 +62,7 @@ function esf_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
     'story' => array(
@@ -70,7 +70,7 @@ function esf_feature_node_info() {
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Nadpis'),
       'help' => '',
     ),
   );

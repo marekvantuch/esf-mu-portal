@@ -24,10 +24,13 @@ function esf_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Jokes';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -67,13 +70,14 @@ function esf_feature_views_default_views() {
   $translatables['jokes'] = array(
     t('Master'),
     t('Jokes'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
     t('Block'),
+    t('more'),
   );
   $export['jokes'] = $view;
 
@@ -90,10 +94,13 @@ function esf_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
@@ -125,10 +132,10 @@ function esf_feature_views_default_views() {
   );
   $translatables['legal_subjects'] = array(
     t('Master'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
   );
@@ -148,12 +155,22 @@ function esf_feature_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'News';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Vynechat položky';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« první';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ předchozí';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'následující ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
   /* Field: Content: Title */
@@ -196,20 +213,21 @@ function esf_feature_views_default_views() {
   $translatables['news'] = array(
     t('Master'),
     t('News'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('Položek na stránku'),
+    t('- Vše -'),
+    t('Vynechat položky'),
+    t('« první'),
+    t('‹ předchozí'),
+    t('následující ›'),
+    t('poslední »'),
     t('Page'),
+    t('more'),
     t('Block'),
   );
   $export['news'] = $view;
@@ -227,11 +245,21 @@ function esf_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Vynechat položky';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« první';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ předchozí';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'následující ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -272,12 +300,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['relationship'] = 'reverse_field_school_subjects_node';
+  $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Vše';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -298,23 +328,23 @@ function esf_feature_views_default_views() {
   );
   $translatables['reference_legal_subject_to_school_subject'] = array(
     t('Master'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('Položek na stránku'),
+    t('- Vše -'),
+    t('Vynechat položky'),
+    t('« první'),
+    t('‹ předchozí'),
+    t('následující ›'),
+    t('poslední »'),
     t('Legal Subject'),
     t('Title'),
-    t('Code'),
-    t('All'),
+    t('Kód'),
+    t('Vše'),
   );
   $export['reference_legal_subject_to_school_subject'] = $view;
 
@@ -331,11 +361,21 @@ function esf_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Vynechat položky';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« první';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ předchozí';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'následující ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -376,12 +416,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['relationship'] = 'field_school_subjects_target_id';
+  $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Vše';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -402,23 +444,23 @@ function esf_feature_views_default_views() {
   );
   $translatables['reference_school_subject_to_legal_subject'] = array(
     t('Master'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('Položek na stránku'),
+    t('- Vše -'),
+    t('Vynechat položky'),
+    t('« první'),
+    t('‹ předchozí'),
+    t('následující ›'),
+    t('poslední »'),
     t('School Subject'),
     t('Title'),
-    t('Code'),
-    t('All'),
+    t('Kód'),
+    t('Vše'),
   );
   $export['reference_school_subject_to_legal_subject'] = $view;
 
@@ -435,10 +477,13 @@ function esf_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
@@ -533,28 +578,31 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['field_code']['id'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
+  $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Vše';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $translatables['school_subjects'] = array(
     t('Master'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
     t('Entity Reference'),
+    t('more'),
     t('Table'),
-    t('Code'),
-    t('All'),
+    t('Kód'),
+    t('Vše'),
   );
   $export['school_subjects'] = $view;
 
@@ -573,12 +621,22 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['title'] = 'Stories';
   $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Vynechat položky';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« první';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ předchozí';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'následující ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
   /* Field: Content: Title */
@@ -628,20 +686,21 @@ function esf_feature_views_default_views() {
   $translatables['stories'] = array(
     t('Master'),
     t('Stories'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
+    t('Řadit dle'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('Položek na stránku'),
+    t('- Vše -'),
+    t('Vynechat položky'),
+    t('« první'),
+    t('‹ předchozí'),
+    t('následující ›'),
+    t('poslední »'),
     t('Page'),
+    t('more'),
     t('Block'),
   );
   $export['stories'] = $view;

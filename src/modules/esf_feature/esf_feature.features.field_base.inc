@@ -118,6 +118,33 @@ function esf_feature_field_default_field_bases() {
     'type' => 'viewfield',
   );
 
+  // Exported field_base: 'field_materials'
+  $field_bases['field_materials'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_materials',
+    'foreign keys' => array(
+      'file_managed' => array(
+        'columns' => array(
+          'fid' => 'fid',
+        ),
+        'table' => 'file_managed',
+      ),
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'mediafield',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'media',
+  );
+
   // Exported field_base: 'field_school_subjects'
   $field_bases['field_school_subjects'] = array(
     'active' => 1,

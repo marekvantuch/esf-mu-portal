@@ -140,6 +140,61 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-legal_subject-field_materials'
+  $field_instances['node-legal_subject-field_materials'] = array(
+    'bundle' => 'legal_subject',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'mediafield',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'media',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_materials',
+    'label' => 'Materials',
+    'required' => 0,
+    'settings' => array(
+      'file_extensions' => 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv weba webp webm',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'media_generic',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-legal_subject-field_school_subjects'
   $field_instances['node-legal_subject-field_school_subjects'] = array(
     'bundle' => 'legal_subject',
@@ -624,6 +679,7 @@ function esf_feature_field_default_field_instances() {
   t('Code');
   t('Generality');
   t('Legal Subjects View');
+  t('Materials');
   t('School Subjects');
   t('School Subjects View');
   t('Temporary until weight field is installed');
