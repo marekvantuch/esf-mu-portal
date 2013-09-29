@@ -21,6 +21,66 @@ function esf_feature_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_eck_bundle_info().
+ */
+function esf_feature_eck_bundle_info() {
+  $items = array(
+  'law_law' => array(
+  'machine_name' => 'law_law',
+  'entity_type' => 'law',
+  'name' => 'law',
+  'label' => 'Law',
+  'config' => array(
+    'extra_fields' => array(
+      'title' => array(
+        'form' => array(
+          'label' => 'Title',
+          'description' => '',
+          'widget' => array(
+            'type' => 'text',
+            'settings' => array(
+              'size' => 60,
+              'max_length' => 255,
+            ),
+          ),
+          'default_value' => '',
+        ),
+      ),
+    ),
+  ),
+),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_eck_entity_type_info().
+ */
+function esf_feature_eck_entity_type_info() {
+$items = array(
+       'law' => array(
+  'name' => 'law',
+  'label' => 'Law',
+  'properties' => array(
+    'title' => array(
+      'label' => 'Title',
+      'type' => 'text',
+      'behavior' => 'title',
+      'schema' => NULL,
+    ),
+    'changed' => array(
+      'label' => 'Changed',
+      'type' => 'integer',
+      'behavior' => 'changed',
+      'schema' => NULL,
+    ),
+  ),
+),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_node_info().
  */
 function esf_feature_node_info() {

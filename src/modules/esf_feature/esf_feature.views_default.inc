@@ -13,7 +13,7 @@ function esf_feature_views_default_views() {
   $view = new view();
   $view->name = 'jokes';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'Jokes';
   $view->core = 7;
@@ -84,7 +84,7 @@ function esf_feature_views_default_views() {
   $view = new view();
   $view->name = 'legal_subjects';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'Legal Subjects';
   $view->core = 7;
@@ -144,7 +144,7 @@ function esf_feature_views_default_views() {
   $view = new view();
   $view->name = 'news';
   $view->description = 'Displaying news in various lists';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'News';
   $view->core = 7;
@@ -233,9 +233,119 @@ function esf_feature_views_default_views() {
   $export['news'] = $view;
 
   $view = new view();
+  $view->name = 'reference_law_to_legal_subject';
+  $view->description = 'Table displaying laws related to one legal subject';
+  $view->tag = 'ESF';
+  $view->base_table = 'node';
+  $view->human_name = 'Reference: Law to Legal Subject';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_laws_target_id']['id'] = 'field_laws_target_id';
+  $handler->display->display_options['relationships']['field_laws_target_id']['table'] = 'field_data_field_laws';
+  $handler->display->display_options['relationships']['field_laws_target_id']['field'] = 'field_laws_target_id';
+  $handler->display->display_options['relationships']['field_laws_target_id']['label'] = 'Law';
+  $handler->display->display_options['relationships']['field_laws_target_id']['required'] = TRUE;
+  /* Field: Law: Law type */
+  $handler->display->display_options['fields']['field_law_type']['id'] = 'field_law_type';
+  $handler->display->display_options['fields']['field_law_type']['table'] = 'field_data_field_law_type';
+  $handler->display->display_options['fields']['field_law_type']['field'] = 'field_law_type';
+  $handler->display->display_options['fields']['field_law_type']['relationship'] = 'field_laws_target_id';
+  $handler->display->display_options['fields']['field_law_type']['label'] = 'Type';
+  $handler->display->display_options['fields']['field_law_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_law_type']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Law: Number */
+  $handler->display->display_options['fields']['field_number']['id'] = 'field_number';
+  $handler->display->display_options['fields']['field_number']['table'] = 'field_data_field_number';
+  $handler->display->display_options['fields']['field_number']['field'] = 'field_number';
+  $handler->display->display_options['fields']['field_number']['relationship'] = 'field_laws_target_id';
+  $handler->display->display_options['fields']['field_number']['element_label_colon'] = FALSE;
+  /* Field: Law: ASPI */
+  $handler->display->display_options['fields']['field_aspi']['id'] = 'field_aspi';
+  $handler->display->display_options['fields']['field_aspi']['table'] = 'field_data_field_aspi';
+  $handler->display->display_options['fields']['field_aspi']['field'] = 'field_aspi';
+  $handler->display->display_options['fields']['field_aspi']['relationship'] = 'field_laws_target_id';
+  /* Field: Law: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'eck_law';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_laws_target_id';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'legal_subject' => 'legal_subject',
+  );
+  $translatables['reference_law_to_legal_subject'] = array(
+    t('Master'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Law'),
+    t('Type'),
+    t('Number'),
+    t('ASPI'),
+    t('Title'),
+    t('All'),
+  );
+  $export['reference_law_to_legal_subject'] = $view;
+
+  $view = new view();
   $view->name = 'reference_legal_subject_to_school_subject';
   $view->description = 'Table displaying legal subjects related to one school subject';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'Reference: Legal Subject to School Subject';
   $view->core = 7;
@@ -282,11 +392,19 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['label'] = 'No Results';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'K tomuto předmětu se nevztahují žádné obory práva.';
   /* Relationship: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['id'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['field'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['label'] = 'Legal Subject';
+  $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -341,6 +459,8 @@ function esf_feature_views_default_views() {
     t('‹ předchozí'),
     t('následující ›'),
     t('poslední »'),
+    t('No Results'),
+    t('K tomuto předmětu se nevztahují žádné obory práva.'),
     t('Legal Subject'),
     t('Title'),
     t('Kód'),
@@ -351,7 +471,7 @@ function esf_feature_views_default_views() {
   $view = new view();
   $view->name = 'reference_school_subject_to_legal_subject';
   $view->description = 'Table displaying school subjects related to one legal subject';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'Reference: School Subject to Legal Subject';
   $view->core = 7;
@@ -398,11 +518,19 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['label'] = 'No results';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'K tomuto oboru práva se nevztahují žádné předměty.';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['id'] = 'field_school_subjects_target_id';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['table'] = 'field_data_field_school_subjects';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['field'] = 'field_school_subjects_target_id';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['label'] = 'School Subject';
+  $handler->display->display_options['relationships']['field_school_subjects_target_id']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -457,6 +585,8 @@ function esf_feature_views_default_views() {
     t('‹ předchozí'),
     t('následující ›'),
     t('poslední »'),
+    t('No results'),
+    t('K tomuto oboru práva se nevztahují žádné předměty.'),
     t('School Subject'),
     t('Title'),
     t('Kód'),
@@ -467,7 +597,7 @@ function esf_feature_views_default_views() {
   $view = new view();
   $view->name = 'school_subjects';
   $view->description = '';
-  $view->tag = 'default';
+  $view->tag = 'ESF';
   $view->base_table = 'node';
   $view->human_name = 'School Subjects';
   $view->core = 7;

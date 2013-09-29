@@ -11,11 +11,11 @@ function esf_feature_ui_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'backoffice_content';
-  $view->description = 'Administative pages for handling site specific content';
-  $view->tag = 'default';
+  $view->name = 'workbench_esf';
+  $view->description = 'Workbench pages for handling ESF site specific content';
+  $view->tag = 'Workbench';
   $view->base_table = 'node';
-  $view->human_name = 'Backoffice: Content';
+  $view->human_name = 'Workbench: ESF Specific';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -25,6 +25,7 @@ function esf_feature_ui_views_default_views() {
   $handler->display->display_options['title'] = 'Stories';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access workbench';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -232,6 +233,7 @@ function esf_feature_ui_views_default_views() {
     'field_code' => 'field_code',
     'status' => 'status',
     'field_school_subjects' => 'field_school_subjects',
+    'field_laws' => 'field_laws',
     'edit_node' => 'edit_node',
     'delete_node' => 'edit_node',
     'weight' => 'weight',
@@ -265,6 +267,11 @@ function esf_feature_ui_views_default_views() {
       'empty_column' => 0,
     ),
     'field_school_subjects' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_laws' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -437,6 +444,15 @@ function esf_feature_ui_views_default_views() {
     'link' => 0,
   );
   $handler->display->display_options['fields']['field_school_subjects']['delta_offset'] = '0';
+  /* Field: Content: Laws */
+  $handler->display->display_options['fields']['field_laws']['id'] = 'field_laws';
+  $handler->display->display_options['fields']['field_laws']['table'] = 'field_data_field_laws';
+  $handler->display->display_options['fields']['field_laws']['field'] = 'field_laws';
+  $handler->display->display_options['fields']['field_laws']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_laws']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_laws']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -471,7 +487,7 @@ function esf_feature_ui_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'legal_subject' => 'legal_subject',
   );
-  $handler->display->display_options['path'] = 'admin/content/legal-sbjects';
+  $handler->display->display_options['path'] = 'admin/workbench/legal-sbjects';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Legal Subjects';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -620,6 +636,16 @@ function esf_feature_ui_views_default_views() {
   $handler->display->display_options['fields']['field_year']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_year']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_year']['delta_offset'] = '0';
+  /* Field: Content: Materials */
+  $handler->display->display_options['fields']['field_materials']['id'] = 'field_materials';
+  $handler->display->display_options['fields']['field_materials']['table'] = 'field_data_field_materials';
+  $handler->display->display_options['fields']['field_materials']['field'] = 'field_materials';
+  $handler->display->display_options['fields']['field_materials']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_materials']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_materials']['settings'] = array(
+    'file_view_mode' => 'default',
+  );
+  $handler->display->display_options['fields']['field_materials']['delta_offset'] = '0';
   /* Field: Content: Published */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -650,72 +676,14 @@ function esf_feature_ui_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'school_subject' => 'school_subject',
   );
-  $handler->display->display_options['path'] = 'admin/content/school-sbjects';
+  $handler->display->display_options['path'] = 'admin/workbench/school-sbjects';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'School Subjects';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: News */
-  $handler = $view->new_display('page', 'News', 'news');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'News';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'news' => 'news',
-  );
-  $handler->display->display_options['path'] = 'admin/content/news';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'News';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Jokes */
-  $handler = $view->new_display('page', 'Jokes', 'jokes');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Jokes';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'joke' => 'joke',
-  );
-  $handler->display->display_options['path'] = 'admin/content/jokes';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Jokes';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Stories */
-  $handler = $view->new_display('page', 'Stories', 'stories');
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'story' => 'story',
-  );
-  $handler->display->display_options['path'] = 'admin/content/stories';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Stories';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $translatables['backoffice_content'] = array(
+  $translatables['workbench_esf'] = array(
     t('Master'),
     t('Stories'),
     t('more'),
@@ -739,11 +707,11 @@ function esf_feature_ui_views_default_views() {
     t('Legal Subjects'),
     t('Code'),
     t('School Subjects'),
+    t('Laws'),
     t('Year'),
-    t('News'),
-    t('Jokes'),
+    t('Materials'),
   );
-  $export['backoffice_content'] = $view;
+  $export['workbench_esf'] = $view;
 
   return $export;
 }
