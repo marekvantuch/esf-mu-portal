@@ -3,23 +3,29 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.vantuch</groupId>
-  <artifactId>Guacamole-MUNI</artifactId>
-  <version>0.1</version>
+  <artifactId>guacamole-esf</artifactId>
+  <version>0.2</version>
   <packaging>war</packaging>
 
-  <name>Guacamole-MUNI</name>
+  <name>guacamole-esf</name>
 
   <properties>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-web-api</artifactId>
-      <version>6.0</version>
-      <scope>provided</scope>
+      <groupId>org.glyptodon.guacamole</groupId>
+      <artifactId>guacamole-ext</artifactId>
+      <version>0.8.1</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- Servlet API -->
     <dependency>
@@ -29,12 +35,6 @@
       <scope>provided</scope>
     </dependency>
     <!-- Main Guacamole library -->
-    <dependency>
-      <groupId>net.sourceforge.guacamole</groupId>
-      <artifactId>guacamole-common</artifactId>
-      <version>0.8.0</version>
-      <scope>compile</scope>
-    </dependency>
     <!-- Guacamole JavaScript library -->
     <dependency>
       <groupId>net.sourceforge.guacamole</groupId>
@@ -43,6 +43,25 @@
       <type>zip</type>
       <scope>runtime</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.3</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-codec</artifactId>
+          <groupId>commons-codec</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>fluent-hc</artifactId>
+      <version>4.3</version>
+    </dependency>
+            
   </dependencies>
 
   <build>
@@ -73,11 +92,6 @@
             <endorseddirs>${endorsed.dir}</endorseddirs>
           </compilerArguments>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -113,6 +127,12 @@
     <repository>
       <id>guac-dev</id>
       <url>http://guac-dev.org/repo</url>
+    </repository>
+    
+    <repository>              
+      <id>central</id>
+      <name>Central</name>
+      <url>http://repo1.maven.org/maven2</url>
     </repository>
   </repositories>
 </project>

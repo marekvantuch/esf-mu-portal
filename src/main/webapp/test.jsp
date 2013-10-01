@@ -8,16 +8,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <!-- Client core scripts -->
-        <script type="text/javascript"
-            src="guacamole-common-js/layer.js"></script>
-        <script type="text/javascript"
-            src="guacamole-common-js/tunnel.js"></script>
-        <script type="text/javascript"
-            src="guacamole-common-js/guacamole.js"></script>
+      <div id="login-ui" style="display: none">
+            <div id="login-dialog-middle">
+
+                <div id="login-dialog">
+                    <p id="login-error"></p>
+                </div>
+            </div>
+      </div>
+       
 
         <!-- Display -->
         <div id="display"></div>
+        
+        <div id="loading">Please wait, loading...</div>
 
         <!-- Init -->
         <script type="text/javascript"> /* <![CDATA[ */
@@ -47,5 +51,12 @@
             }
 
         /* ]]> */ </script>
+        
+        <!-- Client core scripts -->
+        <script type="text/javascript" src="guacamole-common-js/layer.js"></script>
+        <script type="text/javascript" src="guacamole-common-js/tunnel.js"></script>
+        <script type="text/javascript" src="guacamole-common-js/guacamole.js"></script>
+        
+        <script type="text/javascript" src="scripts/root-ui.js"></script>
     </body>
 </html>

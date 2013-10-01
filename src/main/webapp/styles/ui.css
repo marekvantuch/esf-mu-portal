@@ -1,0 +1,346 @@
+
+/*
+ *  Guacamole - Clientless Remote Desktop
+ *  Copyright (C) 2010  Michael Jumper
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import url('animation.css');
+ 
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input[type=checkbox], input[type=number], input[type=text], textarea {
+    -webkit-tap-highlight-color: rgba(128,192,128,0.5);
+}
+
+input[type=submit], button {
+    -webkit-appearance: none;
+}
+
+div.location, input[type=text], input[type=number], input[type=password] {
+    border: 1px solid #777;
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
+    -khtml-border-radius: 0.2em;
+    border-radius: 0.2em;
+    width: 100%;
+    padding: 0.25em;
+    font-size: 10pt;
+    background: white;
+    cursor: text;
+}
+
+button {
+
+    background: #8A6;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    -moz-border-radius: 0.6em;
+    -webkit-border-radius: 0.6em;
+    -khtml-border-radius: 0.6em;
+    border-radius: 0.6em;
+
+    color: white;
+    text-shadow: -1px -1px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    font-size: 1.125em;
+
+    box-shadow: inset -1px -1px 0.25em rgba(0, 0, 0, 0.25),
+                inset 1px 1px 0.25em rgba(255, 255, 255, 0.25),
+                -1px -1px 0.25em rgba(0, 0, 0, 0.25),
+                1px 1px 0.25em rgba(255, 255, 255, 0.25);
+    
+    padding: 0.35em;
+    padding-right: 1em;
+    padding-left: 1em;
+    min-width: 5em;
+
+}
+
+button:hover {
+    background: #9C7;
+}
+
+button:active {
+
+    padding-left: 1.1em;
+    padding-right: 0.9em;
+    padding-top: 0.45em;
+    padding-bottom: 0.25em;
+    
+    box-shadow: 
+                inset 1px 1px 0.25em rgba(0, 0, 0, 0.25),
+                -1px -1px 0.25em rgba(0, 0, 0, 0.25),
+                1px 1px 0.25em rgba(255, 255, 255, 0.25);
+}
+
+button.danger {
+    background: #A43;
+}
+
+button.danger:hover {
+    background: #C54;
+}
+
+body {
+    background: #EEE;
+    font-family: FreeSans, Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+h1 {
+    
+    margin: 0;
+    padding: 0.5em;
+
+    font-size: 2em;
+    vertical-align: middle;
+    text-align: center;
+
+}
+
+h2 {
+
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+    background: rgba(0, 0, 0, 0.07);
+
+    padding: 0.5em;
+    margin: 0;
+    font-size: 1.5em;
+
+    font-weight: lighter;
+    text-shadow: 1px 1px white;
+
+}
+
+div.section {
+    margin: 0;
+    padding: 1em;
+}
+
+/*
+ * Dialogs
+ */
+
+.dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+}
+
+.dialog {
+
+    max-width: 100%;
+    width: 8in;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+    overflow: auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: #E7E7E7;
+
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
+    -khtml-border-radius: 0.2em;
+    border-radius: 0.2em;
+
+    box-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.6);
+    
+}
+
+.dialog > * {
+    margin: 1em;
+}
+
+.dialog .header {
+    margin: 0;
+}
+
+.dialog td {
+    position: relative;
+}
+
+.dialog .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.dialog .dropdown {
+
+    position: absolute;
+    z-index: 2;
+    margin-top: -1px;
+
+    width: 3in;
+    max-height: 2in;
+    overflow: auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: white;
+
+    font-size: 10pt;
+
+}
+
+.dialog .footer {
+    text-align: center;
+}
+
+/*
+ * List elements
+ */
+
+.list-item {
+
+    display: block;
+    text-align: left;
+    cursor: pointer;
+
+    position: relative;
+
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    background-size: 16px 16px;
+    -moz-background-size: 16px 16px;
+    -webkit-background-size: 16px 16px;
+    -khtml-background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.list-item * {
+    vertical-align: middle;
+}
+
+.list-item .caption {
+    padding: 0.1em;
+}
+
+.list-item .name {
+    color: black;
+    font-weight: normal;
+    padding: 0.1em;
+    margin-left: 0.25em;
+}
+
+.list-item .usage {
+    float: right;
+    font-style: italic;
+    color: gray;
+}
+
+.list-item.in-use {
+    opacity: 0.5;
+}
+
+.choice .list-item .usage {
+    display: none;
+}
+
+.choice .list-item.in-use {
+    opacity: 1;
+}
+
+/*
+ * List element styling
+ */
+
+.list-item.selected {
+    background: #DEB;
+}
+
+.list-item.selected > .icon {
+    opacity: 1.0;
+}
+
+.list-item:not(.selected) .caption:hover {
+    background: #CDA;
+}
+
+.choice .list-item {
+    display: inline-block;
+}
+
+.choice input[type='checkbox'] {
+    vertical-align: top;
+    height: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+.disabled .list-item:not(.selected) {
+    opacity: 0.25;
+}
+
+.disabled .list-item:not(.selected):hover {
+    background: inherit;
+}
+
+.form .fields th,
+.form .permissions th {
+    font-weight: normal;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.form h2 {
+    border-top: none;
+}
+
+.form h3 {
+    font-size: 1em;
+    margin-bottom: 0.25em;
+}
+
+.form {
+    cursor: auto;
+    animation-name: fadein;
+    -webkit-animation-name: fadein;
+    animation-duration: 0.125s;
+    -webkit-animation-duration: 0.125s;
+}
+
+.object-buttons {
+
+    text-align: right;
+
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 0.5em;
+    margin: 0.5em;
+
+}
