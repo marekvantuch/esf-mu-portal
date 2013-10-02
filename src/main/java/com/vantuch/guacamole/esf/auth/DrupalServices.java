@@ -38,21 +38,21 @@ public class DrupalServices {
   
   private static final String RESOURCE_CONNECT_URL = "service/system/connect";
   private static final String RESOURCE_LOGIN_URL = "service/public/user/login";
-  
+  private static final String RESOURCE_SUFFIX = ".json";
   
   public static DrupalSession connect() {
     
     return null;
   }
   
-  public static DrupalSession login(Credentials credentials) throws GuacamoleException {
+  public static DrupalUser login(Credentials credentials) throws GuacamoleException {
     
     try {
       URI uri = new URIBuilder()
               .setScheme("http")
               .setHost(GuacamoleProperties.getProperty(AUTH_PORTAL_URL))
               .setPath("/")
-              .setParameter("q", RESOURCE_LOGIN_URL)
+              .setParameter("q", RESOURCE_LOGIN_URL + RESOURCE_SUFFIX)
               .build();
 
       // Validate and return info for given user and pass
@@ -61,13 +61,13 @@ public class DrupalServices {
               .add("password", credentials.getPassword()).build())
               .setHeader("Content-Type", "application/json")
               .execute()
-              .handleResponse(new ResponseHandler<DrupalSession>() {
+              .handleResponse(new ResponseHandler<DrupalUser>() {
                 
         @Override
-        public DrupalSession handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+        public DrupalUser handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
           StatusLine statusLine = response.getStatusLine();
           HttpEntity entity = response.getEntity();
-
+          
           if (statusLine.getStatusCode() >= 300) {
             throw new HttpResponseException(
                     statusLine.getStatusCode(),
@@ -76,8 +76,14 @@ public class DrupalServices {
           if (entity == null) {
             throw new ClientProtocolException("Response contains no content");
           }
-
-          return new DrupalSession();
+          
+          /* Gson gson = new GsonBuilder().create();
+          ContentType contentType = ContentType.getOrDefault(entity);
+          Charset charset = contentType.getCharset();
+          Reader reader = new InputStreamReader(entity.getContent(), charset);
+          return gson.fromJson(reader, MyJsonObject.class);
+*/
+          return new DrupalUser();
         }
       });
 

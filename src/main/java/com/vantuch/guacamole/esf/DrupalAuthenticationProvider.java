@@ -19,6 +19,7 @@ package com.vantuch.guacamole.esf;
  */
 import com.vantuch.guacamole.esf.auth.DrupalServices;
 import com.vantuch.guacamole.esf.auth.DrupalSession;
+import com.vantuch.guacamole.esf.auth.DrupalUser;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -92,11 +93,14 @@ public class DrupalAuthenticationProvider extends SimpleAuthenticationProvider {
   public Map<String, GuacamoleConfiguration> getAuthorizedConfigurations(Credentials credentials)
           throws GuacamoleException {
 
-    DrupalSession session = DrupalServices.login(credentials);
+    DrupalUser user = DrupalServices.login(credentials);
 
     Map<String, GuacamoleConfiguration> map = new TreeMap<String, GuacamoleConfiguration>();
 
     GuacamoleConfiguration configuration = getConfigurationBase();
+    configuration.setParameter("sessionid", user.session.SessionID);
+    configuration.setParameter("username", user.ASPIusername);
+    configuration.setParameter("password", user.ASPIpassword);
 
     map.put(GuacamoleProperties.getProperty(CONNECTION_NAME, "Default"), configuration);
 
