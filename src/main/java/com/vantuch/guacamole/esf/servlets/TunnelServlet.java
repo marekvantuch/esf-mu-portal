@@ -1,4 +1,4 @@
-package com.vantuch.guacamole.esf;
+package com.vantuch.guacamole.esf.servlets;
 
 /*
  *  Guacamole - Clientless Remote Desktop
@@ -50,8 +50,8 @@ import org.glyptodon.guacamole.servlet.GuacamoleHTTPTunnelServlet;
  *
  * @author Michael Jumper
  */
-public class BasicGuacamoleTunnelServlet extends AuthenticatingHttpServlet {
-  private static final Logger logger = Logger.getLogger(BasicGuacamoleTunnelServlet.class.getName());
+public class TunnelServlet extends AuthenticatingHttpServlet {
+  private static final Logger logger = Logger.getLogger(TunnelServlet.class.getName());
   
   /**
    * All supported identifier types.

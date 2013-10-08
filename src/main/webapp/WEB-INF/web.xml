@@ -4,32 +4,50 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-    <session-config>
-        <session-timeout>
-			30
-        </session-timeout>
-    </session-config>
-    <!-- Automatically detect and load WebSocket support -->
-    <listener>
-        <listener-class>com.vantuch.guacamole.esf.WebSocketSupportLoader</listener-class>
-    </listener>
-    <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>com.vantuch.guacamole.esf.Login</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
-    <!-- Guacamole Tunnel Servlet -->
-    <servlet>
-        <description>Tunnel servlet.</description>
-        <servlet-name>Tunnel</servlet-name>
-        <servlet-class>com.vantuch.guacamole.esf.BasicGuacamoleTunnelServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Tunnel</servlet-name>
         <url-pattern>/tunnel</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Connection</servlet-name>
+        <url-pattern>/connection</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <!-- CORS settings -->
+    <filter>
+      <filter-name>CORS</filter-name>
+      <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>CORS</filter-name>
+      <servlet-name>Tunnel</servlet-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Automatically detect and load WebSocket support -->
+    <listener>
+        <listener-class>com.vantuch.guacamole.esf.WebSocketSupportLoader</listener-class>
+    </listener>
+    
+    <servlet>
+    <description>Login servlet.</description>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.vantuch.guacamole.esf.servlets.LoginServlet</servlet-class>
+  r
+        </servlet>
+    <servlet>
+        <servlet-name>Connection</servlet-name>
+        <servlet-class>com.vantuch.guacamole.esf.servlets.ConnectionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description>Tunnel servlet.</description>
+        <servlet-name>Tunnel</servlet-name>
+        <servlet-class>com.vantuch.guacamole.esf.servlets.TunnelServlet</servlet-class>
+    </servlet>
 </web-app>

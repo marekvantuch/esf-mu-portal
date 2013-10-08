@@ -17,9 +17,6 @@ package com.vantuch.guacamole.esf;
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import com.vantuch.guacamole.esf.auth.DrupalServices;
-import com.vantuch.guacamole.esf.auth.DrupalSession;
-import com.vantuch.guacamole.esf.auth.DrupalUser;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -92,20 +89,22 @@ public class DrupalAuthenticationProvider extends SimpleAuthenticationProvider {
   @Override
   public Map<String, GuacamoleConfiguration> getAuthorizedConfigurations(Credentials credentials)
           throws GuacamoleException {
+    
+    if (credentials.getPassword() == null || credentials.getUsername() == null) {
+      return null;
+    }
 
-    DrupalUser user = DrupalServices.login(credentials);
+    //DrupalUser user = DrupalServices.login(credentials);
 
     Map<String, GuacamoleConfiguration> map = new TreeMap<String, GuacamoleConfiguration>();
 
     GuacamoleConfiguration configuration = getConfigurationBase();
-    configuration.setParameter("sessionid", user.session.SessionID);
-    configuration.setParameter("username", user.ASPIusername);
-    configuration.setParameter("password", user.ASPIpassword);
+    //configuration.setParameter("sessionid", user.session.SessionID);
+    configuration.setParameter("username", credentials.getUsername());
+    configuration.setParameter("password", credentials.getPassword());
 
     map.put(GuacamoleProperties.getProperty(CONNECTION_NAME, "Default"), configuration);
 
-    // Unauthorized
-    return null;
-
+    return map;
   }
 }

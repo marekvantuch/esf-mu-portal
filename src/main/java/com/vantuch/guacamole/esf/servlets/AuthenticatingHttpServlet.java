@@ -1,4 +1,4 @@
-package com.vantuch.guacamole.esf;
+package com.vantuch.guacamole.esf.servlets;
 
 /*
  *  Guacamole - Clientless Remote Desktop
