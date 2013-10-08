@@ -33,7 +33,7 @@ function esf_feature_default_fe_block_settings() {
   );
 
   $export['quicktabs-navigation'] = array(
-    'cache' => 1,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'navigation',
     'module' => 'quicktabs',
