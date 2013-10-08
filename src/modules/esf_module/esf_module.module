@@ -38,13 +38,13 @@ function esf_module_permission() {
  */
 function esf_module_menu() {
   return array(
-    'aspi' => array(
+    'aspi/login' => array(
       'title' => 'ASPI Remote Login',
       'page callback' => 'esf_module_page_aspi',
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.pages.inc',
     ),
-    'aspi-remote' => array(
+    'aspi/remote' => array(
       'title' => 'ASPI Portal',
       'page callback' => 'esf_module_page_aspi_remote',
       //'delivery callback' => 'drupal_deliver_guacamole_page',
