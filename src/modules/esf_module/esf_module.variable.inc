@@ -14,7 +14,7 @@ function esf_module_variable_info($options) {
   $variables['guacamole_server_url'] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat JAVA servlet URL', array(), $options),
-    'description' => t('URL of the server running the remote desktop Guacamole software.'),
+    'description' => t('Complete URL of the server running the remote desktop Guacamole software. Trailing slash mst be included.'),
     'default' => 'FILL IN',
     'localize' => FALSE,
     'group' => 'esf',

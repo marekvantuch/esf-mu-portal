@@ -6,5 +6,9 @@ version = 7.x-1.0
 
 files[] = esf_module.variable.inc
 files[] = esf_module.install
+files[] = includes/esf_module.inc
+files[] = includes/esf_module.pages.inc
+files[] = includes/esf_module.servlets.inc
+
 dependencies[] = variable
-scripts[] = js/esf_module.js
+scripts[] = js/esf-module.js
