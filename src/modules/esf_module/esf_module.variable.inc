@@ -11,10 +11,10 @@
  */
 function esf_module_variable_info($options) {
 
-  $variables['guacamole_server_url'] = array(
+  $variables['guacamole_server_domain'] = array(
     'type' => 'string',
-    'title' => t('Guacamole TomCat JAVA servlet URL', array(), $options),
-    'description' => t('Complete URL of the server running the remote desktop Guacamole software. Trailing slash mst be included.'),
+    'title' => t('Guacamole TomCat JAVA servlet domain', array(), $options),
+    'description' => t('Domain URL of the server running the remote desktop Guacamole software. Must not contain trailing slash.'),
     'default' => 'FILL IN',
     'localize' => FALSE,
     'group' => 'esf',
@@ -25,6 +25,15 @@ function esf_module_variable_info($options) {
     'title' => t('Guacamole TomCat servlet port', array(), $options),
     'description' => t('Port of the server running the remote desktop Guacamole software.'),
     'default' => 0,
+    'localize' => FALSE,
+    'group' => 'esf',
+  );
+
+  $variables['guacamole_server_path'] = array(
+    'type' => 'string',
+    'title' => t('Guacamole TomCat servlet path', array(), $options),
+    'description' => t('Path on the server running the remote desktop Guacamole software. Must start with a slash. For example \'/\''),
+    'default' => '/',
     'localize' => FALSE,
     'group' => 'esf',
   );

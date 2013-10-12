@@ -9,8 +9,9 @@ function esf_module_init() {
   $settings = array(
     'esf' => array(
       'protocol' => variable_get_value('aspi_protocol'),
-      'url' => variable_get_value('guacamole_server_url'),
-      'port' => variable_get_value('guacamole_server_port'),
+      'server_domain' => variable_get_value('guacamole_server_domain'),
+      'server_port' => variable_get_value('guacamole_server_port'),
+      'server_path' => variable_get_value('guacamole_server_path'),
       )
     );
   

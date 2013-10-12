@@ -69,7 +69,7 @@ abstract class Servlet {
    */
   protected static function _urlBase() {
     if (!self::$_url) {
-      self::$_url = variable_get('guacamole_server_url');
+      self::$_url = Server::getUrl();
     }
     
     return self::$_url;

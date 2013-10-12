@@ -28,7 +28,7 @@ function esf_feature_default_fe_block_settings() {
         'weight' => -9,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 
@@ -168,7 +168,7 @@ function esf_feature_default_fe_block_settings() {
         'weight' => -10,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 

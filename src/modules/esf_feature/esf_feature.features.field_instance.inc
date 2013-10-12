@@ -199,10 +199,8 @@ function esf_feature_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
+        'settings' => array(),
+        'type' => 'text_default',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -347,14 +345,13 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_laws_view',
-    'label' => 'Laws View',
+    'label' => 'Laws',
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
         'admin_views_file' => 0,
         'admin_views_node' => 0,
         'admin_views_user' => 0,
-        'backoffice_content' => 0,
         'jokes' => 0,
         'legal_subjects' => 0,
         'media_default' => 0,
@@ -366,6 +363,7 @@ function esf_feature_field_default_field_instances() {
         'stories' => 0,
         'workbench_current_user' => 0,
         'workbench_edited' => 0,
+        'workbench_esf' => 0,
         'workbench_files' => 0,
         'workbench_recent_content' => 0,
       ),
@@ -449,20 +447,27 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_school_subjects_view',
-    'label' => 'School Subjects View',
+    'label' => 'School Subjects',
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
+        'admin_views_file' => 0,
         'admin_views_node' => 0,
         'admin_views_user' => 0,
-        'backoffice_content' => 0,
         'jokes' => 0,
         'legal_subjects' => 0,
+        'media_default' => 0,
         'news' => 0,
+        'reference_law_to_legal_subject' => 0,
         'reference_legal_subject_to_school_subject' => 0,
         'reference_school_subject_to_legal_subject' => 'reference_school_subject_to_legal_subject',
         'school_subjects' => 0,
         'stories' => 0,
+        'workbench_current_user' => 0,
+        'workbench_edited' => 0,
+        'workbench_esf' => 0,
+        'workbench_files' => 0,
+        'workbench_recent_content' => 0,
       ),
       'force_default' => 1,
       'user_register_form' => FALSE,
@@ -473,45 +478,6 @@ function esf_feature_field_default_field_instances() {
       'settings' => array(),
       'type' => 'viewfield_select',
       'weight' => 7,
-    ),
-  );
-
-  // Exported field_instance: 'node-legal_subject-field_weight'
-  $field_instances['node-legal_subject-field_weight'] = array(
-    'bundle' => 'legal_subject',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Temporary until weight field is installed',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_weight',
-    'label' => 'Weight',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 3,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 2,
     ),
   );
 
@@ -751,20 +717,27 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_legal_subjects_view',
-    'label' => 'Legal Subjects View',
+    'label' => 'Legal Subjects',
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
+        'admin_views_file' => 0,
         'admin_views_node' => 0,
         'admin_views_user' => 0,
-        'backoffice_content' => 0,
         'jokes' => 0,
         'legal_subjects' => 0,
+        'media_default' => 0,
         'news' => 0,
+        'reference_law_to_legal_subject' => 0,
         'reference_legal_subject_to_school_subject' => 'reference_legal_subject_to_school_subject',
         'reference_school_subject_to_legal_subject' => 0,
         'school_subjects' => 0,
         'stories' => 0,
+        'workbench_current_user' => 0,
+        'workbench_edited' => 0,
+        'workbench_esf' => 0,
+        'workbench_files' => 0,
+        'workbench_recent_content' => 0,
       ),
       'force_default' => 1,
       'user_register_form' => FALSE,
@@ -913,22 +886,91 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_aspi_password'
+  $field_instances['user-user-field_aspi_password'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'password_field' => array(
+          'password_field' => NULL,
+        ),
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'password_field',
+        'settings' => array(),
+        'type' => 'password_field_formatter',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_aspi_password',
+    'label' => 'ASPI Password',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'password_field',
+      'settings' => array(),
+      'type' => 'password_field',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_aspi_username'
+  $field_instances['user-user-field_aspi_username'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_aspi_username',
+    'label' => 'ASPI Username',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => 1,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('ASPI');
+  t('ASPI Password');
+  t('ASPI Username');
   t('Body');
   t('Code');
   t('Generality');
   t('Law type');
   t('Laws');
-  t('Laws View');
-  t('Legal Subjects View');
+  t('Legal Subjects');
   t('Materials');
   t('Number');
   t('School Subjects');
-  t('School Subjects View');
-  t('Temporary until weight field is installed');
-  t('Weight');
   t('Year');
 
   return $field_instances;

@@ -17,9 +17,13 @@ function esf_module_page_aspi() {
       $login->saveSession();
     }
   }
+  dpm(JSESSIONID);
   dpm(Session::get(JSESSIONID));
   //user_cookie_save(array(SESSION_ID => Session::get(JSESSIONID)));
-  setcookie(SESSION_ID, Session::get(JSESSIONID), 0, '/guacamole-esf/', "http://localhost:8080/");
+  $server_url = 
+  $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+  
+  setcookie(JSESSIONID, Session::get(JSESSIONID), 0, '/guacamole-esf/', "localhost:8080");
   
   return 'SUCCESS';
 }
