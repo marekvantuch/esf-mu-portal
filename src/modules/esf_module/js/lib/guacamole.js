@@ -43,6 +43,78 @@
 var Guacamole = Guacamole || {};
 
 /**
+ * Defines functions to help with working with the CORS framework
+ *
+ * @type {{createRequest: Function}}
+ */
+Guacamole.CORS = function() {
+
+    function getCookieValue(c_name)
+    {
+        var c_value = document.cookie;
+        var c_start = c_value.indexOf(" " + c_name + "=");
+        if (c_start == -1)
+        {
+            c_start = c_value.indexOf(c_name + "=");
+        }
+        if (c_start == -1)
+        {
+            c_value = null;
+        }
+        else
+        {
+            c_start = c_value.indexOf("=", c_start) + 1;
+            var c_end = c_value.indexOf(";", c_start);
+            if (c_end == -1)
+            {
+                c_end = c_value.length;
+            }
+            c_value = unescape(c_value.substring(c_start,c_end));
+        }
+        return c_value;
+    }
+
+    /**
+     * Create a CORS request for all suitable browsers
+     *
+     * @param method method (GET/POST/PUT)
+     * @param url url of the server to be accessed
+     * @returns {XMLHttpRequest}
+     */
+    this.createRequest = function(method, url) {
+        var xhr = new XMLHttpRequest();
+
+        // if url doesn't start with http, put the server address in the begining
+        if (url.indexOf('http') != 0) {
+            url = Drupal.settings.esf.server_url . url;
+        }
+
+        if ("withCredentials" in xhr) {
+
+            // Check if the XMLHttpRequest object has a "withCredentials" property.
+            // "withCredentials" only exists on XMLHTTPRequest2 objects.
+            xhr.withCredentials = true;
+            xhr.open(method, url, true);
+
+        } else if (typeof XDomainRequest != "undefined") {
+
+            // Otherwise, check if XDomainRequest.
+            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+
+        } else {
+
+            // Otherwise, CORS is not supported by the browser.
+            xhr = null;
+
+        }
+
+        return xhr;
+    };
+};
+
+/**
  * Simple Guacamole protocol parser that invokes an oninstruction event when
  * full instructions are available from data received via receive().
  * 
@@ -177,7 +249,6 @@ Guacamole.Parser = function() {
     this.oninstruction = null;
 
 };
-
 
 /**
  * A blob abstraction used by the Guacamole client to facilitate transfer of

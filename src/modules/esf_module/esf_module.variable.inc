@@ -1,17 +1,11 @@
 <?php
 
-
-/**
- * @file
- * Variable integration for ESF module.
- */
-
 /**
  * Implements hook_variable_info().
  */
 function esf_module_variable_info($options) {
 
-  $variables['guacamole_server_domain'] = array(
+  $variables[GUACAMOLE_SERVER_DOMAIN] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat JAVA servlet domain', array(), $options),
     'description' => t('Domain URL of the server running the remote desktop Guacamole software. Must not contain trailing slash.'),
@@ -20,7 +14,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables['guacamole_server_port'] = array(
+  $variables[GUACAMOLE_SERVER_PORT] = array(
     'type' => 'number',
     'title' => t('Guacamole TomCat servlet port', array(), $options),
     'description' => t('Port of the server running the remote desktop Guacamole software.'),
@@ -29,7 +23,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables['guacamole_server_path'] = array(
+  $variables[GUACAMOLE_SERVER_PATH] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat servlet path', array(), $options),
     'description' => t('Path on the server running the remote desktop Guacamole software. Must start with a slash. For example \'/\''),

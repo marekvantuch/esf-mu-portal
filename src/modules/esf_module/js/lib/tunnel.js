@@ -180,7 +180,9 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
             sendingMessages = true;
 
-            var message_xmlhttprequest = Esf.CORS.creeateRequest("POST", TUNNEL_WRITE + tunnel_uuid);
+            var CORS = new Guacamole.CORS();
+
+            var message_xmlhttprequest = CORS.createRequest("POST", TUNNEL_WRITE + tunnel_uuid);
             
             message_xmlhttprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 
@@ -441,10 +443,11 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
     var request_id = 0;
 
     function makeRequest() {
+        var CORS = new Guacamole.CORS();
 
         // Make request, increment request ID
-        var xmlhttprequest = new XMLHttpRequest();
-        xmlhttprequest.open("GET", TUNNEL_READ + tunnel_uuid + ":" + (request_id++));
+        var xmlhttprequest = CORS.createRequest("GET", TUNNEL_READ + tunnel_uuid + ":" + (request_id++));
+
         xmlhttprequest.send(null);
 
         return xmlhttprequest;
@@ -452,10 +455,10 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
     }
 
     this.connect = function(data) {
+        var CORS = new Guacamole.CORS();
 
         // Start tunnel and connect synchronously
-        var connect_xmlhttprequest = new XMLHttpRequest();
-        connect_xmlhttprequest.open("POST", TUNNEL_CONNECT, false);
+        var connect_xmlhttprequest = CORS.createRequest("POST", TUNNEL_CONNECT);
         connect_xmlhttprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
         connect_xmlhttprequest.send(data);
 

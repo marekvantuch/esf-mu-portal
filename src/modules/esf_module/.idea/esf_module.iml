@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../../../all/themes/omega_esf">
+      <excludeFolder url="file://$MODULE_DIR$/../../../all/themes/omega_esf/.sass-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../all/themes/omega_esf/nbproject" />
+    </content>
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../../modules" />
+          <root url="file://$MODULE_DIR$/../../../../includes" />
+          <root url="file://$MODULE_DIR$/../../../all/modules" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../../../modules" />
+          <root url="file://$MODULE_DIR$/../../../../includes" />
+          <root url="file://$MODULE_DIR$/../../../all/modules" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

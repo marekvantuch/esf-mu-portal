@@ -553,40 +553,6 @@ GuacUI.Client.ModalStatus = function(text, classname) {
 GuacUI.Client.ModalStatus.prototype = new GuacUI.Component();
 
 /**
- * Flattens the attached Guacamole.Client, storing the result within the
- * connection history.
- */
-GuacUI.Client.updateThumbnail = function() {
-
-    // Get screenshot
-    var canvas = GuacUI.Client.attachedClient.flatten();
-
-    // Calculate scale of thumbnail (max 320x240, max zoom 100%)
-    var scale = Math.min(
-        320 / canvas.width,
-        240 / canvas.height,
-        1
-    );
-
-    // Create thumbnail canvas
-    var thumbnail = document.createElement("canvas");
-    thumbnail.width  = canvas.width*scale;
-    thumbnail.height = canvas.height*scale;
-
-    // Scale screenshot to thumbnail
-    var context = thumbnail.getContext("2d");
-    context.drawImage(canvas,
-        0, 0, canvas.width, canvas.height,
-        0, 0, thumbnail.width, thumbnail.height
-    );
-
-    // Save thumbnail to history
-    var id = decodeURIComponent(window.location.search.substring(4));
-    GuacamoleHistory.update(id, thumbnail.toDataURL());
-
-};
-
-/**
  * Updates the scale of the attached Guacamole.Client based on current window
  * size and "auto-fit" setting.
  */
@@ -933,30 +899,11 @@ GuacUI.Client.attach = function(guac) {
 
     };
 
-    var thumbnail_update_interval = null;
-
-    window.onblur = function() {
-
-        // Regularly update screenshot if window not visible
-        if (!thumbnail_update_interval)
-            thumbnail_update_interval =
-                window.setInterval(GuacUI.Client.updateThumbnail, 1000);
-
-    };
-
-    window.onfocus = function() {
-        if (thumbnail_update_interval) {
-            window.clearInterval(thumbnail_update_interval);
-            thumbnail_update_interval = null;
-        }
-    };
 
     /*
      * Disconnect and update thumbnail on close
      */
     window.onunload = function() {
-
-        GuacUI.Client.updateThumbnail();
         guac.disconnect();
 
     };
