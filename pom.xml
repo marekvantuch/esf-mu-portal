@@ -9,6 +9,13 @@
 
   <name>guacamole-esf</name>
 
+  <developers>
+    <developer>
+      <name>Marek Vantuch</name>
+      <email>marek.vantuch@gmail.com</email>
+    </developer>
+  </developers>
+
   <properties>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,13 +67,7 @@
       <artifactId>fluent-hc</artifactId>
       <version>4.3</version>
     </dependency>
-    
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.2.4</version>
-    </dependency>
-    
+
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>

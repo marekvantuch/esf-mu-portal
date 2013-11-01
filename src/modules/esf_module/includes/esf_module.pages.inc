@@ -1,63 +1,6 @@
 <?php
 
-
-module_load_include('inc', 'esf_module', 'lib/cookie_parser');
-
 function esf_module_page_aspi() {
-
-  try {
-    if(!connect()) {
-      login();
-      if (!connect()) {
-        return 'FAILURE: Connection error.';
-      }
-    }
-  } catch(Exception $e) {
-    return 'FAILURE: ' . $e;
-  }
-
-  return l('REMOTE', 'aspi/remote');
-}
-
-/**
- * Execute the LoginServlet
- *
- * @return bool
- */
-function login() {
-  $loginServlet = new LoginServlet('Marek', 'Pass');
-
-  $state = $loginServlet->execute()->state();
-
-  if ($state == ServletStatus::SUCCESS) {
-    $loginServlet->processResponse();
-    return true;
-  }
-
-  return false;
-}
-
-/**
- * Try connecting to the Guacamole server
- * @return bool
- */
-function connect() {
-  $connectionServlet = new ConnectionServlet();
-
-  $state = $connectionServlet->execute()->state();
-
-  switch ($state) {
-    case ServletStatus::SUCCESS:
-      dpm('SESSION ACTIVE: ' . Session::get(JSESSIONID));
-      $connectionServlet->processResponse();
-      return true;
-    case ServletStatus::AUTH_FAIL:
-    default:
-      return false;
-  }
-}
-
-function esf_module_page_aspi_remote() {
   $module_path = drupal_get_path('module', 'esf_module');
 
   // remove any javascript added so far

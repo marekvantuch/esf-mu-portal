@@ -12,10 +12,6 @@
         <servlet-name>Tunnel</servlet-name>
         <url-pattern>/tunnel</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Connection</servlet-name>
-        <url-pattern>/connection</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
@@ -39,10 +35,6 @@
         <description>Login servlet.</description>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.vantuch.guacamole.esf.servlets.LoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Connection</servlet-name>
-        <servlet-class>com.vantuch.guacamole.esf.servlets.ConnectionServlet</servlet-class>
     </servlet>
     <servlet>
         <description>Tunnel servlet.</description>

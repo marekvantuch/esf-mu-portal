@@ -285,28 +285,3 @@ class LoginServlet extends Servlet {
   }
 
 }
-
-/**
- * Servlet for retrieving ASPI connection details
- */
-class ConnectionServlet extends Servlet {
-
-  protected function endPoint() {
-    return 'connection';
-  }
-
-  protected function method() {
-    return METHOD_POST;
-  }
-
-  /**
-   * Stores the connection in the cookie for the website
-   *
-   * @return bool result of the processing
-   */
-  public function processResponse() {
-    $data = json_decode($this->result->data);
-    $identifier = $data->identifier;
-    //user_cookie_save(array('C'))
-  }
-}

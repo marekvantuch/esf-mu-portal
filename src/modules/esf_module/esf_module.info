@@ -11,4 +11,4 @@ files[] = includes/esf_module.pages.inc
 files[] = includes/esf_module.servlets.inc
 
 dependencies[] = variable
-scripts[] = js/esf-module.js
+scripts[] = js/esf-common.js

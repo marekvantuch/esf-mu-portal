@@ -53,7 +53,7 @@ public class WebSocketSupportLoader implements ServletContextListener {
 
       // Attempt to find WebSocket servlet
       Class<Servlet> servlet = (Class<Servlet>) GuacamoleClassLoader.getInstance().findClass(
-              "org.glyptodon.guacamole.net.basic.BasicGuacamoleWebSocketTunnelServlet");
+              "org.glyptodon.guacamole.esf.WebSocketTunnelServlet");
 
       // Dynamically add servlet IF SERVLET 3.0 API AVAILABLE!
       try {
