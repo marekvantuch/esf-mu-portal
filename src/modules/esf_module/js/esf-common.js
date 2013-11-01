@@ -1,9 +1,7 @@
 (function($) {
   var Esf = Esf || {};
 
-
-
-  Drupal.behaviors.esf = {
+  Drupal.behaviors.esf_common = {
     attach: function(context) {
       $('article a').each(function(index, element){
         var protocol = Drupal.settings.esf.protocol;

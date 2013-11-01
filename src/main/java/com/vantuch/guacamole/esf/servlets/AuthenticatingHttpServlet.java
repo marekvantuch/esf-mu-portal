@@ -211,7 +211,9 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
    * @return true if the request contains credentials, false otherwise.
    */
   protected boolean hasNewCredentials(HttpServletRequest request) {
-    return true;
+    String username = request.getParameter("username");
+
+    return username != null;
   }
 
   @Override
@@ -256,7 +258,7 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
 
           // Log successful authentication
           if (context != null) {
-            logger.log(Level.INFO, "User \"{}\" successfully authenticated from {}.",
+            logger.log(Level.INFO, "User {0} successfully authenticated.",
                     context.self().getUsername());
           }
 
@@ -267,7 +269,7 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
 
         // If auth failed, notify listeners
         if (context == null) {
-          logger.log(Level.WARNING, "Authentication attempt from {} for user \"{}\" failed.",
+          logger.log(Level.WARNING, "Authentication attempt for user {0} failed.",
                   credentials.getUsername());
 
           notifyFailed(listeners, credentials);
@@ -302,7 +304,7 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
       sendError(response, HttpServletResponse.SC_NOT_FOUND,
               e.getMessage());
     } catch (GuacamoleClientException e) {
-      logger.log(Level.WARNING, "Error in client request: {}", e);
+      logger.log(Level.WARNING, "Error in client request: {0}", e);
       sendError(response, HttpServletResponse.SC_BAD_REQUEST,
               e.getMessage());
     } catch (GuacamoleException e) {

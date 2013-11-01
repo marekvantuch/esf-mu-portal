@@ -62,12 +62,6 @@ function esf_module_menu() {
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.ajax.inc',
       'type' => MENU_CALLBACK
-    ),
-    'aspi/ajax/connect' => array(
-      'page callback' => 'esf_module_ajax_connect',
-      'access arguments' => array('access aspi'),
-      'file' => 'includes/esf_module.ajax.inc',
-      'type' => MENU_CALLBACK
     )
   );
 }

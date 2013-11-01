@@ -36,11 +36,10 @@
     </listener>
     
     <servlet>
-    <description>Login servlet.</description>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>com.vantuch.guacamole.esf.servlets.LoginServlet</servlet-class>
-  r
-        </servlet>
+        <description>Login servlet.</description>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.vantuch.guacamole.esf.servlets.LoginServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>Connection</servlet-name>
         <servlet-class>com.vantuch.guacamole.esf.servlets.ConnectionServlet</servlet-class>

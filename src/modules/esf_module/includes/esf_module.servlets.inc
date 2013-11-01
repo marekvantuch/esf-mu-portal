@@ -53,7 +53,11 @@ abstract class Servlet {
    * @return \Servlet
    */
   public function execute() {
-    $this->result = drupal_http_request($this->url(), $this->_buildOptions());
+    try {
+      $this->result = drupal_http_request($this->url(), $this->_buildOptions());
+    } catch (Exception $e) {
+      $this->result = (object) array('code' => $e->getCode(), 'error' => $e->getMessage());
+    }
 
     return $this;
   }
@@ -71,7 +75,9 @@ abstract class Servlet {
       case 403:
         return ServletStatus::AUTH_FAIL;
       default:
-        throw new ServletException($this);
+        $e = new ServletException($this);
+        watchdog('esf_module', 'Servlet call failed with: %e', array('%e' => (string) $e), WATCHDOG_ERROR);
+        throw $e;
     }
   }
 

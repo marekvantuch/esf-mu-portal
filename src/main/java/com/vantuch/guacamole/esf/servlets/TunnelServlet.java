@@ -21,6 +21,7 @@ import com.vantuch.guacamole.esf.event.SessionListenerCollection;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -225,17 +226,6 @@ public class TunnelServlet extends AuthenticatingHttpServlet {
         throw e;
       }
 
-      // Get ID of connection
-      String id = request.getParameter("id");
-      IdentifierType id_type = IdentifierType.getType(id);
-
-      // Do not continue if unable to determine type
-      if (id_type == null) {
-        throw new GuacamoleClientException("Illegal identifier - unknown type.");
-      }
-
-      // Remove prefix
-      id = id.substring(id_type.PREFIX.length());
 
       // Get credentials
       final Credentials credentials = getCredentials(httpSession);
@@ -277,53 +267,31 @@ public class TunnelServlet extends AuthenticatingHttpServlet {
 
       // Create connected socket from identifier
       GuacamoleSocket socket;
-      switch (id_type) {
 
-        // Connection identifiers
-        case CONNECTION: {
+      // Get connection directory
+      Directory<String, Connection> directory =
+              context.getRootConnectionGroup().getConnectionDirectory();
 
-          // Get connection directory
-          Directory<String, Connection> directory =
-                  context.getRootConnectionGroup().getConnectionDirectory();
+      // In our situation, there is always only single connection per session, so no need to worry about other ones
+      // or loading it from the session parameters of whatever
+      Set<String> identifiers = directory.getIdentifiers();
 
-          // Get authorized connection
-          Connection connection = directory.get(id);
-          if (connection == null) {
-            logger.log(Level.WARNING, "Connection id={} not found.", id);
-            throw new GuacamoleSecurityException("Requested connection is not authorized.");
-          }
-
-          // Connect socket
-          socket = connection.connect(info);
-          logger.log(Level.INFO, "Successful connection from {} to \"{}\".", request.getRemoteAddr());
-          break;
-        }
-
-        // Connection group identifiers
-        case CONNECTION_GROUP: {
-
-          // Get connection group directory
-          Directory<String, ConnectionGroup> directory =
-                  context.getRootConnectionGroup().getConnectionGroupDirectory();
-
-          // Get authorized connection group
-          ConnectionGroup group = directory.get(id);
-          if (group == null) {
-            logger.log(Level.WARNING, "Connection group id={} not found.", id);
-            throw new GuacamoleSecurityException("Requested connection group is not authorized.");
-          }
-
-          // Connect socket
-          socket = group.connect(info);
-          logger.log(Level.WARNING, "Successful connection from {} to group \"{}\".", request.getRemoteAddr());
-          break;
-        }
-
-        // Fail if unsupported type
-        default:
-          throw new GuacamoleClientException("Connection not supported for provided identifier type.");
-
+      if (identifiers.isEmpty()) {
+        throw new GuacamoleException("No identifiers were found for current session.");
       }
+
+      String id = identifiers.iterator().next();
+
+      Connection connection = directory.get(id);
+
+      if (connection == null) {
+        logger.log(Level.WARNING, "Connection id={0} not found.", id);
+        throw new GuacamoleSecurityException("Requested connection is not authorized.");
+      }
+
+      // Connect socket
+      socket = connection.connect(info);
+      logger.log(Level.INFO, "Successful connection to {0}.", request.getRemoteAddr());
 
       // Associate socket with tunnel
       GuacamoleTunnel tunnel = new GuacamoleTunnel(socket) {
