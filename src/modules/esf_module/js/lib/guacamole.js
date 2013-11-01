@@ -81,36 +81,38 @@ Guacamole.CORS = function() {
      * @param url url of the server to be accessed
      * @returns {XMLHttpRequest}
      */
-    this.createRequest = function(method, url) {
-        var xhr = new XMLHttpRequest();
+    this.createRequest = function(method, url, async) {
+      async = (typeof async === "undefined") ? true : async;
 
-        // if url doesn't start with http, put the server address in the begining
-        if (url.indexOf('http') != 0) {
-            url = Drupal.settings.esf.server_url . url;
-        }
+      var xhr = new XMLHttpRequest();
 
-        if ("withCredentials" in xhr) {
+      // if url doesn't start with http, put the server address in the begining
+      if (url.indexOf('http') != 0) {
+          url = Drupal.settings.esf.server_url . url;
+      }
 
-            // Check if the XMLHttpRequest object has a "withCredentials" property.
-            // "withCredentials" only exists on XMLHTTPRequest2 objects.
-            xhr.withCredentials = true;
-            xhr.open(method, url, true);
+      if ("withCredentials" in xhr) {
 
-        } else if (typeof XDomainRequest != "undefined") {
+          // Check if the XMLHttpRequest object has a "withCredentials" property.
+          // "withCredentials" only exists on XMLHTTPRequest2 objects.
+          xhr.withCredentials = true;
+          xhr.open(method, url, async);
 
-            // Otherwise, check if XDomainRequest.
-            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-            xhr = new XDomainRequest();
-            xhr.open(method, url);
+      } else if (typeof XDomainRequest != "undefined") {
 
-        } else {
+          // Otherwise, check if XDomainRequest.
+          // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
 
-            // Otherwise, CORS is not supported by the browser.
-            xhr = null;
+      } else {
 
-        }
+          // Otherwise, CORS is not supported by the browser.
+          xhr = null;
 
-        return xhr;
+      }
+
+      return xhr;
     };
 };
 

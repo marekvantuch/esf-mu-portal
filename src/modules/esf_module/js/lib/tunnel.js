@@ -458,7 +458,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
         var CORS = new Guacamole.CORS();
 
         // Start tunnel and connect synchronously
-        var connect_xmlhttprequest = CORS.createRequest("POST", TUNNEL_CONNECT);
+        var connect_xmlhttprequest = CORS.createRequest("POST", TUNNEL_CONNECT, false);
         connect_xmlhttprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
         connect_xmlhttprequest.send(data);
 
