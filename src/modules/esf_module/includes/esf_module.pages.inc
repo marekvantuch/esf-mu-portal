@@ -1,6 +1,6 @@
 <?php
 
-module_load_include('inc', 'esf_module', 'includes/esf_module.servlets');
+
 module_load_include('inc', 'esf_module', 'lib/cookie_parser');
 
 function esf_module_page_aspi() {

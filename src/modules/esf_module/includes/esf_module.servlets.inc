@@ -267,17 +267,20 @@ class LoginServlet extends Servlet {
   public function processResponse() {
     $cookie_value = $this->getCookie(JSESSIONID)->value;
 
-    dpm('SESSION SAVED: ' . $cookie_value);
+    // If session already exists, we don't get any cookie
+    if ($cookie_value != null) {
 
-    Session::set(JSESSIONID, $cookie_value);
-    
-    //user_cookie_save(array(JSESSIONID => $cookie_value));
+      //dpm('SESSION SAVED: ' . $cookie_value);
 
-    $server_domain = Server::getDomain() != 'localhost' ? Server::getDomain() : false;
-    $server_path = Server::getPath();
+      Session::set(JSESSIONID, $cookie_value);
 
-    setcookie(JSESSIONID, $cookie_value, 0, $server_path, $server_domain);
-    
+      //user_cookie_save(array(JSESSIONID => $cookie_value));
+
+      $server_domain = Server::getDomain() != 'localhost' ? Server::getDomain() : false;
+      $server_path = Server::getPath();
+
+      setcookie(JSESSIONID, $cookie_value, 0, $server_path, $server_domain);
+    }
     return $this;
   }
 

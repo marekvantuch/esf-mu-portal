@@ -3,16 +3,22 @@
 
   Drupal.behaviors.esf_aspi = {
     attach: function(context) {
-      Esf.Servlets.login(Esf.Tunnel.init);
+      Esf.Servlets.login();
+      if (Esf.Servlets.loginResult) {
+        Esf.Tunnel.init();
+      }
     }
   }
 
   Esf.Servlets = {
-    login: function(success_callback) {
+    loginResult: null,
+
+    login: function() {
       GuacUI.Client.showStatus('Logging in...')
 
       $.ajax({
         url: '?q=aspi/ajax/login',
+        async: false,
         // Check for error. Note that Drupal is not capable of sending
         // errors via JSON response so we need to send a valid JSON
         // in case error happens
@@ -23,7 +29,7 @@
           if (data != null && "error" in data) {
             GuacUI.Client.showError("Login failed: " + data.error);
           } else {
-            success_callback();
+            Esf.Servlets.loginResult = true;
           }
         }
       });

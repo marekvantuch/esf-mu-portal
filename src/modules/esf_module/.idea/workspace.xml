@@ -31,43 +31,7 @@
       <file leaf-file-name="aspi-remote.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/aspi-remote.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="10" selection-start="616" selection-end="616" vertical-scroll-proportion="0.5612745" vertical-offset="131" max-vertical-offset="2394">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client-ui.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/client-ui.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="609" column="14" selection-start="15873" selection-end="15873" vertical-scroll-proportion="0.0" vertical-offset="10755" max-vertical-offset="17982">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="esf_module.module" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/esf_module.module">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="5" selection-start="1844" selection-end="1844" vertical-scroll-proportion="-12.666667" vertical-offset="810" max-vertical-offset="1314">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="esf_module.ajax.inc" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/includes/esf_module.ajax.inc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="144" selection-end="144" vertical-scroll-proportion="1.3333334" vertical-offset="108" max-vertical-offset="594">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="esf_module.pages.inc" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/includes/esf_module.pages.inc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="3" selection-start="81" selection-end="143" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="1656">
+            <state line="7" column="8" selection-start="178" selection-end="178" vertical-scroll-proportion="-3.0721154" vertical-offset="1404" max-vertical-offset="2502">
               <folding />
             </state>
           </provider>
@@ -98,12 +62,12 @@
         <option value="$PROJECT_DIR$/js/client-ui.js" />
         <option value="$PROJECT_DIR$/../../../../includes/common.inc" />
         <option value="$PROJECT_DIR$/js/esf-common.js" />
-        <option value="$PROJECT_DIR$/includes/esf_module.pages.inc" />
         <option value="$PROJECT_DIR$/../../../../index.php" />
         <option value="$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SPL.php" />
-        <option value="$PROJECT_DIR$/includes/esf_module.servlets.inc" />
         <option value="$PROJECT_DIR$/esf_module.module" />
         <option value="$PROJECT_DIR$/includes/esf_module.ajax.inc" />
+        <option value="$PROJECT_DIR$/includes/esf_module.pages.inc" />
+        <option value="$PROJECT_DIR$/includes/esf_module.servlets.inc" />
         <option value="$PROJECT_DIR$/js/aspi-remote.js" />
       </list>
     </option>
@@ -312,7 +276,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.sourceCode.JavaScript" />
+    <property name="options.lastSelected" value="appearance" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../all/themes/omega_esf" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -388,16 +352,16 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32872504" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872504" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31336406" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31336406" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990755" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27121213" sideWeight="0.67127496" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27121213" sideWeight="0.686636" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -441,21 +405,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/includes/esf_module.servlets.inc</url>
-          <line>304</line>
+          <line>307</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/includes/esf_module.ajax.inc</url>
-          <line>6</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/includes/esf_module.servlets.inc</url>
           <line>79</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/includes/esf_module.servlets.inc</url>
+          <line>274</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -501,13 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="0.32225063" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../includes/common.inc">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2553" column="9" selection-start="88862" selection-end="88862" vertical-scroll-proportion="-0.8095238" vertical-offset="46260" max-vertical-offset="147636">
@@ -531,44 +488,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/esf_module.servlets.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="17" selection-start="1615" selection-end="1615" vertical-scroll-proportion="3.0255754" vertical-offset="239" max-vertical-offset="5652">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/client-ui.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="609" column="14" selection-start="15873" selection-end="15873" vertical-scroll-proportion="0.0" vertical-offset="10755" max-vertical-offset="17982">
+        <state line="609" column="14" selection-start="15873" selection-end="15873" vertical-scroll-proportion="0.50735295" vertical-offset="10755" max-vertical-offset="17982">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/esf_module.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="5" selection-start="1844" selection-end="1844" vertical-scroll-proportion="-12.666667" vertical-offset="810" max-vertical-offset="1314">
+        <state line="64" column="5" selection-start="1844" selection-end="1844" vertical-scroll-proportion="-42.666668" vertical-offset="0" max-vertical-offset="1314">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/esf_module.pages.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="3" selection-start="81" selection-end="143" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="1656">
+        <state line="17" column="0" selection-start="293" selection-end="293" vertical-scroll-proportion="0.09448819" vertical-offset="270" max-vertical-offset="1656">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="324">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/esf_module.servlets.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="277" column="0" selection-start="5753" selection-end="5753" vertical-scroll-proportion="0.58567774" vertical-offset="4757" max-vertical-offset="5706">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/esf_module.ajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="144" selection-end="144" vertical-scroll-proportion="1.3333334" vertical-offset="108" max-vertical-offset="594">
+        <state line="6" column="0" selection-start="180" selection-end="180" vertical-scroll-proportion="-4.0" vertical-offset="0" max-vertical-offset="594">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/aspi-remote.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="10" selection-start="616" selection-end="616" vertical-scroll-proportion="0.5612745" vertical-offset="131" max-vertical-offset="2394">
+        <state line="7" column="8" selection-start="178" selection-end="178" vertical-scroll-proportion="-3.0721154" vertical-offset="1404" max-vertical-offset="2502">
           <folding />
         </state>
       </provider>
