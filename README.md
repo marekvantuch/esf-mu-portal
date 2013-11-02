@@ -96,4 +96,4 @@ Then edit file ```%MAVEN_PATH%/conf/settings.xml``` and add the same credentials
 </server>
 ```
 
-Then you can simply (re)deploy your project by running ```mvn tomcat7 (re)deploy```
+Then you can simply (re)deploy your project by running ```mvn tomcat7:(re)deploy```
