@@ -5,6 +5,7 @@ function esf_module_page_aspi() {
 
   // remove any javascript added so far
   //drupal_static_reset('drupal_add_js');
+  drupal_static_reset('drupal_add_css');
 
   drupal_add_js($module_path . '/js/lib/blob/blob.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/lib/filesaver/filesaver.js', array('group' => JS_LIBRARY));

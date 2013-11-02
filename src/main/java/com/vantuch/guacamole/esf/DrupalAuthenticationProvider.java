@@ -94,12 +94,9 @@ public class DrupalAuthenticationProvider extends SimpleAuthenticationProvider {
       return null;
     }
 
-    //DrupalUser user = DrupalServices.login(credentials);
-
     Map<String, GuacamoleConfiguration> map = new TreeMap<String, GuacamoleConfiguration>();
 
     GuacamoleConfiguration configuration = getConfigurationBase();
-    //configuration.setParameter("sessionid", user.session.SessionID);
     configuration.setParameter("username", credentials.getUsername());
     configuration.setParameter("password", credentials.getPassword());
 

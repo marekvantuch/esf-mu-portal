@@ -23,6 +23,16 @@ function esf_module_ui_menu() {
     'access arguments' => array('administer esf'),
     'weight' => 10,
   );
+
+  $items['admin/config/esf/remote'] = array(
+    'title' => 'Remote Machine Configuration',
+    'description' => 'Configuration of the connection to the remote machine.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('esf_module_ui_remote'),
+    'access arguments' => array('administer esf'),
+    'file' => 'includes/esf_module_ui.admin.inc',
+    'weight' => 11,
+  );
   
   return $items;
 }
