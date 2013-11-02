@@ -39,15 +39,35 @@ Version 0.1 *(May 2013)*
 
 Version 0.2 *(June 2013)*
 
-- [ ] Drupal integration module is created.
-- [ ] Remote client server running on a standalone werver with designated port so that multiple computers can connect to it.
+- [x] Drupal integration module is created.
+- [x] Remote client server running on a standalone server with designated port so that multiple computers can connect to it.
 
 Version 0.3 *(July 2013)*
 
-- [ ] Correct privilegies settings for the drupal module so that it can be integrated into the existing website
-- [ ] Styling of the module to align with the page which it integrates with.
+- [x] Correct privilegies settings for the drupal module so that it can be integrated into the existing website
+- [x] Styling of the module to align with the page which it integrates with.
 
+Instalation
+-----------
 
+I have ever really tested this working on linux, but there should theoretically not be any problem running it on windows. 
+I am not going to write the installation tutorial for it though, so if you'd like to try it, please go ahead. Steps 
+should be fairly similar.
 
+Requirements: Maven (http://maven.apache.org/), Tomcat, JAVA, JAVA JDK
+
+To verify that your environment is ready for the installation, please check that following commands return valid results.
+
+Maven ```mvn --version``` 
+JAVA ```java -version``` version should be at least 1.5.x
+JAVA JDK ```echo $JAVA_HOME``` should display the location of 
+
+Build JAVA Servlet application
+
+Navigate into a folder where you'd like to install this piece of software
+Clone this repository ```git clone git@github.com:kanei/ESF-MU-Portal.git```
+Enter the cloned repository ```cd ESF-MU-Portal```
+Build the application ```mvn clean install```
+Check the ```target``` folder and make sure it contains the built application (war)
 
 
