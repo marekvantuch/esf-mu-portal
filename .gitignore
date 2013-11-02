@@ -5,5 +5,9 @@
 *.war
 *.ear
 
+# Idea Solution Files #
+.idea/
+*.iml
+
 target
 /src/modules/nbproject/private/
