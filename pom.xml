@@ -4,7 +4,7 @@
 
   <groupId>com.vantuch</groupId>
   <artifactId>guacamole-esf</artifactId>
-  <version>0.2</version>
+  <version>0.4</version>
   <packaging>war</packaging>
 
   <name>guacamole-esf</name>
