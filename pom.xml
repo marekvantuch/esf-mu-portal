@@ -87,6 +87,12 @@
       <version>2.1.2</version>
       <scope>compile</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>cors-filter</artifactId>
+      <version>1.7.1</version>
+    </dependency>
   </dependencies>
 
   <build>
