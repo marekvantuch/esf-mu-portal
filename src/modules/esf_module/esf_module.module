@@ -1,10 +1,14 @@
 <?php
 
+use \Esf\Server;
+
 module_load_include('inc', 'esf_module', 'includes/esf_module');
 
 define('GUACAMOLE_SERVER_DOMAIN', 'guacamole_server_domain');
 define('GUACAMOLE_SERVER_PORT', 'guacamole_server_port');
 define('GUACAMOLE_SERVER_PATH', 'guacamole_server_path');
+define('GUACAMOLE_HOME', 'guacamole_home');
+define('GUACAMOLE_PROPERTIES_FILE', 'guacamole_properties_file');
 
 /**
  * Implements hook_init()

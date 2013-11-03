@@ -1,5 +1,13 @@
 <?php
 
+namespace Esf;
+
+module_load_include('inc', 'esf_module', 'includes/esf_module.interfaces');
+
+/**
+ * Class Session
+ * @package Esf
+ */
 class Session {
   public static function set($name, $value) {
     $_SESSION[$name] = $value;
@@ -13,6 +21,7 @@ class Session {
 /**
  * Class Server for handling the server url from the variables
  * set in the drupal configuration pages
+ * @package Esf
  */
 class Server {
   /**

@@ -155,7 +155,7 @@
         <version>2.1</version>
         <configuration>
           <port>8080</port>
-          <path>/guacamole/</path>
+          <path>/guacamole</path>
         </configuration>
       </plugin>
     </plugins>

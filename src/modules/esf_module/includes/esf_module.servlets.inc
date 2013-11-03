@@ -1,5 +1,7 @@
 <?php
 
+namespace Esf;
+
 define ('METHOD_POST', 'POST');
 define ('METHOD_GET', 'GET');
 define ('METHOD_PUT', 'PUT');
@@ -23,7 +25,7 @@ class ServletStatus {
 /**
  * Class ServletException is to be raised during the execution of servlets
  */
-class ServletException extends Exception {
+class ServletException extends \Exception {
 
   /**
    * @param Servlet $servlet
@@ -50,12 +52,12 @@ abstract class Servlet {
   /**
    * Executes a service login call
    *
-   * @return \Servlet
+   * @return \Esf\Servlet
    */
   public function execute() {
     try {
       $this->result = drupal_http_request($this->url(), $this->_buildOptions());
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->result = (object) array('code' => $e->getCode(), 'error' => $e->getMessage());
     }
 
@@ -66,7 +68,7 @@ abstract class Servlet {
    * Check the return code to be 200
    *
    * @throws ServletException
-   * @return \ServletStatus
+   * @return \Esf\ServletStatus
    */
   public function state() {
     switch($this->result->code) {
@@ -112,7 +114,7 @@ abstract class Servlet {
    * Returns a cookie of a specific name
    * 
    * @param string $cookie_name cookie name
-   * @return cookie
+   * @return \cookie
    */
   protected final function getCookie($cookie_name) {
     $cookies = parse_cookies($this->result->headers['set-cookie']);
@@ -262,7 +264,7 @@ class LoginServlet extends Servlet {
   /**
    * Store the java login cookie in the session
    * 
-   * @return \LoginServlet
+   * @return \Esf\LoginServlet
    */
   public function processResponse() {
     $cookie_value = $this->getCookie(JSESSIONID)->value;

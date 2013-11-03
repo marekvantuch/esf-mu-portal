@@ -1,2 +1,47 @@
 <?php
 
+function esf_module_requirements($phase) {
+  switch($phase) {
+    case 'runtime':
+      $guacamole_home = variable_get(GUACAMOLE_HOME);
+      $guacamole_properties_file = variable_get(GUACAMOLE_PROPERTIES_FILE);
+
+      $properties_file = new SplFileInfo($guacamole_home . $guacamole_properties_file);
+
+      if (empty($guacamole_home)) {
+        return esf_module_requirement(REQUIREMENT_ERROR,
+          t('Incorrect or missing parameters'),
+          t('Guacamole home property has not been set. Please do so
+            <a href="!url">here</a>.',
+            array('!url' => url('admin/config/esf/settings'))));
+      }
+
+      if (!$properties_file->isReadable()) {
+        return esf_module_requirement(REQUIREMENT_ERROR,
+        t('Properties file'),
+        t('Properties file was not found in \'!location\'.',
+          array('!location' => $guacamole_home . $guacamole_properties_file)));
+      }
+
+      if (!$properties_file->isWritable()) {
+        return esf_module_requirement(REQUIREMENT_ERROR,
+          t('Properties file'),
+          t('Properties file was found in \'!location\', but is not writable.',
+            array('!location' => $guacamole_home . $guacamole_properties_file)));
+      }
+
+      return esf_module_requirement(REQUIREMENT_OK, t('Just fine'),
+        t('All properties are correctly set and property files are accessible.'));
+
+  }
+}
+
+function esf_module_requirement($severity, $value, $description) {
+  return array(
+    'esf_module' => array(
+      'title' => 'ESF module',
+      'value' => $value,
+      'description' => $description,
+      'severity' => $severity
+    ));
+}
