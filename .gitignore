@@ -6,8 +6,8 @@
 *.ear
 
 # Idea Solution Files #
-.idea/
+*.idea/
 *.iml
 
 target
-/src/modules/nbproject/private/
+nbproject
