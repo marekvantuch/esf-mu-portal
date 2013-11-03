@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03f2f52b-247f-46a5-9a05-84c68622789f" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../../../all/themes/omega_esf/templates/system/html--aspi--remote.tpl.php" afterPath="$PROJECT_DIR$/../../../all/themes/omega_esf/templates/system/html--aspi.tpl.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../all/themes/omega_esf/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../all/themes/omega_esf/.idea/workspace.xml" />
     </list>
     <ignored path="esf_module.iws" />
@@ -37,28 +38,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="esf_module.variable.inc" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="esf_module.variable.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/esf_module.variable.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="33" selection-start="2668" selection-end="2668" vertical-scroll-proportion="4.0536194" vertical-offset="0" max-vertical-offset="1728">
+            <state line="84" column="33" selection-start="2668" selection-end="2668" vertical-scroll-proportion="-56.0" vertical-offset="0" max-vertical-offset="1728">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.inc" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../includes/bootstrap.inc">
+      <file leaf-file-name="guacamole-layout.tpl.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../../all/themes/omega_esf/layouts/guacamole/guacamole-layout.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="952" column="0" selection-start="30948" selection-end="30948" vertical-scroll-proportion="-4.5925927" vertical-offset="16958" max-vertical-offset="62064">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../index.php">
+      <file leaf-file-name="html--aspi.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../../all/themes/omega_esf/templates/system/html--aspi.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="324">
+            <state line="14" column="0" selection-start="403" selection-end="403" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="360">
               <folding />
             </state>
           </provider>
@@ -82,7 +83,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/includes/esf_module.ajax.inc" />
         <option value="$PROJECT_DIR$/js/aspi-remote.js" />
         <option value="$PROJECT_DIR$/esf_module.info" />
         <option value="$PROJECT_DIR$/js/lib/guacamole.js" />
@@ -98,6 +98,7 @@
         <option value="$PROJECT_DIR$/includes/esf_module_ui.admin.inc" />
         <option value="$PROJECT_DIR$/includes/esf_module.properties.inc" />
         <option value="$PROJECT_DIR$/esf_module.variable.inc" />
+        <option value="$PROJECT_DIR$/../../../all/themes/omega_esf/templates/system/html--aspi.tpl.php" />
       </list>
     </option>
   </component>
@@ -181,6 +182,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="omega_esf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="esf_module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="esf_module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="omega_esf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -448,20 +471,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/includes/esf_module.servlets.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="35" selection-start="151" selection-end="151" vertical-scroll-proportion="0.25307557" vertical-offset="0" max-vertical-offset="5292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/includes/esf_module.ajax.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="81" selection-end="143" vertical-scroll-proportion="0.09490334" vertical-offset="0" max-vertical-offset="594">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_8.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1093" column="9" selection-start="34963" selection-end="34963" vertical-scroll-proportion="0.76724136" vertical-offset="19229" max-vertical-offset="19836">
@@ -525,20 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../includes/bootstrap.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="952" column="0" selection-start="30948" selection-end="30948" vertical-scroll-proportion="-4.5925927" vertical-offset="16958" max-vertical-offset="62064">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="324">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/esf_module.properties.inc">
       <provider selected="true" editor-type-id="text-editor">
         <state line="121" column="0" selection-start="2635" selection-end="2635" vertical-scroll-proportion="5.642487" vertical-offset="0" max-vertical-offset="6588">
@@ -555,7 +550,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/esf_module.variable.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="33" selection-start="2668" selection-end="2668" vertical-scroll-proportion="4.0536194" vertical-offset="0" max-vertical-offset="1728">
+        <state line="84" column="33" selection-start="2668" selection-end="2668" vertical-scroll-proportion="-56.0" vertical-offset="0" max-vertical-offset="1728">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="0.3480663" vertical-offset="0" max-vertical-offset="362">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../includes/bootstrap.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="952" column="0" selection-start="30948" selection-end="30948" vertical-scroll-proportion="0.3324397" vertical-offset="16958" max-vertical-offset="62064">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../all/themes/omega_esf/templates/system/html--aspi.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="403" selection-end="403" vertical-scroll-proportion="-9.333333" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../all/themes/omega_esf/layouts/guacamole/guacamole-layout.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <folding />
         </state>
       </provider>
