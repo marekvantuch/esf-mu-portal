@@ -1,4 +1,3 @@
-
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -46,38 +45,41 @@ var Guacamole = Guacamole || {};
  * is a null implementation whose functions do nothing. Guacamole applications
  * should use {@link Guacamole.HTTPTunnel} instead, or implement their own tunnel based
  * on this one.
- * 
+ *
  * @constructor
  * @see Guacamole.HTTPTunnel
  */
-Guacamole.Tunnel = function() {
+Guacamole.Tunnel = function () {
 
     /**
      * Connect to the tunnel with the given optional data. This data is
      * typically used for authentication. The format of data accepted is
      * up to the tunnel implementation.
-     * 
+     *
      * @param {String} data The data to send to the tunnel when connecting.
      */
-    this.connect = function(data) {};
-    
+    this.connect = function (data) {
+    };
+
     /**
      * Disconnect from the tunnel.
      */
-    this.disconnect = function() {};
-    
+    this.disconnect = function () {
+    };
+
     /**
      * Send the given message through the tunnel to the service on the other
      * side. All messages are guaranteed to be received in the order sent.
-     * 
+     *
      * @param {...} elements The elements of the message to send to the
      *                       service on the other side of the tunnel.
      */
-    this.sendMessage = function(elements) {};
-    
+    this.sendMessage = function (elements) {
+    };
+
     /**
      * Fired whenever an error is encountered by the tunnel.
-     * 
+     *
      * @event
      * @param {String} message A human-readable description of the error that
      *                         occurred.
@@ -86,7 +88,7 @@ Guacamole.Tunnel = function() {
 
     /**
      * Fired once for every complete Guacamole instruction received, in order.
-     * 
+     *
      * @event
      * @param {String} opcode The Guacamole instruction opcode.
      * @param {Array} parameters The parameters provided for the instruction,
@@ -98,12 +100,12 @@ Guacamole.Tunnel = function() {
 
 /**
  * Guacamole Tunnel implemented over HTTP via XMLHttpRequest.
- * 
+ *
  * @constructor
  * @augments Guacamole.Tunnel
  * @param {String} tunnelURL The URL of the HTTP tunneling service.
  */
-Guacamole.HTTPTunnel = function(tunnelURL) {
+Guacamole.HTTPTunnel = function (tunnelURL) {
 
     /**
      * Reference to this HTTP tunnel.
@@ -114,17 +116,17 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
     var tunnel_uuid;
 
     var TUNNEL_CONNECT = tunnelURL + "?connect";
-    var TUNNEL_READ    = tunnelURL + "?read:";
-    var TUNNEL_WRITE   = tunnelURL + "?write:";
+    var TUNNEL_READ = tunnelURL + "?read:";
+    var TUNNEL_WRITE = tunnelURL + "?write:";
 
-    var STATE_IDLE          = 0;
-    var STATE_CONNECTED     = 1;
-    var STATE_DISCONNECTED  = 2;
+    var STATE_IDLE = 0;
+    var STATE_CONNECTED = 1;
+    var STATE_DISCONNECTED = 2;
 
     var currentState = STATE_IDLE;
 
-    var POLLING_ENABLED     = 1;
-    var POLLING_DISABLED    = 0;
+    var POLLING_ENABLED = 1;
+    var POLLING_DISABLED = 0;
 
     // Default to polling - will be turned off automatically if not needed
     var pollingMode = POLLING_ENABLED;
@@ -132,7 +134,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
     var sendingMessages = false;
     var outputMessageBuffer = "";
 
-    this.sendMessage = function() {
+    this.sendMessage = function () {
 
         // Do not attempt to send messages if not connected
         if (currentState != STATE_CONNECTED)
@@ -145,21 +147,21 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
         /**
          * Converts the given value to a length/string pair for use as an
          * element in a Guacamole instruction.
-         * 
+         *
          * @private
          * @param value The value to convert.
-         * @return {String} The converted value. 
+         * @return {String} The converted value.
          */
         function getElement(value) {
             var string = new String(value);
-            return string.length + "." + string; 
+            return string.length + "." + string;
         }
 
         // Initialized message with first element
         var message = getElement(arguments[0]);
 
         // Append remaining elements
-        for (var i=1; i<arguments.length; i++)
+        for (var i = 1; i < arguments.length; i++)
             message += "," + getElement(arguments[i]);
 
         // Final terminator
@@ -173,7 +175,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
             sendPendingMessages();
 
     };
-    
+
     function sendPendingMessages() {
 
         if (outputMessageBuffer.length > 0) {
@@ -183,11 +185,11 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
             var CORS = new Guacamole.CORS();
 
             var message_xmlhttprequest = CORS.createRequest("POST", TUNNEL_WRITE + tunnel_uuid);
-            
+
             message_xmlhttprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 
             // Once response received, send next queued event.
-            message_xmlhttprequest.onreadystatechange = function() {
+            message_xmlhttprequest.onreadystatechange = function () {
                 if (message_xmlhttprequest.readyState == 4) {
 
                     // If an error occurs during send, handle it
@@ -218,20 +220,21 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
         if (status == 0)   return "Disconnected";
         if (status == 200) return "Success";
         if (status == 403) return "Unauthorized";
-        if (status == 404) return "Connection closed"; /* While it may be more
-                                                        * accurate to say the
-                                                        * connection does not
-                                                        * exist, it is confusing
-                                                        * to the user.
-                                                        * 
-                                                        * In general, this error
-                                                        * will only happen when
-                                                        * the tunnel does not
-                                                        * exist, which happens
-                                                        * after the connection
-                                                        * is closed and the
-                                                        * tunnel is detached.
-                                                        */
+        if (status == 404) return "Connection closed";
+        /* While it may be more
+         * accurate to say the
+         * connection does not
+         * exist, it is confusing
+         * to the user.
+         *
+         * In general, this error
+         * will only happen when
+         * the tunnel does not
+         * exist, which happens
+         * after the connection
+         * is closed and the
+         * tunnel is detached.
+         */
         // Internal server errors
         if (status >= 500 && status <= 599) return "Server error";
 
@@ -274,11 +277,11 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
             // Do not handle responses if not connected
             if (currentState != STATE_CONNECTED) {
-                
+
                 // Clean up interval if polling
                 if (interval != null)
                     clearInterval(interval);
-                
+
                 return;
             }
 
@@ -287,10 +290,14 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
             // Attempt to read status
             var status;
-            try { status = xmlhttprequest.status; }
+            try {
+                status = xmlhttprequest.status;
+            }
 
-            // If status could not be read, assume successful.
-            catch (e) { status = 200; }
+                // If status could not be read, assume successful.
+            catch (e) {
+                status = 200;
+            }
 
             // Start next request as soon as possible IF request was successful
             if (nextRequest == null && status == 200)
@@ -322,10 +329,14 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
                 // Attempt to read in-progress data
                 var current;
-                try { current = xmlhttprequest.responseText; }
+                try {
+                    current = xmlhttprequest.responseText;
+                }
 
-                // Do not attempt to parse if data could not be read
-                catch (e) { return; }
+                    // Do not attempt to parse if data could not be read
+                catch (e) {
+                    return;
+                }
 
                 // While search is within currently received data
                 while (elementEnd < current.length) {
@@ -335,7 +346,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
                         // We now have enough data for the element. Parse.
                         var element = current.substring(startIndex, elementEnd);
-                        var terminator = current.substring(elementEnd, elementEnd+1);
+                        var terminator = current.substring(elementEnd, elementEnd + 1);
 
                         // Add element to array
                         elements.push(element);
@@ -366,7 +377,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
                     if (lengthEnd != -1) {
 
                         // Parse length
-                        var length = parseInt(current.substring(elementEnd+1, lengthEnd));
+                        var length = parseInt(current.substring(elementEnd + 1, lengthEnd));
 
                         // If we're done parsing, handle the next response.
                         if (length == 0) {
@@ -374,7 +385,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
                             // Clean up interval if polling
                             if (interval != null)
                                 clearInterval(interval);
-                           
+
                             // Clean up object
                             xmlhttprequest.onreadystatechange = null;
                             xmlhttprequest.abort();
@@ -395,7 +406,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
                         elementEnd = startIndex + length;
 
                     }
-                    
+
                     // If no period yet, continue search when more data
                     // is received
                     else {
@@ -412,7 +423,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
         // If response polling enabled, attempt to detect if still
         // necessary (via wrapping parseResponse())
         if (pollingMode == POLLING_ENABLED) {
-            xmlhttprequest.onreadystatechange = function() {
+            xmlhttprequest.onreadystatechange = function () {
 
                 // If we receive two or more readyState==3 events,
                 // there is no need to poll.
@@ -454,7 +465,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
     }
 
-    this.connect = function(data) {
+    this.connect = function (data) {
         var CORS = new Guacamole.CORS();
 
         // Start tunnel and connect synchronously
@@ -477,7 +488,7 @@ Guacamole.HTTPTunnel = function(tunnelURL) {
 
     };
 
-    this.disconnect = function() {
+    this.disconnect = function () {
         currentState = STATE_DISCONNECTED;
     };
 
@@ -488,12 +499,12 @@ Guacamole.HTTPTunnel.prototype = new Guacamole.Tunnel();
 
 /**
  * Guacamole Tunnel implemented over WebSocket via XMLHttpRequest.
- * 
+ *
  * @constructor
  * @augments Guacamole.Tunnel
  * @param {String} tunnelURL The URL of the WebSocket tunneling service.
  */
-Guacamole.WebSocketTunnel = function(tunnelURL) {
+Guacamole.WebSocketTunnel = function (tunnelURL) {
 
     /**
      * Reference to this WebSocket tunnel.
@@ -513,7 +524,7 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
      * @private
      */
     var ws_protocol = {
-        "http:":  "ws:",
+        "http:": "ws:",
         "https:": "wss:"
     };
 
@@ -531,16 +542,16 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
         1010: "Extension negotiation failed."
     };
 
-    var STATE_IDLE          = 0;
-    var STATE_CONNECTED     = 1;
-    var STATE_DISCONNECTED  = 2;
+    var STATE_IDLE = 0;
+    var STATE_CONNECTED = 1;
+    var STATE_DISCONNECTED = 2;
 
     var currentState = STATE_IDLE;
-    
+
     // Transform current URL to WebSocket URL
 
     // If not already a websocket URL
-    if (   tunnelURL.substring(0, 3) != "ws:"
+    if (tunnelURL.substring(0, 3) != "ws:"
         && tunnelURL.substring(0, 4) != "wss:") {
 
         var protocol = ws_protocol[window.location.protocol];
@@ -549,28 +560,28 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
         if (tunnelURL.substring(0, 1) == "/")
             tunnelURL =
                 protocol
-                + "//" + window.location.host
-                + tunnelURL;
+                    + "//" + window.location.host
+                    + tunnelURL;
 
         // Otherwise, construct absolute from relative URL
         else {
 
             // Get path from pathname
             var slash = window.location.pathname.lastIndexOf("/");
-            var path  = window.location.pathname.substring(0, slash + 1);
+            var path = window.location.pathname.substring(0, slash + 1);
 
             // Construct absolute URL
             tunnelURL =
                 protocol
-                + "//" + window.location.host
-                + path
-                + tunnelURL;
+                    + "//" + window.location.host
+                    + path
+                    + tunnelURL;
 
         }
 
     }
 
-    this.sendMessage = function(elements) {
+    this.sendMessage = function (elements) {
 
         // Do not attempt to send messages if not connected
         if (currentState != STATE_CONNECTED)
@@ -583,21 +594,21 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
         /**
          * Converts the given value to a length/string pair for use as an
          * element in a Guacamole instruction.
-         * 
+         *
          * @private
          * @param value The value to convert.
-         * @return {String} The converted value. 
+         * @return {String} The converted value.
          */
         function getElement(value) {
             var string = new String(value);
-            return string.length + "." + string; 
+            return string.length + "." + string;
         }
 
         // Initialized message with first element
         var message = getElement(arguments[0]);
 
         // Append remaining elements
-        for (var i=1; i<arguments.length; i++)
+        for (var i = 1; i < arguments.length; i++)
             message += "," + getElement(arguments[i]);
 
         // Final terminator
@@ -607,31 +618,31 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
 
     };
 
-    this.connect = function(data) {
+    this.connect = function (data) {
 
         // Connect socket
         socket = new WebSocket(tunnelURL + "?" + data, "guacamole");
 
-        socket.onopen = function(event) {
+        socket.onopen = function (event) {
             currentState = STATE_CONNECTED;
         };
 
-        socket.onclose = function(event) {
+        socket.onclose = function (event) {
 
             // If connection closed abnormally, signal error.
             if (event.code != 1000 && tunnel.onerror)
                 tunnel.onerror(status_code[event.code]);
 
         };
-        
-        socket.onerror = function(event) {
+
+        socket.onerror = function (event) {
 
             // Call error handler
             if (tunnel.onerror) tunnel.onerror(event.data);
 
         };
 
-        socket.onmessage = function(event) {
+        socket.onmessage = function (event) {
 
             var message = event.data;
             var startIndex = 0;
@@ -646,7 +657,7 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
                 if (lengthEnd != -1) {
 
                     // Parse length
-                    var length = parseInt(message.substring(elementEnd+1, lengthEnd));
+                    var length = parseInt(message.substring(elementEnd + 1, lengthEnd));
 
                     // Calculate start of element
                     startIndex = lengthEnd + 1;
@@ -655,14 +666,14 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
                     elementEnd = startIndex + length;
 
                 }
-                
+
                 // If no period, incomplete instruction.
                 else
                     throw new Error("Incomplete instruction.");
 
                 // We now have enough data for the element. Parse.
                 var element = message.substring(startIndex, elementEnd);
-                var terminator = message.substring(elementEnd, elementEnd+1);
+                var terminator = message.substring(elementEnd, elementEnd + 1);
 
                 // Add element to array
                 elements.push(element);
@@ -692,7 +703,7 @@ Guacamole.WebSocketTunnel = function(tunnelURL) {
 
     };
 
-    this.disconnect = function() {
+    this.disconnect = function () {
         currentState = STATE_DISCONNECTED;
         socket.close();
     };
@@ -708,12 +719,12 @@ Guacamole.WebSocketTunnel.prototype = new Guacamole.Tunnel();
  * no instructions have been received. If an instruction has been
  * received, or no tunnels remain, the error is passed directly out
  * through the onerror handler (if defined).
- * 
+ *
  * @constructor
  * @augments Guacamole.Tunnel
  * @param {...} tunnel_chain The tunnels to use, in order of priority.
  */
-Guacamole.ChainedTunnel = function(tunnel_chain) {
+Guacamole.ChainedTunnel = function (tunnel_chain) {
 
     /**
      * Reference to this chained tunnel.
@@ -742,12 +753,12 @@ Guacamole.ChainedTunnel = function(tunnel_chain) {
     var tunnels = [];
 
     // Load all tunnels into array
-    for (var i=0; i<arguments.length; i++)
+    for (var i = 0; i < arguments.length; i++)
         tunnels.push(arguments[i]);
 
     /**
      * Sets the current tunnel.
-     * 
+     *
      * @private
      * @param {Guacamole.Tunnel} tunnel The tunnel to set as the current tunnel.
      */
@@ -760,15 +771,15 @@ Guacamole.ChainedTunnel = function(tunnel_chain) {
         }
 
         // Set own functions to tunnel's functions
-        chained_tunnel.disconnect    = tunnel.disconnect;
-        chained_tunnel.sendMessage   = tunnel.sendMessage;
-        
+        chained_tunnel.disconnect = tunnel.disconnect;
+        chained_tunnel.sendMessage = tunnel.sendMessage;
+
         // Record current tunnel
         current_tunnel = tunnel;
 
         // Wrap own oninstruction within current tunnel
-        current_tunnel.oninstruction = function(opcode, elements) {
-            
+        current_tunnel.oninstruction = function (opcode, elements) {
+
             // Invoke handler
             chained_tunnel.oninstruction(opcode, elements);
 
@@ -777,11 +788,11 @@ Guacamole.ChainedTunnel = function(tunnel_chain) {
 
             // Pass through errors (without trying other tunnels)
             current_tunnel.onerror = chained_tunnel.onerror;
-            
+
         }
 
         // Attach next tunnel on error
-        current_tunnel.onerror = function(message) {
+        current_tunnel.onerror = function (message) {
 
             // Get next tunnel
             var next_tunnel = tunnels.shift();
@@ -797,23 +808,23 @@ Guacamole.ChainedTunnel = function(tunnel_chain) {
         };
 
         try {
-            
+
             // Attempt connection
             current_tunnel.connect(connect_data);
-            
+
         }
         catch (e) {
-            
+
             // Call error handler of current tunnel on error
             current_tunnel.onerror(e.message);
-            
+
         }
 
 
     }
 
-    this.connect = function(data) {
-       
+    this.connect = function (data) {
+
         // Remember connect data
         connect_data = data;
 
@@ -829,7 +840,7 @@ Guacamole.ChainedTunnel = function(tunnel_chain) {
             chained_tunnel.onerror("No tunnels to try.");
 
     };
-    
+
 };
 
 Guacamole.ChainedTunnel.prototype = new Guacamole.Tunnel();

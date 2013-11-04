@@ -86,7 +86,8 @@ Edit file ```%TOMCAT_PATH%/conf/tomcat-users.xml``` and setup your admin user.
 </tomcat-users>
 ```
 
-Then edit file ```%MAVEN_PATH%/conf/settings.xml``` and add the same credentials.
+Then edit file ```%MAVEN_PATH%/conf/settings.xml``` and add the same credentials. Also make sure that the id stays 
+TomcatServer, otherwise it's not going to work (must be the same as in the pom.xml file).
 
 ```xml
 <server>

@@ -30,7 +30,7 @@ GuacUI.sessionState = new GuacamoleSessionState();
 /**
  * Creates a new element having the given tagname and CSS class.
  */
-GuacUI.createElement = function(tagname, classname) {
+GuacUI.createElement = function (tagname, classname) {
     var new_element = document.createElement(tagname);
     if (classname) new_element.className = classname;
     return new_element;
@@ -40,7 +40,7 @@ GuacUI.createElement = function(tagname, classname) {
  * Creates a new element having the given tagname, CSS class, and specified
  * parent element.
  */
-GuacUI.createChildElement = function(parent, tagname, classname) {
+GuacUI.createChildElement = function (parent, tagname, classname) {
     var element = GuacUI.createElement(tagname, classname);
     parent.appendChild(element);
     return element;
@@ -50,12 +50,12 @@ GuacUI.createChildElement = function(parent, tagname, classname) {
  * Creates a new row within the given table having a single header cell
  * with the given title, and a single value cell. The value cell is returned.
  */
-GuacUI.createTabulatedContainer = function(table, title) {
+GuacUI.createTabulatedContainer = function (table, title) {
 
     // Create elements
-    var row    = GuacUI.createChildElement(table, "tr");
+    var row = GuacUI.createChildElement(table, "tr");
     var header = GuacUI.createChildElement(row, "th");
-    var cell   = GuacUI.createChildElement(row, "td");
+    var cell = GuacUI.createChildElement(row, "td");
 
     // Set title, return cell
     header.textContent = title;
@@ -66,7 +66,7 @@ GuacUI.createTabulatedContainer = function(table, title) {
 /**
  * Adds the given CSS class to the given element.
  */
-GuacUI.addClass = function(element, classname) {
+GuacUI.addClass = function (element, classname) {
 
     // If supported, use native classlist for addClass()
     if (Node.classlist)
@@ -81,7 +81,7 @@ GuacUI.addClass = function(element, classname) {
 /**
  * Removes the given CSS class from the given element.
  */
-GuacUI.removeClass = function(element, classname) {
+GuacUI.removeClass = function (element, classname) {
 
     // If supported, use native classlist for removeClass()
     if (Node.classlist)
@@ -92,7 +92,7 @@ GuacUI.removeClass = function(element, classname) {
 
         // Filter out classes with given name
         element.className = element.className.replace(/([^ ]+)[ ]*/g,
-            function(match, testClassname, spaces, offset, string) {
+            function (match, testClassname, spaces, offset, string) {
 
                 // If same class, remove
                 if (testClassname == classname)
@@ -100,7 +100,7 @@ GuacUI.removeClass = function(element, classname) {
 
                 // Otherwise, allow
                 return match;
-                
+
             }
         );
 
@@ -110,35 +110,35 @@ GuacUI.removeClass = function(element, classname) {
 
 /**
  * Opens the connection group having the given ID in a new tab/window.
- * 
+ *
  * @param {String} id The ID of the connection group to open.
  * @param {String} parameters Any parameters that should be added to the URL,
  *                            for sake of authentication.
  */
-GuacUI.openConnectionGroup = function(id, parameters) {
+GuacUI.openConnectionGroup = function (id, parameters) {
     GuacUI.openObject("g/" + id, parameters);
 };
 
 /**
  * Opens the connection having the given ID in a new tab/window.
- * 
+ *
  * @param {String} id The ID of the connection to open.
  * @param {String} parameters Any parameters that should be added to the URL,
  *                            for sake of authentication.
  */
-GuacUI.openConnection = function(id, parameters) {
+GuacUI.openConnection = function (id, parameters) {
     GuacUI.openObject("c/" + id, parameters);
 };
 
 /**
  * Opens the object having the given ID in a new tab/window. The ID must
  * include the relevant prefix.
- * 
+ *
  * @param {String} id The ID of the object to open, including prefix.
  * @param {String} parameters Any parameters that should be added to the URL,
  *                            for sake of authentication.
  */
-GuacUI.openObject = function(id, parameters) {
+GuacUI.openObject = function (id, parameters) {
 
     // Get URL
     var url = "client.xhtml?id=" + encodeURIComponent(id);
@@ -162,7 +162,7 @@ GuacUI.openObject = function(id, parameters) {
  * that audio be disabled, this object will pretend that audio is not
  * supported.
  */
-GuacUI.Audio = new (function() {
+GuacUI.Audio = new (function () {
 
     var codecs = [
         'audio/ogg; codecs="vorbis"',
@@ -184,9 +184,9 @@ GuacUI.Audio = new (function() {
     // If sound disabled, we're done now.
     if (GuacUI.sessionState.getProperty("disable-sound"))
         return;
-    
+
     // Build array of supported audio formats
-    codecs.forEach(function(mimetype) {
+    codecs.forEach(function (mimetype) {
 
         var audio = new Audio();
         var support_level = audio.canPlayType(mimetype);
@@ -217,7 +217,7 @@ GuacUI.Audio = new (function() {
 /**
  * Object describing the UI's level of video support.
  */
-GuacUI.Video = new (function() {
+GuacUI.Video = new (function () {
 
     var codecs = [
         'video/ogg; codecs="theora, vorbis"',
@@ -233,9 +233,9 @@ GuacUI.Video = new (function() {
      * working.
      */
     this.supported = [];
-    
+
     // Build array of supported audio formats
-    codecs.forEach(function(mimetype) {
+    codecs.forEach(function (mimetype) {
 
         var video = document.createElement("video");
         var support_level = video.canPlayType(mimetype);
@@ -267,7 +267,7 @@ GuacUI.Video = new (function() {
 /**
  * Central registry of all components for all states.
  */
-GuacUI.StateManager = new (function() {
+GuacUI.StateManager = new (function () {
 
     /**
      * The current state.
@@ -282,15 +282,15 @@ GuacUI.StateManager = new (function() {
     /**
      * Registers the given component with this state manager, to be shown
      * during the given states.
-     * 
+     *
      * @param {GuacUI.Component} component The component to register.
      * @param {Number} [...] The list of states this component should be
      *                       visible during.
      */
-    this.registerComponent = function(component) {
+    this.registerComponent = function (component) {
 
         // For each state specified, add the given component
-        for (var i=1; i<arguments.length; i++) {
+        for (var i = 1; i < arguments.length; i++) {
 
             // Get specified state
             var state = arguments[i];
@@ -310,7 +310,7 @@ GuacUI.StateManager = new (function() {
     function allComponents(components, name) {
 
         // Invoke given function on all components in array
-        for (var i=0; i<components.length; i++)
+        for (var i = 0; i < components.length; i++)
             components[i][name]();
 
     }
@@ -318,7 +318,7 @@ GuacUI.StateManager = new (function() {
     /**
      * Sets the current visible state.
      */
-    this.setState = function(state) {
+    this.setState = function (state) {
 
         // Hide components in current state
         if (current_state && components[current_state])
@@ -334,7 +334,7 @@ GuacUI.StateManager = new (function() {
     /**
      * Returns the current visible state.
      */
-    this.getState = function() {
+    this.getState = function () {
         return current_state;
     };
 
@@ -344,10 +344,10 @@ GuacUI.StateManager = new (function() {
 /**
  * Abstract component which can be registered with GuacUI and shown or hidden
  * dynamically based on interface mode.
- * 
+ *
  * @constructor
  */
-GuacUI.Component = function() {
+GuacUI.Component = function () {
 
     /**
      * Called whenever this component needs to be shown and activated.
@@ -365,11 +365,11 @@ GuacUI.Component = function() {
 
 /**
  * A Guacamole UI component which can be repositioned by dragging.
- * 
+ *
  * @constructor
  * @augments GuacUI.Component
  */
-GuacUI.DraggableComponent = function(element) {
+GuacUI.DraggableComponent = function (element) {
 
     var draggable_component = this;
 
@@ -383,27 +383,27 @@ GuacUI.DraggableComponent = function(element) {
      * Record drag start when finger hits element
      */
     if (element)
-        element.addEventListener("touchstart", function(e) {
-            
+        element.addEventListener("touchstart", function (e) {
+
             if (e.touches.length == 1) {
 
                 start_x = e.touches[0].screenX;
                 start_y = e.touches[0].screenY;
 
             }
-       
+
             e.stopPropagation();
-       
+
         }, true);
 
     /*
      * Update position based on last touch
      */
     if (element)
-        element.addEventListener("touchmove", function(e) {
-            
+        element.addEventListener("touchmove", function (e) {
+
             if (e.touches.length == 1) {
-                
+
                 var new_x = e.touches[0].screenX;
                 var new_y = e.touches[0].screenY;
 
@@ -417,32 +417,32 @@ GuacUI.DraggableComponent = function(element) {
                 draggable_component.move(position_x, position_y);
 
             }
-            
+
             e.preventDefault();
             e.stopPropagation();
 
         }, true);
 
     if (element)
-        element.addEventListener("touchend", function(e) {
+        element.addEventListener("touchend", function (e) {
             e.stopPropagation();
         }, true);
-            
+
     /**
      * Moves this component to the specified location relative to its normal
      * position.
-     * 
+     *
      * @param {Number} x The X coordinate in pixels.
      * @param {Number} y The Y coordinate in pixels.
      */
-    this.move = function(x, y) {
+    this.move = function (x, y) {
 
         element.style.WebkitTransform =
-        element.style.MozTransform =
-        element.style.OTransform =
-        element.style.msTransform =
-        element.style.transform = "translate("
-            + x + "px, " + y + "px)";
+            element.style.MozTransform =
+                element.style.OTransform =
+                    element.style.msTransform =
+                        element.style.transform = "translate("
+                            + x + "px, " + y + "px)";
 
         if (draggable_component.onmove)
             draggable_component.onmove(x, y);
@@ -451,7 +451,7 @@ GuacUI.DraggableComponent = function(element) {
 
     /**
      * Trigered whenever this element is moved.
-     * 
+     *
      * @event
      * @param {Number} x The new X coordinate.
      * @param {Number} y The new Y coordinate.
@@ -464,7 +464,7 @@ GuacUI.DraggableComponent = function(element) {
  * A connection UI object which can be easily added to a list of connections
  * for sake of display.
  */
-GuacUI.ListConnection = function(connection) {
+GuacUI.ListConnection = function (connection) {
 
     /**
      * Reference to this connection.
@@ -484,13 +484,13 @@ GuacUI.ListConnection = function(connection) {
     this.onclick = null;
 
     // Create connection display elements
-    var element   = GuacUI.createElement("div",  "connection");
-    var caption   = GuacUI.createChildElement(element, "div",  "caption");
-    var protocol  = GuacUI.createChildElement(caption, "div",  "protocol");
-    var name      = GuacUI.createChildElement(caption, "span", "name");
-    GuacUI.createChildElement(protocol, "div",  "icon " + connection.protocol);
+    var element = GuacUI.createElement("div", "connection");
+    var caption = GuacUI.createChildElement(element, "div", "caption");
+    var protocol = GuacUI.createChildElement(caption, "div", "protocol");
+    var name = GuacUI.createChildElement(caption, "span", "name");
+    GuacUI.createChildElement(protocol, "div", "icon " + connection.protocol);
 
-    element.addEventListener("click", function(e) {
+    element.addEventListener("click", function (e) {
 
         // Prevent click from affecting parent
         e.stopPropagation();
@@ -516,7 +516,7 @@ GuacUI.ListConnection = function(connection) {
     /**
      * Returns the DOM element representing this connection.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 
@@ -525,12 +525,12 @@ GuacUI.ListConnection = function(connection) {
 /**
  * A paging component. Elements can be added via the addElement() function,
  * and will only be shown if they are on the current page, set via setPage().
- * 
+ *
  * Beware that all elements will be added to the given container element, and
  * all children of the container element will be removed when the page is
  * changed.
  */
-GuacUI.Pager = function(container) {
+GuacUI.Pager = function (container) {
 
     var guac_pager = this;
 
@@ -571,12 +571,12 @@ GuacUI.Pager = function(container) {
         // Calculate first and last elements of page (where the last element
         // is actually the first element of the next page)
         var first_element = guac_pager.current_page * guac_pager.page_capacity;
-        var last_element  = Math.min(elements.length,
-                first_element + guac_pager.page_capacity);
+        var last_element = Math.min(elements.length,
+            first_element + guac_pager.page_capacity);
 
         // Clear contents, add elements
         container.innerHTML = "";
-        for (i=first_element; i < last_element; i++)
+        for (i = first_element; i < last_element; i++)
             container.appendChild(elements[i]);
 
         // Update buttons
@@ -588,11 +588,11 @@ GuacUI.Pager = function(container) {
 
         // Handle prev/first
         if (guac_pager.current_page > 0) {
-            first.onclick = function() {
+            first.onclick = function () {
                 guac_pager.setPage(0);
             };
 
-            prev.onclick = function() {
+            prev.onclick = function () {
                 guac_pager.setPage(guac_pager.current_page - 1);
             };
         }
@@ -614,26 +614,26 @@ GuacUI.Pager = function(container) {
             window_start = Math.max(0, window_start - window_end + guac_pager.last_page);
             window_end = guac_pager.last_page;
         }
-        
+
         // Add ellipsis if window after beginning
         if (window_start != 0)
             GuacUI.createChildElement(element, "div", "more-pages").textContent = "...";
-        
+
         // Add page jumps
-        for (i=window_start; i<=window_end; i++) {
+        for (i = window_start; i <= window_end; i++) {
 
             // Create clickable element containing page number
             var jump = GuacUI.createChildElement(element, "div", "set-page");
-            jump.textContent = i+1;
-            
+            jump.textContent = i + 1;
+
             // Mark current page
             if (i == guac_pager.current_page)
                 GuacUI.addClass(jump, "current");
 
             // If not current, add click event
             else
-                (function(page_number) {
-                    jump.onclick = function() {
+                (function (page_number) {
+                    jump.onclick = function () {
                         guac_pager.setPage(page_number);
                     };
                 })(i);
@@ -643,18 +643,18 @@ GuacUI.Pager = function(container) {
         // Add ellipsis if window before end
         if (window_end != guac_pager.last_page)
             GuacUI.createChildElement(element, "div", "more-pages").textContent = "...";
-        
+
         // Create next and last buttons
         var next = GuacUI.createChildElement(element, "div", "next-page icon");
         var last = GuacUI.createChildElement(element, "div", "last-page icon");
 
         // Handle next/last
         if (guac_pager.current_page < guac_pager.last_page) {
-            next.onclick = function() {
+            next.onclick = function () {
                 guac_pager.setPage(guac_pager.current_page + 1);
             };
-            
-            last.onclick = function() {
+
+            last.onclick = function () {
                 guac_pager.setPage(guac_pager.last_page);
             };
         }
@@ -668,7 +668,7 @@ GuacUI.Pager = function(container) {
     /**
      * Adds the given element to the set of displayable elements.
      */
-    this.addElement = function(element) {
+    this.addElement = function (element) {
         elements.push(element);
         guac_pager.last_page = Math.max(0,
             Math.floor((elements.length - 1) / guac_pager.page_capacity));
@@ -677,7 +677,7 @@ GuacUI.Pager = function(container) {
     /**
      * Sets the current page, where 0 is the first page.
      */
-    this.setPage = function(number) {
+    this.setPage = function (number) {
         guac_pager.current_page = number;
         update_display();
     };
@@ -685,7 +685,7 @@ GuacUI.Pager = function(container) {
     /**
      * Returns the element representing the buttons of this pager.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 
@@ -695,11 +695,11 @@ GuacUI.Pager = function(container) {
 /**
  * Interface object which displays the progress of a download, ultimately
  * becoming a download link once complete.
- * 
+ *
  * @constructor
  * @param {String} filename The name the file will have once complete.
  */
-GuacUI.Download = function(filename) {
+GuacUI.Download = function (filename) {
 
     /**
      * Reference to this GuacUI.Download.
@@ -724,7 +724,7 @@ GuacUI.Download = function(filename) {
      * @private
      */
     var close_button = GuacUI.createChildElement(title, "div", "close");
-    close_button.onclick = function() {
+    close_button.onclick = function () {
         if (guac_download.onclose)
             guac_download.onclose();
     };
@@ -743,24 +743,24 @@ GuacUI.Download = function(filename) {
 
     /**
      * Updates the content of the progress indicator with the given text.
-     * 
+     *
      * @param {String} text The text to assign to the progress indicator.
      */
-    this.updateProgress = function(text) {
+    this.updateProgress = function (text) {
         progress.textContent = text;
     };
 
     /**
      * Removes the progress indicator and replaces it with a download button.
      */
-    this.complete = function() {
+    this.complete = function () {
 
         element.removeChild(progress);
         GuacUI.addClass(element, "complete");
 
         var download = GuacUI.createChildElement(element, "div", "download");
         download.textContent = "Download";
-        download.onclick = function() {
+        download.onclick = function () {
             if (guac_download.ondownload)
                 guac_download.ondownload();
         };
@@ -770,7 +770,7 @@ GuacUI.Download = function(filename) {
     /**
      * Returns the element representing this notification.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 
@@ -792,7 +792,7 @@ GuacUI.Download = function(filename) {
  * A grouping component. Child elements can be added via the addElement()
  * function. By default, groups display as collapsed.
  */
-GuacUI.ListGroup = function(caption) {
+GuacUI.ListGroup = function (caption) {
 
     /**
      * Reference to this group.
@@ -812,9 +812,9 @@ GuacUI.ListGroup = function(caption) {
     var element = GuacUI.createElement("div", "group empty");
 
     // Create connection display elements
-    var caption_element = GuacUI.createChildElement(element, "div",  "caption");
-    var caption_icon    = GuacUI.createChildElement(caption_element, "div",  "icon group");
-    GuacUI.createChildElement(caption_element, "div",  "icon type");
+    var caption_element = GuacUI.createChildElement(element, "div", "caption");
+    var caption_icon = GuacUI.createChildElement(caption_element, "div", "icon group");
+    GuacUI.createChildElement(caption_element, "div", "icon type");
     GuacUI.createChildElement(caption_element, "span", "name").textContent = caption;
 
     /**
@@ -824,7 +824,7 @@ GuacUI.ListGroup = function(caption) {
 
     /**
      * Whether this group is expanded.
-     * 
+     *
      * @type Boolean
      */
     this.expanded = false;
@@ -838,14 +838,14 @@ GuacUI.ListGroup = function(caption) {
     /**
      * Returns the element representing this notification.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 
     /**
      * Adds an element as a child of this group.
      */
-    this.addElement = function(child) {
+    this.addElement = function (child) {
 
         // Mark as non-empty
         if (empty) {
@@ -861,7 +861,7 @@ GuacUI.ListGroup = function(caption) {
      * Expands the list group, revealing all children of the group. This
      * functionality requires supporting CSS.
      */
-    this.expand = function() {
+    this.expand = function () {
         GuacUI.addClass(element, "expanded");
         guac_group.expanded = true;
     };
@@ -870,13 +870,13 @@ GuacUI.ListGroup = function(caption) {
      * Collapses the list group, hiding all children of the group. This
      * functionality requires supporting CSS.
      */
-    this.collapse = function() {
+    this.collapse = function () {
         GuacUI.removeClass(element, "expanded");
         guac_group.expanded = false;
     };
 
     // Toggle when icon is clicked
-    caption_icon.addEventListener("click", function(e) {
+    caption_icon.addEventListener("click", function (e) {
 
         // Prevent click from affecting parent
         e.stopPropagation();
@@ -890,7 +890,7 @@ GuacUI.ListGroup = function(caption) {
     }, false);
 
     // Fire event when any other part is clicked
-    element.addEventListener("click", function(e) {
+    element.addEventListener("click", function (e) {
 
         // Prevent click from affecting parent
         e.stopPropagation();
@@ -907,7 +907,7 @@ GuacUI.ListGroup = function(caption) {
 /**
  * Component which displays a paginated tree view of all groups and their
  * connections.
- * 
+ *
  * @constructor
  * @param {GuacamoleService.ConnectionGroup} root_group The group to display
  *                                                      within the view.
@@ -919,8 +919,7 @@ GuacUI.ListGroup = function(caption) {
  *                                     connection should be displayed and false
  *                                     otherwise.
  */
-GuacUI.GroupView = function(root_group, flags,
-    group_filter, connection_filter) {
+GuacUI.GroupView = function (root_group, flags, group_filter, connection_filter) {
 
     /**
      * Reference to this GroupView.
@@ -990,7 +989,7 @@ GuacUI.GroupView = function(root_group, flags,
      * Fired when a connection group is clicked.
      *
      * @event
-     * @param {GuacamolService.ConnectionGroup} group The connection group which 
+     * @param {GuacamolService.ConnectionGroup} group The connection group which
      *                                                was clicked.
      */
     this.ongroupclick = null;
@@ -1018,18 +1017,18 @@ GuacUI.GroupView = function(root_group, flags,
     /**
      * Returns the element representing this group view.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 
     /**
      * Sets whether the group with the given ID can be selected. This function
      * only has an effect when multiselect is enabled.
-     * 
+     *
      * @param {String} id The ID of the group to alter.
      * @param {Boolean} value Whether the group should be selected.
      */
-    this.setGroupEnabled = function(id, value) {
+    this.setGroupEnabled = function (id, value) {
 
         var checkbox = group_checkboxes[id];
         if (!checkbox)
@@ -1052,11 +1051,11 @@ GuacUI.GroupView = function(root_group, flags,
     /**
      * Sets whether the connection with the given ID can be selected. This
      * function only has an effect when multiselect is enabled.
-     * 
+     *
      * @param {String} id The ID of the connection to alter.
      * @param {Boolean} value Whether the connection can be selected.
      */
-    this.setConnectionEnabled = function(id, value) {
+    this.setConnectionEnabled = function (id, value) {
 
         var checkbox = connection_checkboxes[id];
         if (!checkbox)
@@ -1079,11 +1078,11 @@ GuacUI.GroupView = function(root_group, flags,
     /**
      * Sets the current value of the group with the given ID. This function
      * only has an effect when multiselect is enabled.
-     * 
+     *
      * @param {String} id The ID of the group to change.
      * @param {Boolean} value Whether the group should be selected.
      */
-    this.setGroupValue = function(id, value) {
+    this.setGroupValue = function (id, value) {
 
         var checkbox = group_checkboxes[id];
         if (!checkbox)
@@ -1096,11 +1095,11 @@ GuacUI.GroupView = function(root_group, flags,
     /**
      * Sets the current value of the connection with the given ID. This function
      * only has an effect when multiselect is enabled.
-     * 
+     *
      * @param {String} id The ID of the connection to change.
      * @param {Boolean} value Whether the connection should be selected.
      */
-    this.setConnectionValue = function(id, value) {
+    this.setConnectionValue = function (id, value) {
 
         var checkbox = connection_checkboxes[id];
         if (!checkbox)
@@ -1112,11 +1111,11 @@ GuacUI.GroupView = function(root_group, flags,
 
     /**
      * Expands the given group and all parent groups all the way up to root.
-     * 
+     *
      * @param {GuacamoleService.ConnectionGroup} group The group that should
      *                                                 be expanded.
      */
-    this.expand = function(group) {
+    this.expand = function (group) {
 
         // Skip current group - only need to expand parents
         group = group.parent;
@@ -1141,7 +1140,7 @@ GuacUI.GroupView = function(root_group, flags,
     /**
      * Adds the contents of the given group via the given appendChild()
      * function, but not the given group itself.
-     * 
+     *
      * @param {GuacamoleService.ConnectionGroup} group The group whose contents
      *                                                 should be added.
      * @param {Function} appendChild A function which, given an element, will
@@ -1154,19 +1153,19 @@ GuacUI.GroupView = function(root_group, flags,
 
         // Add all contained connections
         if (show_connections) {
-            for (i=0; i<group.connections.length; i++)
+            for (i = 0; i < group.connections.length; i++)
                 addConnection(group.connections[i], appendChild);
         }
 
         // Add all contained groups 
-        for (i=0; i<group.groups.length; i++)
+        for (i = 0; i < group.groups.length; i++)
             addGroup(group.groups[i], appendChild);
 
     }
 
     /**
      * Adds the given connection via the given appendChild() function.
-     * 
+     *
      * @param {GuacamoleService.Connection} connection The connection to add.
      * @param {Function} appendChild A function which, given an element, will
      *                               add that element the the display as
@@ -1190,7 +1189,7 @@ GuacUI.GroupView = function(root_group, flags,
             var connection_choice = GuacUI.createElement("div", "choice");
             var connection_checkbox = GuacUI.createChildElement(connection_choice, "input");
             connection_checkbox.setAttribute("type", "checkbox");
-            
+
             connection_choice.appendChild(guacui_connection.getElement());
             appendChild(connection_choice);
 
@@ -1206,7 +1205,7 @@ GuacUI.GroupView = function(root_group, flags,
             }
 
             // Fire change events when checkbox modified
-            connection_checkbox.addEventListener("click",  fire_connection_change, false);
+            connection_checkbox.addEventListener("click", fire_connection_change, false);
             connection_checkbox.addEventListener("change", fire_connection_change, false);
 
             // Add checbox to set of connection checkboxes
@@ -1217,7 +1216,7 @@ GuacUI.GroupView = function(root_group, flags,
             appendChild(guacui_connection.getElement());
 
         // Fire click events when connection clicked
-        guacui_connection.onclick = function() {
+        guacui_connection.onclick = function () {
             if (group_view.onconnectionclick)
                 group_view.onconnectionclick(connection);
         };
@@ -1226,7 +1225,7 @@ GuacUI.GroupView = function(root_group, flags,
 
     /**
      * Adds the given group via the given appendChild() function.
-     * 
+     *
      * @param {GuacamoleService.ConnectionGroup} group The group to add.
      * @param {Function} appendChild A function which, given an element, will
      *                               add that element the the display as
@@ -1259,7 +1258,7 @@ GuacUI.GroupView = function(root_group, flags,
             var group_choice = GuacUI.createElement("div", "choice");
             var group_checkbox = GuacUI.createChildElement(group_choice, "input");
             group_checkbox.setAttribute("type", "checkbox");
-            
+
             group_choice.appendChild(list_group.getElement());
             appendChild(group_choice);
 
@@ -1275,7 +1274,7 @@ GuacUI.GroupView = function(root_group, flags,
             }
 
             // Fire change events when checkbox modified
-            group_checkbox.addEventListener("click",  fire_group_change, false);
+            group_checkbox.addEventListener("click", fire_group_change, false);
             group_checkbox.addEventListener("change", fire_group_change, false);
 
             // Add checbox to set of group checkboxes
@@ -1286,7 +1285,7 @@ GuacUI.GroupView = function(root_group, flags,
             appendChild(list_group.getElement());
 
         // Fire click events when group clicked
-        list_group.onclick = function() {
+        list_group.onclick = function () {
             if (group_view.ongroupclick)
                 group_view.ongroupclick(group);
         };
@@ -1334,12 +1333,12 @@ GuacUI.GroupView.SHOW_ROOT_GROUP = 0x4;
  * functionality is provided other than a reasonable hierarchy of divs and
  * easy access to their corresponding elements.
  */
-GuacUI.Dialog = function() {
+GuacUI.Dialog = function () {
 
     /**
      * The container of the entire dialog. Adding this element to the DOM
      * displays the dialog, while removing this element hides the dialog.
-     * 
+     *
      * @private
      * @type Element
      */
@@ -1349,7 +1348,7 @@ GuacUI.Dialog = function() {
      * The dialog itself. This element is not exposed outside this object,
      * but rather contains the header, body, and footer sections which are
      * exposed.
-     * 
+     *
      * @private
      * @type Element
      */
@@ -1358,7 +1357,7 @@ GuacUI.Dialog = function() {
     /**
      * The header section of the dialog. This section would normally contain
      * the title.
-     * 
+     *
      * @private
      * @type Element
      */
@@ -1367,7 +1366,7 @@ GuacUI.Dialog = function() {
     /**
      * The body section of the dialog. This section would normally contain any
      * form fields and content.
-     * 
+     *
      * @private
      * @type Element
      */
@@ -1376,7 +1375,7 @@ GuacUI.Dialog = function() {
     /**
      * The footer section of the dialog. This section would normally contain
      * the buttons.
-     * 
+     *
      * @private
      * @type Element
      */
@@ -1385,40 +1384,40 @@ GuacUI.Dialog = function() {
     /**
      * Returns the header section of this dialog. This section normally
      * contains the title of the dialog.
-     * 
+     *
      * @return {Element} The header section of this dialog.
      */
-    this.getHeader = function() {
+    this.getHeader = function () {
         return header;
     };
 
     /**
      * Returns the body section of this dialog. This section normally contains
      * the form fields, etc. of a dialog.
-     * 
+     *
      * @return {Element} The body section of this dialog.
      */
-    this.getBody = function() {
+    this.getBody = function () {
         return body;
     };
 
     /**
      * Returns the footer section of this dialog. This section is normally
      * used to contain the buttons of the dialog.
-     * 
+     *
      * @return {Element} The footer section of this dialog.
      */
-    this.getFooter = function() {
+    this.getFooter = function () {
         return footer;
     };
 
     /**
      * Returns the element representing this dialog. Adding this element to
      * the DOM shows the dialog, while removing this element hides the dialog.
-     * 
+     *
      * @return {Element} The element representing this dialog.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return element;
     };
 

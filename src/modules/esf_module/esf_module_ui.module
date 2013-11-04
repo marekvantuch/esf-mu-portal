@@ -14,7 +14,7 @@ function esf_module_ui_menu() {
     'file' => 'system.admin.inc',
     'weight' => -50,
   );
-  
+
   $items['admin/config/esf/settings'] = array(
     'title' => 'Settings',
     'description' => 'Configuration of the general settings.',
@@ -25,7 +25,7 @@ function esf_module_ui_menu() {
   );
 
   $items['admin/config/esf/remote'] = array(
-    'title' => 'Remote Machine Configuration',
+    'title' => 'Remote Connection',
     'description' => 'Configuration of the connection to the remote machine.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('esf_module_ui_remote'),
@@ -33,6 +33,6 @@ function esf_module_ui_menu() {
     'file' => 'includes/esf_module_ui.admin.inc',
     'weight' => 11,
   );
-  
+
   return $items;
 }

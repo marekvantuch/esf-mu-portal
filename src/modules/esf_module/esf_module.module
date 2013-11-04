@@ -1,13 +1,17 @@
 <?php
 
+use \Esf\Server;
+
 module_load_include('inc', 'esf_module', 'includes/esf_module');
 
-define('GUACAMOLE_SERVER_DOMAIN', 'guacamole_server_domain');
-define('GUACAMOLE_SERVER_PORT', 'guacamole_server_port');
-define('GUACAMOLE_SERVER_PATH', 'guacamole_server_path');
+define('ESF_MODULE_GUACAMOLE_SERVER_DOMAIN', 'guacamole_server_domain');
+define('ESF_MODULE_GUACAMOLE_SERVER_PORT', 'guacamole_server_port');
+define('ESF_MODULE_GUACAMOLE_SERVER_PATH', 'guacamole_server_path');
+define('ESF_MODULE_GUACAMOLE_HOME', 'guacamole_home');
+define('ESF_MODULE_GUACAMOLE_PROPERTIES_FILE', 'guacamole_properties_file');
 
 /**
- * Implements hook_init()
+ * Implements hook_init().
  */
 function esf_module_init() {
   $settings = array(
@@ -17,9 +21,9 @@ function esf_module_init() {
       'server_domain' => Server::getDomain(),
       'server_port' => Server::getPort(),
       'server_path' => Server::getPath(),
-      )
-    );
-  
+    ),
+  );
+
   drupal_add_js($settings, 'setting');
 }
 
@@ -32,15 +36,15 @@ function esf_module_permission() {
       'title' => t('Administer ESF configuration'),
       'description' => t('Allows to set or alter settings for Guacamole server'),
     ),
-    'access aspi' => array( 
+    'access aspi' => array(
       'title' => t('Access ASPI Remote'),
-      'description' => t('Allows a user to connect to an ASPI remote machine server')
-    )
+      'description' => t('Allows a user to connect to an ASPI remote machine server'),
+    ),
   );
 }
 
 /**
- * Implements hook_menu()
+ * Implements hook_menu().
  */
 function esf_module_menu() {
   return array(
@@ -49,13 +53,13 @@ function esf_module_menu() {
       'page callback' => 'esf_module_page_aspi',
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.pages.inc',
-      'type' => MENU_CALLBACK
+      'type' => MENU_CALLBACK,
     ),
     'aspi/ajax/login' => array(
       'page callback' => 'esf_module_ajax_login',
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.ajax.inc',
-      'type' => MENU_CALLBACK
-    )
+      'type' => MENU_CALLBACK,
+    ),
   );
 }
