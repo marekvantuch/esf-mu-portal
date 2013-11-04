@@ -1,7 +1,7 @@
-name = Green
-description = Specific ESF project layout.
+name = Guacamole
+description = Plain layout designed for the remote machine connection.
 preview = preview.png
-template = green-layout
+template = guacamole-layout
 
 ; Regions
 regions[header]         = Header
@@ -13,4 +13,4 @@ regions[postscript]     = Postscript
 regions[footer]         = Footer
 
 ; Stylesheets
-stylesheets[all][] = css/layouts/green/green.layout.css
+stylesheets[all][] = css/layouts/guacamole/guacamole.layout.css

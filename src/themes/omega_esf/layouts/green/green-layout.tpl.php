@@ -19,8 +19,11 @@
     </div>
 
     <?php print render($page['header']); ?>
-    <?php print render($page['navigation']); ?>
   </header>
+
+  <div class="l-navigation">
+    <?php print render($page['navigation']); ?>
+  </div>
 
   <div class="l-main">
     <div class="l-content" role="main">
@@ -42,10 +45,9 @@
       <?php print $feed_icons; ?>
     </div>
 
-    <?php print render($page['sidebar_first']); ?>
-    <?php print render($page['sidebar_second']); ?>
+    <?php print render($page['sidebar']); ?>
+    <?php print render($page['postscript']); ?>
   </div>
-
   <footer class="l-footer" role="contentinfo">
     <?php print render($page['footer']); ?>
   </footer>
