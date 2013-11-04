@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ESF Portal" default="deploy">
+    <property file="build.properties" />
+    <taskdef name="drush" classname="phing.DrushTask" />
+
+    <target name="deploy">
+        <copy todir="${drupal.home}/sites/default/modules" overwrite="true" >
+            <fileset dir="src/modules">
+                <include name="**" />
+            </fileset>
+        </copy>
+        <copy todir="${drupal.home}/sites/all/themes" overwrite="true" >
+            <fileset dir="src/themes">
+                <include name="omega_esf" />
+            </fileset>
+        </copy>
+
+        <drush command="features-revert" assume="yes">
+            <param>${drupal.features}</param>
+        </drush>
+    </target>
+</project>
