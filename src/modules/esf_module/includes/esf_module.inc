@@ -9,6 +9,36 @@ namespace Esf;
 
 module_load_include('inc', 'esf_module', 'includes/esf_module.interfaces');
 
+class Settings {
+  /**
+   * Returns the ASPI username for the currently logged user.
+   *
+   * Username is set on the user profile page.
+   *
+   * @return string
+   *   ASPI username
+   */
+  public static function username() {
+    global $user;
+
+    return user_load($user->uid)->field_aspi_username[LANGUAGE_NONE][0]['value'];
+  }
+
+  /**
+   * Returns the ASPI password for the currently logged user.
+   *
+   * Password is set on the user profile page and is encrypted in db.
+   *
+   * @return string
+   *   ASPI password
+   */
+  public static function password() {
+    global $user;
+
+    return password_field_decrypt(user_load($user->uid)->field_aspi_password[LANGUAGE_NONE][0]['value']);
+  }
+}
+
 /**
  * Class Session
  * @package Esf

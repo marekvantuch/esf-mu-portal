@@ -4,11 +4,18 @@ package = ESF
 core = 7.x
 version = 7.x-1.0
 
-files[] = esf_module.variable.inc
 files[] = esf_module.install
+files[] = esf_module.test
+files[] = esf_module.variable.inc
 files[] = includes/esf_module.inc
+files[] = includes/esf_module.ajax.inc
+files[] = includes/esf_module.interfaces.inc
 files[] = includes/esf_module.pages.inc
+files[] = includes/esf_module.properties.inc
 files[] = includes/esf_module.servlets.inc
 
 dependencies[] = variable
+dependencies[] = pdm
+dependencies[] = password_field
+
 scripts[] = js/esf-common.js

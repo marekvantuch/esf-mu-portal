@@ -23,7 +23,6 @@ function esf_module_page_aspi() {
   drupal_add_js($module_path . '/js/esf-common.js', array('group' => JS_LIBRARY));
 
   drupal_add_js($module_path . '/js/lib/guacamole.js', array('group' => JS_LIBRARY));
-  drupal_add_js($module_path . '/js/lib/oskeyboard.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/lib/keyboard.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/lib/mouse.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/lib/layer.js', array('group' => JS_LIBRARY));
