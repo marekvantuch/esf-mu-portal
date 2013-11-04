@@ -19,7 +19,7 @@ function esf_feature_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'aspi/remote' => 'aspi/remote',
+        'aspi' => 'aspi',
       ),
     ),
   );

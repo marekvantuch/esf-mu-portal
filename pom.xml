@@ -40,16 +40,7 @@
       <version>3.0.1</version>
       <scope>provided</scope>
     </dependency>
-    <!-- Main Guacamole library -->
-    <!-- Guacamole JavaScript library -->
-    <dependency>
-      <groupId>net.sourceforge.guacamole</groupId>
-      <artifactId>guacamole-common-js</artifactId>
-      <version>0.7.1</version>
-      <type>zip</type>
-      <scope>runtime</scope>
-    </dependency>
-    
+
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>

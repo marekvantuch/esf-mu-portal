@@ -4,6 +4,7 @@ package = ESF
 version = 7.x-1.13
 project = esf_feature
 dependencies[] = ckeditor
+dependencies[] = context
 dependencies[] = context_omega
 dependencies[] = eck
 dependencies[] = entityreference

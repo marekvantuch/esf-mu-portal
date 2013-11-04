@@ -63,3 +63,28 @@ function esf_module_menu() {
     ),
   );
 }
+
+/**
+ * Implements hook_user_insert().
+ */
+function esf_module_user_insert(&$edit, $account, $category) {
+  if (empty($account->field_aspi_username[LANGUAGE_NONE][0]['value']) ||
+    empty($account->field_aspi_password[LANGUAGE_NONE][0]['password_field'])) {
+    $uid = $account->uid;
+
+    // Display a message to the user, notifying him that he should fill
+    // in his ASPI credentials.
+    $message = t('Please fill in your ASPI credentials <a href="!url">here</a>.',
+      array('!url' => url("user/$uid/edit")));
+
+    $options = array(
+      'type' => 'warning',
+      'pdm_type' => 'ASPI credentials',
+      'repeat' => FALSE,
+      'persist' => TRUE,
+      'uid' => $uid,
+    );
+
+    pdm_create_message($message, $options);
+  }
+}
