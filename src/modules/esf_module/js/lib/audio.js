@@ -1,4 +1,3 @@
-
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -45,7 +44,7 @@ var Guacamole = Guacamole || {};
  * Abstract audio channel which queues and plays arbitrary audio data.
  * @constructor
  */
-Guacamole.AudioChannel = function() {
+Guacamole.AudioChannel = function () {
 
     /**
      * Reference to this AudioChannel.
@@ -63,13 +62,13 @@ Guacamole.AudioChannel = function() {
      * Queues up the given data for playing by this channel once all previously
      * queued data has been played. If no data has been queued, the data will
      * play immediately.
-     * 
+     *
      * @param {String} mimetype The mimetype of the data provided.
      * @param {Number} duration The duration of the data provided, in
      *                          milliseconds.
      * @param {String} data The base64-encoded data to play.
      */
-    this.play = function(mimetype, duration, data) {
+    this.play = function (mimetype, duration, data) {
 
         var packet =
             new Guacamole.AudioChannel.Packet(mimetype, data);
@@ -101,7 +100,7 @@ if (window.webkitAudioContext) {
  *
  * @return {Number} An arbitrary channel-relative timestamp, in milliseconds.
  */
-Guacamole.AudioChannel.getTimestamp = function() {
+Guacamole.AudioChannel.getTimestamp = function () {
 
     // If we have an audio context, use its timestamp
     if (Guacamole.AudioChannel.context)
@@ -115,7 +114,7 @@ Guacamole.AudioChannel.getTimestamp = function() {
 
         if (window.performance.webkitNow)
             return window.performance.webkitNow();
-        
+
     }
 
     // Fallback to millisecond-resolution system time
@@ -125,13 +124,13 @@ Guacamole.AudioChannel.getTimestamp = function() {
 
 /**
  * Abstract representation of an audio packet.
- * 
+ *
  * @constructor
- * 
+ *
  * @param {String} mimetype The mimetype of the data contained by this packet.
  * @param {String} data The base64-encoded sound data contained by this packet.
  */
-Guacamole.AudioChannel.Packet = function(mimetype, data) {
+Guacamole.AudioChannel.Packet = function (mimetype, data) {
 
     /**
      * Schedules this packet for playback at the given time.
@@ -149,7 +148,7 @@ Guacamole.AudioChannel.Packet = function(mimetype, data) {
 
         // By default, when decoding finishes, store buffer for future
         // playback
-        var handleReady = function(buffer) {
+        var handleReady = function (buffer) {
             readyBuffer = buffer;
         };
 
@@ -158,13 +157,15 @@ Guacamole.AudioChannel.Packet = function(mimetype, data) {
         var arrayBuffer = new ArrayBuffer(binary.length);
         var bufferView = new Uint8Array(arrayBuffer);
 
-        for (var i=0; i<binary.length; i++)
+        for (var i = 0; i < binary.length; i++)
             bufferView[i] = binary.charCodeAt(i);
 
         // Get context and start decoding
         Guacamole.AudioChannel.context.decodeAudioData(
             arrayBuffer,
-            function(buffer) { handleReady(buffer); }
+            function (buffer) {
+                handleReady(buffer);
+            }
         );
 
         // Set up buffer source
@@ -179,10 +180,10 @@ Guacamole.AudioChannel.Packet = function(mimetype, data) {
         }
 
         /** @ignore */
-        this.play = function(when) {
-            
+        this.play = function (when) {
+
             play_when = when;
-            
+
             // If buffer available, play it NOW
             if (readyBuffer)
                 playDelayed(readyBuffer);
@@ -199,25 +200,25 @@ Guacamole.AudioChannel.Packet = function(mimetype, data) {
 
         // Build data URI
         var data_uri = "data:" + mimetype + ";base64," + data;
-       
+
         // Create audio element to house and play the data
         var audio = new Audio();
         audio.src = data_uri;
-      
+
         /** @ignore */
-        this.play = function(when) {
-            
+        this.play = function (when) {
+
             // Calculate time until play
             var now = Guacamole.AudioChannel.getTimestamp();
             var delay = when - now;
-            
+
             // Play now if too late
             if (delay < 0)
                 audio.play();
 
             // Otherwise, schedule later playback
             else
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                     audio.play();
                 }, delay);
 

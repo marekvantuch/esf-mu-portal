@@ -1,4 +1,3 @@
-
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -45,30 +44,30 @@ var Guacamole = Guacamole || {};
  * Dynamic on-screen keyboard. Given the URL to an XML keyboard layout file,
  * this object will download and use the XML to construct a clickable on-screen
  * keyboard with its own key events.
- * 
+ *
  * @constructor
  * @param {String} url The URL of an XML keyboard layout file.
  */
-Guacamole.OnScreenKeyboard = function(url) {
+Guacamole.OnScreenKeyboard = function (url) {
 
     var on_screen_keyboard = this;
 
     /**
      * State of all modifiers. This is the bitwise OR of all active modifier
      * values.
-     * 
+     *
      * @private
      */
     var modifiers = 0;
 
     var scaledElements = [];
-    
+
     var modifier_masks = {};
     var next_mask = 1;
 
     /**
      * Adds a class to an element.
-     * 
+     *
      * @private
      * @function
      * @param {Element} element The element to add a class to.
@@ -78,7 +77,7 @@ Guacamole.OnScreenKeyboard = function(url) {
 
     /**
      * Removes a class from an element.
-     * 
+     *
      * @private
      * @function
      * @param {Element} element The element to remove a class from.
@@ -100,40 +99,42 @@ Guacamole.OnScreenKeyboard = function(url) {
     var ignore_mouse = 0;
 
     // Ignore all pending mouse events when touch events are the apparent source
-    function ignorePendingMouseEvents() { ignore_mouse = on_screen_keyboard.touchMouseThreshold; }
+    function ignorePendingMouseEvents() {
+        ignore_mouse = on_screen_keyboard.touchMouseThreshold;
+    }
 
     // If Node.classList is supported, implement addClass/removeClass using that
     if (Node.classList) {
 
         /** @ignore */
-        addClass = function(element, classname) {
+        addClass = function (element, classname) {
             element.classList.add(classname);
         };
-        
+
         /** @ignore */
-        removeClass = function(element, classname) {
+        removeClass = function (element, classname) {
             element.classList.remove(classname);
         };
-        
+
     }
 
     // Otherwise, implement own
     else {
 
         /** @ignore */
-        addClass = function(element, classname) {
+        addClass = function (element, classname) {
 
             // Simply add new class
             element.className += " " + classname;
 
         };
-        
+
         /** @ignore */
-        removeClass = function(element, classname) {
+        removeClass = function (element, classname) {
 
             // Filter out classes with given name
             element.className = element.className.replace(/([^ ]+)[ ]*/g,
-                function(match, testClassname, spaces, offset, string) {
+                function (match, testClassname, spaces, offset, string) {
 
                     // If same class, remove
                     if (testClassname == classname)
@@ -141,18 +142,18 @@ Guacamole.OnScreenKeyboard = function(url) {
 
                     // Otherwise, allow
                     return match;
-                    
+
                 }
             );
 
         };
-        
+
     }
 
     // Returns a unique power-of-two value for the modifier with the
     // given name. The same value will be returned for the same modifier.
     function getModifierMask(name) {
-        
+
         var value = modifier_masks[name];
         if (!value) {
 
@@ -166,7 +167,7 @@ Guacamole.OnScreenKeyboard = function(url) {
         }
 
         return value;
-            
+
     }
 
     function ScaledElement(element, width, height, scaleFont) {
@@ -174,13 +175,13 @@ Guacamole.OnScreenKeyboard = function(url) {
         this.width = width;
         this.height = height;
 
-        this.scale = function(pixels) {
-            element.style.width      = (width  * pixels) + "px";
-            element.style.height     = (height * pixels) + "px";
+        this.scale = function (pixels) {
+            element.style.width = (width * pixels) + "px";
+            element.style.height = (height * pixels) + "px";
 
             if (scaleFont) {
                 element.style.lineHeight = (height * pixels) + "px";
-                element.style.fontSize   = pixels + "px";
+                element.style.fontSize = pixels + "px";
             }
         }
 
@@ -190,7 +191,7 @@ Guacamole.OnScreenKeyboard = function(url) {
     function parseChildren(element, next) {
 
         var children = element.childNodes;
-        for (var i=0; i<children.length; i++) {
+        for (var i = 0; i < children.length; i++) {
 
             // Get child node
             var child = children[i];
@@ -209,8 +210,8 @@ Guacamole.OnScreenKeyboard = function(url) {
             // Throw exception if no handler
             else
                 throw new Error(
-                      "Unexpected " + child.tagName
-                    + " within " + element.tagName
+                    "Unexpected " + child.tagName
+                        + " within " + element.tagName
                 );
 
         }
@@ -231,16 +232,16 @@ Guacamole.OnScreenKeyboard = function(url) {
     if (xml) {
 
         function parse_row(e) {
-            
+
             var row = document.createElement("div");
             row.className = "guac-keyboard-row";
 
             parseChildren(e, {
-                
-                "column": function(e) {
+
+                "column": function (e) {
                     row.appendChild(parse_column(e));
                 },
-                
+
                 "gap": function parse_gap(e) {
 
                     // Create element
@@ -256,9 +257,9 @@ Guacamole.OnScreenKeyboard = function(url) {
                     row.appendChild(gap);
 
                 },
-                
+
                 "key": function parse_key(e) {
-                    
+
                     // Create element
                     var key_element = document.createElement("div");
                     key_element.className = "guac-keyboard-key";
@@ -286,14 +287,14 @@ Guacamole.OnScreenKeyboard = function(url) {
                         "cap": function parse_cap(e) {
 
                             // TODO: Handle "sticky" attribute
-                            
+
                             // Get content of key cap
                             var content = e.textContent || e.text;
 
                             // If read as blank, assume cap is a single space.
                             if (content.length == 0)
                                 content = " ";
-                            
+
                             // Get keysym
                             var real_keysym = null;
                             if (e.getAttribute("keysym"))
@@ -309,13 +310,13 @@ Guacamole.OnScreenKeyboard = function(url) {
                                     real_keysym = 0x01000000 | charCode;
 
                             }
-                            
+
                             // Create cap
                             var cap = new Guacamole.OnScreenKeyboard.Cap(content, real_keysym);
 
                             if (e.getAttribute("modifier"))
                                 cap.modifier = e.getAttribute("modifier");
-                            
+
                             // Create cap element
                             var cap_element = document.createElement("div");
                             cap_element.className = "guac-keyboard-cap";
@@ -333,7 +334,7 @@ Guacamole.OnScreenKeyboard = function(url) {
                                 // Get modifier value for specified comma-delimited
                                 // list of required modifiers.
                                 var requirements = e.getAttribute("if").split(",");
-                                for (var i=0; i<requirements.length; i++) {
+                                for (var i = 0; i < requirements.length; i++) {
                                     modifierValue |= getModifierMask(requirements[i]);
                                     addClass(cap_element, "guac-keyboard-requires-" + requirements[i]);
                                     addClass(key_element, "guac-keyboard-uses-" + requirements[i]);
@@ -374,9 +375,9 @@ Guacamole.OnScreenKeyboard = function(url) {
 
                                 // Activate modifier if pressed
                                 if (modifiers & modifierMask) {
-                                    
+
                                     addClass(keyboard, modifierClass);
-                                    
+
                                     // Send key event
                                     if (on_screen_keyboard.onkeydown && cap.keysym)
                                         on_screen_keyboard.onkeydown(cap.keysym);
@@ -387,7 +388,7 @@ Guacamole.OnScreenKeyboard = function(url) {
                                 else {
 
                                     removeClass(keyboard, modifierClass);
-                                    
+
                                     // Send key event
                                     if (on_screen_keyboard.onkeyup && cap.keysym)
                                         on_screen_keyboard.onkeyup(cap.keysym);
@@ -453,14 +454,14 @@ Guacamole.OnScreenKeyboard = function(url) {
                     }
 
                     key_element.addEventListener("touchstart", touchPress, true);
-                    key_element.addEventListener("touchend",   touchRelease, true);
+                    key_element.addEventListener("touchend", touchRelease, true);
 
-                    key_element.addEventListener("mousedown", mousePress,   true);
-                    key_element.addEventListener("mouseup",   mouseRelease, true);
-                    key_element.addEventListener("mouseout",  mouseRelease, true);
+                    key_element.addEventListener("mousedown", mousePress, true);
+                    key_element.addEventListener("mouseup", mouseRelease, true);
+                    key_element.addEventListener("mouseout", mouseRelease, true);
 
                 }
-                
+
             });
 
             return row;
@@ -468,7 +469,7 @@ Guacamole.OnScreenKeyboard = function(url) {
         }
 
         function parse_column(e) {
-            
+
             var col = document.createElement("div");
             col.className = "guac-keyboard-column";
 
@@ -477,7 +478,7 @@ Guacamole.OnScreenKeyboard = function(url) {
 
             // Columns can only contain rows
             parseChildren(e, {
-                "row": function(e) {
+                "row": function (e) {
                     col.appendChild(parse_row(e));
                 }
             });
@@ -495,42 +496,42 @@ Guacamole.OnScreenKeyboard = function(url) {
         // Get attributes
         if (!keyboard_element.getAttribute("size"))
             throw new Error("size attribute is required for keyboard");
-        
+
         var keyboard_size = parseFloat(keyboard_element.getAttribute("size"));
-        
+
         parseChildren(keyboard_element, {
-            
-            "row": function(e) {
+
+            "row": function (e) {
                 keyboard.appendChild(parse_row(e));
             },
-            
-            "column": function(e) {
+
+            "column": function (e) {
                 keyboard.appendChild(parse_column(e));
             }
-            
+
         });
 
     }
 
     // Do not allow selection or mouse movement to propagate/register.
     keyboard.onselectstart =
-    keyboard.onmousemove   =
-    keyboard.onmouseup     =
-    keyboard.onmousedown   =
-    function(e) {
+        keyboard.onmousemove =
+            keyboard.onmouseup =
+                keyboard.onmousedown =
+                    function (e) {
 
-        // If ignoring events, decrement counter
-        if (ignore_mouse)
-            ignore_mouse--;
+                        // If ignoring events, decrement counter
+                        if (ignore_mouse)
+                            ignore_mouse--;
 
-        e.stopPropagation();
-        return false;
+                        e.stopPropagation();
+                        return false;
 
-    };
+                    };
 
     /**
      * Fired whenever the user presses a key on this Guacamole.OnScreenKeyboard.
-     * 
+     *
      * @event
      * @param {Number} keysym The keysym of the key being pressed.
      */
@@ -538,17 +539,17 @@ Guacamole.OnScreenKeyboard = function(url) {
 
     /**
      * Fired whenever the user releases a key on this Guacamole.OnScreenKeyboard.
-     * 
+     *
      * @event
      * @param {Number} keysym The keysym of the key being released.
      */
-    this.onkeyup   = null;
+    this.onkeyup = null;
 
     /**
      * Returns the element containing the entire on-screen keyboard.
      * @returns {Element} The element containing the entire on-screen keyboard.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return keyboard;
     };
 
@@ -556,17 +557,17 @@ Guacamole.OnScreenKeyboard = function(url) {
      * Resizes all elements within this Guacamole.OnScreenKeyboard such that
      * the width is close to but does not exceed the specified width. The
      * height of the keyboard is determined based on the width.
-     * 
+     *
      * @param {Number} width The width to resize this Guacamole.OnScreenKeyboard
      *                       to, in pixels.
      */
-    this.resize = function(width) {
+    this.resize = function (width) {
 
         // Get pixel size of a unit
         var unit = Math.floor(width * 10 / keyboard_size) / 10;
 
         // Resize all scaled elements
-        for (var i=0; i<scaledElements.length; i++) {
+        for (var i = 0; i < scaledElements.length; i++) {
             var scaledElement = scaledElements[i];
             scaledElement.scale(unit)
         }
@@ -581,10 +582,10 @@ Guacamole.OnScreenKeyboard = function(url) {
  * caps associated with tuples of modifiers. The cap determins what happens
  * when a key is pressed, while it is the state of modifier keys that determines
  * what cap is in effect on any particular key.
- * 
+ *
  * @constructor
  */
-Guacamole.OnScreenKeyboard.Key = function() {
+Guacamole.OnScreenKeyboard.Key = function () {
 
     var key = this;
 
@@ -612,7 +613,7 @@ Guacamole.OnScreenKeyboard.Key = function() {
      * Given the bitwise OR of all active modifiers, returns the key cap
      * which applies.
      */
-    this.getCap = function(modifier) {
+    this.getCap = function (modifier) {
         return key.caps[modifier & key.modifierMask];
     };
 
@@ -623,20 +624,20 @@ Guacamole.OnScreenKeyboard.Key = function() {
  * and determines the active behavior of a key when pressed. The state of all
  * modifiers on the keyboard determines the active cap for all keys, thus
  * each cap is associated with a set of modifiers.
- * 
+ *
  * @constructor
  * @param {String} text The text to be displayed within this cap.
  * @param {Number} keysym The keysym this cap sends when its associated key is
  *                        pressed or released.
  * @param {String} modifier The modifier represented by this cap.
  */
-Guacamole.OnScreenKeyboard.Cap = function(text, keysym, modifier) {
-    
+Guacamole.OnScreenKeyboard.Cap = function (text, keysym, modifier) {
+
     /**
      * Modifier represented by this keycap
      */
     this.modifier = null;
-    
+
     /**
      * The text to be displayed within this keycap
      */
@@ -649,5 +650,5 @@ Guacamole.OnScreenKeyboard.Cap = function(text, keysym, modifier) {
 
     // Set modifier if provided
     if (modifier) this.modifier = modifier;
-    
+
 };

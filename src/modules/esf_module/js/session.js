@@ -1,4 +1,3 @@
-
 /*
  *  Guacamole - Clientless Remote Desktop
  *  Copyright (C) 2010  Michael Jumper
@@ -39,11 +38,11 @@ function GuacamoleSessionState() {
      * Reloads the internal state, sending onchange events for all changed,
      * deleted, or new properties.
      */
-    this.reload = function() {
+    this.reload = function () {
 
         // Pull current state
         var new_state = JSON.parse(localStorage.getItem("GUACAMOLE_STATE") || "{}");
-        
+
         // Assign new state
         var old_state = state;
         state = new_state;
@@ -67,28 +66,28 @@ function GuacamoleSessionState() {
 
     /**
      * Sets the given property to the given value.
-     * 
+     *
      * @param {String} name The name of the property to change.
      * @param value An arbitrary value.
      */
-    this.setProperty = function(name, value) {
+    this.setProperty = function (name, value) {
         state[name] = value;
         localStorage.setItem("GUACAMOLE_STATE", JSON.stringify(state));
     };
 
     /**
      * Returns the value stored under the property having the given name.
-     * 
+     *
      * @param {String} name The name of the property to read.
      * @return The value of the given property.
      */
-    this.getProperty = function(name) {
+    this.getProperty = function (name) {
         return state[name];
     };
 
     /**
      * Event which is fired whenever a property value is changed externally.
-     * 
+     *
      * @event
      * @param old_state An object whose properties' values are the old values
      *                  of this GuacamoleSessionState.

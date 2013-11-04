@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Guacamole properties file related classes
+ */
+
 namespace Esf;
 
 /**
@@ -8,10 +13,19 @@ namespace Esf;
  */
 class PropertiesFactory {
   /**
+   * Builds the \Esf\Properties object.
+   *
+   * Object needs filename passed into it's constructor. In our case that is
+   * a properties file and we load it's filename from the variables.
+   *
+   * For list of all the properties see define statements:
+   * @see esf_module.inc
+   *
    * @return Properties
+   *   Newly created \Esf\Properties object.
    */
   public static function build() {
-    return (new Properties(new \SplFileObject(variable_get(GUACAMOLE_HOME) . variable_get(GUACAMOLE_PROPERTIES_FILE), 'r+')));
+    return (new Properties(new \SplFileObject(variable_get(ESF_MODULE_GUACAMOLE_HOME) . variable_get(ESF_MODULE_GUACAMOLE_PROPERTIES_FILE), 'r+')));
   }
 }
 
@@ -20,7 +34,10 @@ class PropertiesFactory {
  * @package Esf
  */
 class Properties {
-  private $data;
+  /**
+   * @var array
+   */
+  protected $data;
 
   /**
    * Hostname and port of guacamole proxy
@@ -29,7 +46,8 @@ class Properties {
   const GUACD_PORT = 'guacd-port';
 
   /**
-   * Auth provider class (authenticates user/pass combination, needed if using the provided login screen)
+   * Auth provider class (authenticates user/pass combination, needed if using
+   * the provided login screen)
    */
   const AUTH_PROVIDER = 'auth-provider';
 
@@ -44,37 +62,43 @@ class Properties {
   /**
    * Stores all the properties
    *
-   * @var \Esf\IProperty[]
+   * @var \Esf\PropertyInterface[]
    */
-  private $properties;
+  protected $properties;
 
   /**
    * @var bool
    */
-  private $properties_file_exists = false;
+  protected $propertiesFileExists = FALSE;
 
   /**
    * @var \SplFileObject
    */
-  private $properties_file;
+  protected $propertiesFile;
 
   /**
-   * @param $properties_file \SplFileObject
+   * Constructs the Properties object.
+   *
+   * Uses file containing the java style properties.
+   *
+   * @param \SplFileObject $properties_file
+   *   File containing the properties
    */
-  function __construct($properties_file) {
-    $this->properties_file = $properties_file;
+  public function __construct($properties_file) {
+    $this->propertiesFile = $properties_file;
 
     $this->initPropertiesFile();
     $this->initProperties();
   }
 
   /**
-   * Return all the properties loaded from the file
+   * Return all the properties loaded from the file.
    *
    * @return array
+   *   associative array of property_id->property_value
    */
   public function getAll() {
-    if ($this->properties_file_exists) {
+    if ($this->propertiesFileExists) {
       return $this->data;
     }
 
@@ -82,13 +106,16 @@ class Properties {
   }
 
   /**
-   * Get value of a property
+   * Get value of a property.
    *
-   * @param $property_id string
-   * @return mixed
+   * @param string $property_id
+   *   id of the property
+   *
+   * @return string
+   *   value of the property
    */
   public function get($property_id) {
-    if ($this->properties_file_exists && array_key_exists($property_id, $this->data)) {
+    if ($this->propertiesFileExists && array_key_exists($property_id, $this->data)) {
       return $this->data[$property_id];
     }
 
@@ -96,10 +123,12 @@ class Properties {
   }
 
   /**
-   * Set value of a property
+   * Set value of a property.
    *
-   * @param $property_id string
-   * @param $property_value mixed
+   * @param string $property_id
+   *   id of the property
+   * @param string $property_value
+   *   value of the property
    */
   public function set($property_id, $property_value) {
     $this->data[$property_id] = $property_value;
@@ -107,6 +136,9 @@ class Properties {
 
   /**
    * Updates the properties file with current values.
+   *
+   * @param array $form_state
+   *   form_state array from the Drupal Forms API
    */
   public function submitForm($form_state) {
     foreach ($this->properties as $property) {
@@ -116,18 +148,21 @@ class Properties {
       }
     }
 
-    $string = implode("\r\n", array_map(function ($v, $k) { return $k . "\t:\t" . $v; }, $this->data, array_keys($this->data)));
+    $string = implode("\r\n", array_map(function ($v, $k) {
+      return $k . "\t:\t" . $v;
+    }, $this->data, array_keys($this->data)));
 
-    $this->properties_file->rewind();
-    $length = $this->properties_file->fwrite($string);
-    $this->properties_file->ftruncate($length);
-    $this->properties_file->fflush();
+    $this->propertiesFile->rewind();
+    $length = $this->propertiesFile->fwrite($string);
+    $this->propertiesFile->ftruncate($length);
+    $this->propertiesFile->fflush();
   }
 
   /**
-   * Builds an array in Drupal Forms API for all registered properties
+   * Builds an array in Drupal Forms API for all registered properties.
    *
    * @return array
+   *   associative array with Drupal Forms API objects
    */
   public function buildForm() {
     $result = array();
@@ -138,44 +173,53 @@ class Properties {
 
     $result['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Save')
+      '#value' => t('Save'),
     );
 
     return $result;
   }
 
   /**
-   * Builds an array in Drupal Forms API for a single property
+   * Builds an array in Drupal Forms API for a single property.
    *
-   * @param $property IProperty
-   * @return array drupal Form API array
+   * @param PropertyInterface $property
+   *   property to be used
+   *
+   * @return array
+   *   drupal Form API array
    */
-  private function buildFormProperty($property) {
+  protected function buildFormProperty($property) {
     return array_merge(array(
       '#type' => $property->getType(),
       '#title' => t($property->getTitle()),
       '#description' => t($property->getDescription()),
       '#default_value' => $this->get($property->getId()),
-      '#element_validate' => array(array($property , 'validate')),
+      '#element_validate' => array(array($property, 'validate')),
       '#required' => TRUE,
-      '#disabled' => !$this->properties_file_exists,
+      '#disabled' => !$this->propertiesFileExists,
     ), $property->getExtraParameters());
   }
 
   /**
    * Init the properties file and load the properties.
    */
-  private function initPropertiesFile() {
+  protected function initPropertiesFile() {
 
-    if ($this->properties_file->isReadable()) {
+    if ($this->propertiesFile->isReadable()) {
       $this->data = $this->parseProperties();
-      $this->properties_file_exists = true;
-    } else {
-      $this->properties_file_exists = false;
+      $this->propertiesFileExists = TRUE;
+    }
+    else {
+      $this->propertiesFileExists = FALSE;
     }
   }
 
-  private function initProperties() {
+  /**
+   * Sets the properties object.
+   *
+   * Uses all the properties used in the module.
+   */
+  protected function initProperties() {
     $this->add(new TextProperty(
       self::GUACD_HOSTNAME,
       'Guacd hostname',
@@ -209,21 +253,25 @@ class Properties {
   }
 
   /**
-   * @param $property IProperty
+   * Adds a property into the internal properties object.
+   *
+   * @param PropertyInterface $property
+   *   property to be added
    */
-  private function add($property) {
+  protected function add($property) {
     $this->properties[$property->getId()] = $property;
   }
 
   /**
-   * Parses the properties file into an associative array
+   * Parses the properties file into an associative array.
    *
    * @return array
+   *   properties in an associative array
    */
-  private function parseProperties() {
+  protected function parseProperties() {
     $result = $lines = array();
 
-    foreach($this->properties_file as $line) {
+    foreach ($this->propertiesFile as $line) {
 
       if (preg_match('/([\w-]+)[\s]*:[\s]*(.*)/', $line, $matches)) {
         $key = trim($matches[1]);
@@ -237,35 +285,57 @@ class Properties {
   }
 }
 
-abstract class Property Implements IProperty{
+abstract class Property implements PropertyInterface {
   const TYPE_TEXT = 'textfield';
   const TYPE_RADIOS = 'radios';
   const TYPE_CHECKBOXES = 'checkboxes';
   const TYPE_SUBMIT = 'submit';
   const TYPE_MARKUP = 'markup';
 
-  private $id;
-  private $title;
-  private $description;
+  protected  $id;
+  protected $title;
+  protected $description;
 
-  function __construct($id, $title, $description) {
+  /**
+   * Creates a new Property object with typical parameters.
+   *
+   * @param string $id
+   *   id of the property
+   * @param string $title
+   *   title to be displayed on the configuration page
+   * @param string $description
+   *   description to be displayed on the configuration page
+   */
+  public function __construct($id, $title, $description) {
     $this->id = $id;
     $this->title = $title;
     $this->description = $description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTitle() {
     return $this->title;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDescription() {
     return $this->description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getExtraParameters() {
     return array();
   }
@@ -278,16 +348,25 @@ abstract class Property Implements IProperty{
  *
  * @package Esf
  */
-class TextProperty Extends Property {
+class TextProperty extends Property {
 
+  /**
+   * {@inheritdoc}
+   */
   public function getType() {
     return Property::TYPE_TEXT;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getExtraParameters() {
     return array('#size' => 20);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function validate($element, &$form_state) {
     if (empty($element['#value'])) {
       form_error($element, t('The "!name" option must not be empty.',
@@ -303,8 +382,11 @@ class TextProperty Extends Property {
  *
  * @package Esf
  */
-class NumberProperty Extends TextProperty {
+class NumberProperty extends TextProperty {
 
+  /**
+   * {@inheritdoc}
+   */
   public static function validate($element, &$form_state) {
     parent::validate($element, $form_state);
 
@@ -314,6 +396,9 @@ class NumberProperty Extends TextProperty {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getExtraParameters() {
     return array('#size' => 10);
   }
@@ -327,16 +412,25 @@ class NumberProperty Extends TextProperty {
  *
  * @package Esf
  */
-class RadioProperty Extends Property {
-  private $options;
+class RadioProperty extends Property {
+  protected $options;
 
   /**
-   * @param $id string
-   * @param $title string
-   * @param $description string
-   * @param $options array
+   * Builds the object with options.
+   *
+   * Parent is created in the same way, but options for the
+   * radio buttons are included in this constructor.
+   *
+   * @param string $id
+   *   id of the property
+   * @param string $title
+   *   title of the property
+   * @param string $description
+   *   description of the property
+   * @param array $options
+   *   options defining the values of the radio buttons
    */
-  function __construct($id, $title, $description, $options) {
+  public function __construct($id, $title, $description, $options) {
     parent::__construct($id, $title, $description);
     $this->options = array();
 
@@ -345,16 +439,25 @@ class RadioProperty Extends Property {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getType() {
     return Property::TYPE_RADIOS;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getExtraParameters() {
     return array(
-      '#options' => $this->options
+      '#options' => $this->options,
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function validate($element, &$form_state) {
 
   }

@@ -1,4 +1,3 @@
-
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -47,16 +46,16 @@ var Guacamole = Guacamole || {};
  * however unlike the canvas element itself, drawing operations on a Layer are
  * guaranteed to run in order, even if such an operation must wait for an image
  * to load before completing.
- * 
+ *
  * @constructor
- * 
+ *
  * @param {Number} width The width of the Layer, in pixels. The canvas element
  *                       backing this Layer will be given this width.
- *                       
+ *
  * @param {Number} height The height of the Layer, in pixels. The canvas element
  *                        backing this Layer will be given this height.
  */
-Guacamole.Layer = function(width, height) {
+Guacamole.Layer = function (width, height) {
 
     /**
      * Reference to this Layer.
@@ -94,11 +93,11 @@ Guacamole.Layer = function(width, height) {
 
     /**
      * The number of states on the state stack.
-     * 
+     *
      * Note that there will ALWAYS be one element on the stack, but that
      * element is not exposed. It is only used to reset the layer to its
      * initial state.
-     * 
+     *
      * @private
      */
     var stackSize = 0;
@@ -109,20 +108,20 @@ Guacamole.Layer = function(width, height) {
      * @private
      */
     var compositeOperation = {
-     /* 0x0 NOT IMPLEMENTED */
+        /* 0x0 NOT IMPLEMENTED */
         0x1: "destination-in",
         0x2: "destination-out",
-     /* 0x3 NOT IMPLEMENTED */
+        /* 0x3 NOT IMPLEMENTED */
         0x4: "source-in",
-     /* 0x5 NOT IMPLEMENTED */
+        /* 0x5 NOT IMPLEMENTED */
         0x6: "source-atop",
-     /* 0x7 NOT IMPLEMENTED */
+        /* 0x7 NOT IMPLEMENTED */
         0x8: "source-out",
         0x9: "destination-atop",
         0xA: "xor",
         0xB: "destination-over",
         0xC: "copy",
-     /* 0xD NOT IMPLEMENTED */
+        /* 0xD NOT IMPLEMENTED */
         0xE: "source-over",
         0xF: "lighter"
     };
@@ -130,7 +129,7 @@ Guacamole.Layer = function(width, height) {
     /**
      * Resizes the canvas element backing this Layer without testing the
      * new size. This function should only be used internally.
-     * 
+     *
      * @private
      * @param {Number} newWidth The new width to assign to this Layer.
      * @param {Number} newHeight The new height to assign to this Layer.
@@ -150,8 +149,8 @@ Guacamole.Layer = function(width, height) {
 
             // Copy image data from current
             oldDataContext.drawImage(display,
-                    0, 0, width, height,
-                    0, 0, width, height);
+                0, 0, width, height,
+                0, 0, width, height);
 
         }
 
@@ -164,9 +163,9 @@ Guacamole.Layer = function(width, height) {
 
         // Redraw old data, if any
         if (oldData)
-                displayContext.drawImage(oldData, 
-                    0, 0, width, height,
-                    0, 0, width, height);
+            displayContext.drawImage(oldData,
+                0, 0, width, height,
+                0, 0, width, height);
 
         // Restore composite operation
         displayContext.globalCompositeOperation = oldCompositeOperation;
@@ -187,7 +186,7 @@ Guacamole.Layer = function(width, height) {
      * element's coordinate space. This function will only make the canvas
      * larger. If the rectangle already fits within the canvas element's
      * coordinate space, the canvas is left unchanged.
-     * 
+     *
      * @private
      * @param {Number} x The X coordinate of the upper-left corner of the
      *                   rectangle to fit.
@@ -197,11 +196,11 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} h The height of the the rectangle to fit.
      */
     function fitRect(x, y, w, h) {
-        
+
         // Calculate bounds
         var opBoundX = w + x;
         var opBoundY = h + y;
-        
+
         // Determine max width
         var resizeWidth;
         if (opBoundX > width)
@@ -225,37 +224,37 @@ Guacamole.Layer = function(width, height) {
     /**
      * A container for an task handler. Each operation which must be ordered
      * is associated with a Task that goes into a task queue. Tasks in this
-     * queue are executed in order once their handlers are set, while Tasks 
+     * queue are executed in order once their handlers are set, while Tasks
      * without handlers block themselves and any following Tasks from running.
      *
      * @constructor
      * @private
-     * @param {function} taskHandler The function to call when this task 
+     * @param {function} taskHandler The function to call when this task
      *                               runs, if any.
      * @param {boolean} blocked Whether this task should start blocked.
      */
     function Task(taskHandler, blocked) {
-       
+
         var task = this;
-       
+
         /**
          * Whether this Task is blocked.
-         * 
+         *
          * @type boolean
          */
         this.blocked = blocked;
 
         /**
          * The handler this Task is associated with, if any.
-         * 
+         *
          * @type function
          */
         this.handler = taskHandler;
-       
+
         /**
          * Unblocks this Task, allowing it to run.
          */
-        this.unblock = function() {
+        this.unblock = function () {
             if (task.blocked) {
                 task.blocked = false;
 
@@ -272,7 +271,7 @@ Guacamole.Layer = function(width, height) {
      * If no tasks are pending or running, run the provided handler immediately,
      * if any. Otherwise, schedule a task to run immediately after all currently
      * running or pending tasks are complete.
-     * 
+     *
      * @private
      * @param {function} handler The function to call when possible, if any.
      * @param {boolean} blocked Whether the task should start blocked.
@@ -281,7 +280,7 @@ Guacamole.Layer = function(width, height) {
      *                 immediately and no Task needed to be created.
      */
     function scheduleTask(handler, blocked) {
-        
+
         // If no pending tasks, just call (if available) and exit
         if (layer.autoflush && layer.isReady() && !blocked) {
             if (handler) handler();
@@ -293,7 +292,7 @@ Guacamole.Layer = function(width, height) {
         var task = new Task(handler, blocked);
         tasks.push(task);
         return task;
-        
+
     }
 
     /**
@@ -301,7 +300,7 @@ Guacamole.Layer = function(width, height) {
      * waiting in the queue when flush() was called but still blocked, the
      * queue will continue to flush outside the original flush() call until
      * the queue is empty.
-     * 
+     *
      * @private
      */
     var flushComplete = true;
@@ -317,7 +316,7 @@ Guacamole.Layer = function(width, height) {
      * Run any Tasks which were pending but are now ready to run and are not
      * blocked by other Tasks.
      */
-    this.flush = function() {
+    this.flush = function () {
 
         if (tasksInProgress)
             return;
@@ -345,15 +344,15 @@ Guacamole.Layer = function(width, height) {
      * except that another specified layer will be blocked until this task
      * completes, and this task will not start until the other layer is
      * ready.
-     * 
+     *
      * Essentially, a task is scheduled in both layers, and the specified task
      * will only be performed once both layers are ready, and neither layer may
      * proceed until this task completes.
-     * 
+     *
      * Note that there is no way to specify whether the task starts blocked,
      * as whether the task is blocked depends completely on whether the
      * other layer is currently ready.
-     * 
+     *
      * @private
      * @param {Guacamole.Layer} otherLayer The other layer which must be blocked
      *                          until this task completes.
@@ -378,7 +377,7 @@ Guacamole.Layer = function(width, height) {
                 handler();
 
                 // Unblock the other layer now that draw is complete
-                if (layerLock != null) 
+                if (layerLock != null)
                     layerLock.unblock();
 
                 // Flag operation as done
@@ -406,19 +405,19 @@ Guacamole.Layer = function(width, height) {
     /**
      * Set to true if this Layer should resize itself to accomodate the
      * dimensions of any drawing operation, and false (the default) otherwise.
-     * 
+     *
      * Note that setting this property takes effect immediately, and thus may
      * take effect on operations that were started in the past but have not
      * yet completed. If you wish the setting of this flag to only modify
      * future operations, you will need to make the setting of this flag an
      * operation with sync().
-     * 
+     *
      * @example
      * // Set autosize to true for all future operations
      * layer.sync(function() {
      *     layer.autosize = true;
      * });
-     * 
+     *
      * @type Boolean
      * @default false
      */
@@ -428,7 +427,7 @@ Guacamole.Layer = function(width, height) {
      * Set to true to allow operations to flush automatically, instantly
      * affecting the layer. By default, operations are buffered and only
      * drawn when flush() is called.
-     * 
+     *
      * @type Boolean
      * @default false
      */
@@ -438,17 +437,17 @@ Guacamole.Layer = function(width, height) {
      * Returns the canvas element backing this Layer.
      * @returns {Element} The canvas element backing this Layer.
      */
-    this.getCanvas = function() {
+    this.getCanvas = function () {
         return display;
     };
 
     /**
      * Returns whether this Layer is ready. A Layer is ready if it has no
      * pending operations and no operations in-progress.
-     * 
+     *
      * @returns {Boolean} true if this Layer is ready, false otherwise.
      */
-    this.isReady = function() {
+    this.isReady = function () {
         return tasks.length == 0;
     };
 
@@ -456,12 +455,12 @@ Guacamole.Layer = function(width, height) {
      * Changes the size of this Layer to the given width and height. Resizing
      * is only attempted if the new size provided is actually different from
      * the current size.
-     * 
+     *
      * @param {Number} newWidth The new width to assign to this Layer.
      * @param {Number} newHeight The new height to assign to this Layer.
      */
-    this.resize = function(newWidth, newHeight) {
-        scheduleTask(function() {
+    this.resize = function (newWidth, newHeight) {
+        scheduleTask(function () {
             if (newWidth != width || newHeight != height)
                 resize(newWidth, newHeight);
         });
@@ -470,14 +469,14 @@ Guacamole.Layer = function(width, height) {
     /**
      * Draws the specified image at the given coordinates. The image specified
      * must already be loaded.
-     * 
+     *
      * @param {Number} x The destination X coordinate.
      * @param {Number} y The destination Y coordinate.
      * @param {Image} image The image to draw. Note that this is an Image
      *                      object - not a URL.
      */
-    this.drawImage = function(x, y, image) {
-        scheduleTask(function() {
+    this.drawImage = function (x, y, image) {
+        scheduleTask(function () {
             if (layer.autosize != 0) fitRect(x, y, image.width, image.height);
             displayContext.drawImage(image, x, y);
         });
@@ -487,14 +486,14 @@ Guacamole.Layer = function(width, height) {
      * Draws the image at the specified URL at the given coordinates. The image
      * will be loaded automatically, and this and any future operations will
      * wait for the image to finish loading.
-     * 
+     *
      * @param {Number} x The destination X coordinate.
      * @param {Number} y The destination Y coordinate.
      * @param {String} url The URL of the image to draw.
      */
-    this.draw = function(x, y, url) {
+    this.draw = function (x, y, url) {
 
-        var task = scheduleTask(function() {
+        var task = scheduleTask(function () {
             if (layer.autosize != 0) fitRect(x, y, image.width, image.height);
             displayContext.drawImage(image, x, y);
         }, true);
@@ -510,12 +509,12 @@ Guacamole.Layer = function(width, height) {
      * will be loaded automatically, and this and any future operations will
      * wait for the video to finish loading. Future operations will not be
      * executed until the video finishes playing.
-     * 
+     *
      * @param {String} mimetype The mimetype of the video to play.
      * @param {Number} duration The duration of the video in milliseconds.
      * @param {String} url The URL of the video to play.
      */
-    this.play = function(mimetype, duration, url) {
+    this.play = function (mimetype, duration, url) {
 
         // Start loading the video
         var video = document.createElement("video");
@@ -523,7 +522,7 @@ Guacamole.Layer = function(width, height) {
         video.src = url;
 
         // Main task - playing the video
-        var task = scheduleTask(function() {
+        var task = scheduleTask(function () {
             video.play();
         }, true);
 
@@ -531,8 +530,8 @@ Guacamole.Layer = function(width, height) {
         var lock = scheduleTask(null, true);
 
         // Start copying frames when playing
-        video.addEventListener("play", function() {
-            
+        video.addEventListener("play", function () {
+
             function render_callback() {
                 displayContext.drawImage(video, 0, 0, width, height);
                 if (!video.ended)
@@ -540,9 +539,9 @@ Guacamole.Layer = function(width, height) {
                 else
                     lock.unblock();
             }
-            
+
             render_callback();
-            
+
         }, false);
 
         // Unblock future operations after an error
@@ -557,7 +556,7 @@ Guacamole.Layer = function(width, height) {
     /**
      * Run an arbitrary function as soon as currently pending operations
      * are complete.
-     * 
+     *
      * @param {function} handler The function to call once all currently
      *                           pending operations are complete.
      * @param {boolean} blocked Whether the task should start blocked.
@@ -567,7 +566,7 @@ Guacamole.Layer = function(width, height) {
     /**
      * Transfer a rectangle of image data from one Layer to this Layer using the
      * specified transfer function.
-     * 
+     *
      * @param {Guacamole.Layer} srcLayer The Layer to copy image data from.
      * @param {Number} srcx The X coordinate of the upper-left corner of the
      *                      rectangle within the source Layer's coordinate
@@ -585,8 +584,8 @@ Guacamole.Layer = function(width, height) {
      *                                    transfer data from source to
      *                                    destination.
      */
-    this.transfer = function(srcLayer, srcx, srcy, srcw, srch, x, y, transferFunction) {
-        scheduleTaskSynced(srcLayer, function() {
+    this.transfer = function (srcLayer, srcx, srcy, srcw, srch, x, y, transferFunction) {
+        scheduleTaskSynced(srcLayer, function () {
 
             var srcCanvas = srcLayer.getCanvas();
 
@@ -607,25 +606,25 @@ Guacamole.Layer = function(width, height) {
 
             // Get image data from src and dst
             var src = srcLayer.getCanvas().getContext("2d").getImageData(srcx, srcy, srcw, srch);
-            var dst = displayContext.getImageData(x , y, srcw, srch);
+            var dst = displayContext.getImageData(x, y, srcw, srch);
 
             // Apply transfer for each pixel
-            for (var i=0; i<srcw*srch*4; i+=4) {
+            for (var i = 0; i < srcw * srch * 4; i += 4) {
 
                 // Get source pixel environment
                 var src_pixel = new Guacamole.Layer.Pixel(
                     src.data[i],
-                    src.data[i+1],
-                    src.data[i+2],
-                    src.data[i+3]
+                    src.data[i + 1],
+                    src.data[i + 2],
+                    src.data[i + 3]
                 );
-                    
+
                 // Get destination pixel environment
                 var dst_pixel = new Guacamole.Layer.Pixel(
                     dst.data[i],
-                    dst.data[i+1],
-                    dst.data[i+2],
-                    dst.data[i+3]
+                    dst.data[i + 1],
+                    dst.data[i + 2],
+                    dst.data[i + 3]
                 );
 
                 // Apply transfer function
@@ -633,9 +632,9 @@ Guacamole.Layer = function(width, height) {
 
                 // Save pixel data
                 dst.data[i  ] = dst_pixel.red;
-                dst.data[i+1] = dst_pixel.green;
-                dst.data[i+2] = dst_pixel.blue;
-                dst.data[i+3] = dst_pixel.alpha;
+                dst.data[i + 1] = dst_pixel.green;
+                dst.data[i + 2] = dst_pixel.blue;
+                dst.data[i + 3] = dst_pixel.alpha;
 
             }
 
@@ -651,7 +650,7 @@ Guacamole.Layer = function(width, height) {
      * operations of the source Layer that were pending at the time this
      * function was called are complete. This operation will not alter the
      * size of the source Layer even if its autosize property is set to true.
-     * 
+     *
      * @param {Guacamole.Layer} srcLayer The Layer to copy image data from.
      * @param {Number} srcx The X coordinate of the upper-left corner of the
      *                      rectangle within the source Layer's coordinate
@@ -666,8 +665,8 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} x The destination X coordinate.
      * @param {Number} y The destination Y coordinate.
      */
-    this.copy = function(srcLayer, srcx, srcy, srcw, srch, x, y) {
-        scheduleTaskSynced(srcLayer, function() {
+    this.copy = function (srcLayer, srcx, srcy, srcw, srch, x, y) {
+        scheduleTaskSynced(srcLayer, function () {
 
             var srcCanvas = srcLayer.getCanvas();
 
@@ -692,49 +691,49 @@ Guacamole.Layer = function(width, height) {
 
     /**
      * Starts a new path at the specified point.
-     * 
+     *
      * @param {Number} x The X coordinate of the point to draw.
      * @param {Number} y The Y coordinate of the point to draw.
      */
-    this.moveTo = function(x, y) {
-        scheduleTask(function() {
-            
+    this.moveTo = function (x, y) {
+        scheduleTask(function () {
+
             // Start a new path if current path is closed
             if (pathClosed) {
                 displayContext.beginPath();
                 pathClosed = false;
             }
-            
+
             if (layer.autosize != 0) fitRect(x, y, 0, 0);
             displayContext.moveTo(x, y);
-            
+
         });
     };
 
     /**
      * Add the specified line to the current path.
-     * 
+     *
      * @param {Number} x The X coordinate of the endpoint of the line to draw.
      * @param {Number} y The Y coordinate of the endpoint of the line to draw.
      */
-    this.lineTo = function(x, y) {
-        scheduleTask(function() {
-            
+    this.lineTo = function (x, y) {
+        scheduleTask(function () {
+
             // Start a new path if current path is closed
             if (pathClosed) {
                 displayContext.beginPath();
                 pathClosed = false;
             }
-            
+
             if (layer.autosize != 0) fitRect(x, y, 0, 0);
             displayContext.lineTo(x, y);
-            
+
         });
     };
 
     /**
      * Add the specified arc to the current path.
-     * 
+     *
      * @param {Number} x The X coordinate of the center of the circle which
      *                   will contain the arc.
      * @param {Number} y The Y coordinate of the center of the circle which
@@ -745,24 +744,24 @@ Guacamole.Layer = function(width, height) {
      * @param {Boolean} negative Whether the arc should be drawn in order of
      *                           decreasing angle.
      */
-    this.arc = function(x, y, radius, startAngle, endAngle, negative) {
-        scheduleTask(function() {
-            
+    this.arc = function (x, y, radius, startAngle, endAngle, negative) {
+        scheduleTask(function () {
+
             // Start a new path if current path is closed
             if (pathClosed) {
                 displayContext.beginPath();
                 pathClosed = false;
             }
-            
+
             if (layer.autosize != 0) fitRect(x, y, 0, 0);
             displayContext.arc(x, y, radius, startAngle, endAngle, negative);
-            
+
         });
     };
 
     /**
      * Starts a new path at the specified point.
-     * 
+     *
      * @param {Number} cp1x The X coordinate of the first control point.
      * @param {Number} cp1y The Y coordinate of the first control point.
      * @param {Number} cp2x The X coordinate of the second control point.
@@ -770,18 +769,18 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} x The X coordinate of the endpoint of the curve.
      * @param {Number} y The Y coordinate of the endpoint of the curve.
      */
-    this.curveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
-        scheduleTask(function() {
-            
+    this.curveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+        scheduleTask(function () {
+
             // Start a new path if current path is closed
             if (pathClosed) {
                 displayContext.beginPath();
                 pathClosed = false;
             }
-            
+
             if (layer.autosize != 0) fitRect(x, y, 0, 0);
             displayContext.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-            
+
         });
     };
 
@@ -789,19 +788,19 @@ Guacamole.Layer = function(width, height) {
      * Closes the current path by connecting the end point with the start
      * point (if any) with a straight line.
      */
-    this.close = function() {
-        scheduleTask(function() {
-            
+    this.close = function () {
+        scheduleTask(function () {
+
             // Close path
             displayContext.closePath();
             pathClosed = true;
-            
+
         });
     };
 
     /**
      * Add the specified rectangle to the current path.
-     * 
+     *
      * @param {Number} x The X coordinate of the upper-left corner of the
      *                   rectangle to draw.
      * @param {Number} y The Y coordinate of the upper-left corner of the
@@ -809,18 +808,18 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} w The width of the rectangle to draw.
      * @param {Number} h The height of the rectangle to draw.
      */
-    this.rect = function(x, y, w, h) {
-        scheduleTask(function() {
-            
+    this.rect = function (x, y, w, h) {
+        scheduleTask(function () {
+
             // Start a new path if current path is closed
             if (pathClosed) {
                 displayContext.beginPath();
                 pathClosed = false;
             }
-            
+
             if (layer.autosize != 0) fitRect(x, y, w, h);
             displayContext.rect(x, y, w, h);
-            
+
         });
     };
 
@@ -830,8 +829,8 @@ Guacamole.Layer = function(width, height) {
      * for other operations (such as fillColor()) but a new path will be started
      * once a path drawing operation (path() or rect()) is used.
      */
-    this.clip = function() {
-        scheduleTask(function() {
+    this.clip = function () {
+        scheduleTask(function () {
 
             // Set new clipping region
             displayContext.clip();
@@ -847,7 +846,7 @@ Guacamole.Layer = function(width, height) {
      * is implicitly closed. The current path can continue to be reused
      * for other operations (such as clip()) but a new path will be started
      * once a path drawing operation (path() or rect()) is used.
-     * 
+     *
      * @param {String} cap The line cap style. Can be "round", "square",
      *                     or "butt".
      * @param {String} join The line join style. Can be "round", "bevel",
@@ -858,14 +857,14 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} b The blue component of the color to fill.
      * @param {Number} a The alpha component of the color to fill.
      */
-    this.strokeColor = function(cap, join, thickness, r, g, b, a) {
-        scheduleTask(function() {
+    this.strokeColor = function (cap, join, thickness, r, g, b, a) {
+        scheduleTask(function () {
 
             // Stroke with color
             displayContext.lineCap = cap;
             displayContext.lineJoin = join;
             displayContext.lineWidth = thickness;
-            displayContext.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a/255.0 + ")";
+            displayContext.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255.0 + ")";
             displayContext.stroke();
 
             // Path now implicitly closed
@@ -879,17 +878,17 @@ Guacamole.Layer = function(width, height) {
      * is implicitly closed. The current path can continue to be reused
      * for other operations (such as clip()) but a new path will be started
      * once a path drawing operation (path() or rect()) is used.
-     * 
+     *
      * @param {Number} r The red component of the color to fill.
      * @param {Number} g The green component of the color to fill.
      * @param {Number} b The blue component of the color to fill.
      * @param {Number} a The alpha component of the color to fill.
      */
-    this.fillColor = function(r, g, b, a) {
-        scheduleTask(function() {
+    this.fillColor = function (r, g, b, a) {
+        scheduleTask(function () {
 
             // Fill with color
-            displayContext.fillStyle = "rgba(" + r + "," + g + "," + b + "," + a/255.0 + ")";
+            displayContext.fillStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255.0 + ")";
             displayContext.fill();
 
             // Path now implicitly closed
@@ -904,7 +903,7 @@ Guacamole.Layer = function(width, height) {
      * is implicitly closed. The current path can continue to be reused
      * for other operations (such as clip()) but a new path will be started
      * once a path drawing operation (path() or rect()) is used.
-     * 
+     *
      * @param {String} cap The line cap style. Can be "round", "square",
      *                     or "butt".
      * @param {String} join The line join style. Can be "round", "bevel",
@@ -913,8 +912,8 @@ Guacamole.Layer = function(width, height) {
      * @param {Guacamole.Layer} srcLayer The layer to use as a repeating pattern
      *                                   within the stroke.
      */
-    this.strokeLayer = function(cap, join, thickness, srcLayer) {
-        scheduleTaskSynced(srcLayer, function() {
+    this.strokeLayer = function (cap, join, thickness, srcLayer) {
+        scheduleTaskSynced(srcLayer, function () {
 
             // Stroke with image data
             displayContext.lineCap = cap;
@@ -938,14 +937,14 @@ Guacamole.Layer = function(width, height) {
      * is implicitly closed. The current path can continue to be reused
      * for other operations (such as clip()) but a new path will be started
      * once a path drawing operation (path() or rect()) is used.
-     * 
+     *
      * @param {Guacamole.Layer} srcLayer The layer to use as a repeating pattern
      *                                   within the fill.
      */
-    this.fillLayer = function(srcLayer) {
-        scheduleTask(function() {
+    this.fillLayer = function (srcLayer) {
+        scheduleTask(function () {
 
-            // Fill with image data 
+            // Fill with image data
             displayContext.fillStyle = displayContext.createPattern(
                 srcLayer.getCanvas(),
                 "repeat"
@@ -961,8 +960,8 @@ Guacamole.Layer = function(width, height) {
     /**
      * Push current layer state onto stack.
      */
-    this.push = function() {
-        scheduleTask(function() {
+    this.push = function () {
+        scheduleTask(function () {
 
             // Save current state onto stack
             displayContext.save();
@@ -974,8 +973,8 @@ Guacamole.Layer = function(width, height) {
     /**
      * Pop layer state off stack.
      */
-    this.pop = function() {
-        scheduleTask(function() {
+    this.pop = function () {
+        scheduleTask(function () {
 
             // Restore current state from stack
             if (stackSize > 0) {
@@ -990,8 +989,8 @@ Guacamole.Layer = function(width, height) {
      * Reset the layer, clearing the stack, the current path, and any transform
      * matrix.
      */
-    this.reset = function() {
-        scheduleTask(function() {
+    this.reset = function () {
+        scheduleTask(function () {
 
             // Clear stack
             while (stackSize > 0) {
@@ -1013,7 +1012,7 @@ Guacamole.Layer = function(width, height) {
     /**
      * Sets the given affine transform (defined with six values from the
      * transform's matrix).
-     * 
+     *
      * @param {Number} a The first value in the affine transform's matrix.
      * @param {Number} b The second value in the affine transform's matrix.
      * @param {Number} c The third value in the affine transform's matrix.
@@ -1021,14 +1020,14 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} e The fifth value in the affine transform's matrix.
      * @param {Number} f The sixth value in the affine transform's matrix.
      */
-    this.setTransform = function(a, b, c, d, e, f) {
-        scheduleTask(function() {
+    this.setTransform = function (a, b, c, d, e, f) {
+        scheduleTask(function () {
 
             // Set transform
             displayContext.setTransform(
                 a, b, c,
                 d, e, f
-              /*0, 0, 1*/
+                /*0, 0, 1*/
             );
 
         });
@@ -1038,7 +1037,7 @@ Guacamole.Layer = function(width, height) {
     /**
      * Applies the given affine transform (defined with six values from the
      * transform's matrix).
-     * 
+     *
      * @param {Number} a The first value in the affine transform's matrix.
      * @param {Number} b The second value in the affine transform's matrix.
      * @param {Number} c The third value in the affine transform's matrix.
@@ -1046,14 +1045,14 @@ Guacamole.Layer = function(width, height) {
      * @param {Number} e The fifth value in the affine transform's matrix.
      * @param {Number} f The sixth value in the affine transform's matrix.
      */
-    this.transform = function(a, b, c, d, e, f) {
-        scheduleTask(function() {
+    this.transform = function (a, b, c, d, e, f) {
+        scheduleTask(function () {
 
             // Apply transform
             displayContext.transform(
                 a, b, c,
                 d, e, f
-              /*0, 0, 1*/
+                /*0, 0, 1*/
             );
 
         });
@@ -1062,18 +1061,18 @@ Guacamole.Layer = function(width, height) {
 
     /**
      * Sets the channel mask for future operations on this Layer.
-     * 
+     *
      * The channel mask is a Guacamole-specific compositing operation identifier
      * with a single bit representing each of four channels (in order): source
      * image where destination transparent, source where destination opaque,
      * destination where source transparent, and destination where source
      * opaque.
-     * 
+     *
      * @param {Number} mask The channel mask for future operations on this
      *                      Layer.
      */
-    this.setChannelMask = function(mask) {
-        scheduleTask(function() {
+    this.setChannelMask = function (mask) {
+        scheduleTask(function () {
             displayContext.globalCompositeOperation = compositeOperation[mask];
         });
     };
@@ -1083,12 +1082,12 @@ Guacamole.Layer = function(width, height) {
      * limit is the maximum ratio of the size of the miter join to the stroke
      * width. If this ratio is exceeded, the miter will not be drawn for that
      * joint of the path.
-     * 
+     *
      * @param {Number} limit The miter limit for stroke operations using the
      *                       miter join.
      */
-    this.setMiterLimit = function(limit) {
-        scheduleTask(function() {
+    this.setMiterLimit = function (limit) {
+        scheduleTask(function () {
             displayContext.miterLimit = limit;
         });
     };
@@ -1102,17 +1101,17 @@ Guacamole.Layer = function(width, height) {
 /**
  * Channel mask for the composite operation "rout".
  */
-Guacamole.Layer.ROUT  = 0x2;
+Guacamole.Layer.ROUT = 0x2;
 
 /**
  * Channel mask for the composite operation "atop".
  */
-Guacamole.Layer.ATOP  = 0x6;
+Guacamole.Layer.ATOP = 0x6;
 
 /**
  * Channel mask for the composite operation "xor".
  */
-Guacamole.Layer.XOR   = 0xA;
+Guacamole.Layer.XOR = 0xA;
 
 /**
  * Channel mask for the composite operation "rover".
@@ -1122,12 +1121,12 @@ Guacamole.Layer.ROVER = 0xB;
 /**
  * Channel mask for the composite operation "over".
  */
-Guacamole.Layer.OVER  = 0xE;
+Guacamole.Layer.OVER = 0xE;
 
 /**
  * Channel mask for the composite operation "plus".
  */
-Guacamole.Layer.PLUS  = 0xF;
+Guacamole.Layer.PLUS = 0xF;
 
 /**
  * Channel mask for the composite operation "rin".
@@ -1135,7 +1134,7 @@ Guacamole.Layer.PLUS  = 0xF;
  * layer where the source layer is transparent, despite the definition of this
  * operation.
  */
-Guacamole.Layer.RIN   = 0x1;
+Guacamole.Layer.RIN = 0x1;
 
 /**
  * Channel mask for the composite operation "in".
@@ -1143,7 +1142,7 @@ Guacamole.Layer.RIN   = 0x1;
  * layer where the source layer is transparent, despite the definition of this
  * operation.
  */
-Guacamole.Layer.IN    = 0x4;
+Guacamole.Layer.IN = 0x4;
 
 /**
  * Channel mask for the composite operation "out".
@@ -1151,7 +1150,7 @@ Guacamole.Layer.IN    = 0x4;
  * layer where the source layer is transparent, despite the definition of this
  * operation.
  */
-Guacamole.Layer.OUT   = 0x8;
+Guacamole.Layer.OUT = 0x8;
 
 /**
  * Channel mask for the composite operation "ratop".
@@ -1167,27 +1166,27 @@ Guacamole.Layer.RATOP = 0x9;
  * layer where the source layer is transparent, despite the definition of this
  * operation.
  */
-Guacamole.Layer.SRC   = 0xC;
+Guacamole.Layer.SRC = 0xC;
 
 
 /**
  * Represents a single pixel of image data. All components have a minimum value
  * of 0 and a maximum value of 255.
- * 
+ *
  * @constructor
- * 
+ *
  * @param {Number} r The red component of this pixel.
  * @param {Number} g The green component of this pixel.
  * @param {Number} b The blue component of this pixel.
  * @param {Number} a The alpha component of this pixel.
  */
-Guacamole.Layer.Pixel = function(r, g, b, a) {
+Guacamole.Layer.Pixel = function (r, g, b, a) {
 
     /**
      * The red component of this pixel, where 0 is the minimum value,
      * and 255 is the maximum.
      */
-    this.red   = r;
+    this.red = r;
 
     /**
      * The green component of this pixel, where 0 is the minimum value,
@@ -1199,7 +1198,7 @@ Guacamole.Layer.Pixel = function(r, g, b, a) {
      * The blue component of this pixel, where 0 is the minimum value,
      * and 255 is the maximum.
      */
-    this.blue  = b;
+    this.blue = b;
 
     /**
      * The alpha component of this pixel, where 0 is the minimum value,

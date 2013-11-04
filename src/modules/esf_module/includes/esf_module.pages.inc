@@ -1,10 +1,20 @@
 <?php
 
+/**
+ * Page callback for the /aspi page.
+ *
+ * No page is actually build in here, because no content should be displayed.
+ * As instead, all the html is stored in the theme and loaded from the layout.
+ *
+ * @see omega_esf/layouts/guacamole/guacamole.layout.tpl.php
+ *
+ * @return array
+ *   empty array
+ */
 function esf_module_page_aspi() {
   $module_path = drupal_get_path('module', 'esf_module');
 
-  // remove any javascript added so far
-  //drupal_static_reset('drupal_add_js');
+  // Removes any css added so far.
   drupal_static_reset('drupal_add_css');
 
   drupal_add_js($module_path . '/js/lib/blob/blob.js', array('group' => JS_LIBRARY));
@@ -25,7 +35,7 @@ function esf_module_page_aspi() {
 
   drupal_add_js($module_path . '/js/aspi-remote.js', array('weight' => 3, 'scope' => 'footer'));
 
-  drupal_add_css($module_path. '/css/aspi_remote.css');
+  drupal_add_css($module_path . '/css/aspi_remote.css');
 
   return array();
 }

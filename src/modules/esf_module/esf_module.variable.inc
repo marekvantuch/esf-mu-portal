@@ -5,7 +5,7 @@
  */
 function esf_module_variable_info($options) {
 
-  $variables[GUACAMOLE_SERVER_DOMAIN] = array(
+  $variables[ESF_MODULE_GUACAMOLE_SERVER_DOMAIN] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat JAVA servlet domain'),
     'description' => t('Domain URL of the server running the remote desktop Guacamole software. Must not contain trailing slash.'),
@@ -14,7 +14,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables[GUACAMOLE_SERVER_PORT] = array(
+  $variables[ESF_MODULE_GUACAMOLE_SERVER_PORT] = array(
     'type' => 'number',
     'title' => t('Guacamole TomCat servlet port'),
     'description' => t('Port of the server running the remote desktop Guacamole
@@ -24,7 +24,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables[GUACAMOLE_SERVER_PATH] = array(
+  $variables[ESF_MODULE_GUACAMOLE_SERVER_PATH] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat servlet path'),
     'description' => t('Path on the server running the remote desktop Guacamole
@@ -34,7 +34,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables[GUACAMOLE_HOME] = array(
+  $variables[ESF_MODULE_GUACAMOLE_HOME] = array(
     'type' => 'string',
     'title' => t('Guacamole home'),
     'description' => t('Location of the guacamole settings file, typically
@@ -42,17 +42,17 @@ function esf_module_variable_info($options) {
       must be included. Default is\'/srv/guacamole/\''),
     'default' => '/srv/guacamole/',
     'localize' => FALSE,
-    'group' => 'esf'
+    'group' => 'esf',
   );
 
-  $variables[GUACAMOLE_PROPERTIES_FILE] = array(
+  $variables[ESF_MODULE_GUACAMOLE_PROPERTIES_FILE] = array(
     'type' => 'string',
     'title' => t('Guacamole properties filename'),
     'description' => t('Name of the file which stores the properties of the
       guacamole program (typically guacamole.properties)'),
     'default' => 'guacamole.properties',
     'localize' => FALSE,
-    'group' => 'esf'
+    'group' => 'esf',
   );
 
   $variables['aspi_protocol'] = array(

@@ -14,7 +14,7 @@ function esf_module_ui_menu() {
     'file' => 'system.admin.inc',
     'weight' => -50,
   );
-  
+
   $items['admin/config/esf/settings'] = array(
     'title' => 'Settings',
     'description' => 'Configuration of the general settings.',
@@ -33,6 +33,6 @@ function esf_module_ui_menu() {
     'file' => 'includes/esf_module_ui.admin.inc',
     'weight' => 11,
   );
-  
+
   return $items;
 }

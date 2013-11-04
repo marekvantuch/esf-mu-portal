@@ -1,4 +1,3 @@
-
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -47,29 +46,24 @@ var Guacamole = Guacamole || {};
  *
  * @type {{createRequest: Function}}
  */
-Guacamole.CORS = function() {
+Guacamole.CORS = function () {
 
-    function getCookieValue(c_name)
-    {
+    function getCookieValue(c_name) {
         var c_value = document.cookie;
         var c_start = c_value.indexOf(" " + c_name + "=");
-        if (c_start == -1)
-        {
+        if (c_start == -1) {
             c_start = c_value.indexOf(c_name + "=");
         }
-        if (c_start == -1)
-        {
+        if (c_start == -1) {
             c_value = null;
         }
-        else
-        {
+        else {
             c_start = c_value.indexOf("=", c_start) + 1;
             var c_end = c_value.indexOf(";", c_start);
-            if (c_end == -1)
-            {
+            if (c_end == -1) {
                 c_end = c_value.length;
             }
-            c_value = unescape(c_value.substring(c_start,c_end));
+            c_value = unescape(c_value.substring(c_start, c_end));
         }
         return c_value;
     }
@@ -81,48 +75,48 @@ Guacamole.CORS = function() {
      * @param url url of the server to be accessed
      * @returns {XMLHttpRequest}
      */
-    this.createRequest = function(method, url, async) {
-      async = (typeof async === "undefined") ? true : async;
+    this.createRequest = function (method, url, async) {
+        async = (typeof async === "undefined") ? true : async;
 
-      var xhr = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
 
-      // if url doesn't start with http, put the server address in the begining
-      if (url.indexOf('http') != 0) {
-          url = Drupal.settings.esf.server_url . url;
-      }
+        // if url doesn't start with http, put the server address in the begining
+        if (url.indexOf('http') != 0) {
+            url = Drupal.settings.esf.server_url.url;
+        }
 
-      if ("withCredentials" in xhr) {
+        if ("withCredentials" in xhr) {
 
-          // Check if the XMLHttpRequest object has a "withCredentials" property.
-          // "withCredentials" only exists on XMLHTTPRequest2 objects.
-          xhr.withCredentials = true;
-          xhr.open(method, url, async);
+            // Check if the XMLHttpRequest object has a "withCredentials" property.
+            // "withCredentials" only exists on XMLHTTPRequest2 objects.
+            xhr.withCredentials = true;
+            xhr.open(method, url, async);
 
-      } else if (typeof XDomainRequest != "undefined") {
+        } else if (typeof XDomainRequest != "undefined") {
 
-          // Otherwise, check if XDomainRequest.
-          // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-          xhr = new XDomainRequest();
-          xhr.open(method, url);
+            // Otherwise, check if XDomainRequest.
+            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
 
-      } else {
+        } else {
 
-          // Otherwise, CORS is not supported by the browser.
-          xhr = null;
+            // Otherwise, CORS is not supported by the browser.
+            xhr = null;
 
-      }
+        }
 
-      return xhr;
+        return xhr;
     };
 };
 
 /**
  * Simple Guacamole protocol parser that invokes an oninstruction event when
  * full instructions are available from data received via receive().
- * 
+ *
  * @constructor
  */
-Guacamole.Parser = function() {
+Guacamole.Parser = function () {
 
     /**
      * Reference to this parser.
@@ -134,7 +128,7 @@ Guacamole.Parser = function() {
      * Current buffer of received data. This buffer grows until a full
      * element is available. After a full element is available, that element
      * is flushed into the element buffer.
-     * 
+     *
      * @private
      */
     var buffer = "";
@@ -142,7 +136,7 @@ Guacamole.Parser = function() {
     /**
      * Buffer of all received, complete elements. After an entire instruction
      * is read, this buffer is flushed, and a new instruction begins.
-     * 
+     *
      * @private
      */
     var element_buffer = [];
@@ -160,7 +154,7 @@ Guacamole.Parser = function() {
      *
      * @param {String} packet The instruction data to append.
      */
-    this.receive = function(packet) {
+    this.receive = function (packet) {
 
         // Truncate buffer as necessary
         if (start_index > 4096 && element_end >= start_index) {
@@ -184,7 +178,7 @@ Guacamole.Parser = function() {
 
                 // We now have enough data for the element. Parse.
                 var element = buffer.substring(start_index, element_end);
-                var terminator = buffer.substring(element_end, element_end+1);
+                var terminator = buffer.substring(element_end, element_end + 1);
 
                 // Add element to array
                 element_buffer.push(element);
@@ -217,7 +211,7 @@ Guacamole.Parser = function() {
             if (length_end != -1) {
 
                 // Parse length
-                var length = parseInt(buffer.substring(element_end+1, length_end));
+                var length = parseInt(buffer.substring(element_end + 1, length_end));
                 if (length == NaN)
                     throw new Error("Non-numeric character in element length.");
 
@@ -228,7 +222,7 @@ Guacamole.Parser = function() {
                 element_end = start_index + length;
 
             }
-            
+
             // If no period yet, continue search when more data
             // is received
             else {
@@ -242,7 +236,7 @@ Guacamole.Parser = function() {
 
     /**
      * Fired once for every complete Guacamole instruction received, in order.
-     * 
+     *
      * @event
      * @param {String} opcode The Guacamole instruction opcode.
      * @param {Array} parameters The parameters provided for the instruction,
@@ -255,12 +249,12 @@ Guacamole.Parser = function() {
 /**
  * A blob abstraction used by the Guacamole client to facilitate transfer of
  * files or other binary data.
- * 
+ *
  * @constructor
  * @param {String} mimetype The mimetype of the data this blob will contain.
  * @param {String} name An arbitrary name for this blob.
  */
-Guacamole.Blob = function(mimetype, name) {
+Guacamole.Blob = function (mimetype, name) {
 
     /**
      * Reference to this Guacamole.Blob.
@@ -287,19 +281,19 @@ Guacamole.Blob = function(mimetype, name) {
 
     // Get blob builder
     var blob_builder;
-    if      (window.BlobBuilder)       blob_builder = new BlobBuilder();
+    if (window.BlobBuilder)       blob_builder = new BlobBuilder();
     else if (window.WebKitBlobBuilder) blob_builder = new WebKitBlobBuilder();
     else if (window.MozBlobBuilder)    blob_builder = new MozBlobBuilder();
     else
-        blob_builder = new (function() {
+        blob_builder = new (function () {
 
             var blobs = [];
 
-            this.append = function(data) {
+            this.append = function (data) {
                 blobs.push(new Blob([data], {"type": mimetype}));
             };
 
-            this.getBlob = function() {
+            this.getBlob = function () {
                 return new Blob(blobs, {"type": mimetype});
             };
 
@@ -307,11 +301,11 @@ Guacamole.Blob = function(mimetype, name) {
 
     /**
      * Appends the given ArrayBuffer to this Guacamole.Blob.
-     * 
+     *
      * @param {ArrayBuffer} buffer An ArrayBuffer containing the data to be
      *                             appended.
      */
-    this.append = function(buffer) {
+    this.append = function (buffer) {
 
         blob_builder.append(buffer);
         length += buffer.byteLength;
@@ -325,7 +319,7 @@ Guacamole.Blob = function(mimetype, name) {
     /**
      * Closes this Guacamole.Blob such that no further data will be written.
      */
-    this.close = function() {
+    this.close = function () {
 
         // Call handler, if present
         if (guac_blob.oncomplete)
@@ -339,7 +333,7 @@ Guacamole.Blob = function(mimetype, name) {
      * Returns the current length of this Guacamole.Blob, in bytes.
      * @return {Number} The current length of this Guacamole.Blob.
      */
-    this.getLength = function() {
+    this.getLength = function () {
         return length;
     };
 
@@ -347,13 +341,13 @@ Guacamole.Blob = function(mimetype, name) {
      * Returns the contents of this Guacamole.Blob as a Blob.
      * @return {Blob} The contents of this Guacamole.Blob.
      */
-    this.getBlob = function() {
+    this.getBlob = function () {
         return blob_builder.getBlob();
     };
 
     /**
      * Fired once for every blob of data received.
-     * 
+     *
      * @event
      * @param {Number} length The number of bytes received.
      */
@@ -372,24 +366,24 @@ Guacamole.Blob = function(mimetype, name) {
  * Guacamole protocol client. Given a display element and {@link Guacamole.Tunnel},
  * automatically handles incoming and outgoing Guacamole instructions via the
  * provided tunnel, updating the display using one or more canvas elements.
- * 
+ *
  * @constructor
  * @param {Guacamole.Tunnel} tunnel The tunnel to use to send and receive
  *                                  Guacamole instructions.
  */
-Guacamole.Client = function(tunnel) {
+Guacamole.Client = function (tunnel) {
 
     var guac_client = this;
 
-    var STATE_IDLE          = 0;
-    var STATE_CONNECTING    = 1;
-    var STATE_WAITING       = 2;
-    var STATE_CONNECTED     = 3;
+    var STATE_IDLE = 0;
+    var STATE_CONNECTING = 1;
+    var STATE_WAITING = 2;
+    var STATE_CONNECTED = 3;
     var STATE_DISCONNECTING = 4;
-    var STATE_DISCONNECTED  = 5;
+    var STATE_DISCONNECTED = 5;
 
     var currentState = STATE_IDLE;
-    
+
     var currentTimestamp = 0;
     var pingInterval = null;
 
@@ -417,11 +411,11 @@ Guacamole.Client = function(tunnel) {
         2: "round"
     };
 
-    // Create bounding div 
+    // Create bounding div
     var bounds = document.createElement("div");
     bounds.style.position = "relative";
-    bounds.style.width = (displayWidth*displayScale) + "px";
-    bounds.style.height = (displayHeight*displayScale) + "px";
+    bounds.style.width = (displayWidth * displayScale) + "px";
+    bounds.style.height = (displayHeight * displayScale) + "px";
 
     // Create display
     var display = document.createElement("div");
@@ -431,11 +425,11 @@ Guacamole.Client = function(tunnel) {
 
     // Ensure transformations on display originate at 0,0
     display.style.transformOrigin =
-    display.style.webkitTransformOrigin =
-    display.style.MozTransformOrigin =
-    display.style.OTransformOrigin =
-    display.style.msTransformOrigin =
-        "0 0";
+        display.style.webkitTransformOrigin =
+            display.style.MozTransformOrigin =
+                display.style.OTransformOrigin =
+                    display.style.msTransformOrigin =
+                        "0 0";
 
     // Create default layer
     var default_layer_container = new Guacamole.Client.LayerContainer(displayWidth, displayHeight);
@@ -444,7 +438,7 @@ Guacamole.Client = function(tunnel) {
     var default_layer_container_element = default_layer_container.getElement();
     default_layer_container_element.style.position = "absolute";
     default_layer_container_element.style.left = "0px";
-    default_layer_container_element.style.top  = "0px";
+    default_layer_container_element.style.top = "0px";
     default_layer_container_element.style.overflow = "hidden";
 
     // Create cursor layer
@@ -456,7 +450,7 @@ Guacamole.Client = function(tunnel) {
     var cursor_element = cursor.getElement();
     cursor_element.style.position = "absolute";
     cursor_element.style.left = "0px";
-    cursor_element.style.top  = "0px";
+    cursor_element.style.top = "0px";
 
     // Add default layer and cursor to display
     display.appendChild(default_layer_container.getElement());
@@ -466,7 +460,7 @@ Guacamole.Client = function(tunnel) {
     bounds.appendChild(display);
 
     // Initially, only default layer exists
-    var layers =  [default_layer_container];
+    var layers = [default_layer_container];
 
     // No initial buffers
     var buffers = [];
@@ -474,13 +468,13 @@ Guacamole.Client = function(tunnel) {
     // No initial parsers
     var parsers = [];
 
-    // No initial audio channels 
+    // No initial audio channels
     var audio_channels = [];
 
     // No initial blobs
     var blobs = [];
 
-    tunnel.onerror = function(message) {
+    tunnel.onerror = function (message) {
         if (guac_client.onerror)
             guac_client.onerror(message);
     };
@@ -519,21 +513,21 @@ Guacamole.Client = function(tunnel) {
      * Returns an element containing the display of this Guacamole.Client.
      * Adding the element returned by this function to an element in the body
      * of a document will cause the client's display to be visible.
-     * 
+     *
      * @return {Element} An element containing ths display of this
      *                   Guacamole.Client.
      */
-    this.getDisplay = function() {
+    this.getDisplay = function () {
         return bounds;
     };
 
     /**
      * Sends the current size of the screen.
-     * 
+     *
      * @param {Number} width The width of the screen.
      * @param {Number} height The height of the screen.
      */
-    this.sendSize = function(width, height) {
+    this.sendSize = function (width, height) {
 
         // Do not send requests if not connected
         if (!isConnected())
@@ -546,12 +540,12 @@ Guacamole.Client = function(tunnel) {
     /**
      * Sends a key event having the given properties as if the user
      * pressed or released a key.
-     * 
+     *
      * @param {Boolean} pressed Whether the key is pressed (true) or released
      *                          (false).
      * @param {Number} keysym The keysym of the key being pressed or released.
      */
-    this.sendKeyEvent = function(pressed, keysym) {
+    this.sendKeyEvent = function (pressed, keysym) {
         // Do not send requests if not connected
         if (!isConnected())
             return;
@@ -562,11 +556,11 @@ Guacamole.Client = function(tunnel) {
     /**
      * Sends a mouse event having the properties provided by the given mouse
      * state.
-     * 
+     *
      * @param {Guacamole.Mouse.State} mouseState The state of the mouse to send
      *                                           in the mouse event.
      */
-    this.sendMouseState = function(mouseState) {
+    this.sendMouseState = function (mouseState) {
 
         // Do not send requests if not connected
         if (!isConnected())
@@ -592,10 +586,10 @@ Guacamole.Client = function(tunnel) {
 
     /**
      * Sets the clipboard of the remote client to the given text data.
-     * 
+     *
      * @param {String} data The data to send as the clipboard contents.
      */
-    this.setClipboard = function(data) {
+    this.setClipboard = function (data) {
 
         // Do not send requests if not connected
         if (!isConnected())
@@ -606,7 +600,7 @@ Guacamole.Client = function(tunnel) {
 
     /**
      * Fired whenever the state of this Guacamole.Client changes.
-     * 
+     *
      * @event
      * @param {Number} state The new state of the client.
      */
@@ -614,7 +608,7 @@ Guacamole.Client = function(tunnel) {
 
     /**
      * Fired when the remote client sends a name update.
-     * 
+     *
      * @event
      * @param {String} name The new name of this client.
      */
@@ -623,7 +617,7 @@ Guacamole.Client = function(tunnel) {
     /**
      * Fired when an error is reported by the remote client, and the connection
      * is being closed.
-     * 
+     *
      * @event
      * @param {String} error A human-readable description of the error.
      */
@@ -631,7 +625,7 @@ Guacamole.Client = function(tunnel) {
 
     /**
      * Fired when the clipboard of the remote client is changing.
-     * 
+     *
      * @event
      * @param {String} data The new text data of the remote clipboard.
      */
@@ -640,7 +634,7 @@ Guacamole.Client = function(tunnel) {
     /**
      * Fired when the default layer (and thus the entire Guacamole display)
      * is resized.
-     * 
+     *
      * @event
      * @param {Number} width The new width of the Guacamole display.
      * @param {Number} height The new height of the Guacamole display.
@@ -651,7 +645,7 @@ Guacamole.Client = function(tunnel) {
      * Fired when a blob is created. The blob provided to this event handler
      * will contain its own event handlers for received data and the close
      * event.
-     * 
+     *
      * @event
      * @param {Guacamole.Blob} blob A container for blob data that will receive
      *                              data from the server.
@@ -702,7 +696,7 @@ Guacamole.Client = function(tunnel) {
     }
 
     function getLayer(index) {
-       
+
         // If buffer, just get layer
         if (index < 0)
             return getBufferLayer(index);
@@ -745,12 +739,12 @@ Guacamole.Client = function(tunnel) {
      */
     var layerPropertyHandlers = {
 
-        "miter-limit": function(layer, value) {
+        "miter-limit": function (layer, value) {
             layer.setMiterLimit(parseFloat(value));
         }
 
     };
-    
+
     /**
      * Handlers for all instruction opcodes receivable by a Guacamole protocol
      * client.
@@ -758,7 +752,7 @@ Guacamole.Client = function(tunnel) {
      */
     var instructionHandlers = {
 
-        "arc": function(parameters) {
+        "arc": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var x = parseInt(parameters[1]);
@@ -772,7 +766,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "audio": function(parameters) {
+        "audio": function (parameters) {
 
             var channel = getAudioChannel(parseInt(parameters[0]));
             var mimetype = parameters[1];
@@ -783,7 +777,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "blob": function(parameters) {
+        "blob": function (parameters) {
 
             // Get blob
             var blob_index = parseInt(parameters[0]);
@@ -795,7 +789,7 @@ Guacamole.Client = function(tunnel) {
             var arrayBuffer = new ArrayBuffer(binary.length);
             var bufferView = new Uint8Array(arrayBuffer);
 
-            for (var i=0; i<binary.length; i++)
+            for (var i = 0; i < binary.length; i++)
                 bufferView[i] = binary.charCodeAt(i);
 
             // Write data
@@ -803,7 +797,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "cfill": function(parameters) {
+        "cfill": function (parameters) {
 
             var channelMask = parseInt(parameters[0]);
             var layer = getLayer(parseInt(parameters[1]));
@@ -818,7 +812,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "clip": function(parameters) {
+        "clip": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
@@ -826,11 +820,11 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "clipboard": function(parameters) {
+        "clipboard": function (parameters) {
             if (guac_client.onclipboard) guac_client.onclipboard(parameters[0]);
         },
 
-        "close": function(parameters) {
+        "close": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
@@ -838,7 +832,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "copy": function(parameters) {
+        "copy": function (parameters) {
 
             var srcL = getLayer(parseInt(parameters[0]));
             var srcX = parseInt(parameters[1]);
@@ -856,15 +850,15 @@ Guacamole.Client = function(tunnel) {
                 srcL,
                 srcX,
                 srcY,
-                srcWidth, 
-                srcHeight, 
+                srcWidth,
+                srcHeight,
                 dstX,
-                dstY 
+                dstY
             );
 
         },
 
-        "cstroke": function(parameters) {
+        "cstroke": function (parameters) {
 
             var channelMask = parseInt(parameters[0]);
             var layer = getLayer(parseInt(parameters[1]));
@@ -882,7 +876,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "cursor": function(parameters) {
+        "cursor": function (parameters) {
 
             cursorHotspotX = parseInt(parameters[0]);
             cursorHotspotY = parseInt(parameters[1]);
@@ -900,10 +894,10 @@ Guacamole.Client = function(tunnel) {
                 srcL,
                 srcX,
                 srcY,
-                srcWidth, 
-                srcHeight, 
+                srcWidth,
+                srcHeight,
                 0,
-                0 
+                0
             );
 
             // Update cursor position (hotspot may have changed)
@@ -911,7 +905,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "curve": function(parameters) {
+        "curve": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var cp1x = parseInt(parameters[1]);
@@ -925,8 +919,8 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "dispose": function(parameters) {
-            
+        "dispose": function (parameters) {
+
             var layer_index = parseInt(parameters[0]);
 
             // If visible layer, remove from parent
@@ -951,7 +945,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "distort": function(parameters) {
+        "distort": function (parameters) {
 
             var layer_index = parseInt(parameters[0]);
             var a = parseFloat(parameters[1]);
@@ -967,19 +961,19 @@ Guacamole.Client = function(tunnel) {
                 // Get container element
                 var layer_container = getLayerContainer(layer_index).getElement();
 
-                // Set layer transform 
+                // Set layer transform
                 layer_container.transform(a, b, c, d, e, f);
 
-             }
+            }
 
         },
- 
-        "error": function(parameters) {
+
+        "error": function (parameters) {
             if (guac_client.onerror) guac_client.onerror(parameters[0]);
             guac_client.disconnect();
         },
 
-        "end": function(parameters) {
+        "end": function (parameters) {
 
             // Get blob
             var blob_index = parseInt(parameters[0]);
@@ -990,7 +984,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "file": function(parameters) {
+        "file": function (parameters) {
 
             var blob_index = parseInt(parameters[0]);
             var mimetype = parameters[1];
@@ -1005,7 +999,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "identity": function(parameters) {
+        "identity": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
@@ -1013,7 +1007,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "lfill": function(parameters) {
+        "lfill": function (parameters) {
 
             var channelMask = parseInt(parameters[0]);
             var layer = getLayer(parseInt(parameters[1]));
@@ -1025,7 +1019,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "line": function(parameters) {
+        "line": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var x = parseInt(parameters[1]);
@@ -1035,7 +1029,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "lstroke": function(parameters) {
+        "lstroke": function (parameters) {
 
             var channelMask = parseInt(parameters[0]);
             var layer = getLayer(parseInt(parameters[1]));
@@ -1047,8 +1041,8 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "move": function(parameters) {
-            
+        "move": function (parameters) {
+
             var layer_index = parseInt(parameters[0]);
             var parent_index = parseInt(parameters[1]);
             var x = parseInt(parameters[2]);
@@ -1075,16 +1069,16 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "name": function(parameters) {
+        "name": function (parameters) {
             if (guac_client.onname) guac_client.onname(parameters[0]);
         },
 
-        "nest": function(parameters) {
+        "nest": function (parameters) {
             var parser = getParser(parseInt(parameters[0]));
             parser.receive(parameters[1]);
         },
 
-        "png": function(parameters) {
+        "png": function (parameters) {
 
             var channelMask = parseInt(parameters[0]);
             var layer = getLayer(parseInt(parameters[1]));
@@ -1102,7 +1096,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "pop": function(parameters) {
+        "pop": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
@@ -1110,15 +1104,15 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "push": function(parameters) {
+        "push": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
             layer.push();
 
         },
- 
-        "rect": function(parameters) {
+
+        "rect": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var x = parseInt(parameters[1]);
@@ -1129,16 +1123,16 @@ Guacamole.Client = function(tunnel) {
             layer.rect(x, y, w, h);
 
         },
-        
-        "reset": function(parameters) {
+
+        "reset": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
 
             layer.reset();
 
         },
-        
-        "set": function(parameters) {
+
+        "set": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var name = parameters[1];
@@ -1151,8 +1145,8 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "shade": function(parameters) {
-            
+        "shade": function (parameters) {
+
             var layer_index = parseInt(parameters[0]);
             var a = parseInt(parameters[1]);
 
@@ -1163,13 +1157,13 @@ Guacamole.Client = function(tunnel) {
                 var layer_container = getLayerContainer(layer_index).getElement();
 
                 // Set layer opacity
-                layer_container.style.opacity = a/255.0;
+                layer_container.style.opacity = a / 255.0;
 
             }
 
         },
 
-        "size": function(parameters) {
+        "size": function (parameters) {
 
             var layer_index = parseInt(parameters[0]);
             var width = parseInt(parameters[1]);
@@ -1193,8 +1187,8 @@ Guacamole.Client = function(tunnel) {
                     display.style.height = displayHeight + "px";
 
                     // Update bounds size
-                    bounds.style.width = (displayWidth*displayScale) + "px";
-                    bounds.style.height = (displayHeight*displayScale) + "px";
+                    bounds.style.width = (displayWidth * displayScale) + "px";
+                    bounds.style.height = (displayHeight * displayScale) + "px";
 
                     // Call resize event handler if defined
                     if (guac_client.onresize)
@@ -1211,8 +1205,8 @@ Guacamole.Client = function(tunnel) {
             }
 
         },
-        
-        "start": function(parameters) {
+
+        "start": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var x = parseInt(parameters[1]);
@@ -1222,7 +1216,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "sync": function(parameters) {
+        "sync": function (parameters) {
 
             var timestamp = parameters[0];
 
@@ -1230,6 +1224,7 @@ Guacamole.Client = function(tunnel) {
             // UP TO THIS POINT IN TIME, send sync response.
 
             var layersToSync = 0;
+
             function syncLayer() {
 
                 layersToSync--;
@@ -1245,7 +1240,7 @@ Guacamole.Client = function(tunnel) {
             }
 
             // Count active, not-ready layers and install sync tracking hooks
-            for (var i=0; i<layers.length; i++) {
+            for (var i = 0; i < layers.length; i++) {
 
                 var layer = layers[i].getLayer();
                 if (layer) {
@@ -1278,7 +1273,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "transfer": function(parameters) {
+        "transfer": function (parameters) {
 
             var srcL = getLayer(parseInt(parameters[0]));
             var srcX = parseInt(parameters[1]);
@@ -1294,8 +1289,8 @@ Guacamole.Client = function(tunnel) {
                 srcL,
                 srcX,
                 srcY,
-                srcWidth, 
-                srcHeight, 
+                srcWidth,
+                srcHeight,
                 dstX,
                 dstY,
                 transferFunction
@@ -1303,7 +1298,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "transform": function(parameters) {
+        "transform": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var a = parseFloat(parameters[1]);
@@ -1317,7 +1312,7 @@ Guacamole.Client = function(tunnel) {
 
         },
 
-        "video": function(parameters) {
+        "video": function (parameters) {
 
             var layer = getLayer(parseInt(parameters[0]));
             var mimetype = parameters[1];
@@ -1332,7 +1327,7 @@ Guacamole.Client = function(tunnel) {
     };
 
 
-    tunnel.oninstruction = function(opcode, parameters) {
+    tunnel.oninstruction = function (opcode, parameters) {
 
         var handler = instructionHandlers[opcode];
         if (handler)
@@ -1344,11 +1339,11 @@ Guacamole.Client = function(tunnel) {
     /**
      * Sends a disconnect instruction to the server and closes the tunnel.
      */
-    this.disconnect = function() {
+    this.disconnect = function () {
 
         // Only attempt disconnection not disconnected.
         if (currentState != STATE_DISCONNECTED
-                && currentState != STATE_DISCONNECTING) {
+            && currentState != STATE_DISCONNECTING) {
 
             setState(STATE_DISCONNECTING);
 
@@ -1364,7 +1359,7 @@ Guacamole.Client = function(tunnel) {
         }
 
     };
-    
+
     /**
      * Connects the underlying tunnel of this Guacamole.Client, passing the
      * given arbitrary data to the tunnel during the connection process.
@@ -1372,7 +1367,7 @@ Guacamole.Client = function(tunnel) {
      * @param data Arbitrary connection data to be sent to the underlying
      *             tunnel during the connection process.
      */
-    this.connect = function(data) {
+    this.connect = function (data) {
 
         setState(STATE_CONNECTING);
 
@@ -1385,7 +1380,7 @@ Guacamole.Client = function(tunnel) {
         }
 
         // Ping every 5 seconds (ensure connection alive)
-        pingInterval = window.setInterval(function() {
+        pingInterval = window.setInterval(function () {
             tunnel.sendMessage("sync", currentTimestamp);
         }, 5000);
 
@@ -1400,21 +1395,21 @@ Guacamole.Client = function(tunnel) {
      * @param {Number} scale The scale to resize to, where 1.0 is normal
      *                       size (1:1 scale).
      */
-    this.scale = function(scale) {
+    this.scale = function (scale) {
 
         display.style.transform =
-        display.style.WebkitTransform =
-        display.style.MozTransform =
-        display.style.OTransform =
-        display.style.msTransform =
+            display.style.WebkitTransform =
+                display.style.MozTransform =
+                    display.style.OTransform =
+                        display.style.msTransform =
 
-            "scale(" + scale + "," + scale + ")";
+                            "scale(" + scale + "," + scale + ")";
 
         displayScale = scale;
 
         // Update bounds size
-        bounds.style.width = (displayWidth*displayScale) + "px";
-        bounds.style.height = (displayHeight*displayScale) + "px";
+        bounds.style.width = (displayWidth * displayScale) + "px";
+        bounds.style.height = (displayHeight * displayScale) + "px";
 
     };
 
@@ -1423,7 +1418,7 @@ Guacamole.Client = function(tunnel) {
      *
      * @return {Number} The width of the display.
      */
-    this.getWidth = function() {
+    this.getWidth = function () {
         return displayWidth;
     };
 
@@ -1432,7 +1427,7 @@ Guacamole.Client = function(tunnel) {
      *
      * @return {Number} The height of the display.
      */
-    this.getHeight = function() {
+    this.getHeight = function () {
         return displayHeight;
     };
 
@@ -1441,7 +1436,7 @@ Guacamole.Client = function(tunnel) {
      *
      * @return {Number} The scale of the display.
      */
-    this.getScale = function() {
+    this.getScale = function () {
         return displayScale;
     };
 
@@ -1452,8 +1447,8 @@ Guacamole.Client = function(tunnel) {
      * @return {HTMLCanvasElement} A new canvas element containing a copy of
      *                             the display.
      */
-    this.flatten = function() {
-       
+    this.flatten = function () {
+
         // Get source and destination canvases
         var source = getLayer(0).getCanvas();
         var canvas = document.createElement("canvas");
@@ -1465,10 +1460,10 @@ Guacamole.Client = function(tunnel) {
         // Copy image from source
         var context = canvas.getContext("2d");
         context.drawImage(source, 0, 0);
-        
+
         // Return new canvas copy
         return canvas;
-        
+
     };
 
 };
@@ -1477,16 +1472,16 @@ Guacamole.Client = function(tunnel) {
  * Simple container for Guacamole.Layer, allowing layers to be easily
  * repositioned and nested. This allows certain operations to be accelerated
  * through DOM manipulation, rather than raster operations.
- * 
+ *
  * @constructor
- * 
+ *
  * @param {Number} width The width of the Layer, in pixels. The canvas element
  *                       backing this Layer will be given this width.
- *                       
+ *
  * @param {Number} height The height of the Layer, in pixels. The canvas element
  *                        backing this Layer will be given this height.
  */
-Guacamole.Client.LayerContainer = function(width, height) {
+Guacamole.Client.LayerContainer = function (width, height) {
 
     /**
      * Reference to this LayerContainer.
@@ -1512,11 +1507,11 @@ Guacamole.Client.LayerContainer = function(width, height) {
     /**
      * Changes the size of this LayerContainer and the contained Layer to the
      * given width and height.
-     * 
+     *
      * @param {Number} width The new width to assign to this Layer.
      * @param {Number} height The new height to assign to this Layer.
      */
-    this.resize = function(width, height) {
+    this.resize = function (width, height) {
 
         // Resize layer
         layer.resize(width, height);
@@ -1526,13 +1521,13 @@ Guacamole.Client.LayerContainer = function(width, height) {
         div.style.height = height + "px";
 
     };
-  
+
     /**
      * Returns the Layer contained within this LayerContainer.
      * @returns {Guacamole.Layer} The Layer contained within this
      *                            LayerContainer.
      */
-    this.getLayer = function() {
+    this.getLayer = function () {
         return layer;
     };
 
@@ -1541,7 +1536,7 @@ Guacamole.Client.LayerContainer = function(width, height) {
      * @returns {Element} The element containing the Layer within this
      *                    LayerContainer.
      */
-    this.getElement = function() {
+    this.getElement = function () {
         return div;
     };
 
@@ -1560,32 +1555,32 @@ Guacamole.Client.LayerContainer = function(width, height) {
     /**
      * Moves the upper-left corner of this LayerContainer to the given X and Y
      * coordinate.
-     * 
+     *
      * @param {Number} x The X coordinate to move to.
      * @param {Number} y The Y coordinate to move to.
      */
-    this.translate = function(x, y) {
+    this.translate = function (x, y) {
 
         // Generate translation
         translate = "translate("
-                        + x + "px,"
-                        + y + "px)";
+            + x + "px,"
+            + y + "px)";
 
-        // Set layer transform 
+        // Set layer transform
         div.style.transform =
-        div.style.WebkitTransform =
-        div.style.MozTransform =
-        div.style.OTransform =
-        div.style.msTransform =
+            div.style.WebkitTransform =
+                div.style.MozTransform =
+                    div.style.OTransform =
+                        div.style.msTransform =
 
-            translate + " " + matrix;
+                            translate + " " + matrix;
 
     };
 
     /**
      * Applies the given affine transform (defined with six values from the
      * transform's matrix).
-     * 
+     *
      * @param {Number} a The first value in the affine transform's matrix.
      * @param {Number} b The second value in the affine transform's matrix.
      * @param {Number} c The third value in the affine transform's matrix.
@@ -1593,7 +1588,7 @@ Guacamole.Client.LayerContainer = function(width, height) {
      * @param {Number} e The fifth value in the affine transform's matrix.
      * @param {Number} f The sixth value in the affine transform's matrix.
      */
-    this.transform = function(a, b, c, d, e, f) {
+    this.transform = function (a, b, c, d, e, f) {
 
         // Generate matrix transformation
         matrix =
@@ -1602,17 +1597,17 @@ Guacamole.Client.LayerContainer = function(width, height) {
              * b d f
              * 0 0 1
              */
-    
+
             "matrix(" + a + "," + b + "," + c + "," + d + "," + e + "," + f + ")";
 
-        // Set layer transform 
+        // Set layer transform
         div.style.transform =
-        div.style.WebkitTransform =
-        div.style.MozTransform =
-        div.style.OTransform =
-        div.style.msTransform =
+            div.style.WebkitTransform =
+                div.style.MozTransform =
+                    div.style.OTransform =
+                        div.style.msTransform =
 
-            translate + " " + matrix;
+                            translate + " " + matrix;
 
     };
 
@@ -1636,9 +1631,9 @@ Guacamole.Client.DefaultTransferFunction = {
 
     /* SRC */
     0x3: function (src, dst) {
-        dst.red   = src.red;
+        dst.red = src.red;
         dst.green = src.green;
-        dst.blue  = src.blue;
+        dst.blue = src.blue;
         dst.alpha = src.alpha;
     },
 
@@ -1649,87 +1644,87 @@ Guacamole.Client.DefaultTransferFunction = {
 
     /* Invert SRC */
     0xC: function (src, dst) {
-        dst.red   = 0xFF & ~src.red;
+        dst.red = 0xFF & ~src.red;
         dst.green = 0xFF & ~src.green;
-        dst.blue  = 0xFF & ~src.blue;
-        dst.alpha =  src.alpha;
+        dst.blue = 0xFF & ~src.blue;
+        dst.alpha = src.alpha;
     },
-    
+
     /* Invert DEST */
     0xA: function (src, dst) {
-        dst.red   = 0xFF & ~dst.red;
+        dst.red = 0xFF & ~dst.red;
         dst.green = 0xFF & ~dst.green;
-        dst.blue  = 0xFF & ~dst.blue;
+        dst.blue = 0xFF & ~dst.blue;
     },
 
     /* AND */
     0x1: function (src, dst) {
-        dst.red   =  ( src.red   &  dst.red);
-        dst.green =  ( src.green &  dst.green);
-        dst.blue  =  ( src.blue  &  dst.blue);
+        dst.red = ( src.red & dst.red);
+        dst.green = ( src.green & dst.green);
+        dst.blue = ( src.blue & dst.blue);
     },
 
     /* NAND */
     0xE: function (src, dst) {
-        dst.red   = 0xFF & ~( src.red   &  dst.red);
-        dst.green = 0xFF & ~( src.green &  dst.green);
-        dst.blue  = 0xFF & ~( src.blue  &  dst.blue);
+        dst.red = 0xFF & ~( src.red & dst.red);
+        dst.green = 0xFF & ~( src.green & dst.green);
+        dst.blue = 0xFF & ~( src.blue & dst.blue);
     },
 
     /* OR */
     0x7: function (src, dst) {
-        dst.red   =  ( src.red   |  dst.red);
-        dst.green =  ( src.green |  dst.green);
-        dst.blue  =  ( src.blue  |  dst.blue);
+        dst.red = ( src.red | dst.red);
+        dst.green = ( src.green | dst.green);
+        dst.blue = ( src.blue | dst.blue);
     },
 
     /* NOR */
     0x8: function (src, dst) {
-        dst.red   = 0xFF & ~( src.red   |  dst.red);
-        dst.green = 0xFF & ~( src.green |  dst.green);
-        dst.blue  = 0xFF & ~( src.blue  |  dst.blue);
+        dst.red = 0xFF & ~( src.red | dst.red);
+        dst.green = 0xFF & ~( src.green | dst.green);
+        dst.blue = 0xFF & ~( src.blue | dst.blue);
     },
 
     /* XOR */
     0x6: function (src, dst) {
-        dst.red   =  ( src.red   ^  dst.red);
-        dst.green =  ( src.green ^  dst.green);
-        dst.blue  =  ( src.blue  ^  dst.blue);
+        dst.red = ( src.red ^ dst.red);
+        dst.green = ( src.green ^ dst.green);
+        dst.blue = ( src.blue ^ dst.blue);
     },
 
     /* XNOR */
     0x9: function (src, dst) {
-        dst.red   = 0xFF & ~( src.red   ^  dst.red);
-        dst.green = 0xFF & ~( src.green ^  dst.green);
-        dst.blue  = 0xFF & ~( src.blue  ^  dst.blue);
+        dst.red = 0xFF & ~( src.red ^ dst.red);
+        dst.green = 0xFF & ~( src.green ^ dst.green);
+        dst.blue = 0xFF & ~( src.blue ^ dst.blue);
     },
 
     /* AND inverted source */
     0x4: function (src, dst) {
-        dst.red   =  0xFF & (~src.red   &  dst.red);
-        dst.green =  0xFF & (~src.green &  dst.green);
-        dst.blue  =  0xFF & (~src.blue  &  dst.blue);
+        dst.red = 0xFF & (~src.red & dst.red);
+        dst.green = 0xFF & (~src.green & dst.green);
+        dst.blue = 0xFF & (~src.blue & dst.blue);
     },
 
     /* OR inverted source */
     0xD: function (src, dst) {
-        dst.red   =  0xFF & (~src.red   |  dst.red);
-        dst.green =  0xFF & (~src.green |  dst.green);
-        dst.blue  =  0xFF & (~src.blue  |  dst.blue);
+        dst.red = 0xFF & (~src.red | dst.red);
+        dst.green = 0xFF & (~src.green | dst.green);
+        dst.blue = 0xFF & (~src.blue | dst.blue);
     },
 
     /* AND inverted destination */
     0x2: function (src, dst) {
-        dst.red   =  0xFF & ( src.red   & ~dst.red);
-        dst.green =  0xFF & ( src.green & ~dst.green);
-        dst.blue  =  0xFF & ( src.blue  & ~dst.blue);
+        dst.red = 0xFF & ( src.red & ~dst.red);
+        dst.green = 0xFF & ( src.green & ~dst.green);
+        dst.blue = 0xFF & ( src.blue & ~dst.blue);
     },
 
     /* OR inverted destination */
     0xB: function (src, dst) {
-        dst.red   =  0xFF & ( src.red   | ~dst.red);
-        dst.green =  0xFF & ( src.green | ~dst.green);
-        dst.blue  =  0xFF & ( src.blue  | ~dst.blue);
+        dst.red = 0xFF & ( src.red | ~dst.red);
+        dst.green = 0xFF & ( src.green | ~dst.green);
+        dst.blue = 0xFF & ( src.blue | ~dst.blue);
     }
 
 };
