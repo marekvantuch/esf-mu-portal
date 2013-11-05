@@ -1,3 +1,10 @@
+<?php
+/**
+ * @file
+ * Rewrites the html to minimize html content of the aspi connection page.
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 <head>

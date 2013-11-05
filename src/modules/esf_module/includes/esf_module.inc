@@ -35,7 +35,15 @@ class Settings {
   public static function password() {
     global $user;
 
-    return password_field_decrypt(user_load($user->uid)->field_aspi_password[LANGUAGE_NONE][0]['value']);
+    $user_object = user_load($user->uid);
+
+    $field_aspi_password = $user_object->field_aspi_password[LANGUAGE_NONE][0];
+
+    $value = array_key_exists('value', $field_aspi_password) ?
+      $field_aspi_password['value'] :
+      $field_aspi_password['password_field'];
+
+    return password_field_decrypt($value);
   }
 }
 

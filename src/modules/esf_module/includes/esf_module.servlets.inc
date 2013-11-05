@@ -92,7 +92,12 @@ abstract class Servlet {
 
       default:
         $e = new ServletException($this);
-        watchdog('esf_module', 'Servlet call failed with: %e', array('%e' => (string) $e), WATCHDOG_ERROR);
+        watchdog('esf_module', 'Servlet call failed with: %e url: %url',
+          array(
+            '%e' => (string) $e,
+            '%url' => $this->url(),
+          ),
+          WATCHDOG_ERROR);
         throw $e;
     }
   }

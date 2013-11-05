@@ -1,3 +1,11 @@
+<?php
+/**
+ * @file
+ * Main content for the Guacamole layout. This had been ported from the
+ * Guacamole project.
+ */
+?>
+
 <!-- Display -->
 <div class="displayOuter">
   <div class="displayMiddle">
@@ -14,6 +22,6 @@
 
 <!-- Images which should be preloaded -->
 <div id="preload">
-  <img src="<?=drupal_get_path('theme', 'omega_esf')?>/images/action-icons/guac-close.png"/>
-  <img src="<?=drupal_get_path('theme', 'omega_esf')?>/images/progress.png"/>
+  <img src="<?php echo drupal_get_path('theme', 'omega_esf')?>/images/action-icons/guac-close.png"/>
+  <img src="<?php echo drupal_get_path('theme', 'omega_esf')?>/images/progress.png"/>
 </div>

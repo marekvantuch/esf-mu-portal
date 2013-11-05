@@ -1,5 +1,5 @@
 name = Omega ESF
-description = Please provide a description for your theme.
+description = Template for the ESF Portal
 base theme = omega
 screenshot = screenshot.png
 engine = phptemplate

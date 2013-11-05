@@ -7,7 +7,7 @@ function esf_module_variable_info($options) {
 
   $variables[ESF_MODULE_GUACAMOLE_SERVER_DOMAIN] = array(
     'type' => 'string',
-    'title' => t('Guacamole TomCat JAVA servlet domain'),
+    'title' => t('Guacamole TomCat Servlet domain'),
     'description' => t('Domain URL of the server running the remote desktop Guacamole software. Must not contain trailing slash.'),
     'default' => 'localhost',
     'localize' => FALSE,
@@ -16,7 +16,7 @@ function esf_module_variable_info($options) {
 
   $variables[ESF_MODULE_GUACAMOLE_SERVER_PORT] = array(
     'type' => 'number',
-    'title' => t('Guacamole TomCat servlet port'),
+    'title' => t('Guacamole Servlet port'),
     'description' => t('Port of the server running the remote desktop Guacamole
       software.'),
     'default' => 0,
@@ -26,10 +26,10 @@ function esf_module_variable_info($options) {
 
   $variables[ESF_MODULE_GUACAMOLE_SERVER_PATH] = array(
     'type' => 'string',
-    'title' => t('Guacamole TomCat servlet path'),
+    'title' => t('Guacamole Servlet path'),
     'description' => t('Path on the server running the remote desktop Guacamole
-      software. Must start with a slash. For example \'/\''),
-    'default' => '/',
+      software. Must start and end with a slash (defaults to \'/guacamole/\').'),
+    'default' => '/guacamole/',
     'localize' => FALSE,
     'group' => 'esf',
   );
@@ -39,7 +39,7 @@ function esf_module_variable_info($options) {
     'title' => t('Guacamole home'),
     'description' => t('Location of the guacamole settings file, typically
       stored in the GUACAMOLE_HOME system environment property. Trailing slash
-      must be included. Default is\'/srv/guacamole/\''),
+      must be included (defaults to \'/srv/guacamole/\').'),
     'default' => '/srv/guacamole/',
     'localize' => FALSE,
     'group' => 'esf',

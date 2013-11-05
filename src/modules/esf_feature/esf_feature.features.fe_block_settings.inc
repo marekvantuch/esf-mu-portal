@@ -122,8 +122,8 @@ function esf_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'omega_esf' => array(
-        'region' => 'sidebar',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'omega_esf',
         'weight' => -9,
       ),
@@ -222,8 +222,8 @@ function esf_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'omega_esf' => array(
-        'region' => 'sidebar',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'omega_esf',
         'weight' => 0,
       ),

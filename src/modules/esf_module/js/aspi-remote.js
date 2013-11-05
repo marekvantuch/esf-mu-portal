@@ -68,15 +68,27 @@
         getTunnel: function () {
             // If WebSocket available, try to use it.
             if (window.WebSocket) {
-                var url = Drupal.settings.esf.server_url;
-                return new Guacamole.ChainedTunnel(
+                var url;
+
+                if (Drupal.settings.esf.server_domain == 'localhost') {
+                    var port = Drupal.settings.esf.server_port;
+                    var path = Drupal.settings.esf.server_path;
+                    url = window.location.origin +
+                        (port != null && port != 0 ? ':' . port : '') +
+                        path;
+                } else {
+                    url = Drupal.settings.esf.server_url;
+                }
+                //return new Guacamole.ChainedTunnel(
                     //new Guacamole.WebSocketTunnel(url.replace("http", "ws") + "websocket-tunnel"),
-                    new Guacamole.HTTPTunnel(url + "tunnel")
-                );
+                    //new Guacamole.HTTPTunnel(url + "tunnel")
+                //);
+
+                return new Guacamole.HTTPTunnel(url + "tunnel");
             }
 
             // If no WebSocket, then use HTTP.
-            return new Guacamole.HTTPTunnel("tunnel");
+            return new Guacamole.HTTPTunnel(url + "tunnel");
         },
 
         /**
