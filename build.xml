@@ -10,12 +10,12 @@
                                    features-revert" />
 
     <target name="copy-modules">
-        <copy todir="${drupal.dir}/sites/default/modules" overwrite="true" >
+        <copy todir="${project.dir}/sites/default/modules" overwrite="true" >
             <fileset dir="${source.dir}/src/modules">
                 <include name="**" />
             </fileset>
         </copy>
-        <copy todir="${drupal.dir}/sites/all/themes" overwrite="true" >
+        <copy todir="${project.dir}/sites/default/themes" overwrite="true" >
             <fileset dir="${source.dir}/src/themes">
                 <include name="**" />
             </fileset>
@@ -24,13 +24,13 @@
 
     <target name="modules-enable">
         <drush command="pm-enable" assume="yes">
-            <param>${drupal.modules} ${drupal.features}</param>
+            <param>${project.modules} ${project.features}</param>
         </drush>
     </target>
 
     <target name="features-revert">
         <drush command="features-revert" assume="yes">
-            <param>${drupal.features}</param>
+            <param>${project.features}</param>
         </drush>
     </target>
 
@@ -56,7 +56,7 @@
 
     <target name="init-drush">
         <taskdef name="drush" classname="phing.DrushTask" />
-        <property name="drush.root" value="${drupal.dir}"/>
+        <property name="drush.root" value="${project.dir}"/>
     </target>
 
 </project>
