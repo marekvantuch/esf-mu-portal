@@ -32,6 +32,8 @@ Source structure
 - */src/themes* - Drupal theme for the project 
 - *build.xml* - Phing build file
 - *pom.xml* - Maven build file
+
+***
  
 Whare next?
 -----------
