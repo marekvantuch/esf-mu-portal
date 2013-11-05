@@ -4,7 +4,7 @@
  * Implements hook_preprocess_html().
  */
 function omega_esf_preprocess_html(&$variables) {
-  
+
   if (arg(0) == 'aspi') {
     // key-words for Guacamole
     $page_keywords = array(
@@ -20,7 +20,7 @@ function omega_esf_preprocess_html(&$variables) {
     if (isset($variables['page']['page_bottom']['admin_menu'])) {
       unset($variables['page']['page_bottom']['admin_menu']);
     }
-    
+
     drupal_add_html_head($page_keywords, 'page_keywords');
   }
 }
