@@ -26,32 +26,46 @@ To connect to the third-party servers (ASPI), Guacamole (http://guac-dev.org/) i
 Source structure
 ----------------------
 
-- /doc - documentation of the project
-- /src/main - java application sources
-- /src/modules - Drupal modules and features modules
-- /src/themes - Drupal theme for the project 
-- build.xml - Phing build file
-- pom.xml - Maven build file
+- */doc* - documentation of the project
+- */src/main* - java application sources
+- */src/modules* - Drupal modules and features modules
+- */src/themes* - Drupal theme for the project 
+- *build.xml* - Phing build file
+- *pom.xml* - Maven build file
 
 ***
 
 Roadmap
 -------
 
-Version 0.1 *(May 2013)*
+Version 0.1
 
 - [x] First functional version, ability to log in into remote machine from web using custom HTML5 client. 
 - [x] Only running locally from one Virtual Machine to another. 
 
-Version 0.2 *(June 2013)*
+Version 0.2
 
 - [x] Drupal integration module is created.
 - [x] Remote client server running on a standalone server with designated port so that multiple computers can connect to it.
 
-Version 0.3 *(July 2013)*
+Version 0.3
 
 - [x] Correct privilegies settings for the drupal module so that it can be integrated into the existing website
 - [x] Styling of the module to align with the page which it integrates with.
+
+Version 0.4
+
+- [x] Migration of client application from Guacamole to Drupal module.
+- [x] Connection between the various parts of the system are functional.
+
+Version 0.5
+
+- [ ] Translations of UI to czech language.
+- [ ] Automated deployment scripts
+
+Version 0.6
+
+- [ ] Ability to execute commands on the Remote Connection client page from Drupal site.
 
 ***
 
@@ -62,7 +76,7 @@ I have ever really tested this working on linux, but there should theoretically 
 I am not going to write the installation tutorial for it though, so if you'd like to try it, please go ahead. Steps 
 should be fairly similar.
 
-Requirements: Maven (http://maven.apache.org/), Tomcat (http://tomcat.apache.org), JAVA, JAVA JDK
+Requirements: Maven (http://maven.apache.org/), Tomcat (http://tomcat.apache.org), JAVA (https://java.com), JAVA JDK, Phing (http://www.phing.info/)
 
 To verify that your environment is ready for the installation, please check that following commands return valid results.
 Also make sure you have the manager webapp contained in your tomcat installation.
