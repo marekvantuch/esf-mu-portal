@@ -73,8 +73,8 @@
                 if (Drupal.settings.esf.server_domain == 'localhost') {
                     var port = Drupal.settings.esf.server_port;
                     var path = Drupal.settings.esf.server_path;
-                    url = window.location.origin +
-                        (port != null && port != 0 ? ':' . port : '') +
+                    url = "http://" + window.location.hostname +
+                        (port != null && port != 0 ? ':' + port : '') +
                         path;
                 } else {
                     url = Drupal.settings.esf.server_url;
