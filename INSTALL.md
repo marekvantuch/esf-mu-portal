@@ -137,8 +137,13 @@ the libraries
       		RDP ....... yes
 	```
 1. if you downloaded all the libraries, you should see no *.... no*
-2. make and install - guacd will now automatically start as a service
+2. make and install
     ```
     $ make
     $ make install
     ```
+
+3. enable service autostart
+	```
+	sudo chkconfig guacd on
+	```
