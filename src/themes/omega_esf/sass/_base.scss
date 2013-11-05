@@ -12,3 +12,29 @@
  * before adding any more specific customisations you ensure that as any new
  * features are added they will be correctly styled without any extra work.
  ******************************************************************************/
+$green: #9FEE00;
+
+.l-header {
+  background: $green;
+}
+
+.l-navigation {
+  background: lighten($green, 30%);
+}
+
+.l-main {
+  background: lighten($green, 40%);
+}
+
+.l-footer {
+  background: $green;
+}
+
+.site-name {
+  color: darken($green, 30%);
+}
+
+a {
+  color: darken($green, 30%);
+  text-decoration: none;
+}

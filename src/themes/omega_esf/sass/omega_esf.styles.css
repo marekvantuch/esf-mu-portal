@@ -39,27 +39,21 @@
  * before adding any more specific customisations you ensure that as any new
  * features are added they will be correctly styled without any extra work.
  ******************************************************************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000317}}
 .l-header {
   background: #9fee00; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000321}}
 .l-navigation {
   background: #d7ff88; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000325}}
 .l-main {
   background: #e8ffbb; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000329}}
 .l-footer {
   background: #9fee00; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000333}}
 .site-name {
   color: #395500; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/_base\.scss}line{font-family:\0000337}}
 a {
   color: #395500;
   text-decoration: none; }

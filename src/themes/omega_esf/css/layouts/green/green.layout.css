@@ -2,137 +2,91 @@
  * _layout.scss
  *
  ******************************************************************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000328}}
-.l-header,
-.l-main,
-.l-footer {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000325}}
+.l-page {
   *zoom: 1;
-  max-width: 1190px;
-  _width: 1190px;
   padding-left: 5px;
   padding-right: 5px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/\.rvm\/gems\/ruby-1\.9\.3-p448\@omega\.omega_esf\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000338}}
-  .l-header:after,
-  .l-main:after,
-  .l-footer:after {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/\.rvm\/gems\/ruby-2\.0\.0-p247\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000338}}
+  .l-page:after {
     content: "";
     display: table;
     clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000330}}
+  .l-page footer, .l-page header {
+    clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000332}}
+  .l-page .l-region--postscript {
+    display: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000342}}
 .l-region--highlighted,
-.l-region--help,
-.l-region--sidebar-first,
-.l-region--sidebar-second {
+.l-region--sidebar,
+.l-region--postscript,
+.l-region--header {
   margin-bottom: 20px; }
 
 @media (min-width: 44em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000344}}
-  .l-header,
-  .l-main,
-  .l-footer {
-    max-width: 1190px; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000349}}
-  .l-branding {
-    width: 32.20339%;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000353}}
+  .l-navigation {
+    width: 23.72881%;
     float: left;
     margin-right: 1.69492%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000352}}
-  .l-region--header {
-    width: 66.10169%;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000357}}
+  .l-main {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 74.57627%;
     float: right;
     margin-right: 0; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000355}}
-  .l-region--navigation {
-    clear: both; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000362}}
-  .sidebar-first .l-content,
-  .sidebar-second .l-content,
-  .two-sidebars .l-content {
-    width: 66.10169%;
-    float: left;
-    margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000366}}
-  .sidebar-first .l-region--sidebar-first,
-  .sidebar-first .l-region--sidebar-second,
-  .sidebar-second .l-region--sidebar-first,
-  .sidebar-second .l-region--sidebar-second,
-  .two-sidebars .l-region--sidebar-first,
-  .two-sidebars .l-region--sidebar-second {
-    width: 32.20339%;
-    float: right;
-    margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000369}}
-  .sidebar-first .l-region--sidebar-second,
-  .sidebar-second .l-region--sidebar-second,
-  .two-sidebars .l-region--sidebar-second {
-    clear: right; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/\.rvm\/gems\/ruby-2\.0\.0-p247\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000338}}
+    .l-main:after {
+      content: "";
+      display: table;
+      clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000362}}
+    .l-main .l-content {
+      clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000367}}
+    .l-main .l-region--sidebar {
+      display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000372}}
+    .l-main .l-region--postscript {
+      clear: both;
+      display: block; } }
 @media (min-width: 70em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000378}}
-  .l-header,
-  .l-main,
-  .l-footer {
-    max-width: 1190px; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000383}}
-  .l-branding {
-    width: 36.70886%;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000385}}
+  .l-navigation {
+    width: 24.05063%;
     float: left;
     margin-right: 1.26582%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000386}}
-  .l-region--header {
-    width: 62.02532%;
-    float: right;
-    margin-right: 0; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000391}}
-  .sidebar-first .l-content {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000389}}
+  .l-main {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: auto;
+    margin-right: auto;
     width: 74.68354%;
     float: right;
     margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000394}}
-  .sidebar-first .l-region--sidebar-first {
-    width: 24.05063%;
-    float: left;
-    margin-right: 1.26582%; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000399}}
-  .sidebar-second .l-content {
-    width: 74.68354%;
-    float: left;
-    margin-right: 1.26582%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003102}}
-  .sidebar-second .l-region--sidebar-second {
-    width: 24.05063%;
-    float: right;
-    margin-right: 0;
-    clear: none; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003109}}
-  .two-sidebars .l-content {
-    width: 49.36709%;
-    float: left;
-    margin-right: 1.26582%;
-    margin-left: 25.31646%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003114}}
-  .two-sidebars .l-region--sidebar-first,
-  .two-sidebars .l-region--sidebar-second {
-    width: 24.05063%;
-    float: left;
-    margin-right: 1.26582%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003117}}
-  .two-sidebars .l-region--sidebar-first {
-    margin-left: -75.94937%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/Repositories\/ESF-MU-Portal\/src\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003120}}
-  .two-sidebars .l-region--sidebar-second {
-    float: right;
-    margin-right: 0;
-    clear: none; } }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/marek\/\.rvm\/gems\/ruby-2\.0\.0-p247\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000338}}
+    .l-main:after {
+      content: "";
+      display: table;
+      clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000394}}
+    .l-main .l-content {
+      clear: both; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\0000399}}
+    .l-main .l-region--sidebar {
+      display: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/www\/esf\/sites\/all\/themes\/omega_esf\/sass\/layouts\/green\/green\.layout\.scss}line{font-family:\00003104}}
+    .l-main .l-region--postscript {
+      clear: both; } }
