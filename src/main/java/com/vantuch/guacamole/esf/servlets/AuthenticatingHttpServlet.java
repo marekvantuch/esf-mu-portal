@@ -17,8 +17,8 @@ package com.vantuch.guacamole.esf.servlets;
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import com.vantuch.guacamole.esf.DrupalAuthenticationProvider;
 import com.vantuch.guacamole.esf.event.SessionListenerCollection;
-import com.vantuch.guacamole.esf.properties.BasicGuacamoleProperties;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
@@ -40,7 +40,6 @@ import org.glyptodon.guacamole.net.event.AuthenticationFailureEvent;
 import org.glyptodon.guacamole.net.event.AuthenticationSuccessEvent;
 import org.glyptodon.guacamole.net.event.listener.AuthenticationFailureListener;
 import org.glyptodon.guacamole.net.event.listener.AuthenticationSuccessListener;
-import org.glyptodon.guacamole.properties.GuacamoleProperties;
 
 /**
  * Abstract servlet which provides an authenticatedService() function that is
@@ -78,13 +77,7 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
   public void init() throws ServletException {
 
     // Get auth provider instance
-    try {
-      authProvider = GuacamoleProperties.getRequiredProperty(BasicGuacamoleProperties.AUTH_PROVIDER);
-    } catch (GuacamoleException e) {
-      logger.log(Level.SEVERE, "Error getting authentication provider from properties.", e);
-      throw new ServletException(e);
-    }
-
+    authProvider = new DrupalAuthenticationProvider();
   }
 
   /**
@@ -302,10 +295,6 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
     } catch (GuacamoleResourceNotFoundException e) {
       logger.log(Level.INFO, "Resource not found: ", e);
       sendError(response, HttpServletResponse.SC_NOT_FOUND,
-              e.getMessage());
-    } catch (GuacamoleClientException e) {
-      logger.log(Level.WARNING, "Error in client request: {0}", e);
-      sendError(response, HttpServletResponse.SC_BAD_REQUEST,
               e.getMessage());
     } catch (GuacamoleException e) {
       logger.log(Level.SEVERE, "Internal server error.", e);
