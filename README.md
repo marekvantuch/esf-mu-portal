@@ -1,33 +1,39 @@
 ESF MU Portal
 ==============
 
-A project to implement a portal for ESF MU
+This project is a combination of several diploma thesis on **Masaryk University** (http://www.muni.cz/) in 
+Brno, Czech Republic. It's aim is to create an information portal for students of
+*Faculty of Economics and Administration*, providing them with valuable information and references. 
+Whole website had to be reinvented and redesigned and will provide connection to an law information system
+ASPI (http://www.systemaspi.cz/).
 
-Technologies
-------------
-Core functionality will be covered by implementing Guacamole (http://guac-dev.org/). 
-It is an open-source library designed to connect to remote desktop from any HTML5 compatible web browser
-through a JAVA based server running on Apache TomCat. This highly lowers the requirements for client computer
-and software, eliminating any required instalation steps for end users and providing seamless connection to 
-the remote machine. 
+**Drupal Website** (PHP) <=> **Guacamole Servlets** (JAVA) <=> **Guacamole Proxy** (C) <=> **ASPI** (RDP)
 
-Overview
+**Apache** <=> **Apache Tomcat** <=> **Linux Service** <=> **ASPI**
 
-Client -> Tunnel -> Remote Desktop
+***
 
-Client
+Drupal Website
+---------------------
 
-HTML5 Client (Browser) implemented as a Drupal module on the site (independend on client operating system, 
-possibly usable on Android and IOS too).
+Whole site is build on Drupal CMS, using as much of it's features as possible. To make the whole process easier, Features module (https://drupal.org/project/features) is used to export configuration and content and then keep it in source control. This way, all the development can happen on a development environment and then be migrated into production.
 
-Tunnel
+Remote desktop connection
+-------------------------------------
 
-JAVA based tunnel application running on Linux which provides the tunneling functionality for the HTML5 client. 
-It runs as a service on Apache TomCat server.
+To connect to the third-party servers (ASPI), Guacamole (http://guac-dev.org/) is used. Being an open-source library designed to connect to remote desktop from any HTML5 compatible web browser, it allows us to minimize the requirements for the client environment and almost eliminates any client-side installation steps. It comes with it's own client, which was ported into a Drupal module. To enable it work this way, Guacamole's core JavaScript libraries had to be modified to support CORS (http://www.w3.org/TR/cors/).
 
-Remote Desktop
+Source structure
+----------------------
 
-Any kind of VNC or RDP protocol based server, which provides the end point we are connecting to.
+- /doc - documentation of the project
+- /src/main - java application sources
+- /src/modules - Drupal modules and features modules
+- /src/themes - Drupal theme for the project 
+- build.xml - Phing build file
+- pom.xml - Maven build file
+
+***
 
 Roadmap
 -------
@@ -46,6 +52,8 @@ Version 0.3 *(July 2013)*
 
 - [x] Correct privilegies settings for the drupal module so that it can be integrated into the existing website
 - [x] Styling of the module to align with the page which it integrates with.
+
+***
 
 Instalation
 -----------
