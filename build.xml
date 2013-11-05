@@ -4,10 +4,13 @@
          description="Build file for Drupal deployment of ESF Portal project.">
 
 
+    <target name="guacamole" depends="init, guacamole-properties"/>
+
     <target name="deploy" depends="init,
                                    copy-modules,
                                    modules-enable,
-                                   features-revert" />
+                                   features-revert,
+                                   guacamole-properties" />
 
     <target name="copy-modules">
         <copy todir="${project.dir}/sites/default/modules" overwrite="true" >
@@ -34,6 +37,56 @@
         </drush>
     </target>
 
+    <!--
+        Loads the variables from drupal installation and copies the
+        default file into the proper location
+    -->
+    <target name="guacamole-properties">
+        <drush command="variable-get" returnProperty="guacamole.home">
+            <param>guacamole_home</param>
+            <option name="format">string</option>
+            <option name="exact" />
+        </drush>
+
+        <drush command="variable-get" returnProperty="guacamole.properties.file">
+            <param>guacamole_properties_file</param>
+            <option name="format">string</option>
+            <option name="exact" />
+        </drush>
+
+        <available file="${guacamole.home}/${guacamole.properties.file}" type="file"
+                   property="guacamole.properties.file.exists" />
+
+        <if>
+            <equals arg1="${guacamole.properties.file.exists}" arg2="true" />
+            <else>
+                <mkdir dir="${guacamole.home}" />
+                <copy file="default.guacamole.properties" tofile="${guacamole.home}/${guacamole.properties.file}"/>
+
+                <echo level="info">File ${guacamole.properties.file} was created in ${guacamole.home}.</echo>
+                <echo level="warning">Make sure to update it properly via the Drupal configuration site.</echo>
+            </else>
+        </if>
+
+    </target>
+
+    <target name="codesniffer" depends="init">
+        <drush command="pm-download" assume="yes">
+            <param>coder</param>
+        </drush>
+
+        <phpcodesniffer standard="${project.dir}/sites/all/modules/coder/coder_sniffer/Drupal"
+                        format="summary"
+                        docGenerator="HTML"
+                        docFile="doc/sniffer.html"
+                        allowedFileExtensions="php inc module install">
+            <fileset dir="src/">
+                <include name="modules/esf_module/**" />
+                <include name="themes/esf_theme/**" />
+            </fileset>
+        </phpcodesniffer>
+    </target>
+
     <target name="init" depends="init-properties, init-drush" />
 
     <target name="init-properties">
@@ -44,10 +97,10 @@
         <available file="build.properties" type="file" property="properties.file.exists"/>
 
         <if>
-            <equals arg1="${properties.file.exists}" arg2="false" />
-            <then>
+            <equals arg1="${properties.file.exists}" arg2="true" />
+            <else>
                 <copy file="default.build.properties" tofile="build.properties" />
-            </then>
+            </else>
         </if>
 
         <property file="build.properties" override="false"/>
