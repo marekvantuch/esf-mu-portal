@@ -8,9 +8,20 @@ Phing (http://www.phing.info/), Drupal(https://drupal.org)
 To verify that your environment is ready for the installation, please check that following commands return valid results.
 Also make sure you have the manager webapp contained in your tomcat installation.
 
-Maven ```$ mvn --version``` 
-JAVA ```$ java -version``` version should be at least 1.5.x
-JAVA JDK ```$ echo $JAVA_HOME``` should display the location of the JAVA SDK
+* Maven 
+	```
+	$ mvn --version
+	``` 
+
+* JAVA (version should be at least 1.5.x)
+    ```
+    $ java -version
+    ``` 
+
+* JAVA JDK (should display the location of the JAVA SDK)
+    ```
+    $ echo $JAVA_HOME
+    ``` 
 
 JAVA Servlet application
 ------------------------
@@ -18,9 +29,21 @@ JAVA Servlet application
 **Build**
 
 1. Navigate into a folder where you'd like to install this piece of software
-2. Clone this repository ```$ git clone git@github.com:kanei/ESF-MU-Portal.git```
-3. Enter the cloned repository ```$ cd ESF-MU-Portal```
-4. Build the application ```$ mvn clean install```
+2. Clone this repository 
+    ```
+    $ git clone git@github.com:kanei/ESF-MU-Portal.git
+    ```
+
+3. Enter the cloned repository 
+    ```
+    $ cd ESF-MU-Portal
+    ```
+
+4. Build the application 
+    ```
+    $ mvn clean install
+    ```
+
 5. Check the ```target``` folder and make sure it contains the built application (war)
 
 **Deploy**
@@ -32,9 +55,9 @@ Edit file ```%TOMCAT_PATH%/conf/tomcat-users.xml``` and setup your admin user.
 ```xml 
 <?xml version='1.0' encoding='utf-8'?>
 <tomcat-users>
-  <role rolename="manager"/>
-  <role rolename="admin"/>
-  <user username="admin" password="password" roles="admin,manager"/>
+	<role rolename="manager"/>
+	<role rolename="admin"/>
+	<user username="admin" password="password" roles="admin,manager"/>
 </tomcat-users>
 ```
 
@@ -68,9 +91,17 @@ Drupal modules and features
 
 First of all, we need to have a running drupal instance, please refer to their documentation. 
 
-1. copy the *build.properties.default* file into *build.properties* 
+1. prepare the properties file
+    ```
+    $ cp build.properties.default build.properties
+    ```
+
 2. fill in the correct location of the drupal installation
-3. execute command ```$ phing``` and it will take care of everything else
+3. build the project with Phing
+    ```
+    $ phing
+    ```
+
 4. fix any eventual issues (usualy there is a problem or two with permissioning)
  
 Script will automatically copy a guacamole.properties file into '''/srv/guacamole/guacamole.properties'''. 
