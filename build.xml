@@ -71,6 +71,7 @@
     </target>
 
     <target name="fix-permissions">
+        <echo>${apache.user} ${apache.user.group}</echo>
         <chown user="${apache.user}" group="${apache.user.group}" verbose="true">
             <fileset dir="${project.dir}/sites/default/">
                 <include name="modules/**" />
