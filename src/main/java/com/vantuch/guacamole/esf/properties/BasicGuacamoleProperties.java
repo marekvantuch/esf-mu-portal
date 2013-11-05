@@ -34,17 +34,6 @@ public class BasicGuacamoleProperties {
     private BasicGuacamoleProperties() {}
 
     /**
-     * The authentication provider to user when retrieving the authorized
-     * configurations of a user.
-     */
-    public static final AuthenticationProviderProperty AUTH_PROVIDER = new AuthenticationProviderProperty() {
-
-        @Override
-        public String getName() { return "auth-provider"; }
-
-    };
-
-    /**
      * The directory to search for authentication provider classes.
      */
     public static final FileGuacamoleProperty LIB_DIRECTORY = new FileGuacamoleProperty() {
