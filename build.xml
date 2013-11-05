@@ -1,23 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ESF Portal" default="deploy">
-    <property file="build.properties" />
-    <taskdef name="drush" classname="phing.DrushTask" />
+<project name="ESF Portal" default="deploy"
+         description="Build file for Drupal deployment of ESF Portal project.">
 
-    <target name="deploy">
-        <copy todir="${drupal.home}/sites/default/modules" overwrite="true" >
-            <fileset dir="src/modules">
+
+    <target name="deploy" depends="init,
+                                   copy-modules,
+                                   modules-enable,
+                                   features-revert" />
+
+    <target name="copy-modules">
+        <copy todir="${drupal.dir}/sites/default/modules" overwrite="true" >
+            <fileset dir="${source.dir}/src/modules">
                 <include name="**" />
             </fileset>
         </copy>
-        <copy todir="${drupal.home}/sites/all/themes" overwrite="true" >
-            <fileset dir="src/themes">
-                <include name="omega_esf" />
+        <copy todir="${drupal.dir}/sites/all/themes" overwrite="true" >
+            <fileset dir="${source.dir}/src/themes">
+                <include name="**" />
             </fileset>
         </copy>
+    </target>
 
+    <target name="modules-enable">
+        <drush command="pm-enable" assume="yes">
+            <param>${drupal.modules} ${drupal.features}</param>
+        </drush>
+    </target>
+
+    <target name="features-revert">
         <drush command="features-revert" assume="yes">
             <param>${drupal.features}</param>
         </drush>
     </target>
+
+    <target name="init" depends="init-properties, init-drush" />
+
+    <target name="init-properties">
+        <!--
+        Check if properties file exists, if no, copy it over from the
+        default.build.properties
+        -->
+        <available file="build.properties" type="file" property="properties.file.exists"/>
+
+        <if>
+            <equals arg1="${properties.file.exists}" arg2="false" />
+            <then>
+                <copy file="default.build.properties" tofile="build.properties" />
+            </then>
+        </if>
+
+        <property file="build.properties" override="false"/>
+        <property name="source.dir" value="${phing.dir}" />
+    </target>
+
+    <target name="init-drush">
+        <taskdef name="drush" classname="phing.DrushTask" />
+        <property name="drush.root" value="${drupal.dir}"/>
+    </target>
+
 </project>
