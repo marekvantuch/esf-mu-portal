@@ -71,16 +71,16 @@
     </target>
 
     <target name="codesniffer" depends="init">
-
-        <phpcodesniffer standard="Drupal"
+        <phpcodesniffer standard="$Drupal"
                         format="summary"
                         docGenerator="HTML"
-                        docFile="doc/sniffer.html"
+                        docFile="doc/code_standards.html"
                         allowedFileExtensions="php inc module install">
             <fileset dir="src/">
                 <include name="modules/esf_module/**" />
                 <include name="themes/esf_theme/**" />
             </fileset>
+            <formatter outfile="target/" />
         </phpcodesniffer>
     </target>
 
