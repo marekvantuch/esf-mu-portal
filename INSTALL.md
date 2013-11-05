@@ -70,7 +70,7 @@ First of all, we need to have a running drupal instance, please refer to their d
 
 1. copy the *build.properties.default* file into *build.properties* 
 2. fill in the correct location of the drupal installation
-3. execute command ```phing``` and it will take care of everything else
+3. execute command ```$ phing``` and it will take care of everything else
 4. fix any eventual issues (usualy there is a problem or two with permissioning)
  
 Script will automatically copy a guacamole.properties file into '''/srv/guacamole/guacamole.properties'''. 
