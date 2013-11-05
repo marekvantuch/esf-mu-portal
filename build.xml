@@ -71,11 +71,8 @@
     </target>
 
     <target name="codesniffer" depends="init">
-        <drush command="pm-download" assume="yes">
-            <param>coder</param>
-        </drush>
 
-        <phpcodesniffer standard="${project.dir}/sites/all/modules/coder/coder_sniffer/Drupal"
+        <phpcodesniffer standard="Drupal"
                         format="summary"
                         docGenerator="HTML"
                         docFile="doc/sniffer.html"
