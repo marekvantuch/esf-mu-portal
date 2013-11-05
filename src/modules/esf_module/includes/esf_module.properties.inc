@@ -194,7 +194,7 @@ class Properties {
       '#title' => t($property->getTitle()),
       '#description' => t($property->getDescription()),
       '#default_value' => $this->get($property->getId()),
-      '#element_validate' => array(array($property, 'validate')),
+      '#element_validate' => array(get_class($property) . '::validate'),
       '#required' => TRUE,
       '#disabled' => !$this->propertiesFileExists,
     ), $property->getExtraParameters());
