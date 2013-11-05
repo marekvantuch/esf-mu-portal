@@ -10,7 +10,8 @@
                                    copy-modules,
                                    modules-enable,
                                    features-revert,
-                                   guacamole-properties" />
+                                   guacamole-properties,
+                                   fix-permissions" />
 
     <target name="copy-modules">
         <copy todir="${project.dir}/sites/default/modules" overwrite="true" >
@@ -67,7 +68,29 @@
                 <echo level="warning">Make sure to update it properly via the Drupal configuration site.</echo>
             </else>
         </if>
+    </target>
 
+    <target name="fix-permissions">
+        <chown user="${apache.user}" group="${apache.user.group}" verbose="true">
+            <fileset dir="${project.dir}/sites/default/">
+                <include name="modules/**" />
+                <include name="themes/**" />
+            </fileset>
+        </chown>
+
+        <chmod mode="664" verbose="true">
+            <fileset dir="${project.dir}/sites/default/">
+                <include name="modules/**" />
+                <include name="themes/**" />
+            </fileset>
+        </chmod>
+
+        <chmod mode="0775" verbose="true">
+            <fileset dir="${project.dir}/sites/default/">
+                <include name="modules/*" />
+                <include name="themes/*" />
+            </fileset>
+        </chmod>
     </target>
 
     <target name="codesniffer" depends="init">
