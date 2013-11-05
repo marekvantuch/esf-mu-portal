@@ -52,7 +52,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>fluent-hc</artifactId>
@@ -64,7 +64,7 @@
       <artifactId>javaee-web-api</artifactId>
       <version>6.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-api</artifactId>
@@ -88,21 +88,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1.1</version>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-          <overlays>
-            <overlay>
-              <groupId>net.sourceforge.guacamole</groupId>
-              <artifactId>guacamole-common-js</artifactId>
-              <type>zip</type>
-            </overlay>
-          </overlays>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -152,7 +137,7 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <repositories>
 
     <!-- Main Guacamole repository -->
@@ -160,8 +145,8 @@
       <id>guac-dev</id>
       <url>http://guac-dev.org/repo</url>
     </repository>
-    
-    <repository>              
+
+    <repository>
       <id>central</id>
       <name>Central</name>
       <url>http://repo1.maven.org/maven2</url>
