@@ -32,7 +32,7 @@ function esf_module_page_aspi() {
   drupal_add_js($module_path . '/js/guac-ui.js', array('weight' => 1, 'scope' => 'footer'));
   drupal_add_js($module_path . '/js/client-ui.js', array('weight' => 2, 'scope' => 'footer'));
 
-  drupal_add_js($module_path . '/js/aspi-remote.js', array('weight' => 3, 'scope' => 'footer'));
+  drupal_add_js($module_path . '/js/aspi.js', array('weight' => 3, 'scope' => 'footer'));
 
   drupal_add_css($module_path . '/css/aspi_remote.css');
 

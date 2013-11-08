@@ -14,8 +14,8 @@
         loginResult: null,
 
         login: function () {
-            GuacUI.Client.showStatus('Logging in...')
-            GuacUI.Client.titlePrefix = "[Logging in...]";
+            GuacUI.Client.showStatus(Drupal.t('Logging in...'));
+            GuacUI.Client.titlePrefix = "[" + Drupal.t("Logging in...") + "]";
             GuacUI.Client.updateTitle();
 
             $.ajax({
@@ -25,12 +25,14 @@
                 // errors via JSON response so we need to send a valid JSON
                 // in case error happens
                 error: function (xhr, status, message) {
-                    GuacUI.Client.showError("Login failed: " + xhr.statusText);
+                    var error = Drupal.t("Login failed: !err", { '!err': xhr.statusText });
+                    GuacUI.Client.showError(error);
                 },
                 success: function (data, status) {
                     if (data != null && (typeof data === 'string' || "error" in data)) {
-                        GuacUI.Client.showError("Login failed: " + data.error);
-                        GuacUI.Client.titlePrefix = "[Login failed]";
+                        var error = Drupal.t("Login failed: !err", {'!err': data.error });
+                        GuacUI.Client.showError(error);
+                        GuacUI.Client.titlePrefix = "[" + Drupal.t("Login failed") + "]";
                         GuacUI.Client.updateTitle();
                     } else {
                         Esf.Servlets.loginResult = true;
@@ -70,6 +72,8 @@
             if (window.WebSocket) {
                 var url;
 
+                // In case we are connecting to localhost, we need to
+                // amend it's URL.
                 if (Drupal.settings.esf.server_domain == 'localhost') {
                     var port = Drupal.settings.esf.server_port;
                     var path = Drupal.settings.esf.server_path;

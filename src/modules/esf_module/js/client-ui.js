@@ -574,20 +574,20 @@ GuacUI.Client.attach = function (guac) {
 
             // Idle
             case 0:
-                GuacUI.Client.showStatus("Idle.");
-                GuacUI.Client.titlePrefix = "[Idle]";
+                GuacUI.Client.showStatus(Drupal.t("Idle") + ".");
+                GuacUI.Client.titlePrefix = "[" + Drupal.t("Idle") + "]";
                 break;
 
             // Connecting
             case 1:
-                GuacUI.Client.showStatus("Connecting...");
-                GuacUI.Client.titlePrefix = "[Connecting...]";
+                GuacUI.Client.showStatus(Drupal.t("Connecting..."));
+                GuacUI.Client.titlePrefix = "[" + Drupal.t("Connecting...") + "]";
                 break;
 
             // Connected + waiting
             case 2:
-                GuacUI.Client.showStatus("Connected, waiting for first update...");
-                GuacUI.Client.titlePrefix = "[Waiting...]";
+                GuacUI.Client.showStatus(Drupal.t("Connected, waiting for first update..."));
+                GuacUI.Client.titlePrefix = "[" + Drupal.t("Waiting...") + "]";
                 break;
 
             // Connected
@@ -604,19 +604,19 @@ GuacUI.Client.attach = function (guac) {
 
             // Disconnecting
             case 4:
-                GuacUI.Client.showStatus("Disconnecting...");
-                GuacUI.Client.titlePrefix = "[Disconnecting...]";
+                GuacUI.Client.showStatus(Drupal.t("Disconnecting..."));
+                GuacUI.Client.titlePrefix = "[" + Drupal.t("Disconnecting...") + "]";
                 break;
 
             // Disconnected
             case 5:
-                GuacUI.Client.showStatus("Disconnected.");
-                GuacUI.Client.titlePrefix = "[Disconnected]";
+                GuacUI.Client.showStatus(Drupal.t("Disconnected."));
+                GuacUI.Client.titlePrefix = "[" + Drupal.t("Disconnected") + "]";
                 break;
 
             // Unknown status code
             default:
-                GuacUI.Client.showStatus("[UNKNOWN STATUS]");
+                GuacUI.Client.showStatus("[" + Drupal.t("UNKNOWN STATUS") + "]");
 
         }
 
