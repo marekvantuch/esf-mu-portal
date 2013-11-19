@@ -1,0 +1,233 @@
+%% Requires fithesis2 module (can be downloaded from
+%% https://github.com/arax/fithesis2
+%% Load document class fithesis2
+%% {10pt, 11pt, 12pt}
+%% {draft, final}
+%% {oneside, twoside}
+%% {onecolumn, twocolumn}
+\documentclass[11pt,draft,oneside]{fithesis2}
+
+%% Basic packages
+\usepackage[czech]{babel}
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+%% Additional packages for colors, advanced
+%% formatting options, etc.
+\usepackage{color}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{cslatexquotes}
+\usepackage{fancyvrb}
+\usepackage[small,bf]{caption}
+\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
+\usepackage[all]{hypcap}
+
+%% Fix long URLs in DVIs
+\usepackage{ifpdf}
+
+\ifpdf
+\else
+  \usepackage{breakurl}
+\fi
+
+%% Packages used to generate various lists
+\usepackage{makeidx}
+\makeindex
+
+%% CHECK WHAT THIS IS
+%%\usepackage[xindy]{glossaries}
+%%\makeglossary
+
+%% Use STAR and CIRCLE signs for nested
+%% itemized lists
+\renewcommand{\labelitemii}{$\star$}
+\renewcommand{\labelitemiii}{$\circ$}
+
+%% Title page information
+\thesistitle{Vytvoření specializovaného klienta pro podporu e-learningového portálu}
+\thesissubtitle{Diplomová práce}
+\thesisstudent{Marek Vantuch}
+\thesiswoman{false} %% Important when using Slovak or Czech lang
+\thesisfaculty{fi}  %% {fi, eco, law, sci, fsps, phil, ped, med, fss}
+\thesislang{cs}     %% {en, sk, cs}
+\thesisyear{Podzim 2013}
+\thesisadvisor{Ing. Leonard Walletzký, Ph.D}
+
+%% Beginning of the document
+\begin{document}
+
+%% Front page with a logo and basic thesis information
+\FrontMatter
+\ThesisTitlePage
+
+%% Thesis declaration (required)
+\begin{ThesisDeclaration}
+  \DeclarationText
+  \AdvisorName
+\end{ThesisDeclaration}
+
+%%TODO Thanks (optional)
+\begin{ThesisThanks}
+My thanks go to ... 
+\end{ThesisThanks}
+
+%%TODO Abstract (required)
+\begin{ThesisAbstract}
+This thesis is about ...
+\end{ThesisAbstract}
+
+%% Keywords (required)
+\begin{ThesisKeyWords}
+vzdálená plocha, Guacamole, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, WebSockets, JAVA, PHP, JavaScript
+\end{ThesisKeyWords}
+
+%% Beginning of the thesis itself
+\MainMatter
+
+%% TOC (required)
+\tableofcontents
+
+%% Thesis text structured using
+%% chapters, sections, subsections, etc.
+\chapter{Úvod}
+
+\chapter{Požadavky}
+
+Cílem projektu je vytvoření online portálu pro studenty fakulty ESF [@TODO: ROZEPSAT] a jeho propojení se systémem ASPI. %%TODO [ROZEPSAT A POPSAT] 
+Hlavní část systému je založena na Drupal CMS a jehož nástavba dovoluje studentům co nejjednodušší připojení do systému ASPI. Systém má nabídnout rozložení informací vhodné pro jednoduché nalezení zákonů a studijních předmětů. 
+
+Celý projekt je výsledkem spolupráce několika studentů a vznikl spojením jejich diplomových prací.
+Ondřej Materna (NÁZEV PRÁCE)
+Získat popis z jeho práce
+Marek Vantuch (tato práce) 
+Analýza požadavků, jejich aplikace na možnosti systému Drupal. 
+Průzkum dostupných řešení k implementaci vzdálené plochy s co nejnižšími potřebami na uživatele a integrace daného řešení.
+Holčina
+Návrh designu a jeho implementace na stránky
+Radek 
+Koordinace spolupráce mezi týmem.
+Popsat responsibilities jednotlivých účastníků
+
+\chapter{Analýza}
+
+Jak byly požadavky zpracovány a navrženy
+Jakým způsobem bylo vytvořeno propojení na vzdálený server
+Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
+
+\section{Použité technologie}
+
+Drupal (PHP)
+Jádro – CMS
+CORS
+Popsat jen co to přesně je a jak to pracuje
+WebSockets
+Jakým způsobem použity a pro co
+Guacamole (JAVA EE)
+Popsat co přesně za tím stojí a proč to tak je
+ASPI
+Popsat o čem to je
+
+DEPLOYMENT
+
+Drush 
+Phing
+Popsat že to je založené na ANT
+DrushTask
+Maven
+Pro JAVU
+Team City
+GitHub
+
+VZHLED
+
+SASS
+COMPASS
+SUSY
+
+
+Media Queries
+Pro zobrazení na zařízeních s menším rozlišením nebo velikostí obrazovky (telefony a tablety)
+
+Architektura řešení
+Zde popsat co mezi sebou jak komunikuje, ideálně jako vrstvy technologií
+
+Drupal
+Drupal Services
+Guacamole Servlets
+Guacamole Proxy
+ASPI Remote Machines
+
+Popsat jak funguje Guacamole normálně a jak bylo přepracováno a proč pak byl využit CORS
+
+
+\chapter{Implementace}
+
+Tady popsat co přesně bylo uděláno v rámci implementace a proč to bylo uděláno. Proč bylo důležité aktualizovat na Drupal 7 a co to s sebou přineslo za změny.
+\section{Aktualizace Drupal 6 na Drupal 7}
+Výhody Drupal 7 nad Drupalem 6
+Porovnání dostupných verzí mezi Drupalem 6 a 7
+\section{Nově přidané moduly a jejich popis}
+Zde sepsat které moduly byly přidány a proč
+\section{Deployment a jeho možnosti}
+\section{Instalace a konfigurace řešení}
+\section{Optimalizace řešení a její dopad na uživatelskou zkušenost}
+Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
+
+\chapter{Organizace pracovního postupu a spolupráce mezi studenty}
+
+Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru Apache nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto MySQL použit MySQL Lite, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
+
+Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba Guacamole Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém Windows Server 2008 SP2, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro JAVA aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
+
+\begin{center}
+  \begin{tabular}{ | p{3cm} | p{4cm} | p{4cm} | }
+    \hline  
+    & Vývojové prostředí & Produkční prostředí \\ \hline
+    HTTP Server & Lighttpd & Apache \\ \hline
+    SQL databáze & SQLite [OPRAVIT???] & MySQL \\ \hline
+    JAVA Servlet Container & Apache Tomcat 7 & Apache Tomcat 7 \\ \hline
+    Vzdálená plocha & Windows Server 2008 SP2 (Oracle VM VirtualBox) & ASPI [PŘIDAT VÍCE DETAILŮ] \\ \hline
+  \end{tabular}
+\end{center}
+
+Protože Drupal je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt Features [LINK], který exportuje pomocí funkcionality postkytnuté modulem Ctools nastavení drupalu jako jsou typy obsahu a také pomocí modulu Strongarm nastavení systéu samotného. Všechna tato nastavení jsou pak uložena do modulu Drupalu a mohou pak být jednoduše přenesena na jiné prostředí a také aktualizována v průběhu času a s přibývajícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
+
+ESF Feature (esf\_feature) – základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
+ESF Feature UI (esf\_feature\_ui) – administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench [LINK]
+ESF Permissions (esf\_permissions) – definice uživatelských rolí a jejich práv
+Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
+
+\section{Organizace mé vlastní práce}
+
+\section{Organizace ticketů pomocí GitHubu}
+
+%% Lists of tables and figures, glossary, etc.
+\printindex
+%%\printglossary
+\listoffigures
+\listoftables
+
+%% Bibliography from references.bib
+\begingroup
+\def\tmpchapter{0}
+\renewcommand{\chaptername}{}
+\renewcommand{\thechapter}{}
+\addtocontents{toc}{\setcounter{tocdepth}{-1}}
+\chapter{References}
+\renewcommand{\chapter}[2]{}% for other classes
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\addtocontents{toc}{\setcounter{tocdepth}{2}}
+\endgroup
+
+%% Additional materials
+\appendix
+
+%% End of the whole document
+\end{document}
