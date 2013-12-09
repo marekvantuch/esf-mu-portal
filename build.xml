@@ -62,7 +62,7 @@
             <equals arg1="${guacamole.properties.file.exists}" arg2="true" />
             <else>
                 <mkdir dir="${guacamole.home}" />
-                <copy file="default.guacamole.properties" tofile="${guacamole.home}/${guacamole.properties.file}"/>
+                <copy file="phing/default.guacamole.properties" tofile="${guacamole.home}/${guacamole.properties.file}"/>
 
                 <echo level="info">File ${guacamole.properties.file} was created in ${guacamole.home}.</echo>
                 <echo level="warning">Make sure to update it properly via the Drupal configuration site.</echo>
@@ -120,7 +120,7 @@
         <if>
             <equals arg1="${properties.file.exists}" arg2="true" />
             <else>
-                <copy file="default.build.properties" tofile="build.properties" />
+                <copy file="phing/default.build.properties" tofile="build.properties" />
             </else>
         </if>
 
