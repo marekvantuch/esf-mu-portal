@@ -92,6 +92,9 @@ function esf_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_aspi_username',
+    'field_permissions' => array(
+      'type' => 1,
+    ),
     'foreign keys' => array(
       'format' => array(
         'columns' => array(
@@ -121,6 +124,9 @@ function esf_feature_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_code',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'format' => array(
         'columns' => array(

@@ -33,24 +33,6 @@ function esf_feature_eck_bundle_info() {
   'entity_type' => 'law',
   'name' => 'law',
   'label' => 'Law',
-  'config' => array(
-    'extra_fields' => array(
-      'title' => array(
-        'form' => array(
-          'label' => 'Title',
-          'description' => '',
-          'widget' => array(
-            'type' => 'text',
-            'settings' => array(
-              'size' => 60,
-              'max_length' => 255,
-            ),
-          ),
-          'default_value' => '',
-        ),
-      ),
-    ),
-  ),
 ),
   );
   return $items;
@@ -69,13 +51,11 @@ $items = array(
       'label' => 'Title',
       'type' => 'text',
       'behavior' => 'title',
-      'schema' => NULL,
     ),
     'changed' => array(
       'label' => 'Changed',
       'type' => 'integer',
       'behavior' => 'changed',
-      'schema' => NULL,
     ),
   ),
 ),
@@ -105,7 +85,7 @@ function esf_feature_node_info() {
       'help' => '',
     ),
     'news' => array(
-      'name' => t('News'),
+      'name' => t('Novinka'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -129,7 +109,7 @@ function esf_feature_node_info() {
       'help' => '',
     ),
     'story' => array(
-      'name' => t('Story'),
+      'name' => t('Příběh'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

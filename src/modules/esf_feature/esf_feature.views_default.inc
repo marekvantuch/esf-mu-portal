@@ -31,24 +31,26 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['view_mode'] = 'full';
   $handler->display->display_options['row_options']['links'] = FALSE;
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Global: Random */
+  /* Sort criterion: Globální: Náhodný */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -56,7 +58,7 @@ function esf_feature_views_default_views() {
     'joke' => 'joke',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -74,10 +76,9 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Block'),
-    t('more'),
   );
   $export['jokes'] = $view;
 
@@ -101,33 +102,35 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Weight: Weight */
+  /* Sort criterion: Váha: Váha */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'weight_weights';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  /* Sort criterion: Content: Title */
+  /* Sort criterion: Obsah: Nadpis */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -140,8 +143,8 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
   );
   $export['legal_subjects'] = $view;
 
@@ -157,7 +160,7 @@ function esf_feature_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'News';
+  $handler->display->display_options['title'] = 'Novinka';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -166,6 +169,8 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
@@ -177,26 +182,26 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
+  /* Sort criterion: Obsah: Datum vytvoření */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -213,16 +218,16 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
-  $handler->display->display_options['block_description'] = 'News';
+  $handler->display->display_options['block_description'] = 'Novinka';
   $translatables['news'] = array(
     t('Master'),
-    t('News'),
+    t('Novinka'),
     t('více'),
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Položek na stránku'),
     t('- Vše -'),
     t('Vynechat položky'),
@@ -231,7 +236,6 @@ function esf_feature_views_default_views() {
     t('následující ›'),
     t('poslední »'),
     t('Page'),
-    t('more'),
     t('Block'),
   );
   $export['news'] = $view;
@@ -249,11 +253,23 @@ function esf_feature_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'více';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Vynechat položky';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« první';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ předchozí';
+  $handler->display->display_options['pager']['options']['tags']['next'] = 'následující ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -268,54 +284,57 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Entity Reference: Referenced Entity */
+  /* Vztah: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_laws_target_id']['id'] = 'field_laws_target_id';
   $handler->display->display_options['relationships']['field_laws_target_id']['table'] = 'field_data_field_laws';
   $handler->display->display_options['relationships']['field_laws_target_id']['field'] = 'field_laws_target_id';
   $handler->display->display_options['relationships']['field_laws_target_id']['label'] = 'Law';
   $handler->display->display_options['relationships']['field_laws_target_id']['required'] = TRUE;
-  /* Field: Law: Law type */
+  /* Pole: Law: Law type */
   $handler->display->display_options['fields']['field_law_type']['id'] = 'field_law_type';
   $handler->display->display_options['fields']['field_law_type']['table'] = 'field_data_field_law_type';
   $handler->display->display_options['fields']['field_law_type']['field'] = 'field_law_type';
   $handler->display->display_options['fields']['field_law_type']['relationship'] = 'field_laws_target_id';
-  $handler->display->display_options['fields']['field_law_type']['label'] = 'Type';
+  $handler->display->display_options['fields']['field_law_type']['label'] = 'Typ';
   $handler->display->display_options['fields']['field_law_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_law_type']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Law: Number */
+  /* Pole: Law: Number */
   $handler->display->display_options['fields']['field_number']['id'] = 'field_number';
   $handler->display->display_options['fields']['field_number']['table'] = 'field_data_field_number';
   $handler->display->display_options['fields']['field_number']['field'] = 'field_number';
   $handler->display->display_options['fields']['field_number']['relationship'] = 'field_laws_target_id';
+  $handler->display->display_options['fields']['field_number']['label'] = 'Číslo';
   $handler->display->display_options['fields']['field_number']['element_label_colon'] = FALSE;
-  /* Field: Law: ASPI */
+  /* Pole: Law: ASPI */
   $handler->display->display_options['fields']['field_aspi']['id'] = 'field_aspi';
   $handler->display->display_options['fields']['field_aspi']['table'] = 'field_data_field_aspi';
   $handler->display->display_options['fields']['field_aspi']['field'] = 'field_aspi';
   $handler->display->display_options['fields']['field_aspi']['relationship'] = 'field_laws_target_id';
-  /* Field: Law: Title */
+  /* Pole: Law: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'eck_law';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_laws_target_id';
+  $handler->display->display_options['fields']['title']['label'] = 'Nadpis';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Contextual filter: Content: Nid */
+  /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Vše';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -324,25 +343,25 @@ function esf_feature_views_default_views() {
   );
   $translatables['reference_law_to_legal_subject'] = array(
     t('Master'),
-    t('more'),
-    t('Apply'),
+    t('více'),
+    t('Použít'),
     t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('Řadit dle'),
+    t('Vzestupně'),
+    t('Sestupně'),
+    t('Položek na stránku'),
+    t('- Vše -'),
+    t('Vynechat položky'),
+    t('« první'),
+    t('‹ předchozí'),
+    t('následující ›'),
+    t('poslední »'),
     t('Law'),
-    t('Type'),
-    t('Number'),
+    t('Typ'),
+    t('Číslo'),
     t('ASPI'),
-    t('Title'),
-    t('All'),
+    t('Nadpis'),
+    t('Vše'),
   );
   $export['reference_law_to_legal_subject'] = $view;
 
@@ -366,6 +385,8 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
@@ -396,20 +417,20 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* No results behavior: Global: Unfiltered text */
+  /* Chování při žádných výsledcích: Globální: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'No Results';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'K tomuto předmětu se nevztahují žádné obory práva.';
-  /* Relationship: Entity Reference: Referencing entity */
+  /* Vztah: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['id'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['field'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['label'] = 'Legal Subject';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['required'] = TRUE;
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -417,14 +438,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Field: Content: Code */
+  /* Pole: Obsah: Code */
   $handler->display->display_options['fields']['field_code']['id'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['relationship'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
-  /* Contextual filter: Content: Nid */
+  /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -434,14 +455,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -454,8 +475,8 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Položek na stránku'),
     t('- Vše -'),
     t('Vynechat položky'),
@@ -466,7 +487,7 @@ function esf_feature_views_default_views() {
     t('No Results'),
     t('K tomuto předmětu se nevztahují žádné obory práva.'),
     t('Legal Subject'),
-    t('Title'),
+    t('Nadpis'),
     t('Kód'),
     t('Vše'),
   );
@@ -492,6 +513,8 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Vše -';
@@ -522,20 +545,20 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* No results behavior: Global: Unfiltered text */
+  /* Chování při žádných výsledcích: Globální: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'No results';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'K tomuto oboru práva se nevztahují žádné předměty.';
-  /* Relationship: Entity Reference: Referenced Entity */
+  /* Vztah: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['id'] = 'field_school_subjects_target_id';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['table'] = 'field_data_field_school_subjects';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['field'] = 'field_school_subjects_target_id';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['label'] = 'School Subject';
   $handler->display->display_options['relationships']['field_school_subjects_target_id']['required'] = TRUE;
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -543,14 +566,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Field: Content: Code */
+  /* Pole: Obsah: Code */
   $handler->display->display_options['fields']['field_code']['id'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['relationship'] = 'field_school_subjects_target_id';
   $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
-  /* Contextual filter: Content: Nid */
+  /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -560,14 +583,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -580,8 +603,8 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Položek na stránku'),
     t('- Vše -'),
     t('Vynechat položky'),
@@ -592,7 +615,7 @@ function esf_feature_views_default_views() {
     t('No results'),
     t('K tomuto oboru práva se nevztahují žádné předměty.'),
     t('School Subject'),
-    t('Title'),
+    t('Nadpis'),
     t('Kód'),
     t('Vše'),
   );
@@ -618,31 +641,33 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Title */
+  /* Sort criterion: Obsah: Nadpis */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -665,14 +690,14 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['row_options']['separator'] = '|';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Code */
+  /* Pole: Obsah: Code */
   $handler->display->display_options['fields']['field_code']['id'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
@@ -701,21 +726,21 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Code */
+  /* Pole: Obsah: Code */
   $handler->display->display_options['fields']['field_code']['id'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['table'] = 'field_data_field_code';
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Nid */
+  /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
@@ -730,10 +755,9 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Entity Reference'),
-    t('more'),
     t('Table'),
     t('Kód'),
     t('Vše'),
@@ -762,6 +786,8 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Použít';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Řadit dle';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Vzestupně';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Sestupně';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Položek na stránku';
@@ -773,19 +799,19 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['pager']['options']['tags']['last'] = 'poslední »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
-  /* Field: Content: Title */
+  /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
+  /* Sort criterion: Obsah: Datum vytvoření */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: Obsah: Typ */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -793,7 +819,7 @@ function esf_feature_views_default_views() {
     'story' => 'story',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Obsah: Vydáno */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -824,8 +850,8 @@ function esf_feature_views_default_views() {
     t('Použít'),
     t('Reset'),
     t('Řadit dle'),
-    t('Asc'),
-    t('Desc'),
+    t('Vzestupně'),
+    t('Sestupně'),
     t('Položek na stránku'),
     t('- Vše -'),
     t('Vynechat položky'),
@@ -834,7 +860,6 @@ function esf_feature_views_default_views() {
     t('následující ›'),
     t('poslední »'),
     t('Page'),
-    t('more'),
     t('Block'),
   );
   $export['stories'] = $view;
