@@ -35,27 +35,6 @@ projects[entity][version] = "1.2"
 
 projects[entityreference][version] = "1.1"
 
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-projects[esf_feature][download][type] = ""
-projects[esf_feature][download][url] = ""
-projects[esf_feature][type] = "module"
-projects[esf_feature][version] = "1.15"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-projects[esf_feature_ui][download][type] = ""
-projects[esf_feature_ui][download][url] = ""
-projects[esf_feature_ui][type] = "module"
-projects[esf_feature_ui][version] = "1.3"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-projects[esf_permissions][download][type] = ""
-projects[esf_permissions][download][url] = ""
-projects[esf_permissions][type] = "module"
-projects[esf_permissions][version] = "1.2"
-
 projects[features_extra][version] = "1.0-beta1+3-dev"
 
 projects[features][version] = "2.0"
@@ -142,12 +121,6 @@ projects[omega][version] = "4.0-rc1"
 projects[rootcandy][version] = "1.0-alpha1"
 
 projects[rubik][version] = "4.0-beta9"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-projects[fatal: Not a git repository (or any parent up to mount point ][download][type] = ""
-projects[fatal: Not a git repository (or any parent up to mount point ][download][url] = ""
-projects[fatal: Not a git repository (or any parent up to mount point ][type] = "theme"
 
 ; Libraries
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
