@@ -39,8 +39,8 @@
 \makeindex
 
 %% CHECK WHAT THIS IS
-%%\usepackage[xindy]{glossaries}
-%%\makeglossary
+\usepackage[xindy]{glossaries}
+\makeglossaries
 
 %% Use STAR and CIRCLE signs for nested
 %% itemized lists
@@ -85,6 +85,8 @@ This thesis is about ...
 vzdálená plocha, Guacamole, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, WebSockets, JAVA, PHP, JavaScript
 \end{ThesisKeyWords}
 
+\newglossaryentry{test}{name=test, description={solution able to conduct electric current}}
+
 %% Beginning of the thesis itself
 \MainMatter
 
@@ -96,7 +98,6 @@ vzdálená plocha, Guacamole, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 \chapter{Úvod}
 
 \chapter{Požadavky}
-
 Cílem projektu je vytvoření online portálu pro studenty fakulty ESF [@TODO: ROZEPSAT] a jeho propojení se systémem ASPI. %%TODO [ROZEPSAT A POPSAT] 
 Hlavní část systému je založena na Drupal CMS a jehož nástavba dovoluje studentům co nejjednodušší připojení do systému ASPI. Systém má nabídnout rozložení informací vhodné pro jednoduché nalezení zákonů a studijních předmětů. 
 
@@ -201,13 +202,38 @@ ESF Feature UI (esf\_feature\_ui) – administrační rozhraní pro správu obsa
 ESF Permissions (esf\_permissions) – definice uživatelských rolí a jejich práv
 Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
 
-\section{Organizace mé vlastní práce}
+\section{Organizace řízení projektu}
+S ohledem na nízký počet zainteresovaných osob a rozsah projektu jsme neimplementovali žádné pokročilé metody projektového řízení a rozhodli jsme se pro jednoduchý seznam úkolů. Jelikož jsme pro uložení zdrojových kódů projektu využili GitHub, bylo nejjednodušší jej rovněž využít pro správu úkolů. Ačkoliv se nemůže rovnat s platformami, specializujícími se jen daný úkol, poskytuje několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze jednoduše využít pro rozlišení mezi úkolem a chybou a také důležitostí problému. Milníky byly využity pro jednoduché plánování a sledování pokroku.
 
-\section{Organizace ticketů pomocí GitHubu}
+\subsection{Značky}
+Typy úkolů
+\begin{itemize}
+  \item Úkol \emph{(task)} - úkol, který bylo třeba vykonat na projektu
+  \item Chyba \emph{(bug)} - chyba nalezená na projektu, kterou bylo potřeba opravit
+\end{itemize}
+Priorita
+\begin{itemize}
+	\item Nízká \emph{(0-low)}
+	\item Střední \emph{(1-medium)}
+	\item Vysoká  \emph{(2-high)}
+	\item Kritická \emph{(0-critical)}
+\end{itemize}
+
+\subsection{Milníky}
+\begin{itemize}
+  \item 0.1 | Inicializace - úvodní výzkum týkající se připojení ke vzdálené ploše a dostupných technologií
+  \item 0.2 | Drupal modul - vytvoření modulu pro drupal a jeho základní funkcionalita
+  \item 0.3 | Struktura a práva - struktura stránek, jejich obsahu a práva uživatelů k jejich použití
+  \item 0.4 | Guacamole Drupal - přesun funkcionality z Guacamole do Drupal modulu a jeho propojení s JAVA server aplikací
+  \item 0.5 | Test v praxi - změny potřebné k umístění řešení na produkční servery a vytvoření skriptů k automatizaci tohoto procesu
+  \item 1.0 | Základní verze - spuštění základní funkční verze
+  \item 1.1 | Produkční verze - vyřešení všech problémů, komunikace se stranou klienta a přípravy na reálné spuštění v produkčním prostředí
+  \item 1.2 | Údržba - první z verzí, ve kterých se bude dodávat údržba řešení
+\end{itemize}
 
 %% Lists of tables and figures, glossary, etc.
 \printindex
-%%\printglossary
+%%\printglossaries
 \listoffigures
 \listoftables
 
