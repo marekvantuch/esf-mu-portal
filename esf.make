@@ -35,7 +35,7 @@ projects[entity][version] = "1.2"
 
 projects[entityreference][version] = "1.1"
 
-projects[features_extra][version] = "1.0-beta1+3-dev"
+projects[features_extra][version] = "1.0-beta1"
 
 projects[features][version] = "2.0"
 
@@ -112,15 +112,9 @@ projects[workbench_media][version] = "2.1"
 projects[wysiwyg][version] = "2.2"
 
 ; Themes
-projects[adminimal_theme][version] = "1.x-dev"
-
-projects[ember][version] = "2.0-alpha1+41-dev"
+projects[ember][version] = "2.0-alpha1"
 
 projects[omega][version] = "4.0-rc1"
-
-projects[rootcandy][version] = "1.0-alpha1"
-
-projects[rubik][version] = "4.0-beta9"
 
 ; Libraries
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
