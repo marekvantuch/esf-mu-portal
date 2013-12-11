@@ -5,7 +5,7 @@
 %% {draft, final}
 %% {oneside, twoside}
 %% {onecolumn, twocolumn}
-\documentclass[11pt,draft,oneside]{fithesis2}
+\documentclass[10pt,draft,oneside]{fithesis2}
 
 %% Basic packages
 \usepackage[czech]{babel}
@@ -25,6 +25,7 @@
 \usepackage[small,bf]{caption}
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
 \usepackage[all]{hypcap}
+\usepackage{amssymb}
 
 %% Fix long URLs in DVIs
 \usepackage{ifpdf}
@@ -54,7 +55,7 @@
 \thesiswoman{false} %% Important when using Slovak or Czech lang
 \thesisfaculty{fi}  %% {fi, eco, law, sci, fsps, phil, ped, med, fss}
 \thesislang{cs}     %% {en, sk, cs}
-\thesisyear{Podzim 2013}
+\thesisyear{2014}
 \thesisadvisor{Ing. Leonard Walletzký, Ph.D}
 
 %% Beginning of the document
@@ -70,22 +71,30 @@
   \AdvisorName
 \end{ThesisDeclaration}
 
+%%\chapter*{Zadání práce}
+%%Na základě analýzy možných Open Source klientů, podporujících připojení ke vzdálené ploše (Remonte Desktop) vyberte nejvhodnější a ten dále upravte tak, aby sloužil ke spuštění vzdálené aplikace po kliknutí na speciální odkaz v prohlížeči (aplikace ASPI). V případě nutnosti vytvořte obslužný plug-in do prohlížeče, sloužící pro předávání parametrů vzdálené aplikaci. Dále připravte obslužný systém pro vkládání textů, obsahujících odkazy do aplikace ASPI a jejich editaci.
+
+
 %%TODO Thanks (optional)
 \begin{ThesisThanks}
-My thanks go to ... 
+Chtěl bych obzvláště poděkovat Ing. Leonardu Walletzkému, Ph.D za příležitost pracovat na tomto projektu. Děkuji všem svým spolupracovníkům za ohleduplnost a trpělivost nutnou s ohledem na ztížené podmínky, které byly způsobeny mou prací ze zahraničí.
 \end{ThesisThanks}
 
 %%TODO Abstract (required)
 \begin{ThesisAbstract}
-This thesis is about ...
+Tato práce popisuje implementaci internetového portálu pro fakultu Ekonomicko-správní Masarykovy Univerzity. Jsou zahrnuty dvě hlavní části, popis úprav existujícího řešení postaveného na open-source CMS systému Drupal a jeho propojení pomocí vzdálené plochy na servery ASPI. Při vývoji byl kladen důraz na udržitelnost řešení, jeho strukturalizaci. Ačkoliv Drupal typicky udržuje všechna nastavení v databázi, pomocí dostupných nástrojů byla tato exportována do PHP kódu a byl nastaven proces jejich přenesení do testovacího či produkčního prostředí. Pro ulehčení tohoto procesu byly vytvořeny skripty a ty byly propojeny s ,,Continous Integration'' serverem. Důležitá byla i uživatelská přívětivost a jednoduchost, kterých bylo dosaženo sjednocením platformy postavené na Drupalu a existující implementace vzdálené plochy využívající HTML5 a JavaScriptu.
 \end{ThesisAbstract}
 
-%% Keywords (required)
+%% Keywords (required)git
 \begin{ThesisKeyWords}
-vzdálená plocha, Guacamole, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, WebSockets, JAVA, PHP, JavaScript
+Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, WebSockets, JAVA, PHP, JavaScript
 \end{ThesisKeyWords}
 
-\newglossaryentry{test}{name=test, description={solution able to conduct electric current}}
+\newglossaryentry{aspi}{name=ASPI, description={,,Automatizovaný Systém Právních Informací'' - informační systém vyvíjený společností Wolters Kluwer, poskytující komplexní informace z právníckých oborů}}
+
+\newglossaryentry{api}{name=API, description={}}
+
+\newglossaryentry{responsive}{name=resonzivn, description={}}
 
 %% Beginning of the thesis itself
 \MainMatter
@@ -96,58 +105,75 @@ vzdálená plocha, Guacamole, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 %% Thesis text structured using
 %% chapters, sections, subsections, etc.
 \chapter{Úvod}
+Cílem celého projektu je vytvoření informačního systému pro studenty Ekonomicko-správní fakulty Masarykovy Univerzity. Před započatím tého práce existovala webová stránka postavená na Drupalu verze 6, ve které byla vytvořena komplexní struktura obsahu - právních oborů a zákonů. Kolega Ondřej Materna ve své práci zanalyzoval toto řešení a reálné požadavky studentů. Výsledkem jeho práce bylo řešení, které se příliš neslučovalo s aktuálně existujícími stránkami. Drupal verze 6 již existoval již více než pět let a dva roky existoval i jeho nástupce, drupal verze 7\cite{website:wiki:drupal}. Ten poskytoval mnohem rozsáhlejší možnosti rozšíření, neboť se prakticky všechen vývoj přesunul k němu. 
 
-\chapter{Požadavky}
-Cílem projektu je vytvoření online portálu pro studenty fakulty ESF [@TODO: ROZEPSAT] a jeho propojení se systémem ASPI. %%TODO [ROZEPSAT A POPSAT] 
-Hlavní část systému je založena na Drupal CMS a jehož nástavba dovoluje studentům co nejjednodušší připojení do systému ASPI. Systém má nabídnout rozložení informací vhodné pro jednoduché nalezení zákonů a studijních předmětů. 
+Důležitou částí portálu je propojení s \gls{aspi} za pomocí vzdálené plochy. Protože hlavním cílem projektu byla uživatelská přívětivost, byl při výběru řešení kladen důraz převážně na jednoduchost a minimální požadavky na klienta - ať již uživatele, nebo jeho stroj. Bylo zvoleno řešení postavené na moderním HTML5 a open-source řešení Guacamole. To poskytuje klienta zobrazeného čistě v okně prohlížeče, komunikujícího se vzdálenou plochou za pomocí proxy serveru přeposílajícího požadavky dále. Architektura je detailně popsána v kapitole \ref{chap:implementace}.
 
-Celý projekt je výsledkem spolupráce několika studentů a vznikl spojením jejich diplomových prací.
-Ondřej Materna (NÁZEV PRÁCE)
-Získat popis z jeho práce
-Marek Vantuch (tato práce) 
-Analýza požadavků, jejich aplikace na možnosti systému Drupal. 
-Průzkum dostupných řešení k implementaci vzdálené plochy s co nejnižšími potřebami na uživatele a integrace daného řešení.
-Holčina
-Návrh designu a jeho implementace na stránky
-Radek 
-Koordinace spolupráce mezi týmem.
-Popsat responsibilities jednotlivých účastníků
+Tato práce staví na práci Mgr. Ondřeje Materny ,,Návrh a realizace právního portálu pro ESF MU'' \cite{omaterna2013}. Ta je důkladně zanalyzována a její závěry uplatněny na prostředí CMS Drupal a jeho možnosti. Je popsáno rozdělení na jednotlivé sektory stránek, vzhled samotný však není předmětem této práce, nýbrž %% TODO doplnit Skarlet
+Z důvodu spolupráce mezi více studenty byl vytvořen základní systém pro 
+
+%TODO Popsat co studenti museji aktualne delat k tomu aby se dostali k ASPI a jak to zmenime
 
 \chapter{Analýza}
+\label{chap:analyza}
 
-Jak byly požadavky zpracovány a navrženy
-Jakým způsobem bylo vytvořeno propojení na vzdálený server
+Jak byly požadavky zpracovány a navrženy \\
+Jakým způsobem bylo vytvořeno propojení na vzdálený server \\
 Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
 
 \section{Použité technologie}
+\label{chap:technologies}
 
-Drupal (PHP)
-Jádro – CMS
-CORS
-Popsat jen co to přesně je a jak to pracuje
-WebSockets
-Jakým způsobem použity a pro co
-Guacamole (JAVA EE)
+Základními technologiemi jsou Drupal a Guacamole, které prakticky určují, jaké další technologie byly využity. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
+
+\paragraph*{Drupal} \emph{https://drupal.org}
+
+Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systémů pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
+
+\paragraph*{Guacamole}
 Popsat co přesně za tím stojí a proč to tak je
-ASPI
+
+\paragraph*{CORS} 
+
+Popsat jen co to přesně je a jak to pracuje
+
+\paragraph*{WebSockets}
+
+Jakým způsobem použity a pro co
+
+\paragraph*{ASPI}
+
 Popsat o čem to je
 
 DEPLOYMENT
 
-Drush 
-Phing
+\paragraph*{Drush}
+
+\paragraph*{Phing}
+
 Popsat že to je založené na ANT
-DrushTask
-Maven
+
+\paragraph*{DrushTask}
+
+\paragraph*{Maven}
+
 Pro JAVU
-Team City
-GitHub
+
+\paragraph*{Team City}
+
+\paragraph*{GitHub}
 
 VZHLED
 
-SASS
-COMPASS
-SUSY
+\paragraph*{Omega (Drupal Theme)} \emph{https://drupal.org/project/omega}
+
+Pro Drupal existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů (css). Projekt Omega je zaměřen na \gls{responsive} a poskytuje hotovou implementaci různých stylů pro různá zobrazovací zařízení. Zatímco třetí verze poskytuje komplexní administrační rozhraní, přístup čtvrté verze se spíše zaměřil na implementaci v kódu. Za pomocí SUSY jsou zapsány poměry mezi bloky zobrazenými na stránce a ty se pak při využití knihovny Breakpoints\cite{website:breakpoints} mezi sebou přepínají.
+
+\paragraph*{SASS}
+
+\paragraph*{COMPASS}
+
+\paragraph*{SUSY}
 
 
 Media Queries
@@ -166,25 +192,67 @@ Popsat jak funguje Guacamole normálně a jak bylo přepracováno a proč pak by
 
 
 \chapter{Implementace}
+\label{chap:implementace}
 
 Tady popsat co přesně bylo uděláno v rámci implementace a proč to bylo uděláno. Proč bylo důležité aktualizovat na Drupal 7 a co to s sebou přineslo za změny.
 \section{Aktualizace Drupal 6 na Drupal 7}
 Výhody Drupal 7 nad Drupalem 6
 Porovnání dostupných verzí mezi Drupalem 6 a 7
+
+\begin{table}
+  \caption{Porovnání verzí modulů mezi Drupalem 6 a 7}
+  \begin{tabular}{ | p{5cm} | p{2.5cm} | p{2.5cm} | c | }
+    \hline 
+    Jméno modulu & Drupal 6 & Drupal 7 & stav  \\ \hline 
+    Backup and Migrate & 2.7 & 2.7 & \checkmark \\ \hline
+    Colorbox & 1.6 & 2.4 & \checkmark \\ \hline
+    CCK & 2.9 & jádro & \checkmark \\ \hline
+    Custom Breadcumbs & 1.5 & 1.x-alpha3 & \\ \hline
+    DB Maintenance & 1.4 & 1.1 & \checkmark \\ \hline
+    DHTML Menu & 3.5 & 1.0-beta1 & \\ \hline 
+    Email Field & 1.4 & 1.2 & \checkmark \\ \hline
+    File (Field Paths & 1.5 & 1.0-beta4 & \\ \hline
+    FileField & 3.11 & jádro & \checkmark \\ \hline
+    Front Page & 1.3 & 2.4 & \checkmark \\ \hline
+    ImageAPI & 3.11 & jádro & \checkmark \\ \hline
+    ImageCache & 2.0-rc1 & jádro & \checkmark \\ \hline
+    IMCE & 2.5 & 1.7 & \checkmark \\ \hline
+    IMCE Wysiwyg bridge & 1.1 & 1.0 & \checkmark \\ \hline
+    jCarousel & 2.6 & 2.6 & \checkmark \\ \hline
+    Link & 2.10 & 1.1 & \checkmark \\ \hline
+    Localization Update & 2.10 & 1.1 & \checkmark \\ \hline
+    Menu Attributes & 2.0-beta1 & 1.0-rc2 & \checkmark \\ \hline
+    Menu Block & 2.4 & 2.3 & \checkmark \\ \hline
+    Pathauto & 1.6 & 1.2 & \checkmark \\ \hline
+    Taxonomy Breadcrumb & 1.1 & - & \\ \hline
+    Token & 1.19 & 1.5 & \checkmark \\ \hline
+    Transliteration & 3.1 & 3.1 & \checkmark \\ \hline
+    Views & 2.16 & 3.7 & \\ \hline
+    Views Search & 1.0 & - & \\ \hline
+    WYSIWYG & 2.4 & 2.2 & \checkmark \\ \hline
+  \end{tabular}
+\end{table}
+
+\section{Odebrané moduly}
+
 \section{Nově přidané moduly a jejich popis}
 Zde sepsat které moduly byly přidány a proč
+
 \section{Deployment a jeho možnosti}
 \section{Instalace a konfigurace řešení}
 \section{Optimalizace řešení a její dopad na uživatelskou zkušenost}
 Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
+Popsat agregaci JS, CSS a podobne 
+\cite{website:drupal:optimizing}
 
-\chapter{Organizace pracovního postupu a spolupráce mezi studenty}
+\chapter{Organizace vývojového procesu}
 
 Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru Apache nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto MySQL použit MySQL Lite, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
 
 Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba Guacamole Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém Windows Server 2008 SP2, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro JAVA aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
 
-\begin{center}
+\begin{table}
+  \caption{Porovnání technologií použitých na lokálním a produkčním prostředí}
   \begin{tabular}{ | p{3cm} | p{4cm} | p{4cm} | }
     \hline  
     & Vývojové prostředí & Produkční prostředí \\ \hline
@@ -193,7 +261,7 @@ Pro dostupnost komplexního testování i bez využití internetu byl lokálně 
     JAVA Servlet Container & Apache Tomcat 7 & Apache Tomcat 7 \\ \hline
     Vzdálená plocha & Windows Server 2008 SP2 (Oracle VM VirtualBox) & ASPI [PŘIDAT VÍCE DETAILŮ] \\ \hline
   \end{tabular}
-\end{center}
+\end{table}
 
 Protože Drupal je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt Features [LINK], který exportuje pomocí funkcionality postkytnuté modulem Ctools nastavení drupalu jako jsou typy obsahu a také pomocí modulu Strongarm nastavení systéu samotného. Všechna tato nastavení jsou pak uložena do modulu Drupalu a mohou pak být jednoduše přenesena na jiné prostředí a také aktualizována v průběhu času a s přibývajícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
 
@@ -233,7 +301,7 @@ Priorita
 
 %% Lists of tables and figures, glossary, etc.
 \printindex
-%%\printglossaries
+%%\printglossary
 \listoffigures
 \listoftables
 

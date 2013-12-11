@@ -13,6 +13,16 @@
                                    guacamole-properties,
                                    fix-permissions" />
 
+    <target name="install" depends="init" >
+        <!-- <drush command="make" assume="yes">
+            <param>esf.make</param>
+        </drush> -->
+
+        <drush command="site-install" assume="yes">
+            <option name="db-url"
+        </drush>
+    </target>
+
     <target name="copy-modules">
         <copy todir="${project.dir}/sites/default/modules" overwrite="true" >
             <fileset dir="${source.dir}/src/modules">

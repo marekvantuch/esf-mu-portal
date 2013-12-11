@@ -3,3 +3,11 @@ fi-logo*
 *.lof
 *.lot
 *.pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.log
+*.toc
