@@ -5,6 +5,7 @@
 %% {draft, final}
 %% {oneside, twoside}
 %% {onecolumn, twocolumn}
+%% sudo yum install texlive texlive-babel-czech texlive-hyphen-czech 
 \documentclass[10pt,draft,oneside]{fithesis2}
 
 %% Basic packages
@@ -26,6 +27,7 @@
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
 \usepackage[all]{hypcap}
 \usepackage{amssymb}
+\usepackage{svg}
 
 %% Fix long URLs in DVIs
 \usepackage{ifpdf}
@@ -96,6 +98,8 @@ Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 
 \newglossaryentry{responsive}{name=resonzivn, description={}}
 
+\newglossaryentry{wysiwyg}{name=WYSIWYG, description={Zkratka výrazu ,,What you see is what you get'', doslowně přeloženo jako ,,dostaneš to co vidíš''. Používá se pro označení editorů html kódu, které poskytují formátování pomocí tlačítek a výstup automaticky konvertují do html kódu.}}
+
 %% Beginning of the thesis itself
 \MainMatter
 
@@ -104,200 +108,10 @@ Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 
 %% Thesis text structured using
 %% chapters, sections, subsections, etc.
-\chapter{Úvod}
-Cílem celého projektu je vytvoření informačního systému pro studenty Ekonomicko-správní fakulty Masarykovy Univerzity. Před započatím tého práce existovala webová stránka postavená na Drupalu verze 6, ve které byla vytvořena komplexní struktura obsahu - právních oborů a zákonů. Kolega Ondřej Materna ve své práci zanalyzoval toto řešení a reálné požadavky studentů. Výsledkem jeho práce bylo řešení, které se příliš neslučovalo s aktuálně existujícími stránkami. Drupal verze 6 již existoval již více než pět let a dva roky existoval i jeho nástupce, drupal verze 7\cite{website:wiki:drupal}. Ten poskytoval mnohem rozsáhlejší možnosti rozšíření, neboť se prakticky všechen vývoj přesunul k němu. 
-
-Důležitou částí portálu je propojení s \gls{aspi} za pomocí vzdálené plochy. Protože hlavním cílem projektu byla uživatelská přívětivost, byl při výběru řešení kladen důraz převážně na jednoduchost a minimální požadavky na klienta - ať již uživatele, nebo jeho stroj. Bylo zvoleno řešení postavené na moderním HTML5 a open-source řešení Guacamole. To poskytuje klienta zobrazeného čistě v okně prohlížeče, komunikujícího se vzdálenou plochou za pomocí proxy serveru přeposílajícího požadavky dále. Architektura je detailně popsána v kapitole \ref{chap:implementace}.
-
-Tato práce staví na práci Mgr. Ondřeje Materny ,,Návrh a realizace právního portálu pro ESF MU'' \cite{omaterna2013}. Ta je důkladně zanalyzována a její závěry uplatněny na prostředí CMS Drupal a jeho možnosti. Je popsáno rozdělení na jednotlivé sektory stránek, vzhled samotný však není předmětem této práce, nýbrž %% TODO doplnit Skarlet
-Z důvodu spolupráce mezi více studenty byl vytvořen základní systém pro 
-
-%TODO Popsat co studenti museji aktualne delat k tomu aby se dostali k ASPI a jak to zmenime
-
-\chapter{Analýza}
-\label{chap:analyza}
-
-Jak byly požadavky zpracovány a navrženy \\
-Jakým způsobem bylo vytvořeno propojení na vzdálený server \\
-Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
-
-\section{Použité technologie}
-\label{chap:technologies}
-
-Základními technologiemi jsou Drupal a Guacamole, které prakticky určují, jaké další technologie byly využity. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
-
-\paragraph*{Drupal} \emph{https://drupal.org}
-
-Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systémů pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
-
-\paragraph*{Guacamole}
-Popsat co přesně za tím stojí a proč to tak je
-
-\paragraph*{CORS} 
-
-Popsat jen co to přesně je a jak to pracuje
-
-\paragraph*{WebSockets}
-
-Jakým způsobem použity a pro co
-
-\paragraph*{ASPI}
-
-Popsat o čem to je
-
-DEPLOYMENT
-
-\paragraph*{Drush}
-
-\paragraph*{Phing}
-
-Popsat že to je založené na ANT
-
-\paragraph*{DrushTask}
-
-\paragraph*{Maven}
-
-Pro JAVU
-
-\paragraph*{Team City}
-
-\paragraph*{GitHub}
-
-VZHLED
-
-\paragraph*{Omega (Drupal Theme)} \emph{https://drupal.org/project/omega}
-
-Pro Drupal existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů (css). Projekt Omega je zaměřen na \gls{responsive} a poskytuje hotovou implementaci různých stylů pro různá zobrazovací zařízení. Zatímco třetí verze poskytuje komplexní administrační rozhraní, přístup čtvrté verze se spíše zaměřil na implementaci v kódu. Za pomocí SUSY jsou zapsány poměry mezi bloky zobrazenými na stránce a ty se pak při využití knihovny Breakpoints\cite{website:breakpoints} mezi sebou přepínají.
-
-\paragraph*{SASS}
-
-\paragraph*{COMPASS}
-
-\paragraph*{SUSY}
-
-
-Media Queries
-Pro zobrazení na zařízeních s menším rozlišením nebo velikostí obrazovky (telefony a tablety)
-
-Architektura řešení
-Zde popsat co mezi sebou jak komunikuje, ideálně jako vrstvy technologií
-
-Drupal
-Drupal Services
-Guacamole Servlets
-Guacamole Proxy
-ASPI Remote Machines
-
-Popsat jak funguje Guacamole normálně a jak bylo přepracováno a proč pak byl využit CORS
-
-
-\chapter{Implementace}
-\label{chap:implementace}
-
-Tady popsat co přesně bylo uděláno v rámci implementace a proč to bylo uděláno. Proč bylo důležité aktualizovat na Drupal 7 a co to s sebou přineslo za změny.
-\section{Aktualizace Drupal 6 na Drupal 7}
-Výhody Drupal 7 nad Drupalem 6
-Porovnání dostupných verzí mezi Drupalem 6 a 7
-
-\begin{table}
-  \caption{Porovnání verzí modulů mezi Drupalem 6 a 7}
-  \begin{tabular}{ | p{5cm} | p{2.5cm} | p{2.5cm} | c | }
-    \hline 
-    Jméno modulu & Drupal 6 & Drupal 7 & stav  \\ \hline 
-    Backup and Migrate & 2.7 & 2.7 & \checkmark \\ \hline
-    Colorbox & 1.6 & 2.4 & \checkmark \\ \hline
-    CCK & 2.9 & jádro & \checkmark \\ \hline
-    Custom Breadcumbs & 1.5 & 1.x-alpha3 & \\ \hline
-    DB Maintenance & 1.4 & 1.1 & \checkmark \\ \hline
-    DHTML Menu & 3.5 & 1.0-beta1 & \\ \hline 
-    Email Field & 1.4 & 1.2 & \checkmark \\ \hline
-    File (Field Paths & 1.5 & 1.0-beta4 & \\ \hline
-    FileField & 3.11 & jádro & \checkmark \\ \hline
-    Front Page & 1.3 & 2.4 & \checkmark \\ \hline
-    ImageAPI & 3.11 & jádro & \checkmark \\ \hline
-    ImageCache & 2.0-rc1 & jádro & \checkmark \\ \hline
-    IMCE & 2.5 & 1.7 & \checkmark \\ \hline
-    IMCE Wysiwyg bridge & 1.1 & 1.0 & \checkmark \\ \hline
-    jCarousel & 2.6 & 2.6 & \checkmark \\ \hline
-    Link & 2.10 & 1.1 & \checkmark \\ \hline
-    Localization Update & 2.10 & 1.1 & \checkmark \\ \hline
-    Menu Attributes & 2.0-beta1 & 1.0-rc2 & \checkmark \\ \hline
-    Menu Block & 2.4 & 2.3 & \checkmark \\ \hline
-    Pathauto & 1.6 & 1.2 & \checkmark \\ \hline
-    Taxonomy Breadcrumb & 1.1 & - & \\ \hline
-    Token & 1.19 & 1.5 & \checkmark \\ \hline
-    Transliteration & 3.1 & 3.1 & \checkmark \\ \hline
-    Views & 2.16 & 3.7 & \\ \hline
-    Views Search & 1.0 & - & \\ \hline
-    WYSIWYG & 2.4 & 2.2 & \checkmark \\ \hline
-  \end{tabular}
-\end{table}
-
-\section{Odebrané moduly}
-
-\section{Nově přidané moduly a jejich popis}
-Zde sepsat které moduly byly přidány a proč
-
-\section{Deployment a jeho možnosti}
-\section{Instalace a konfigurace řešení}
-\section{Optimalizace řešení a její dopad na uživatelskou zkušenost}
-Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
-Popsat agregaci JS, CSS a podobne 
-\cite{website:drupal:optimizing}
-
-\chapter{Organizace vývojového procesu}
-
-Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru Apache nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto MySQL použit MySQL Lite, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
-
-Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba Guacamole Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém Windows Server 2008 SP2, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro JAVA aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
-
-\begin{table}
-  \caption{Porovnání technologií použitých na lokálním a produkčním prostředí}
-  \begin{tabular}{ | p{3cm} | p{4cm} | p{4cm} | }
-    \hline  
-    & Vývojové prostředí & Produkční prostředí \\ \hline
-    HTTP Server & Lighttpd & Apache \\ \hline
-    SQL databáze & SQLite [OPRAVIT???] & MySQL \\ \hline
-    JAVA Servlet Container & Apache Tomcat 7 & Apache Tomcat 7 \\ \hline
-    Vzdálená plocha & Windows Server 2008 SP2 (Oracle VM VirtualBox) & ASPI [PŘIDAT VÍCE DETAILŮ] \\ \hline
-  \end{tabular}
-\end{table}
-
-Protože Drupal je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt Features [LINK], který exportuje pomocí funkcionality postkytnuté modulem Ctools nastavení drupalu jako jsou typy obsahu a také pomocí modulu Strongarm nastavení systéu samotného. Všechna tato nastavení jsou pak uložena do modulu Drupalu a mohou pak být jednoduše přenesena na jiné prostředí a také aktualizována v průběhu času a s přibývajícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
-
-ESF Feature (esf\_feature) – základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
-ESF Feature UI (esf\_feature\_ui) – administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench [LINK]
-ESF Permissions (esf\_permissions) – definice uživatelských rolí a jejich práv
-Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
-
-\section{Organizace řízení projektu}
-S ohledem na nízký počet zainteresovaných osob a rozsah projektu jsme neimplementovali žádné pokročilé metody projektového řízení a rozhodli jsme se pro jednoduchý seznam úkolů. Jelikož jsme pro uložení zdrojových kódů projektu využili GitHub, bylo nejjednodušší jej rovněž využít pro správu úkolů. Ačkoliv se nemůže rovnat s platformami, specializujícími se jen daný úkol, poskytuje několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze jednoduše využít pro rozlišení mezi úkolem a chybou a také důležitostí problému. Milníky byly využity pro jednoduché plánování a sledování pokroku.
-
-\subsection{Značky}
-Typy úkolů
-\begin{itemize}
-  \item Úkol \emph{(task)} - úkol, který bylo třeba vykonat na projektu
-  \item Chyba \emph{(bug)} - chyba nalezená na projektu, kterou bylo potřeba opravit
-\end{itemize}
-Priorita
-\begin{itemize}
-	\item Nízká \emph{(0-low)}
-	\item Střední \emph{(1-medium)}
-	\item Vysoká  \emph{(2-high)}
-	\item Kritická \emph{(0-critical)}
-\end{itemize}
-
-\subsection{Milníky}
-\begin{itemize}
-  \item 0.1 | Inicializace - úvodní výzkum týkající se připojení ke vzdálené ploše a dostupných technologií
-  \item 0.2 | Drupal modul - vytvoření modulu pro drupal a jeho základní funkcionalita
-  \item 0.3 | Struktura a práva - struktura stránek, jejich obsahu a práva uživatelů k jejich použití
-  \item 0.4 | Guacamole Drupal - přesun funkcionality z Guacamole do Drupal modulu a jeho propojení s JAVA server aplikací
-  \item 0.5 | Test v praxi - změny potřebné k umístění řešení na produkční servery a vytvoření skriptů k automatizaci tohoto procesu
-  \item 1.0 | Základní verze - spuštění základní funkční verze
-  \item 1.1 | Produkční verze - vyřešení všech problémů, komunikace se stranou klienta a přípravy na reálné spuštění v produkčním prostředí
-  \item 1.2 | Údržba - první z verzí, ve kterých se bude dodávat údržba řešení
-\end{itemize}
+\include{tex/uvod}
+\include{tex/analyza}
+\include{tex/implementace}
+\include{tex/vyvoj}
 
 %% Lists of tables and figures, glossary, etc.
 \printindex
@@ -310,14 +124,14 @@ Priorita
 \def\tmpchapter{0}
 \renewcommand{\chaptername}{}
 \renewcommand{\thechapter}{}
-\addtocontents{toc}{\setcounter{tocdepth}{-1}}
+%\addtocontents{toc}{\setcounter{tocdepth}{-1}}
 \chapter{References}
 \renewcommand{\chapter}[2]{}% for other classes
 
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{mvantuch}
 
-\addtocontents{toc}{\setcounter{tocdepth}{2}}
+%\addtocontents{toc}{\setcounter{tocdepth}{2}}
 \endgroup
 
 %% Additional materials

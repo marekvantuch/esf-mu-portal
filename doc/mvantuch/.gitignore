@@ -11,3 +11,5 @@ fi-logo*
 *.ind
 *.log
 *.toc
+*.glo
+*.xdy
