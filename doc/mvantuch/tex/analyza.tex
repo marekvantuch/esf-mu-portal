@@ -23,9 +23,10 @@ Pro Drupal existuje nespočet témat vzhledu, které se starají o formátován�
 
 \subsubsection*{SASS}
 
+
 \subsubsection*{COMPASS}
 
-\paragraph*{SUSY}
+\subsubsection*{SUSY}
 
 Media Queries
 Pro zobrazení na zařízeních s menším rozlišením nebo velikostí obrazovky (telefony a tablety)
@@ -33,38 +34,39 @@ Pro zobrazení na zařízeních s menším rozlišením nebo velikostí obrazovk
 
 \subsection{Technologie připojení ke vzdálené ploše}
 
-\paragraph*{Guacamole}
-Popsat co přesně za tím stojí a proč to tak je
+\subsubsection*{Guacamole}
+Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat.
 
-\paragraph*{CORS} 
+Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
 
-Popsat jen co to přesně je a jak to pracuje
+\subsubsection*{CORS} 
 
-\paragraph*{ASPI}
+
+\subsubsection*{ASPI}
 
 Popsat o čem to je
 
-\paragraph*{WebSockets}
+\subsubsection*{WebSockets}
 
 Jakým způsobem použity a pro co
 
 \subsection{Podpora deploymentu a vývoje}
 
-\paragraph*{Drush}
+\subsubsection*{Drush}
+Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vyvinut program Drush, který jako PEAR balíček nabízí typické administrační nástroje v terminálové konzoli. Typické akce jako stahování nových modulů a jejích management, čištění keší a podobně jsou proto mnohem urychleny. Zároveň nabízí i jednoduchou možnost pro rozšíření dalšími moduly, které v případě implementace souboru s příponou .drush.inc mohou přidávat další příkazy.
 
-\paragraph*{Phing}
-
+\subsubsection*{Phing}
 Popsat že to je založené na ANT
 
-\paragraph*{DrushTask}
+\subsubsection*{DrushTask}
 
-\paragraph*{Maven}
-
+\subsubsection*{Maven}
 Pro JAVU
 
-\paragraph*{Team City}
+\subsubsection*{Team City}
 
-\paragraph*{GitHub}
+\subsubsection*{GitHub}
+Pro udržování historie kódu a pro spolupráci více autorů byla vybrána technologie Git a online portál GitHub, který pro ni poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
 
 \section{Architektura řešení}
 Zde popsat co mezi sebou jak komunikuje, ideálně jako vrstvy technologií
@@ -113,14 +115,10 @@ I když by se pro určení váhy produktu dalo využít jednoduchého číselné
 Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
 
 \subsection{Typy obsahu}
-Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o název, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{img:blabla}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
+Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{img:blabla}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
 
-\includesvg{}
-
-\begin{center}
-%  \begin{umlpackage}[x=0,y=0]{package-name} 
-%  \end{umlpackage} 
-\end{center}
+%\includegraphics{}
+%\includesvg{}
 
 \subsubsection*{Předmět \emph{(uzel)}}
 Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. \\
@@ -146,7 +144,7 @@ Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z n
 
 \begin{list}{-}{Pole}
   \item popis (dlouhý text se souhrnem)
-  \item váha
+  \item váha (váha)
 \end{list}
 
 \subsubsection*{Příběh \emph{(uzel)}}
