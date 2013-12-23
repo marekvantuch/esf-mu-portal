@@ -13,3 +13,7 @@ fi-logo*
 *.toc
 *.glo
 *.xdy
+*.out
+*.blg
+*.gz
+*.bbl

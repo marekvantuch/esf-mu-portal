@@ -13,28 +13,24 @@ Základními technologiemi jsou Drupal a Guacamole, které prakticky určují, j
 
 \subsection{Jádro CMS a přidružené technologie}
 
-\subsubsection*{Drupal \hfill \emph{https://drupal.org}} 
-
+\subsubsection*{Drupal \hfill \emph{http://drupal.org}} 
 Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systémů pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
 
-\subsubsection*{Omega (Drupal Theme) \hfill \emph{https://drupal.org/project/omega}}
-
+\subsubsection*{Omega (Drupal Theme) \hfill \emph{http://drupal.org/project/omega}}
 Pro Drupal existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů (css). Projekt Omega je zaměřen na \gls{responsive} a poskytuje hotovou implementaci různých stylů pro různá zobrazovací zařízení. Zatímco třetí verze poskytuje komplexní administrační rozhraní, přístup čtvrté verze se spíše zaměřil na implementaci v kódu. Za pomocí SUSY jsou zapsány poměry mezi bloky zobrazenými na stránce a ty se pak při využití knihovny Breakpoints\cite{website:breakpoints} mezi sebou přepínají.
 
-\subsubsection*{SASS}
+\subsubsection*{SASS - Syntactically Awesome Style Sheets \hfill \emph{http://sass-lang.com/}}
+Při využití tématu vzhledu Omega se automaticky nabídla možnost využití knihovny SASS pro generování kaskádových stylů. Namísto použití klasického CSS je kód napsán ve formátu SCSS a poté zkompilován do CSS. Tento přístup přináší bezproblémovou kompatibilitu se všemi prohlížeči doplněnou o rozšířené možnosti definice pravidel, jako je využití proměnných, vnoření pravidel, in-line import a další. Kromě výrazného vylepšení čitelnosti, možnosti seskupováni pravidel bez zvyšování zátěže na přenos dat tak lehce lze dosáhnout i snížení programátorské náročnosti.
 
+\subsubsection*{COMPASS \hfill \emph{http://compass-style.org/}}
+Soubory SASS musí být kompilovány do CSS pro zobrazení prohlížečem a protože manuální kompilace je časově náročná a náchylná k opomenutí, nabízí se využití programu COMPASS. Přestože poskytuje širokou škálu funkcionality určené pro ulehčení práce designérům, pro potřeby tohoto projektu byla využita pouze automatická konverze z SCSS do CSS dle definovaných pravidel za pomocí compass watch. Po spuštění démona jsou kontrolovány všechny změny ve složce a automaticky regenerovány výstupní CSS soubory pro načtení prohlížečem.
 
-\subsubsection*{COMPASS}
-
-\subsubsection*{SUSY}
-
-Media Queries
-Pro zobrazení na zařízeních s menším rozlišením nebo velikostí obrazovky (telefony a tablety)
-	
+\subsubsection*{SUSY \hfill \emph{http://susy.oddbird.net/}}
+Další technologií využitou v tématu vzhledu je SUSY - implementace responsivní mřížky pro Compass. Za pomocí jednoduchých pravidel lze nadefinovat rozdílné rozvržení stránky závisející na rozlišení zobrazovacího zařízení. Například monitoru počítače s rozlišením vyšším než 1024 bodů můžeme postranní panel zobrazit nalevo, zatímco na mobilním zařízením můžeme text zmenšit a zobrazit v horní části stránky spolu s vypuštěním některých nedůležitých bloků. Celá stránka je může být rozdělena na počet sloupců, které mohou být dynamicky vyplňovány a pravidla lze velmi jednoduše zapisovat bez nutnosti řešení problémů s kompatibilitou mezi prohlížeči.
 
 \subsection{Technologie připojení ke vzdálené ploše}
 
-\subsubsection*{Guacamole}
+\subsubsection*{Guacamole \hfill \emph{http://guac-dev.org/}}
 Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat.
 
 Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
@@ -42,7 +38,7 @@ Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí
 \subsubsection*{CORS} 
 
 
-\subsubsection*{ASPI}
+\subsubsection*{ASPI \hfill \emph{http://www.systemaspi.cz/}}
 
 Popsat o čem to je
 
@@ -52,13 +48,14 @@ Jakým způsobem použity a pro co
 
 \subsection{Podpora deploymentu a vývoje}
 
-\subsubsection*{Drush}
-Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vyvinut program Drush, který jako PEAR balíček nabízí typické administrační nástroje v terminálové konzoli. Typické akce jako stahování nových modulů a jejích management, čištění keší a podobně jsou proto mnohem urychleny. Zároveň nabízí i jednoduchou možnost pro rozšíření dalšími moduly, které v případě implementace souboru s příponou .drush.inc mohou přidávat další příkazy.
+\subsubsection*{Drush \hfill \emph{http://github.com/drush-ops/drush}}
+Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vyvinut program Drush, poskytující administrační rozhraní nad Drupalem v terminálové konzoli. V základu jsou poskytovány operace nad moduly a tématy vzhledu, kdy každý z modulů může pomocí implementace funkcí v souboru .drush.inc poskytnout vlastní příkazy.
 
-\subsubsection*{Phing}
-Popsat že to je založené na ANT
+\subsubsection*{Phing \hfill \emph{http://www.phing.info/}}
+Phing je nástroj určený ke kompilaci PHP projektů, fungující na XML konfiguračním souboru. Je založený na technologii Apache ANT poskytující stejný nástroj pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv akcí. 
 
-\subsubsection*{DrushTask}
+\subsubsection*{DrushTask \hfill \emph{https://drupal.org/project/phingdrushtask}}
+
 
 \subsubsection*{Maven}
 Pro JAVU
@@ -78,6 +75,11 @@ Guacamole Proxy
 ASPI Remote Machines
 
 Popsat jak funguje Guacamole normálně a jak bylo přepracováno a proč pak byl využit CORS
+
+\begin{figure}[htp] \centering{
+\includegraphics[scale=0.77]{img/architecture_overview.pdf}}
+\caption{Pohled na architekturu řešení}
+\end{figure}  
 
 \section{Aplikace požadavků na prostředí Drupalu}
 
@@ -117,71 +119,32 @@ Důležitou vlastností většiny systémů je možnost propojení entit. Pro mo
 \subsection{Typy obsahu}
 Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{img:blabla}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
 
-%\includegraphics{}
-%\includesvg{}
+\begin{figure}[htp] \centering{
+\includegraphics[scale=0.83]{img/class_diagram.pdf}}
+\caption{Diagram tříd CMS systému}
+\end{figure}  
+
 
 \subsubsection*{Předmět \emph{(uzel)}}
-Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. \\
-
-\begin{list}{-}{Pole}
-  \item popis (dlouhý text se souhrnem)
-  \item kód (text)
-  \item ročník (hodnota slovníku - Ročník) 
-  \item obecnost (hodnota slovníku - Stupeň obecnosti)
-  \item obory (odkaz na entitu)
-  \item materiály (média)
-\end{list}
-
-\begin{list}{-}{Zobrazení}
-  \item popis (souhrnné zobrazení)
-  \item obory (tabulka)
-  \item materiály (tabulka)
-  \item přednášky (tabulka)
-\end{list}
+Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
 
 \subsubsection*{Obor práva \emph{(uzel)}}
-Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. \\
+Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
 
-\begin{list}{-}{Pole}
-  \item popis (dlouhý text se souhrnem)
-  \item váha (váha)
-\end{list}
+\subsubsection*{Studijní text \emph{položka}}
+Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
+
+\subsubsection*{Zákon \emph{položka}}
+
 
 \subsubsection*{Příběh \emph{(uzel)}}
-Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. \\
-
-\begin{list}{-}{Pole}
-  \item popis (dlouhý text se souhrnem)
-\end{list}
-
-\begin{list}{-}{Zobrazení}
-  \item popis (souhrnné zobrazení)
-\end{list}
-
+Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
 
 \subsubsection*{Vtip \emph{(uzel)}}
 V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. \\
 
-\begin{list}{-}{Pole}
-  \item popis (dlouhý text se souhrnem)
-\end{list}
-
-\begin{list}{-}{Zobrazení}
-  \item popis (souhrnné zobrazení)
-\end{list}
-
-
 \subsubsection*{Novinka \emph{(uzel)}}
 Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. \\
-
-\begin{list}{-}{Pole}
-  \item popis (dlouhý text se souhrnem)
-\end{list}
-
-\begin{list}{-}{Zobrazení}
-  \item popis (souhrnné zobrazení)
-\end{list}
-
 
 \subsection{Slovníky}
 
