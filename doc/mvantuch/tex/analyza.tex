@@ -7,7 +7,7 @@ Jakým způsobem bylo vytvořeno propojení na vzdálený server \\
 Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
 
 \section{Použité technologie}
-\label{chap:technologies}
+\label{sec:technologies}
 
 Základními technologiemi jsou Drupal a Guacamole, které prakticky určují, jaké další technologie byly využity. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
 
@@ -31,12 +31,18 @@ Další technologií využitou v tématu vzhledu je SUSY - implementace responsi
 \subsection{Technologie připojení ke vzdálené ploše}
 
 \subsubsection*{Guacamole \hfill \emph{http://guac-dev.org/}}
-Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat.
+Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat. Postup komunikace mezi klientským prohlížečem a vzdálenou plochou je blíže vyobrazen na diagramu \ref{fig:arch_core}.
 
 Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
 
-\subsubsection*{CORS} 
+\begin{figure}[htp] 
+  \centering{\includegraphics[scale=0.77]{img/architecture-core-crop.pdf}}
+  \caption{Základní architektura komunikace se vzdálenou plochou}
+  \label{fig:arch_core}
+\end{figure}  
 
+\subsubsection*{CORS} 
+Kvůli bezpečnostním rizikům je JavaScriptu běžícímu v prohlížeči zakázáno přistupovat k jiným doménám, tento přístup se nazývá Same-origin policy a slouží k zamezení podvodných stránek a zvýšení internetové bezpečnosti. Veškeré požadavky směřující na jinou doménu tak musejí být vykonávány přímo ze serveru, což je často zbytečně náročné a v dnešní době je občas nutné tato omezení obejít. K tomu slouží CORS - Cross-origin Resource Sharing, kdy za pomocí HTML hlaviček přidaných do komumnikace mezi serverem a prohlížečem je umožněna komunikace s jinými doménami. Pokud server odešle zpět hlavičku Access-Control-Allow-Origin: [doména], prohlížeč ji zanalyzuje a případně umožní komunikaci. K tomuto je nutné využít XMLHttpRequest (XDomainRequest v případě \gls{ie}) s attributem WithCredentials, o zbytek se postará prohlížeč se serverem a komunikace funguje stejně jako v případě klasických požadavků.
 
 \subsubsection*{ASPI \hfill \emph{http://www.systemaspi.cz/}}
 
@@ -65,27 +71,30 @@ Pro JAVU
 \subsubsection*{GitHub}
 Pro udržování historie kódu a pro spolupráci více autorů byla vybrána technologie Git a online portál GitHub, který pro ni poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
 
-\section{Architektura řešení}
-Zde popsat co mezi sebou jak komunikuje, ideálně jako vrstvy technologií
+\section{Architektura připojení ke vzdálené ploše}
+Základně poskytuje Guacamole komplexní řešení na propojení ke vzdálené ploše včetně stránky pro management uživatelů, kde každý z nich si může pro sebe vytvořit své vlastní připojení, u každého z nich se zobrazuje náhled a podobně. Jak je zobrazeno na diagramu \ref{fig:arch_guacamole}, součástí Guacamole je i webová aplikace v jazyce HTML, která implementuje knihovnu Guacamole-js a tím i komunikaci s JAVA Servletem. Pro potřeby tohoto projektu však bylo nutné tyto JavaScriptové knihovny převzít a implementovat do modulu pro Drupal. 
 
-Drupal
-Drupal Services
-Guacamole Servlets
-Guacamole Proxy
-ASPI Remote Machines
-
-Popsat jak funguje Guacamole normálně a jak bylo přepracováno a proč pak byl využit CORS
-
-\begin{figure}[htp] \centering{
-\includegraphics[scale=0.77]{img/architecture_overview.pdf}}
-\caption{Pohled na architekturu řešení}
+\begin{figure}[htp] 
+  \centering{\includegraphics[scale=0.7]{img/architecture-guacamole-crop.pdf}}
+  \caption{Neupravená architektura a rozčlenění řešení}
+  \label{fig:arch_guacamole}
 \end{figure}  
 
-\section{Aplikace požadavků na prostředí Drupalu}
+Díky skutečnosti, že již nutně neběží JAVA Server a JAVA EE Web aplikace na stejném serveru, či url, bylo nutné změnit architekturu AJAXových požadavků. Ty totiž musejí v typickém případě být zasílány pouze na stejnou doménu kvůli prevenci \gls{xss}. Pro vyřešení tohoto problému byla změněna implementace na CORS požadavky, k čemuž musel být uzpůsoben i JAVA Servlet kontejner, u kterého musely být povoleny požadavky z dané domény. 
+
+Uživatel proto pracuje základně pouze s portálem postaveném na Drupalu, do kterého byl přidán modul implementující stránku určenou ke komunikaci s Guacamole Servlet kontejnerem za pomoci upravené JavaScriptové knihovny Guacamole-js, jak je vyobrazeno na diagramu \ref{fig:arch_drupal}.
+
+\begin{figure}[htp] 
+  \centering{\includegraphics[scale=0.7]{img/architecture-drupal-crop.pdf}}
+  \caption{Architektura přizpůsobená pro portál ESF}
+  \label{fig:arch_drupal}
+\end{figure}  
+
+\section{Struktura portálu v prostředí Drupalu}
 
 V Drupalu je využíváno několika základních ,,stavebních kamenů'', každý z nich může dle svého typu hluboce modifikován a přizpůsoben každému řešení. Základem jsou entity, uložené v databázi poskytují možnosti přidávání polí, podobně jako sloupců v databázi. Entity jsou několika moduly jádra Drupalu rozšířeny a poskytují funkcionalitu potřebnou k vytvoření webových stránek. Jmenovitě se jedná o uzly (node), které nám poskytují jednotlivé stránky a mají svou unikátní url adresu, a slovníky (taxonomy), které slouží ke kategorizaci obsahu a vytváření polí založených na výběru z dostupných prvků. Uzly i slovníky mohou být konfigurovány ve formě druhů obsahu, každý z nich s vlastními polemi nezávislými na ostatních entitách. Pole se stejným obsahem však mohou být sdílena pro ulehčení databázové struktury, do ktére se data reálně ukládají. Instance dostupných typů obsahu pak dostanou přidělené unikátní číslo v rámci všech entit, které určuje její data v databázi. Ne všechna pole musejí být zobrazena na stránce entity, nebo může pro jejich zobrazení být využito speciálních formátovacích technik, jako tabulek, či jiných výpisů.
 
-Pro umístění obsahu na stránkách se využívají bloky (block), které lze přímo v UI umístit do předdefinovaných segmentů stránek (ty jsou definované v konfiguračních souborech tématu vzhledu viz. kapitola \ref{chap:implementace}).
+Pro umístění obsahu na stránkách se využívají bloky (block), které lze přímo v UI umístit do předdefinovaných segmentů stránek (ty jsou definované v konfiguračních souborech tématu vzhledu viz. kapitola \ref{chap:implementace-drupal}).
 
 Požadavky \cite{omaterna2013} poskytnuté Mgr. Maternou poskytují analýzu řešení, kterou však bylo potřeba aplikovat přímo na možnosti Drupalu a co nejvíce využít jeho možností - jednak pro samotnou implementaci řešení, ale také pro maximální ulehčení administrace a poskytnutí co nejvyšší míry soudržnosti skrze finální řešení projektu. Toho je dosáhnuto omezením vstupu a poskytnutím výběru z předdefinovaných možností (pokud je tento způsob řešení možný).
 
@@ -117,12 +126,13 @@ I když by se pro určení váhy produktu dalo využít jednoduchého číselné
 Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
 
 \subsection{Typy obsahu}
-Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{img:blabla}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
+Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
 
-\begin{figure}[htp] \centering{
-\includegraphics[scale=0.83]{img/class_diagram.pdf}}
-\caption{Diagram tříd CMS systému}
-\end{figure}  
+%\begin{figure}[htp] \centering{
+%\includegraphics[scale=0.83]{img/class_diagram.pdf}}
+%\caption{Diagram tříd CMS systému}
+%\label{fig:class-diagram}
+%\end{figure}  
 
 
 \subsubsection*{Předmět \emph{(uzel)}}

@@ -40,8 +40,8 @@
 \usepackage{makeidx}
 \makeindex
 
-%% CHECK WHAT THIS IS
 \usepackage[xindy]{glossaries}
+\include{tex/glossary}
 \makeglossaries
 
 %% Use STAR and CIRCLE signs for nested
@@ -91,8 +91,6 @@ Tato práce popisuje implementaci internetového portálu pro fakultu Ekonomicko
 Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, WebSockets, JAVA, PHP, JavaScript
 \end{ThesisKeyWords}
 
-\include{tex/glossary}
-
 %% Beginning of the thesis itself
 \MainMatter
 
@@ -108,7 +106,7 @@ Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 
 %% Lists of tables and figures, glossary, etc.
 \printindex
-%%\printglossary
+\printglossary
 \listoffigures
 \listoftables
 
@@ -118,7 +116,7 @@ Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 \renewcommand{\chaptername}{}
 \renewcommand{\thechapter}{}
 %\addtocontents{toc}{\setcounter{tocdepth}{-1}}
-\chapter{References}
+\chapter{Reference}
 \renewcommand{\chapter}[2]{}% for other classes
 
 \bibliographystyle{plain}

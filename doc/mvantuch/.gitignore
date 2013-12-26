@@ -2,7 +2,7 @@ fi-logo*
 *.dvi
 *.lof
 *.lot
-*.pdf
+mvantuch.pdf
 *.aux
 *.fdb_latexmk
 *.fls
