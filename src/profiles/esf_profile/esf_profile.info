@@ -1,0 +1,120 @@
+; Packaging information for esf_profile
+name = "ESF Profile"
+description = "Installation profile for the ESF Portal site"
+exclusive = "1"
+core = "7.x"
+; ----------
+; Dependencies
+; ----------
+; Administration
+dependencies[] = admin_views
+; Chaos tool suite
+dependencies[] = bulk_export
+dependencies[] = ctools
+; Context
+dependencies[] = context
+dependencies[] = context_layouts
+dependencies[] = context_omega
+; Core
+dependencies[] = block
+dependencies[] = contextual
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = locale
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = php
+dependencies[] = search
+dependencies[] = statistics
+dependencies[] = syslog
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = translation
+dependencies[] = update
+dependencies[] = user
+; ECK
+dependencies[] = eck
+; ESF
+dependencies[] = esf_module
+dependencies[] = esf_module_ui
+; Features extra
+dependencies[] = fe_block
+; Fields
+dependencies[] = bundle_copy
+dependencies[] = email
+dependencies[] = entityreference
+dependencies[] = field_group
+dependencies[] = filefield_paths
+dependencies[] = inline_entity_form
+dependencies[] = link
+dependencies[] = password_field
+dependencies[] = references
+dependencies[] = user_reference
+dependencies[] = viewfield
+; Media
+dependencies[] = file_entity
+dependencies[] = imce
+dependencies[] = media
+dependencies[] = mediafield
+; Multilingual
+dependencies[] = l10n_client
+dependencies[] = l10n_update
+; Multilingual - Internationalization
+dependencies[] = i18n
+dependencies[] = i18n_field
+dependencies[] = i18n_node
+dependencies[] = i18n_string
+dependencies[] = i18n_translation
+; Other
+dependencies[] = backup_migrate
+dependencies[] = breakpoints
+dependencies[] = db_maintenance
+dependencies[] = diff
+dependencies[] = entity
+dependencies[] = entityreference_views_formatter
+dependencies[] = libraries
+dependencies[] = menu_block
+dependencies[] = module_filter
+dependencies[] = navbar
+dependencies[] = pathauto
+dependencies[] = pdm
+dependencies[] = quicktabs
+dependencies[] = simplified_menu_admin
+dependencies[] = site_map
+dependencies[] = taxonomy_breadcrumb
+dependencies[] = token
+dependencies[] = transliteration
+dependencies[] = weight
+; UUID
+dependencies[] = uuid
+; User interface
+dependencies[] = ckeditor
+dependencies[] = imce_wysiwyg
+dependencies[] = jquery_update
+dependencies[] = wysiwyg
+; Variable
+dependencies[] = variable
+; Views
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_ui
+; Workbench
+dependencies[] = workbench
+dependencies[] = workbench_media
+; Features
+dependencies[] = features
+dependencies[] = esf_feature
+dependencies[] = esf_feature_ui
+dependencies[] = esf_permissions
+
