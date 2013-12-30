@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ESF Portal" default="deploy"
+<project name="ESF Portal" default="void"
          description="Build file for Drupal deployment of ESF Portal project.">
 
+    <target name="void" depends="init" />
 
     <target name="guacamole" depends="init, guacamole-properties"/>
 
@@ -14,12 +15,52 @@
                                    fix-permissions" />
 
     <target name="install" depends="init" >
-        <!-- <drush command="make" assume="yes">
+        <available file="${project.dir}" type="dir" property="project.dir.exists" />
+
+        <if>
+            <isset property="project.dir.exists"/>
+            <then>
+                <echo>Project directory already exists.</echo>
+                <echo>It must be deleted.</echo>
+                <input propertyName="project.dir.delete" defaultValue="no" validArgs="yes,no">Do you want to remove the project dir?</input>
+                <if>
+                    <equals arg1="${project.dir.delete}" arg2="yes" />
+                    <then>
+                        <delete dir="${project.dir}"></delete>
+                    </then>
+                    <else>
+                        <fail message="Project directory must be removed!" />
+                    </else>
+                </if>
+            </then>
+        </if>
+
+        <drush command="make" assume="yes">
             <param>esf.make</param>
-        </drush> -->
+            <param>${project.dir}</param>
+            <option name="prepare-install" />
+            <option name="allow-override" />
+        </drush>
+
+        <phingcall target="copy-modules" />
 
         <drush command="site-install" assume="yes">
-            <option name="db-url"
+            <param>esf_profile</param>
+            <option name="db-url">${drupal.db.url}</option>
+            <option name="account-mail">${drupal.user.mail}</option>
+            <option name="account-name">${drupal.user.name}</option>
+            <option name="account-pass">${drupal.user.pass}</option>
+            <option name="site-name">ESF</option>
+            <option name="clean-url">0</option>
+        </drush>
+
+        <drush command="vset" assume="yes">
+            <param>theme_default</param>
+            <param>omega_esf</param>
+        </drush>
+
+        <drush command="pm-enable" assume="yes">
+            <param>${project.features}</param>
         </drush>
     </target>
 
@@ -31,6 +72,11 @@
         </copy>
         <copy todir="${project.dir}/sites/default/themes" overwrite="true" >
             <fileset dir="${source.dir}/src/themes">
+                <include name="**" />
+            </fileset>
+        </copy>
+        <copy todir="${project.dir}/profiles" overwrite="true" >
+            <fileset dir="${source.dir}/src/profiles">
                 <include name="**" />
             </fileset>
         </copy>
