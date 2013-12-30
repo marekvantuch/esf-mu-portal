@@ -129,11 +129,10 @@ Důležitou vlastností většiny systémů je možnost propojení entit. Pro mo
 Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
 
 \begin{figure}[htp] \centering{
-\includegraphics[scale=0.83]{img/class_diagram.pdf}}
+\includegraphics[scale=1]{img/class-diagram-crop.pdf}}
 \caption{Diagram tříd CMS systému}
 \label{fig:class-diagram}
 \end{figure}  
-
 
 \subsubsection*{Předmět \emph{(uzel)}}
 Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
@@ -141,10 +140,10 @@ Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní
 \subsubsection*{Obor práva \emph{(uzel)}}
 Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
 
-\subsubsection*{Studijní text \emph{položka}}
+\subsubsection*{Studijní text \emph{(položka)}}
 Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
 
-\subsubsection*{Zákon \emph{položka}}
+\subsubsection*{Zákon \emph{(položka)}}
 
 
 \subsubsection*{Příběh \emph{(uzel)}}
