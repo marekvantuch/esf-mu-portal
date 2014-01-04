@@ -1,5 +1,5 @@
-
 \chapter{Organizace vývojového procesu}
+\label{chap:vyvoj}
 
 Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru Apache nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto MySQL použit MySQL Lite, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
 
@@ -40,7 +40,7 @@ Priorita
 	\item Nízká \emph{(0-low)}
 	\item Střední \emph{(1-medium)}
 	\item Vysoká  \emph{(2-high)}
-	\item Kritická \emph{(0-critical)}
+	\item Kritická \emph{(3-critical)}
 \end{itemize}
 
 \subsection{Milníky}

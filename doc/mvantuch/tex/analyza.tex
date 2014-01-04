@@ -1,10 +1,13 @@
-
 \chapter{Analýza}
 \label{chap:analyza}
-
 Jak byly požadavky zpracovány a navrženy \\
 Jakým způsobem bylo vytvořeno propojení na vzdálený server \\
 Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
+
+\section{Existující řešení}
+Při analýze bylo nutné zohlednit stávající řešení a možnosti jeho rozšíření. Existující portál využíval Drupal v 6. verzi, který byl již v dané době značně zastaralý a jeho rozšiřitelnost byla velmi omezená, či zbytečně komplikovaná. Řešení bylo rozšířeno řadou volně dostupných modulů, které dohromady poskytovaly komplexní strukturu nabídky menu vytvořenou namíru požadavkům fakulty. Tato struktura byla navržena v době, kdy nebylo známo, že systém bude pro zobrazování zákonů využívat externí software ASPI a proto byly tyto zákony také použity. 
+
+[Popsat strukturu menu]
 
 \section{Použité technologie}
 \label{sec:technologies}
@@ -46,12 +49,6 @@ Kvůli bezpečnostním rizikům je JavaScriptu běžícímu v prohlížeči zak�
 
 \subsubsection*{ASPI \hfill \emph{http://www.systemaspi.cz/}}
 
-Popsat o čem to je
-
-\subsubsection*{WebSockets}
-
-Jakým způsobem použity a pro co
-
 \subsection{Podpora deploymentu a vývoje}
 
 \subsubsection*{Drush \hfill \emph{http://github.com/drush-ops/drush}}
@@ -62,9 +59,7 @@ Phing je nástroj určený ke kompilaci PHP projektů, fungující na XML konfig
 
 \subsubsection*{DrushTask \hfill \emph{https://drupal.org/project/phingdrushtask}}
 
-
 \subsubsection*{Maven}
-Pro JAVU
 
 \subsubsection*{Team City}
 
@@ -129,7 +124,7 @@ Důležitou vlastností většiny systémů je možnost propojení entit. Pro mo
 Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
 
 \begin{figure}[htp] \centering{
-\includegraphics[scale=1]{img/class-diagram-crop.pdf}}
+\includegraphics[scale=0.95]{img/class-diagram-crop.pdf}}
 \caption{Diagram tříd CMS systému}
 \label{fig:class-diagram}
 \end{figure}  
