@@ -10,9 +10,31 @@
 // Globbing from within sub-folders only works with relative paths.
 @import "../../variables/**/*";
 
-.l-main {
+body {
+
+}
+
+html, body {
+  height: 100%;
+}
+
+.l-page {
+  height: auto;
+  min-height: 100%;
+}
+
+.l-footer-wrapper {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: 3em;
+  margin-top: -3em;
+}
+
+.l-constrained {
+
   @include background-grid($color: blue);
-  background: black;
+  margin: auto;
 }
 
 /* Header */
@@ -22,8 +44,12 @@
 
 /* Content Area */
 .l-main {
-  margin-top: 2 * $vert-spacing-unit;
-  margin-bottom: 2 * $vert-spacing-unit;
+  margin-top: $vert-spacing-unit;
+  margin-bottom: $vert-spacing-unit;
+}
+
+.l-content {
+  min-height: 20em;
 }
 
 /* Sidebars */
@@ -43,17 +69,37 @@
 }
 
 @include breakpoint($tab, true) {
-  /* Sidebars */
   .l-region--sidebar {
-    @include grid-span(4, 1);
+    @include grid-span(1, 1);
   }
 
   .l-content {
-    @include grid-span(8, 5);
-
+    @include grid-span(1, 2);
   }
 }
 
 @include breakpoint($desk, true) {
+  .l-constrained {
+    width:960px;
+  }
+  .l-region--sidebar {
+    @include grid-span(1, 1);
+  }
 
+  .l-content {
+    @include grid-span(1, 2);
+  }
+}
+
+@include breakpoint($wide, true) {
+  .l-constrained {
+    width:1200px;
+  }
+  .l-region--sidebar {
+    @include grid-span(1, 1);
+  }
+
+  .l-content {
+    @include grid-span(1, 2);
+  }
 }

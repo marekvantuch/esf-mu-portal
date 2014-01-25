@@ -36,11 +36,13 @@
       <?php print render($page['content']); ?>
       <?php print $feed_icons; ?>
     </div>
+
+    <?php print render($page['postscript']); ?>
   </div>
-
-  <?php print render($page['postscript']); ?>
-
-  <footer class="l-footer-wrapper" role="contentinfo">
-    <?php print render($page['footer']); ?>
-  </footer>
 </div>
+
+<footer class="l-footer-wrapper" role="contentinfo">
+  <div class="l-footer l-constrained">
+    <?php print render($page['footer']); ?>
+  </div>
+</footer>
