@@ -1,0 +1,55 @@
+/*******************************************************************************
+ * blue.layout.scss
+ *
+ * Styles for the Hero layout.
+ ******************************************************************************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000313}}
+.l-main {
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(0, 0, 255, 0.5)), color-stop(20%, rgba(0, 0, 255, 0.5)), color-stop(20%, rgba(0, 0, 255, 0.25)), color-stop(26.66667%, rgba(0, 0, 255, 0.25)), color-stop(26.66667%, rgba(0, 0, 255, 0.5)), color-stop(46.66667%, rgba(0, 0, 255, 0.5)), color-stop(46.66667%, rgba(0, 0, 255, 0.25)), color-stop(53.33333%, rgba(0, 0, 255, 0.25)), color-stop(53.33333%, rgba(0, 0, 255, 0.5)), color-stop(73.33333%, rgba(0, 0, 255, 0.5)), color-stop(73.33333%, rgba(0, 0, 255, 0.25)), color-stop(80%, rgba(0, 0, 255, 0.25)), color-stop(80%, rgba(0, 0, 255, 0.5)), color-stop(100%, rgba(0, 0, 255, 0.5)));
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20%, rgba(0, 0, 255, 0.25) 20%, rgba(0, 0, 255, 0.25) 26.66667%, rgba(0, 0, 255, 0.5) 26.66667%, rgba(0, 0, 255, 0.5) 46.66667%, rgba(0, 0, 255, 0.25) 46.66667%, rgba(0, 0, 255, 0.25) 53.33333%, rgba(0, 0, 255, 0.5) 53.33333%, rgba(0, 0, 255, 0.5) 73.33333%, rgba(0, 0, 255, 0.25) 73.33333%, rgba(0, 0, 255, 0.25) 80%, rgba(0, 0, 255, 0.5) 80%, rgba(0, 0, 255, 0.5) 100%);
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20%, rgba(0, 0, 255, 0.25) 20%, rgba(0, 0, 255, 0.25) 26.66667%, rgba(0, 0, 255, 0.5) 26.66667%, rgba(0, 0, 255, 0.5) 46.66667%, rgba(0, 0, 255, 0.25) 46.66667%, rgba(0, 0, 255, 0.25) 53.33333%, rgba(0, 0, 255, 0.5) 53.33333%, rgba(0, 0, 255, 0.5) 73.33333%, rgba(0, 0, 255, 0.25) 73.33333%, rgba(0, 0, 255, 0.25) 80%, rgba(0, 0, 255, 0.5) 80%, rgba(0, 0, 255, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20%, rgba(0, 0, 255, 0.25) 20%, rgba(0, 0, 255, 0.25) 26.66667%, rgba(0, 0, 255, 0.5) 26.66667%, rgba(0, 0, 255, 0.5) 46.66667%, rgba(0, 0, 255, 0.25) 46.66667%, rgba(0, 0, 255, 0.25) 53.33333%, rgba(0, 0, 255, 0.5) 53.33333%, rgba(0, 0, 255, 0.5) 73.33333%, rgba(0, 0, 255, 0.25) 73.33333%, rgba(0, 0, 255, 0.25) 80%, rgba(0, 0, 255, 0.5) 80%, rgba(0, 0, 255, 0.5) 100%);
+  background-image: linear-gradient(left, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.5) 20%, rgba(0, 0, 255, 0.25) 20%, rgba(0, 0, 255, 0.25) 26.66667%, rgba(0, 0, 255, 0.5) 26.66667%, rgba(0, 0, 255, 0.5) 46.66667%, rgba(0, 0, 255, 0.25) 46.66667%, rgba(0, 0, 255, 0.25) 53.33333%, rgba(0, 0, 255, 0.5) 53.33333%, rgba(0, 0, 255, 0.5) 73.33333%, rgba(0, 0, 255, 0.25) 73.33333%, rgba(0, 0, 255, 0.25) 80%, rgba(0, 0, 255, 0.5) 80%, rgba(0, 0, 255, 0.5) 100%);
+  background: black; }
+
+/* Header */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000319}}
+.l-region--header {
+  padding: 18px 0; }
+
+/* Content Area */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000324}}
+.l-main {
+  margin-top: 36px;
+  margin-bottom: 36px; }
+
+/* Sidebars */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000330}}
+.l-region--sidebar {
+  padding: 18px 1em; }
+
+/* Footer */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000335}}
+.l-footer-wrapper {
+  padding: 18px 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000340}}
+.l-region--postscript {
+  clear: both;
+  padding: 18px 0; }
+
+/* Sidebars */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000347}}
+.l-region--sidebar {
+  width: 31.91489%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 2.12766%; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000351}}
+.l-content {
+  width: 65.95745%;
+  clear: right;
+  float: right;
+  margin-right: 0; }

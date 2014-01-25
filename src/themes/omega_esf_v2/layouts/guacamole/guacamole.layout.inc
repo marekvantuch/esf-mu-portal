@@ -5,8 +5,6 @@ template = guacamole-layout
 
 ; Regions
 regions[header]         = Header
-regions[navigation]     = Navigation bar
-regions[highlighted]    = Highlighted
 regions[content]        = Content
 regions[sidebar]        = Sidebar
 regions[postscript]     = Postscript

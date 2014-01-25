@@ -239,7 +239,9 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
-    'roles' => array(),
+    'roles' => array(
+      'moderator' => 'moderator',
+    ),
     'module' => 'system',
   );
 
@@ -435,7 +437,9 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'delete any school_subject content'.
   $permissions['delete any school_subject content'] = array(
     'name' => 'delete any school_subject content',
-    'roles' => array(),
+    'roles' => array(
+      'moderator' => 'moderator',
+    ),
     'module' => 'node',
   );
 
