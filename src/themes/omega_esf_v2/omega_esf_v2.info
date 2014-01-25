@@ -1,0 +1,32 @@
+name = Omega ESF v2
+description = Please provide a description for your theme.
+base theme = omega
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+; ========================================
+; Stylesheets
+; ========================================
+stylesheets[all][] = css/omega-esf-v2.normalize.css
+stylesheets[all][] = css/omega-esf-v2.hacks.css
+stylesheets[all][] = css/omega-esf-v2.styles.css
+stylesheets[all][] = css/omega-esf-v2.no-query.css
+
+; ========================================
+; Scripts
+; ========================================
+scripts[] = js/omega-esf-v2.behaviors.js
+
+; ========================================
+; Regions
+; ========================================
+regions[branding] = Branding
+regions[header] = Header
+regions[navigation] = Navigation
+regions[highlighted] = Highlighted
+regions[help] = Help
+regions[content] = Content
+regions[sidebar_first] = First Sidebar
+regions[sidebar_second] = Second Sidebar
+regions[footer] = Footer
