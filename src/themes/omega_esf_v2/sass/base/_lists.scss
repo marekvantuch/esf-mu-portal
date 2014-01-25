@@ -1,0 +1,20 @@
+ul{
+ list-style: none;
+
+}
+
+ul li{
+  color: $white;
+  margin: 0px;
+}
+
+.quicktabs-tabs.quicktabs-style-nostyle{
+
+}
+.quicktabs-wrapper.quicktabs-style-nostyle ul{
+  padding-left: 0;
+}
+.quicktabs-wrapper.quicktabs-style-nostyle.jquery-once-1-processed ul li{
+  display: inline;
+
+}
