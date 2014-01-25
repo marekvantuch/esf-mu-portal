@@ -284,38 +284,35 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Vztah: Entity Reference: Referenced Entity */
+  /* Vztah: Poškozený/chybějící ovladač */
   $handler->display->display_options['relationships']['field_laws_target_id']['id'] = 'field_laws_target_id';
   $handler->display->display_options['relationships']['field_laws_target_id']['table'] = 'field_data_field_laws';
   $handler->display->display_options['relationships']['field_laws_target_id']['field'] = 'field_laws_target_id';
   $handler->display->display_options['relationships']['field_laws_target_id']['label'] = 'Law';
   $handler->display->display_options['relationships']['field_laws_target_id']['required'] = TRUE;
-  /* Pole: Law: Law type */
+  /* Pole: Poškozený/chybějící ovladač */
   $handler->display->display_options['fields']['field_law_type']['id'] = 'field_law_type';
   $handler->display->display_options['fields']['field_law_type']['table'] = 'field_data_field_law_type';
   $handler->display->display_options['fields']['field_law_type']['field'] = 'field_law_type';
   $handler->display->display_options['fields']['field_law_type']['relationship'] = 'field_laws_target_id';
   $handler->display->display_options['fields']['field_law_type']['label'] = 'Typ';
   $handler->display->display_options['fields']['field_law_type']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_law_type']['type'] = 'taxonomy_term_reference_plain';
-  /* Pole: Law: Number */
+  /* Pole: Poškozený/chybějící ovladač */
   $handler->display->display_options['fields']['field_number']['id'] = 'field_number';
   $handler->display->display_options['fields']['field_number']['table'] = 'field_data_field_number';
   $handler->display->display_options['fields']['field_number']['field'] = 'field_number';
   $handler->display->display_options['fields']['field_number']['relationship'] = 'field_laws_target_id';
-  $handler->display->display_options['fields']['field_number']['label'] = 'Číslo';
   $handler->display->display_options['fields']['field_number']['element_label_colon'] = FALSE;
-  /* Pole: Law: ASPI */
+  /* Pole: Poškozený/chybějící ovladač */
   $handler->display->display_options['fields']['field_aspi']['id'] = 'field_aspi';
   $handler->display->display_options['fields']['field_aspi']['table'] = 'field_data_field_aspi';
   $handler->display->display_options['fields']['field_aspi']['field'] = 'field_aspi';
   $handler->display->display_options['fields']['field_aspi']['relationship'] = 'field_laws_target_id';
-  /* Pole: Law: Title */
+  /* Pole: Poškozený/chybějící ovladač */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'eck_law';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'field_laws_target_id';
-  $handler->display->display_options['fields']['title']['label'] = 'Nadpis';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -358,9 +355,9 @@ function esf_feature_views_default_views() {
     t('poslední »'),
     t('Law'),
     t('Typ'),
-    t('Číslo'),
-    t('ASPI'),
-    t('Nadpis'),
+    t('Broken handler field_data_field_number.field_number'),
+    t('Broken handler field_data_field_aspi.field_aspi'),
+    t('Broken handler eck_law.title'),
     t('Vše'),
   );
   $export['reference_law_to_legal_subject'] = $view;

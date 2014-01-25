@@ -24,52 +24,12 @@ function esf_feature_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_eck_bundle_info().
- */
-function esf_feature_eck_bundle_info() {
-  $items = array(
-  'law_law' => array(
-  'machine_name' => 'law_law',
-  'entity_type' => 'law',
-  'name' => 'law',
-  'label' => 'Law',
-),
-  );
-  return $items;
-}
-
-/**
- * Implements hook_eck_entity_type_info().
- */
-function esf_feature_eck_entity_type_info() {
-$items = array(
-       'law' => array(
-  'name' => 'law',
-  'label' => 'Law',
-  'properties' => array(
-    'title' => array(
-      'label' => 'Title',
-      'type' => 'text',
-      'behavior' => 'title',
-    ),
-    'changed' => array(
-      'label' => 'Changed',
-      'type' => 'integer',
-      'behavior' => 'changed',
-    ),
-  ),
-),
-  );
-  return $items;
-}
-
-/**
  * Implements hook_node_info().
  */
 function esf_feature_node_info() {
   $items = array(
     'joke' => array(
-      'name' => t('Joke'),
+      'name' => t('Vtip'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -77,7 +37,7 @@ function esf_feature_node_info() {
       'help' => '',
     ),
     'legal_subject' => array(
-      'name' => t('Legal Subject'),
+      'name' => t('Obor práva'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -101,7 +61,7 @@ function esf_feature_node_info() {
       'help' => '',
     ),
     'school_subject' => array(
-      'name' => t('School Subject'),
+      'name' => t('Předmět'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -114,6 +74,14 @@ function esf_feature_node_info() {
       'description' => '',
       'has_title' => '1',
       'title_label' => t('Nadpis'),
+      'help' => '',
+    ),
+    'study_text' => array(
+      'name' => t('Studijní text'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
       'help' => '',
     ),
   );

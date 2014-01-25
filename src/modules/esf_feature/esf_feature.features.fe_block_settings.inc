@@ -21,10 +21,10 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => 'footer',
         'status' => 1,
-        'theme' => 'omega_esf',
+        'theme' => 'omega_esf_v2',
         'weight' => -9,
       ),
     ),
@@ -41,11 +41,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
-        'region' => 'navigation',
+      'omega_esf_v2' => array(
+        'region' => 'sidebar',
         'status' => 1,
-        'theme' => 'omega_esf',
-        'weight' => 0,
+        'theme' => 'omega_esf_v2',
+        'weight' => -15,
       ),
     ),
     'title' => '<none>',
@@ -61,10 +61,10 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => 'content',
         'status' => 1,
-        'theme' => 'omega_esf',
+        'theme' => 'omega_esf_v2',
         'weight' => 0,
       ),
     ),
@@ -81,11 +81,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => -6,
+        'theme' => 'omega_esf_v2',
+        'weight' => -14,
       ),
     ),
     'title' => '',
@@ -101,10 +101,10 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
+        'theme' => 'omega_esf_v2',
         'weight' => -8,
       ),
     ),
@@ -121,11 +121,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => -9,
+        'theme' => 'omega_esf_v2',
+        'weight' => -7,
       ),
     ),
     'title' => '',
@@ -141,11 +141,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => -5,
+        'theme' => 'omega_esf_v2',
+        'weight' => -16,
       ),
     ),
     'title' => '',
@@ -161,10 +161,10 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => 'header',
         'status' => 1,
-        'theme' => 'omega_esf',
+        'theme' => 'omega_esf_v2',
         'weight' => -10,
       ),
     ),
@@ -181,10 +181,10 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => 'header',
         'status' => 1,
-        'theme' => 'omega_esf',
+        'theme' => 'omega_esf_v2',
         'weight' => -11,
       ),
     ),
@@ -201,11 +201,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => 0,
+        'theme' => 'omega_esf_v2',
+        'weight' => -12,
       ),
     ),
     'title' => '',
@@ -221,11 +221,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => 0,
+        'theme' => 'omega_esf_v2',
+        'weight' => -5,
       ),
     ),
     'title' => '',
@@ -241,11 +241,11 @@ function esf_feature_default_fe_block_settings() {
     'pages' => '',
     'roles' => array(),
     'themes' => array(
-      'omega_esf' => array(
+      'omega_esf_v2' => array(
         'region' => '',
         'status' => 0,
-        'theme' => 'omega_esf',
-        'weight' => 0,
+        'theme' => 'omega_esf_v2',
+        'weight' => 1,
       ),
     ),
     'title' => '',

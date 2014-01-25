@@ -10,141 +10,6 @@
 function esf_feature_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'law-law-field_aspi'
-  $field_instances['law-law-field_aspi'] = array(
-    'bundle' => 'law',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'law',
-    'field_name' => 'field_aspi',
-    'label' => 'ASPI',
-    'required' => 0,
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => '_blank',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'rel_remove' => 'default',
-      'title' => 'value',
-      'title_maxlength' => 128,
-      'title_value' => 'link',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'law-law-field_law_type'
-  $field_instances['law-law-field_law_type'] = array(
-    'bundle' => 'law',
-    'default_value' => array(
-      0 => array(
-        'tid' => 2,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'law',
-    'field_name' => 'field_law_type',
-    'label' => 'Law type',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'law-law-field_number'
-  $field_instances['law-law-field_number'] = array(
-    'bundle' => 'law',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'law',
-    'field_name' => 'field_number',
-    'label' => 'Number',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-joke-body'
   $field_instances['node-joke-body'] = array(
     'bundle' => 'joke',
@@ -215,14 +80,15 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Obsah',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -256,7 +122,7 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_code',
-    'label' => 'Code',
+    'label' => 'Kód',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -281,9 +147,13 @@ function esf_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
+        'module' => 'entityreference_views_formatter',
+        'settings' => array(
+          'view_display' => 'default',
+          'view_name' => 'reference_school_subject_to_legal_subject',
+        ),
+        'type' => 'entityreference_views_formatter',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -296,7 +166,7 @@ function esf_feature_field_default_field_instances() {
     'entityconnect_unload_add' => 0,
     'entityconnect_unload_edit' => 0,
     'field_name' => 'field_laws',
-    'label' => 'Laws',
+    'label' => 'Zákony',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -317,23 +187,21 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-legal_subject-field_laws_view'
-  $field_instances['node-legal_subject-field_laws_view'] = array(
+  // Exported field_instance: 'node-legal_subject-field_school_subjects'
+  $field_instances['node-legal_subject-field_school_subjects'] = array(
     'bundle' => 'legal_subject',
-    'default_value' => array(
-      0 => array(
-        'vname' => 'reference_law_to_legal_subject|default',
-        'vargs' => '[node:nid]',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'viewfield',
-        'settings' => array(),
-        'type' => 'viewfield_default',
+        'module' => 'entityreference_views_formatter',
+        'settings' => array(
+          'view_display' => 'default',
+          'view_name' => 'reference_school_subject_to_legal_subject',
+        ),
+        'type' => 'entityreference_views_formatter',
         'weight' => 4,
       ),
       'teaser' => array(
@@ -344,64 +212,8 @@ function esf_feature_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_laws_view',
-    'label' => 'Laws',
-    'required' => 0,
-    'settings' => array(
-      'allowed_views' => array(
-        'admin_views_file' => 0,
-        'admin_views_node' => 0,
-        'admin_views_user' => 0,
-        'jokes' => 0,
-        'legal_subjects' => 0,
-        'media_default' => 0,
-        'news' => 0,
-        'reference_law_to_legal_subject' => 'reference_law_to_legal_subject',
-        'reference_legal_subject_to_school_subject' => 0,
-        'reference_school_subject_to_legal_subject' => 0,
-        'school_subjects' => 0,
-        'stories' => 0,
-        'workbench_current_user' => 0,
-        'workbench_edited' => 0,
-        'workbench_esf' => 0,
-        'workbench_files' => 0,
-        'workbench_recent_content' => 0,
-      ),
-      'force_default' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'viewfield',
-      'settings' => array(),
-      'type' => 'viewfield_select',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-legal_subject-field_school_subjects'
-  $field_instances['node-legal_subject-field_school_subjects'] = array(
-    'bundle' => 'legal_subject',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
     'field_name' => 'field_school_subjects',
-    'label' => 'School Subjects',
+    'label' => 'Předměty',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -416,68 +228,6 @@ function esf_feature_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete_tags',
       'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'node-legal_subject-field_school_subjects_view'
-  $field_instances['node-legal_subject-field_school_subjects_view'] = array(
-    'bundle' => 'legal_subject',
-    'default_value' => array(
-      0 => array(
-        'vname' => 'reference_school_subject_to_legal_subject|default',
-        'vargs' => '[node:nid]',
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'viewfield',
-        'settings' => array(),
-        'type' => 'viewfield_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_school_subjects_view',
-    'label' => 'School Subjects',
-    'required' => 0,
-    'settings' => array(
-      'allowed_views' => array(
-        'admin_views_file' => 0,
-        'admin_views_node' => 0,
-        'admin_views_user' => 0,
-        'jokes' => 0,
-        'legal_subjects' => 0,
-        'media_default' => 0,
-        'news' => 0,
-        'reference_law_to_legal_subject' => 0,
-        'reference_legal_subject_to_school_subject' => 0,
-        'reference_school_subject_to_legal_subject' => 'reference_school_subject_to_legal_subject',
-        'school_subjects' => 0,
-        'stories' => 0,
-        'workbench_current_user' => 0,
-        'workbench_edited' => 0,
-        'workbench_esf' => 0,
-        'workbench_files' => 0,
-        'workbench_recent_content' => 0,
-      ),
-      'force_default' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'viewfield',
-      'settings' => array(),
-      'type' => 'viewfield_select',
-      'weight' => 7,
     ),
   );
 
@@ -507,14 +257,15 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Obsah',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -637,7 +388,7 @@ function esf_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_code',
     'label' => 'Code',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -656,7 +407,11 @@ function esf_feature_field_default_field_instances() {
   // Exported field_instance: 'node-school_subject-field_generality'
   $field_instances['node-school_subject-field_generality'] = array(
     'bundle' => 'school_subject',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 107,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -717,7 +472,7 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_legal_subjects_view',
-    'label' => 'Legal Subjects',
+    'label' => 'Obory práva',
     'required' => 0,
     'settings' => array(
       'allowed_views' => array(
@@ -731,8 +486,11 @@ function esf_feature_field_default_field_instances() {
         'reference_law_to_legal_subject' => 0,
         'reference_legal_subject_to_school_subject' => 'reference_legal_subject_to_school_subject',
         'reference_school_subject_to_legal_subject' => 0,
+        'reference_study_texts_to_legal_subject' => 0,
+        'rejstrik' => 0,
         'school_subjects' => 0,
         'stories' => 0,
+        'weight' => 0,
         'workbench_current_user' => 0,
         'workbench_edited' => 0,
         'workbench_esf' => 0,
@@ -747,7 +505,7 @@ function esf_feature_field_default_field_instances() {
       'module' => 'viewfield',
       'settings' => array(),
       'type' => 'viewfield_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -775,7 +533,7 @@ function esf_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_materials',
-    'label' => 'Materials',
+    'label' => 'Materiály',
     'required' => 0,
     'settings' => array(
       'file_extensions' => 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv weba webp webm',
@@ -789,6 +547,7 @@ function esf_feature_field_default_field_instances() {
           'public' => 'public',
         ),
         'allowed_types' => array(
+          0 => 0,
           'audio' => 0,
           'document' => 0,
           'image' => 'image',
@@ -802,6 +561,52 @@ function esf_feature_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-school_subject-field_study_texts'
+  $field_instances['node-school_subject-field_study_texts'] = array(
+    'bundle' => 'school_subject',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference_views_formatter',
+        'settings' => array(
+          'view_display' => 'default',
+          'view_name' => 'reference_study_texts_to_legal_subject',
+        ),
+        'type' => 'entityreference_views_formatter',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_study_texts',
+    'label' => 'Studijní texty',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'delete_references' => 1,
+          'match_operator' => 'CONTAINS',
+        ),
+      ),
+      'type' => 'inline_entity_form',
       'weight' => 5,
     ),
   );
@@ -886,6 +691,191 @@ function esf_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-study_text-body'
+  $field_instances['node-study_text-body'] = array(
+    'bundle' => 'study_text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'body',
+    'label' => 'Body',
+    'required' => FALSE,
+    'settings' => array(
+      'display_summary' => TRUE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-study_text-field_goal'
+  $field_instances['node-study_text-field_goal'] = array(
+    'bundle' => 'study_text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_goal',
+    'label' => 'Cíl kapitoly',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-study_text-field_id'
+  $field_instances['node-study_text-field_id'] = array(
+    'bundle' => 'study_text',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_id',
+    'label' => 'Číslo kapitoly',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance: 'node-study_text-field_materials'
+  $field_instances['node-study_text-field_materials'] = array(
+    'bundle' => 'study_text',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'mediafield',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'media',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_materials',
+    'label' => 'Materiály',
+    'required' => 0,
+    'settings' => array(
+      'file_extensions' => 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv weba webp webm',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'media_generic',
+      'weight' => 37,
+    ),
+  );
+
   // Exported field_instance: 'user-user-field_aspi_password'
   $field_instances['user-user-field_aspi_password'] = array(
     'bundle' => 'user',
@@ -959,19 +949,21 @@ function esf_feature_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('ASPI');
   t('ASPI Password');
   t('ASPI Username');
   t('Body');
   t('Code');
+  t('Cíl kapitoly');
   t('Generality');
-  t('Law type');
-  t('Laws');
-  t('Legal Subjects');
-  t('Materials');
-  t('Number');
-  t('School Subjects');
+  t('Kód');
+  t('Materiály');
+  t('Obory práva');
+  t('Obsah');
+  t('Předměty');
+  t('Studijní texty');
   t('Year');
+  t('Zákony');
+  t('Číslo kapitoly');
 
   return $field_instances;
 }
