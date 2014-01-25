@@ -32,8 +32,6 @@ html, body {
 }
 
 .l-constrained {
-
-  @include background-grid($color: blue);
   margin: auto;
 }
 
