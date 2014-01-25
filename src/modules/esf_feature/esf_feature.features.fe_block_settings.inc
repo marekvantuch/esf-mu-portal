@@ -188,7 +188,7 @@ function esf_feature_default_fe_block_settings() {
         'weight' => -11,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 
