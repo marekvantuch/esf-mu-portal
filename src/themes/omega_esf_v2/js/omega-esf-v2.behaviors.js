@@ -1,4 +1,5 @@
 (function ($) {
+  var Esf = Esf || {};
 
   /**
    * The recommended way for producing HTML markup through JavaScript is to write
@@ -56,5 +57,37 @@
       });
     }
   };
+
+  Esf.Toggles = {
+    _jokesAllBlock : false,
+
+    jokesAllBlock : function(toggle) {
+      if (arguments.length == 0) {
+        Esf.Toggles._jokesAllBlock = !Esf.Toggles._jokesAllBlock;
+      } else {
+        Esf.Toggles._jokesAllBlock = toggle;
+      }
+
+      $('#block-views-jokes-block-1').toggle(Esf.Toggles._jokesAllBlock);
+    }
+  };
+
+
+  Drupal.behaviors.esf_omega = {
+    attach: function (context, settings) {
+      window.setTimeout(hideJokesBlock, 10000);
+
+      $('footer a.jokes, #block-views-jokes-block-1 a.close').click(function(event){
+        event.preventDefault();
+        Esf.Toggles.jokesAllBlock()
+      });
+
+      Esf.Toggles.jokesAllBlock(false);
+    }
+  };
+
+  function hideJokesBlock() {
+    $('#block-views-jokes-block').fadeOut(2000);
+  }
 
 })(jQuery);
