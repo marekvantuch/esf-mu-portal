@@ -1,0 +1,20 @@
+.l-region--sidebar{
+
+  .quicktabs-style-nostyle ul{
+    padding-left: 0;
+  }
+
+  .quicktabs-tabs {
+    display: inline;
+    width: 50%;
+    text-align: center;
+    padding: 5px 7px;
+    background: #444444;
+    margin: 0;
+  }
+
+  .active {
+    background: $white;
+  }
+
+}
