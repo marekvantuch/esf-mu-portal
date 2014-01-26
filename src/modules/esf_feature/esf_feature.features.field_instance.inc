@@ -332,7 +332,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -360,7 +360,7 @@ function esf_feature_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -376,7 +376,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -419,7 +419,7 @@ function esf_feature_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -440,7 +440,53 @@ function esf_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 3,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-school_subject-field_lecturers'
+  $field_instances['node-school_subject-field_lecturers'] = array(
+    'bundle' => 'school_subject',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference_views_formatter',
+        'settings' => array(
+          'view_display' => 'default',
+          'view_name' => 'reference_lecturers_to_legal_subject',
+        ),
+        'type' => 'entityreference_views_formatter',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lecturers',
+    'label' => 'Vyučující',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'delete_references' => 0,
+          'match_operator' => 'CONTAINS',
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 2,
     ),
   );
 
@@ -461,7 +507,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'viewfield',
         'settings' => array(),
         'type' => 'viewfield_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -505,7 +551,7 @@ function esf_feature_field_default_field_instances() {
       'module' => 'viewfield',
       'settings' => array(),
       'type' => 'viewfield_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -522,7 +568,7 @@ function esf_feature_field_default_field_instances() {
           'file_view_mode' => 'default',
         ),
         'type' => 'media',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -561,7 +607,47 @@ function esf_feature_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
-      'weight' => 6,
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-school_subject-field_postscript'
+  $field_instances['node-school_subject-field_postscript'] = array(
+    'bundle' => 'school_subject',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_postscript',
+    'label' => 'Dovětek',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 10,
     ),
   );
 
@@ -579,7 +665,7 @@ function esf_feature_field_default_field_instances() {
           'view_name' => 'reference_study_texts_to_legal_subject',
         ),
         'type' => 'entityreference_views_formatter',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -607,7 +693,7 @@ function esf_feature_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -622,7 +708,7 @@ function esf_feature_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -643,7 +729,7 @@ function esf_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -954,6 +1040,7 @@ function esf_feature_field_default_field_instances() {
   t('Body');
   t('Code');
   t('Cíl kapitoly');
+  t('Dovětek');
   t('Generality');
   t('Kód');
   t('Materiály');
@@ -961,6 +1048,7 @@ function esf_feature_field_default_field_instances() {
   t('Obsah');
   t('Předměty');
   t('Studijní texty');
+  t('Vyučující');
   t('Year');
   t('Zákony');
   t('Číslo kapitoly');

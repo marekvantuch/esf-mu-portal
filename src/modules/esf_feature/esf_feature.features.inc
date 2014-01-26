@@ -24,18 +24,66 @@ function esf_feature_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_eck_entity_type_info().
+ */
+function esf_feature_eck_entity_type_info() {
+$items = array(
+       'item' => array(
+  'name' => 'item',
+  'label' => 'Položka',
+  'properties' => array(
+    'title' => array(
+      'label' => 'Title',
+      'type' => 'text',
+      'behavior' => 'title',
+    ),
+    'created' => array(
+      'label' => 'Created',
+      'type' => 'integer',
+      'behavior' => 'created',
+    ),
+    'changed' => array(
+      'label' => 'Changed',
+      'type' => 'integer',
+      'behavior' => 'changed',
+    ),
+    'language' => array(
+      'label' => 'Entity language',
+      'type' => 'language',
+      'behavior' => 'language',
+    ),
+  ),
+),
+       'person' => array(
+  'name' => 'person',
+  'label' => 'Osoba',
+  'properties' => array(
+    'created' => array(
+      'label' => 'Created',
+      'type' => 'integer',
+      'behavior' => 'created',
+    ),
+    'changed' => array(
+      'label' => 'Changed',
+      'type' => 'integer',
+      'behavior' => 'changed',
+    ),
+    'full_name' => array(
+      'label' => 'Jméno a příjmení',
+      'type' => 'text',
+      'behavior' => 'title',
+    ),
+  ),
+),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_node_info().
  */
 function esf_feature_node_info() {
   $items = array(
-    'joke' => array(
-      'name' => t('Vtip'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Nadpis'),
-      'help' => '',
-    ),
     'legal_subject' => array(
       'name' => t('Obor práva'),
       'base' => 'node_content',
@@ -62,14 +110,6 @@ function esf_feature_node_info() {
     ),
     'school_subject' => array(
       'name' => t('Předmět'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Nadpis'),
-      'help' => '',
-    ),
-    'story' => array(
-      'name' => t('Příběh'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
