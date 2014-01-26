@@ -33,6 +33,11 @@ Source structure
 - *build.xml* - Phing build file
 - *pom.xml* - Maven build file
 
+Theme development instructions
+------------------------------
+
+Because theme is based on the Omega v.4 Drupal base theme, it uses it's ideas and therefore SCSS. In order to be able to make any changes to the CSS files, instead of changing them directly, the SCSS files must be amended instead. The easiest way to compile them is using Compass. To install all the required libraries, install Bundler (*http://bundler.io/*), navigate to the theme folder (*src/themes/omega_esf_v2*) and run *$ bundle install*. Then start *$ compass watch*, which will start a process monitoring your .scss files and compiling them automatically to the resulting css.
+
 ***
  
 Whare next?
