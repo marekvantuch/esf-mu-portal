@@ -8,13 +8,21 @@
     display: inline;
     width: 50%;
     text-align: center;
-    padding: 5px 7px;
-    background: #444444;
     margin: 0;
   }
 
-  .active {
-    background: $white;
+  .active.jquery-once-2-processed {
+    padding: 5px 7px;
+    margin:0;
   }
 
+  ul.quicktabs-tabs {
+    li.active a {
+      background: white;
+    }
+
+    li a {
+      background: grey;
+    }
+  }
 }

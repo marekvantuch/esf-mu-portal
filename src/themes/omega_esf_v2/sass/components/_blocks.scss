@@ -1,14 +1,25 @@
 .block-views-jokes-block {
   position: absolute;
   bottom: 0px;
+
 }
 
-.views-row-last {
-color: $white;
-font-size: small;
-}
+.block__content {
+   color: $white;
+   display: inline-block;
+   float: left;
+   padding-left: 25px;
+   margin-top: -20px ;
+   margin-left: 25px;
 
-.views-row-last span{
-  font-style: italic;
+  .views-row-last {
+    color: $white;
+    font-size: small;
+  }
+
+  .views-row-last span {
+    font-style: italic;
+  }
+
 
 }
