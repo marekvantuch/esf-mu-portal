@@ -13,6 +13,33 @@ body {
     margin-left: 15px;
     float: left; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000323}}
+.l-content {
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000327}}
+  .l-content h1 {
+    padding-left: 30px;
+    font-family: BenchNine, sans-serif; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000332}}
+  .l-content p, .l-content article {
+    padding-left: 30px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000337}}
+footer {
+  font-family: BenchNine, sans-serif;
+  color: white;
+  position: fixed;
+  margin-bottom: 0;
+  padding-bottom: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000344}}
+  footer ul.menu {
+    text-align: center; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_base\.scss}line{font-family:\0000348}}
+  footer li {
+    display: inline;
+    padding: 10px; }
+
 @media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\000031}}
 .block--user-login {
   float: right;
@@ -28,20 +55,20 @@ body {
   .block--user-login .form-required {
     color: white; }
 @media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000318}}
-  .block--user-login .form-item.form-type-textfield.form-item-name {
+  .block--user-login .form-item-name {
     padding-right: 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000322}}
   .block--user-login .form-text.required {
     width: 120px;
     border: none;
     background: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000328}}
   .block--user-login .user-login-form div ul li a {
     color: white;
     float: left;
     text-decoration: underline;
     font-size: 80%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_forms\.scss}line{font-family:\0000335}}
   .block--user-login .form-submit {
     float: right;
     background: white;
@@ -94,22 +121,36 @@ a {
 .l-region--header span {
   font-style: italic; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\000033}}
-.l-region--sidebar .quicktabs-style-nostyle ul {
-  padding-left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\000037}}
-.l-region--sidebar .quicktabs-tabs {
-  display: inline;
-  width: 50%;
-  text-align: center;
-  margin: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000314}}
-.l-region--sidebar .active.jquery-once-2-processed {
-  padding: 5px 7px;
-  margin: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000320}}
-.l-region--sidebar ul.quicktabs-tabs li.active a {
-  background: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000324}}
-.l-region--sidebar ul.quicktabs-tabs li a {
-  background: grey; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\000031}}
+.l-region--sidebar {
+  background: white;
+  padding-top: 4px;
+  font-family: BenchNine, sans-serif;
+  font-size: 18px;
+  text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\000038}}
+  .l-region--sidebar .quicktabs-style-nostyle ul {
+    padding-left: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000317}}
+  .l-region--sidebar ul.quicktabs-tabs {
+    display: inline; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000321}}
+    .l-region--sidebar ul.quicktabs-tabs li.active a {
+      background: white;
+      padding: 5px 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000326}}
+    .l-region--sidebar ul.quicktabs-tabs li a {
+      background: grey;
+      padding: 5px 20px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000332}}
+  .l-region--sidebar .views-field {
+    padding: 2px 0 2px 10px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000336}}
+  .l-region--sidebar .views-field:hover {
+    background: lightblue; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000340}}
+  .l-region--sidebar .views-field:active {
+    background: lightblue; }
+@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_navigation\.scss}line{font-family:\0000344}}
+  .l-region--sidebar .quicktabs_main {
+    margin-top: -15px; }

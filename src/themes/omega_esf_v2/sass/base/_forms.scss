@@ -11,20 +11,19 @@
 
   }
 
-.form-required{
-  color: $white;
-}
+  .form-required{
+    color: $white;
+  }
 
-.form-item.form-type-textfield.form-item-name{
-  padding-right: 20px;
+  .form-item-name{
+    padding-right: 20px;
+  }
 
-}
-
-.form-text.required{
-  width: 120px;
-  border: none;
-  background: $white;
-}
+  .form-text.required{
+    width: 120px;
+    border: none;
+    background: $white;
+  }
 
 .user-login-form div ul li a{
   color: $white;
