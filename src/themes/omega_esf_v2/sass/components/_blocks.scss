@@ -1,25 +1,29 @@
 .block-views-jokes-block {
   position: absolute;
   bottom: 0px;
-
 }
 
-.block__content {
-   color: $white;
-   display: inline-block;
-   float: left;
-   padding-left: 25px;
-   margin-top: -20px ;
-   margin-left: 25px;
-
-  .views-row-last {
+.l-region--header{
+  .block{
+    margin-top: -20px;
+  }
+  .block--views-jokes-block{
+    max-width: 450px;
+    float: left;
+    display: inline-block;
+    padding-left: 50px;
     color: $white;
     font-size: small;
   }
 
-  .views-row-last span {
-    font-style: italic;
+  h4{
+    margin-bottom: 5px;
+    font-style: normal;
+    font-size: smaller;
   }
 
-
+  span {
+      font-style: italic;
+  }
 }
+

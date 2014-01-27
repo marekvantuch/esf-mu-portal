@@ -1,19 +1,15 @@
-.block.block--user.block--user-login{
+.block--user-login{
   float: right;
   font-size: 80%;
-  top: 0;
-  margin-top: 0;
-}
 
+  .form-item{
+    font-size: smaller;
+    color: $white;
+    float: left;
+    display: inline;
+    margin-top: 0;
 
-.form-item{
-  font-size: smaller;
-  color: $white;
-  float: left;
-  display: inline;
-  margin-top: 0;
-
-}
+  }
 
 .form-required{
   color: $white;
@@ -43,6 +39,8 @@
   padding: 2px;
   border: none;
   @include rounded-corners;
+}
+
 }
 
 
