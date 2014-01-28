@@ -10,25 +10,11 @@
 // Globbing from within sub-folders only works with relative paths.
 @import "../../variables/**/*";
 
-body {
-
-}
-
-html, body {
-  height: 100%;
-}
-
-.l-page {
-  height: auto;
-  min-height: 100%;
-}
-
 .l-footer-wrapper {
-  clear: both;
-  position: relative;
+  position: fixed;
+  bottom: 0;
   z-index: 10;
-  height: 3em;
-  margin-top: -3em;
+  width: 100%;
 }
 
 .l-constrained {
@@ -55,6 +41,7 @@ html, body {
   padding: $vert-spacing-unit 0;
 }
 
+/************* TABLET ***************/
 @include breakpoint($tab, true) {
   .l-region--sidebar {
     @include grid-span(1, 1);
@@ -65,6 +52,7 @@ html, body {
   }
 }
 
+/************* DESKTOP ***************/
 @include breakpoint($desk, true) {
   .l-constrained {
     width:960px;
@@ -78,6 +66,7 @@ html, body {
   }
 }
 
+/************* WIDE DESKTOP ***************/
 @include breakpoint($wide, true) {
   .l-constrained {
     width:1200px;

@@ -3,49 +3,40 @@
  *
  * Styles for the Hero layout.
  ******************************************************************************/
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000317}}
-html, body {
-  height: 100%; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000321}}
-.l-page {
-  height: auto;
-  min-height: 100%; }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000326}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000313}}
 .l-footer-wrapper {
-  clear: both;
-  position: relative;
+  position: fixed;
+  bottom: 0;
   z-index: 10;
-  height: 3em;
-  margin-top: -3em; }
+  width: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000334}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000320}}
 .l-constrained {
   margin: auto; }
 
 /* Header */
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000339}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000325}}
 .l-region--header {
   padding: 18px 0; }
 
 /* Content Area */
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000330}}
 .l-main {
   margin-top: 18px;
   margin-bottom: 18px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000349}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000335}}
 .l-content {
   min-height: 20em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000353}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000339}}
 .l-region--postscript {
   clear: both;
   padding: 18px 0; }
 
+/************* TABLET ***************/
 @media (min-width: 44em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000346}}
   .l-region--sidebar {
     width: 24.4898%;
     float: left;
@@ -53,19 +44,20 @@ html, body {
     margin-left: 0%;
     clear: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000350}}
   .l-content {
     width: 73.46939%;
     float: right;
     margin-left: 0;
     margin-right: 0;
     clear: none; } }
+/************* DESKTOP ***************/
 @media (min-width: 70em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000357}}
   .l-constrained {
     width: 960px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000360}}
   .l-region--sidebar {
     width: 24.4898%;
     float: left;
@@ -73,19 +65,20 @@ html, body {
     margin-left: 0%;
     clear: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000376}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000364}}
   .l-content {
     width: 73.46939%;
     float: right;
     margin-left: 0;
     margin-right: 0;
     clear: none; } }
+/************* WIDE DESKTOP ***************/
 @media (min-width: 100em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000382}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000371}}
   .l-constrained {
     width: 1200px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000374}}
   .l-region--sidebar {
     width: 19.5122%;
     float: left;
@@ -93,7 +86,7 @@ html, body {
     margin-left: 0%;
     clear: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/c\:\/Users\/Ivana\/Documents\/GitHub\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000389}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/layouts\/blue\/blue\.layout\.scss}line{font-family:\0000378}}
   .l-content {
     width: 78.04878%;
     float: right;

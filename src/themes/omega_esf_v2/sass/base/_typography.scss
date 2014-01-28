@@ -1,4 +1,7 @@
-a {
-  text-decoration: none;
-  color: $black;
+/**
+ * $BASE-TYPOGRAPHY
+ */
+html {
+  font-family: $bench-nine;
+  font-weight: $base-font-weight;
 }
