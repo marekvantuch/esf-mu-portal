@@ -19,7 +19,7 @@
   <div class="l-main l-constrained">
 
     <?php print render($tabs); ?>
-    <?php print $breadcrumb; ?>
+    <?php /* print $breadcrumb; */ ?>
     <?php print $messages; ?>
 
     <?php print render($page['sidebar']); ?>

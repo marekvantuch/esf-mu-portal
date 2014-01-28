@@ -2,3 +2,16 @@
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_media\.scss}line{font-family:\000031}}
 img, media {
   max-width: 100%; }
+
+/**
+ * $BASE-TYPOGRAPHY
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/base\/_typography\.scss}line{font-family:\000034}}
+html {
+  font-family: "BenchNine", Helvetica, Arial, sans-serif;
+  font-weight: 300; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/components\/_blocks\.scss}line{font-family:\000031}}
+.block-views-jokes-block {
+  position: absolute;
+  bottom: 0px; }
