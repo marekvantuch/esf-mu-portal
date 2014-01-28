@@ -6,26 +6,21 @@
   text-transform: uppercase;
 
   .quicktabs-style-nostyle ul {
-    padding-left: 0;
+    padding: 0;
   }
 
-  .quicktabs-tabs {
-
-
-  }
 
   ul.quicktabs-tabs {
-    display: inline;
 
 
     li.active a {
       background: white;
-      padding: 5px 20px;
     }
 
     li a {
       background: grey;
-      padding: 5px 20px;
+      padding: 4px 10px 4px 10px;
+      border: solid 1px #000000;
     }
   }
 

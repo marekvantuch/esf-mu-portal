@@ -7,3 +7,16 @@ ul li{
   color: $white;
   margin: 0px;
 }
+
+
+
+ul.breadcrumb{
+  padding-left: 0;
+  width: 100px;
+}
+
+ul.breadcrumb li{
+  display: inline;
+  background: #ffffff;
+  padding: 5px 10px;
+}
