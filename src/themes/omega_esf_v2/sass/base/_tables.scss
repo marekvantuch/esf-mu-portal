@@ -1,6 +1,7 @@
 table{
   border-collapse: collapse;
   width: 80%;
+  margin-top: 2px;
 }
 
 th, td{
@@ -11,6 +12,8 @@ th, td{
 
 th{
   font-family: BenchNine, sans-serif;
+  letter-spacing: 1px;
+  text-transform: lowercase;
 
 }
 
@@ -18,4 +21,9 @@ td{
   font-size: smaller;
   background: #ffffff;
   padding: 5px;
+}
+
+table a:hover {
+  color: $blue;
+  text-decoration: underline;
 }

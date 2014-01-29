@@ -1,4 +1,7 @@
+/*--------------------------------sidebar--------------------------------*/
+
 .l-region--sidebar{
+  margin-top: 2px;
   background: white;
   font-family: BenchNine, sans-serif;
   font-size: 18px;
@@ -14,37 +17,35 @@
 
   ul.quicktabs-tabs {
 
-
     li{
       float: left;
       width: 50%;
       text-align: center;
-      border: none;
-      background: grey;
+      background: #bbbbbb;
       padding: 2px 0;
+      border-bottom: 2px solid #b4b4b4;
+
     }
 
     li.active  {
       background: white;
+      border: none;
+    }
+  }
+
+  .quicktabs_main{
+    clear: both;
+
+    .views-field{
+      padding: 2px 10px;
     }
 
-    .quicktabs_main{
-      padding-top: 5px;
-      clear: both;
+    .views-field:hover {
+      background: lightblue;
     }
 
+    li a.active {
+      font-weight: bold;
+    }
   }
-
-  .views-field{
-     padding: 2px 10px;
-  }
-
-  .views-field:hover {
-    background: lightblue;
-  }
-
-  .views-field:active {
-    background: lightblue;
-  }
-
 }

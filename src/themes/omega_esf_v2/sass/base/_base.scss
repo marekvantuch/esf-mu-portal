@@ -1,0 +1,220 @@
+body{
+ background: beige;
+}
+
+
+/*--------------------------------header--------------------------------*/
+
+.l-header {
+  font-family: Arial, Helvetica, sans-serif;
+  background: $blue ;
+  height: 75px;
+
+  .l-constrained{
+    height: 75px;
+    background: rgb(0,51,153); /* Old browsers */
+    background: -moz-linear-gradient(left, rgb(0,51,153) 0%, rgb(0,94,196) 50%, rgb(0,51,153) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(0,51,153)), color-stop(50%,rgb(0,94,196)), color-stop(100%,rgb(0,51,153))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003399', endColorstr='#003399',GradientType=1 ); /* IE6-9 */
+  }
+
+  .site-branding__logo{
+    padding-top: 15px;
+    margin-left: 15px;
+    float: left;
+  }
+
+  img{
+    width: 80%;
+    height: 80%;
+  }
+}
+
+@mixin rounded-corners {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+
+/*--------------------------------login--------------------------------*/
+
+
+.block--user-login{
+  float: right;
+  font-size: 80%;
+  margin-top: -20px;
+
+  .form-item{
+    font-size: smaller;
+    color: $white;
+    float: left;
+    display: inline;
+    margin-top: 0;
+
+  }
+
+  .form-required{
+    color: $white;
+  }
+
+  .form-item-name{
+    padding-right: 20px;
+  }
+
+  .form-text.required{
+    width: 120px;
+    border: none;
+    background: $white;
+  }
+
+  .user-login-form div ul li a{
+    color: $white;
+    float: left;
+    text-decoration: underline;
+    font-size: 80%;
+  }
+
+  .form-submit{
+    float: right;
+    background: $white;
+    padding: 2px;
+    border: none;
+    font-size: smaller;
+    margin-top: -3px;
+    @include rounded-corners;
+  }
+}
+
+.block--system{
+  float: right;
+  font-size: 80%;
+
+  li.first.last.leaf{
+    list-style: none;
+  }
+
+  a{
+    color: #ffffff;
+  }
+}
+
+
+
+/*--------------------------------content--------------------------------*/
+
+
+.l-main{
+  .messages{
+    height: 40px;
+    text-align: center;
+
+    a{
+      text-decoration: underline;
+      padding: 3px;
+    }
+  }
+}
+
+.l-content{
+  margin-bottom: 50px;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  h1{
+    margin-bottom: 0;
+    padding-bottom: 0.5em;
+    font-family: BenchNine, sans-serif;
+    border-bottom: 1px solid #b4b4b4;
+  }
+
+  #first-time p  {
+
+  }
+
+  article{
+
+  }
+
+
+  .field--name-field-lecturers{
+    font-size: smaller;
+  }
+
+
+  .field__label{
+    padding-bottom: 5px;
+  }
+
+  .field{
+    padding-top: 1.5em;
+  }
+
+  .field--name-body{
+    padding: 0;
+  }
+
+  .site-map-box{
+
+  }
+
+  .user-pass{
+    padding-top: 1.5em;
+  }
+
+  .form-submit{
+    border: 1px solid #000000;
+    background: #ffffff;
+    padding: 3px;
+    @include rounded-corners;
+  }
+
+  .user-login{
+    padding-top: 1.5em;
+  }
+
+}
+
+
+/*--------------------------------footer--------------------------------*/
+
+
+footer{
+
+  font-family: BenchNine, sans-serif;
+  background: #444444;
+  font-size: 16px;
+  height: 30px;
+
+   ul.menu{
+     text-align: center;
+     margin: 0;
+     padding-top: 5px;
+   }
+
+   li{
+     display: inline;
+     padding: 0px 1.5em;
+   }
+
+  a{
+    color: #ffffff;
+  }
+
+  a.jokes.active{
+    color: #ffffff;
+  }
+}
+
+
+
+
+
+
