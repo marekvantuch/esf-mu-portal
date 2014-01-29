@@ -7,13 +7,19 @@
   .block{
     margin-top: -20px;
   }
-  .block--views-jokes-block{
-    max-width: 450px;
+  .view-content{
+    width: 450px;
+    margin: auto;
     float: left;
     display: inline-block;
     padding-left: 50px;
     color: $white;
     font-size: small;
+  }
+
+  .views-row{
+    max-width: 450px;
+    vertical-align: center;
   }
 
   h4{

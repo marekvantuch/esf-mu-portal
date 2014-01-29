@@ -1,32 +1,43 @@
 .l-region--sidebar{
   background: white;
-  padding-top: 4px;
   font-family: BenchNine, sans-serif;
   font-size: 18px;
   text-transform: uppercase;
+
+  .block{
+    margin-top: -20px;
+  }
 
   .quicktabs-style-nostyle ul {
     padding: 0;
   }
 
-
   ul.quicktabs-tabs {
 
 
-    li.active a {
+    li{
+      float: left;
+      width: 50%;
+      text-align: center;
+      border: none;
+      background: grey;
+      padding: 2px 0;
+    }
+
+    li.active  {
       background: white;
     }
 
-    li a {
-      background: grey;
-      padding: 4px 10px 4px 10px;
-      border: solid 1px #000000;
+    .quicktabs_main{
+      padding-top: 5px;
+      clear: both;
     }
+
   }
 
- .views-field{
-   padding: 2px 0 2px 10px;
- }
+  .views-field{
+     padding: 2px 10px;
+  }
 
   .views-field:hover {
     background: lightblue;
@@ -36,7 +47,4 @@
     background: lightblue;
   }
 
-  .quicktabs_main{
-    margin-top: -15px;
-  }
 }

@@ -1,0 +1,21 @@
+table{
+  border-collapse: collapse;
+  width: 80%;
+}
+
+th, td{
+  border: 1px solid grey;
+  padding: 0 1rem;
+  background: #ffffff;
+}
+
+th{
+  font-family: BenchNine, sans-serif;
+
+}
+
+td{
+  font-size: smaller;
+  background: #ffffff;
+  padding: 5px;
+}
