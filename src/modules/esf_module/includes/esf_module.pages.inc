@@ -38,3 +38,32 @@ function esf_module_page_aspi() {
 
   return array();
 }
+
+function esf_module_page_home() {
+  $module_path = drupal_get_path('module', 'esf_module');
+
+  drupal_add_css($module_path . '/css/home.css');
+  drupal_add_js($module_path . '/js/home.js', array('scope' => 'footer'));
+
+  $variables = array(
+    'path' => $module_path . '/images/system_prava.png',
+    'title' => t('Law system')
+  );
+  $output = theme('image', $variables);
+
+  $items = array();
+
+  $items[] = array(
+    ''
+  );
+
+  $variables = array(
+    'name' => 'law_system',
+    'items' => $items,
+  );
+
+  $output .= 'ahoj;';
+  $output .= theme('map_area', $variables);
+
+  return $output;
+}

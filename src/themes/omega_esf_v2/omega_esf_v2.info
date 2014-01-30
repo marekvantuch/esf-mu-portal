@@ -27,4 +27,4 @@ regions[sidebar] = Sidebar
 regions[postscript] = Postscript
 regions[footer] = Footer
 
-fonts[google_fonts_api][] = "BenchNine&subset=latin#300"
+fonts[google_fonts_api][] = "BenchNine&subset=latin-ext#300"

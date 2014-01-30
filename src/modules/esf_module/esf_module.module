@@ -48,6 +48,13 @@ function esf_module_permission() {
  */
 function esf_module_menu() {
   return array(
+    'home' => array(
+      'title' => 'Home',
+      'page callback' => 'esf_module_page_home',
+      'access arguments' => TRUE,
+      'file' => 'includes/esf_module.pages.inc',
+      'type' => MENU_CALLBACK,
+    ),
     'aspi' => array(
       'title' => 'ASPI Portal',
       'page callback' => 'esf_module_page_aspi',
@@ -87,4 +94,31 @@ function esf_module_user_insert(&$edit, $account, $category) {
 
     pdm_create_message($message, $options);
   }
+}
+
+/**
+ * Returns html with rendered map / area.
+ *
+ * @param $variables
+ *   associative array with parameters for rendering the map
+ */
+function theme_map_area($variables) {
+  $name = $variables['name'];
+  $items = $variables['items'];
+
+  $output = "<map name='$name'>";
+
+  //<area id="squidhead" href="#" shape="circle" coords="290,102,30" alt="Octoface" data-maphilight="{&quot;stroke&quot;:false,&quot;fillColor&quot;:&quot;ff0000&quot;,&quot;fillOpacity&quot;:0.6}" title="Metadata'd up a bit">
+
+  foreach ($items as $item) {
+    $id = !empty($item['id']) ? "id='" . $item['id'] . "'" : '';
+    $title = !empty($item['title']) ? "title='" . $item['title'] . "'" : '';
+    $coords = !empty($item['coords']) ? "coords='" . $item['coords'] . "'" : '';
+
+    $output .= "<area $id $coords $title/>";
+  }
+
+  $output .= "</map>";
+
+  return $output;
 }

@@ -75,7 +75,7 @@
 
   Drupal.behaviors.esf_omega = {
     attach: function (context, settings) {
-      window.setTimeout(hideJokesBlock, 10000);
+      window.setTimeout(hideJokesBlock, 7000);
 
       $('footer a.jokes, #block-views-jokes-block-1 a.close').click(function(event){
         event.preventDefault();

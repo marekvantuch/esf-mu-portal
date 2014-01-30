@@ -1,0 +1,13 @@
+#b4ee2b zelena  - obchodni pravo, obch. spol a druzstvo, zavazky, hosp. soutez
+
+#008aff modra - obcanske pravo hmotne, osobnostno p., vecna prava, zasadz soukr, prava, rodinne pravo
+
+#f2a207 oranzova - pracovni pravo
+
+#f2079c ruzova - cenne papiry
+
+#5407f2 fialova - mezinar. pravo soukrome
+
+#808285 seda - obc. pravo procesni
+
+#07f2ce tyrkysova - dusevni vlastnictvi
