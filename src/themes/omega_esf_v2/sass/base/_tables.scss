@@ -1,6 +1,7 @@
 table{
   border-collapse: collapse;
   width: 80%;
+  max-width: 660px;
   margin-top: 2px;
 }
 
@@ -24,6 +25,6 @@ td{
 }
 
 table a:hover {
-  color: $blue;
+  color: #444444;
   text-decoration: underline;
 }

@@ -55,7 +55,6 @@ body{
     float: left;
     display: inline;
     margin-top: 0;
-
   }
 
   .form-required{
@@ -109,6 +108,7 @@ body{
 
 
 .l-main{
+
   .messages{
     height: 40px;
     text-align: center;
@@ -135,19 +135,15 @@ body{
     border-bottom: 1px solid #b4b4b4;
   }
 
-  #first-time p  {
-
-  }
+  #first-time p  { }
 
   article{
-
+    font-size: 15px;
   }
-
 
   .field--name-field-lecturers{
     font-size: smaller;
   }
-
 
   .field__label{
     padding-bottom: 5px;
@@ -161,15 +157,28 @@ body{
     padding: 0;
   }
 
-  .site-map-box{
+  .site-map-box{ }
 
+  .node{
+
+    .node__content{
+      h1{
+        border: none;
+      }
+    }
+    .field__item.even em{
+      font-style: italic;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      border: none;
+    }
   }
 
   .user-pass{
     padding-top: 1.5em;
   }
 
-  .form-submit{
+  input {
     border: 1px solid #000000;
     background: #ffffff;
     padding: 3px;
@@ -187,7 +196,6 @@ body{
 
 
 footer{
-
   font-family: BenchNine, sans-serif;
   background: #444444;
   font-size: 16px;
