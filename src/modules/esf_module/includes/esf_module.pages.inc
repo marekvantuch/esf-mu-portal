@@ -43,18 +43,56 @@ function esf_module_page_home() {
   $module_path = drupal_get_path('module', 'esf_module');
 
   drupal_add_css($module_path . '/css/home.css');
+  drupal_add_js($module_path . '/js/lib/jquery.maphilight.min.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/home.js', array('scope' => 'footer'));
 
   $variables = array(
-    'path' => $module_path . '/images/system_prava.png',
-    'title' => t('Law system')
+    'path' => $module_path . '/images/system_prava_cb.png',
+    'width' => 750,
+    'height' => 605,
+    'title' => t('Law system'),
+    'attributes' => array(
+      'class' => 'map',
+      'usemap' => '#law_system',
+    ),
   );
   $output = theme('image', $variables);
 
-  $items = array();
+  $items = array(
+    'obchodni-spolecnosti' => array(
+      'shape' => 'circle',
+      'coords' => '172, 101, 60',
+      'fillcolor' => 'b4ee2b',
+      'fillopacity' => '0.7',
+      'title' => 'Obchodní společnosti a družstva'
+    ),
+    /*'obchodni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '172, 101, 60',
+      'fillcolor' => 'b4ee2b',
+      'fillopacity' => '0.7',
+      'title' => 'Obchodní společnosti a družstva'
+    ),*/
+    'hospodarska-soutez' => array(
+      'shape' => 'circle',
+      'coords' => '110, 228, 47',
+      'fillcolor' => 'b4ee2b',
+      'fillopacity' => '0.7',
+      'title' => 'Obchodní společnosti a družstva'
+    ),
+    'dusevni-vlastnictvi' => array(
+      'shape' => 'circle',
+      'coords' => '319, 89, 76',
+      'fillcolor' => '07f2ce',
+      'fillopacity' => '0.7',
+      'title' => 'Duševní vlastnictví'
+    ),
+    'cenne-papiry' => array(
+      'shape' => 'circle',
+      'coords' => '114,379,101',
+      'fillcolor' => 'f2079c'
+    )
 
-  $items[] = array(
-    ''
   );
 
   $variables = array(
@@ -62,7 +100,6 @@ function esf_module_page_home() {
     'items' => $items,
   );
 
-  $output .= 'ahoj;';
   $output .= theme('map_area', $variables);
 
   return $output;
