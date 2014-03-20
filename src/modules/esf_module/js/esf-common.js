@@ -7,7 +7,7 @@
                 var protocol = Drupal.settings.esf.protocol;
                 var re = new RegExp("(" + protocol + ":\/\/).*", "g");
                 if (element.href.match(re)) {
-                    var url = Drupal.settings.esf.url + ':' + Drupal.settings.esf.port;
+                    var url = Drupal.settings.basePath + '?q=aspi'; // /esfDrupal.settings.esf.url + ':' + Drupal.settings.esf.port;
                     this.href = url;
                 }
                 //console.log(element.href);
