@@ -97,10 +97,25 @@ function esf_module_user_insert(&$edit, $account, $category) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function esf_module_theme() {
+  return array(
+    'map_area' => array(
+      'variables' => array(
+        'items' => array(),
+        'name' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
  * Returns html with rendered map / area.
  *
  * @param $variables
  *   associative array with parameters for rendering the map
+ * @return string
  */
 function theme_map_area($variables) {
   $name = $variables['name'];
@@ -110,12 +125,29 @@ function theme_map_area($variables) {
 
   //<area id="squidhead" href="#" shape="circle" coords="290,102,30" alt="Octoface" data-maphilight="{&quot;stroke&quot;:false,&quot;fillColor&quot;:&quot;ff0000&quot;,&quot;fillOpacity&quot;:0.6}" title="Metadata'd up a bit">
 
-  foreach ($items as $item) {
-    $id = !empty($item['id']) ? "id='" . $item['id'] . "'" : '';
-    $title = !empty($item['title']) ? "title='" . $item['title'] . "'" : '';
-    $coords = !empty($item['coords']) ? "coords='" . $item['coords'] . "'" : '';
+  foreach ($items as $id => $item) {
+    $id = 'map-' . $id;
+    $shape = $item['shape'];
+    $coords = $item['coords'];
+    $title = $item['title'];
 
-    $output .= "<area $id $coords $title/>";
+    $maphilight_params = array();
+
+    if (!empty($item['stroke'])) {
+      $maphilight_params[] = '"stroke":"' . $item['stroke'] . '"';
+    } else {
+      $maphilight_params[] = '"stroke":false';
+    }
+    if (!empty($item['fillcolor'])) {
+      $maphilight_params[] = '"fillColor":"' . $item['fillcolor'] . '"';
+    }
+    if (!empty($item['fillopacity'])) {
+      $maphilight_params[] = '"fillOpacity":' . $item['fillopacity'];
+    }
+
+    $maphilight = '{' . implode(',', $maphilight_params) . '}';
+
+    $output .= "<area id='$id' shape='$shape' coords='$coords' title='$title' data-maphilight='$maphilight' />";
   }
 
   $output .= "</map>";
