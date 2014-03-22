@@ -43,12 +43,16 @@
 
 /************* TABLET ***************/
 @include breakpoint($tab, true) {
-  .l-region--sidebar {
+  .has-sidebar .l-region--sidebar {
     @include grid-span(1, 1);
   }
 
-  .l-content {
+  .has-sidebar .l-content {
     @include grid-span(1, 2);
+  }
+
+  .l-content {
+    @include grid-span(1, 3);
   }
 }
 
@@ -57,12 +61,17 @@
   .l-constrained {
     width:960px;
   }
-  .l-region--sidebar {
+
+  .has-sidebar .l-region--sidebar {
     @include grid-span(1, 1);
   }
 
-  .l-content {
+  .has-sidebar .l-content {
     @include grid-span(1, 2);
+  }
+
+  .l-content {
+    @include grid-span(1, 3);
   }
 }
 
@@ -71,11 +80,15 @@
   .l-constrained {
     width:1200px;
   }
-  .l-region--sidebar {
+  .has-sidebar .l-region--sidebar {
     @include grid-span(1, 1);
   }
 
-  .l-content {
+  .has-sidebar .l-content {
     @include grid-span(1, 2);
+  }
+
+  .l-content {
+    @include grid-span(1, 3);
   }
 }

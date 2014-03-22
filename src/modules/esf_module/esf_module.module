@@ -51,7 +51,7 @@ function esf_module_menu() {
     'home' => array(
       'title' => 'Home',
       'page callback' => 'esf_module_page_home',
-      'access callback' => array('access content'),
+      'access arguments' => array('access content'),
       'file' => 'includes/esf_module.pages.inc',
       'type' => MENU_CALLBACK,
     ),
