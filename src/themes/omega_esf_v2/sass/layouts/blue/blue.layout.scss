@@ -52,7 +52,7 @@
   }
 
   .l-content {
-    @include grid-span(1, 3);
+    @include grid-span(2, 1);
   }
 }
 
@@ -71,7 +71,7 @@
   }
 
   .l-content {
-    @include grid-span(1, 3);
+    @include grid-span(2, 1);
   }
 }
 
@@ -89,6 +89,6 @@
   }
 
   .l-content {
-    @include grid-span(1, 3);
+    @include grid-span(2, 1);
   }
 }
