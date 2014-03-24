@@ -66,16 +66,16 @@ function esf_module_page_home() {
       'fillopacity' => '0.7',
       'title' => 'Obchodní společnosti a družstva'
     ),
-    /*'obchodni-pravo' => array(
-      'shape' => 'circle',
-      'coords' => '172, 101, 60',
-      'fillcolor' => 'b4ee2b',
-      'fillopacity' => '0.7',
-      'title' => 'Obchodní společnosti a družstva'
-    ),*/
     'hospodarska-soutez' => array(
       'shape' => 'circle',
       'coords' => '110, 228, 47',
+      'fillcolor' => 'b4ee2b',
+      'fillopacity' => '0.7',
+      'title' => 'Obchodní společnosti a družstva'
+    ),
+    'obchodni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '172, 178, 145',
       'fillcolor' => 'b4ee2b',
       'fillopacity' => '0.7',
       'title' => 'Obchodní společnosti a družstva'
@@ -103,4 +103,8 @@ function esf_module_page_home() {
   $output .= theme('map_area', $variables);
 
   return $output;
+}
+
+function esf_module_get_related_subjects($subject) {
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use \Esf\Server;
+use Esf\Settings;
 
 module_load_include('inc', 'esf_module', 'includes/esf_module');
 
@@ -14,6 +15,8 @@ define('ESF_MODULE_GUACAMOLE_PROPERTIES_FILE', 'guacamole_properties_file');
  * Implements hook_init().
  */
 function esf_module_init() {
+  global $user;
+
   $settings = array(
     'esf' => array(
       'protocol' => variable_get_value('aspi_protocol'),
@@ -22,9 +25,51 @@ function esf_module_init() {
       'server_port' => Server::getPort(),
       'server_path' => Server::getPath(),
     ),
+    'subject_map' => array(
+      // Evropske pravo
+      '951' => array('obchodni-spolecnosti', 'obchodni-pravo'),
+      // Financni trhy
+      '965' => array('hospodarska-soutez'),
+      // Financni ucetnictvi I
+      '952' => array('obchodni-pravo', 'cenne-papiry' ),
+      // Financni ucetnictvi II
+      '953' => array('dusevni-vlastnictvi'),
+      // Obcacnsky zakonik
+      '1101' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
+      // Obchodni pravo I (old)
+      '1105' => array('cenne-papiry' ),
+      // Obchodni pravo I (new)
+      '954' => array('hospodarska-soutez'),
+      // Osobni finance
+      '966' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
+      // Pracovni pravo
+      '967' => array('hospodarska-soutez'),
+      // Pravo a finance
+      '968' => array('obchodni-pravo', 'cenne-papiry' ),
+      // Regulace a dohled nad financnim trhem
+      '971' => array('hospodarska-soutez'),
+      // Soutezni pravo
+      '969' => array('obchodni-spolecnosti', 'obchodni-pravo'),
+      // Spravni proces
+      '970' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
+      // Zaklady prava
+      '950' => array('cenne-papiry'),
+    )
   );
 
   drupal_add_js($settings, 'setting');
+
+  $username = Settings::username();
+
+  if (user_is_logged_in() && strlen($username) == 0 && strpos(current_path(), 'user/') === FALSE) {
+
+    $message = t('Please fill in your ASPI credentials <a href="!url">here</a>.',
+      array('!url' => url("user/$user->uid/edit")));
+
+    $message .= t('If you don\'t have credentials yet, please go <a href="#">here</a>.');
+
+    drupal_set_message($message, 'warning');
+  }
 }
 
 /**
@@ -92,7 +137,7 @@ function esf_module_user_insert(&$edit, $account, $category) {
       'uid' => $uid,
     );
 
-    pdm_create_message($message, $options);
+    //pdm_create_message($message, $options);
   }
 }
 

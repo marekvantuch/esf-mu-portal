@@ -15,7 +15,7 @@ files[] = includes/esf_module.properties.inc
 files[] = includes/esf_module.servlets.inc
 
 dependencies[] = variable
-dependencies[] = pdm
+; dependencies[] = pdm
 dependencies[] = password_field
 
 scripts[] = js/esf-common.js
