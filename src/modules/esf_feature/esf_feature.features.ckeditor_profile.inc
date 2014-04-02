@@ -12,7 +12,16 @@ function esf_feature_ckeditor_profile_defaults() {
     'CKEditor Global Profile' => array(
       'name' => 'CKEditor Global Profile',
       'settings' => array(
+        'skin' => 'moono',
         'ckeditor_path' => '%l/ckeditor',
+        'ckeditor_local_path' => '',
+        'ckeditor_plugins_path' => '%m/plugins',
+        'ckeditor_plugins_local_path' => '',
+        'ckfinder_path' => '%m/ckfinder',
+        'ckfinder_local_path' => '',
+        'ckeditor_aggregate' => 'f',
+        'toolbar_wizard' => 't',
+        'loadPlugins' => array(),
       ),
       'input_formats' => array(),
     ),
@@ -40,7 +49,7 @@ function esf_feature_ckeditor_profile_defaults() {
 ]',
         'expand' => 't',
         'width' => '100%',
-        'lang' => 'en',
+        'lang' => 'cs',
         'auto_lang' => 't',
         'language_direction' => 'default',
         'enter_mode' => 'p',
@@ -61,7 +70,7 @@ function esf_feature_ckeditor_profile_defaults() {
         'css_path' => '',
         'css_style' => 'theme',
         'styles_path' => '',
-        'filebrowser' => 'none',
+        'filebrowser' => 'imce',
         'filebrowser_image' => '',
         'filebrowser_flash' => '',
         'UserFilesPath' => '%b%f/',
@@ -92,6 +101,18 @@ function esf_feature_ckeditor_profile_defaults() {
               'Media' => array(
                 'label' => 'Media',
                 'icon' => 'images/icon.gif',
+              ),
+            ),
+            'default' => 'f',
+          ),
+          'mediaembed' => array(
+            'name' => 'mediaembed',
+            'desc' => 'Plugin for inserting Drupal embeded media',
+            'path' => '%plugin_dir%mediaembed/',
+            'buttons' => array(
+              'MediaEmbed' => array(
+                'label' => 'MediaEmbed',
+                'icon' => 'images/icon.png',
               ),
             ),
             'default' => 'f',

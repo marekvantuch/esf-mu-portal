@@ -220,13 +220,22 @@ function esf_feature_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference',
+      'module' => 'options',
       'settings' => array(
+        'fields' => array(),
         'match_operator' => 'CONTAINS',
         'path' => '',
         'size' => 60,
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'uzly',
+          'label_singular' => 'uzel',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 0,
+        ),
       ),
-      'type' => 'entityreference_autocomplete_tags',
+      'type' => 'options_buttons',
       'weight' => 4,
     ),
   );
@@ -789,7 +798,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -833,7 +842,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -870,15 +879,9 @@ function esf_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 1,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -920,7 +923,7 @@ function esf_feature_field_default_field_instances() {
           'file_view_mode' => 'default',
         ),
         'type' => 'media',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',

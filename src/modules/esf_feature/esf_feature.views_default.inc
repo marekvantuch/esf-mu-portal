@@ -342,13 +342,13 @@ function esf_feature_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Chování při žádných výsledcích: Globální: Unfiltered text */
-  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['label'] = 'No Results';
-  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = 'K tomuto předmětu se nevztahují žádné obory práva.';
+  /* Chování při žádných výsledcích: Globální: Textová oblast */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'K tomuto předmětu se nevztahují žadné obory práva.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Vztah: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['id'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['relationships']['reverse_field_school_subjects_node']['table'] = 'node';
@@ -409,8 +409,7 @@ function esf_feature_views_default_views() {
     t('‹ předchozí'),
     t('následující ›'),
     t('poslední »'),
-    t('No Results'),
-    t('K tomuto předmětu se nevztahují žádné obory práva.'),
+    t('K tomuto předmětu se nevztahují žadné obory práva.'),
     t('Legal Subject'),
     t('Nadpis'),
     t('Kód'),
@@ -574,6 +573,13 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Pole: Obsah: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Pole: Obsah: Nadpis */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -581,6 +587,9 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = 'span';
+  $handler->display->display_options['fields']['title']['element_class'] = '[nid]';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Sort criterion: Obsah: Nadpis */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
