@@ -30,7 +30,6 @@ function esf_permissions_user_default_permissions() {
   $permissions['access content'] = array(
     'name' => 'access content',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'node',
@@ -65,10 +64,8 @@ function esf_permissions_user_default_permissions() {
   $permissions['access site map'] = array(
     'name' => 'access site map',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
       'moderator' => 'moderator',
-      'student' => 'student',
     ),
     'module' => 'site_map',
   );

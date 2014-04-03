@@ -16,11 +16,5 @@ function esf_permissions_user_default_roles() {
     'weight' => 3,
   );
 
-  // Exported role: student.
-  $roles['student'] = array(
-    'name' => 'student',
-    'weight' => 2,
-  );
-
   return $roles;
 }

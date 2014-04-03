@@ -5,11 +5,11 @@ Díky využití Features~\ref{nic} a instalačních profilů je možné portál 
 
 \section{Požadavky a příprava systému}
 
-Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, ...) s podporou PHP. MySQL potřebné není, lze využít minimalistickou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. Drupal také k instalaci vyžaduje knihovny php-gd a php-pdo.
+Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, atd.) s podporou PHP. MySQL potřebné není, lze využít minimalistickou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu \ref{phing}.
 
-Volitelně je možné mít nainstalováno
+Volitelně je možné mít nainstalováno: ??
 
-Před samotnou instalací je nutné nastavit základní vlastnosti projektu. Je nutné buď překopírovat soubor \texttt{phing/default.build.properties} do hlavní složky a přejmenovat jej na build.properties, nebo spustit příkaz \texttt{\$~phing}, který provede úvodní inicializaci, jejíž součástí je i překopírování souboru v případě, že neexistuje. V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
+Obsah repozitáře projektu je vhodné umístit například do domovské složky - typicky příkladem \texttt{git clone git@github.com:kanei/esf-mu-portal.git}. Před samotnou instalací je nutné nastavit základní vlastnosti projektu. Soubor \texttt{phing/default.build.properties} překopírujte do hlavní složky repozitáře (např.\texttt{\~/esf-mu-portal}) a přejmenovat jej na build.properties, nebo spustit příkaz \texttt{\$~phing}, který provede úvodní inicializaci, jejíž součástí je i překopírování souboru v případě, že neexistuje. V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
 
 \section{Postup instalace}
 Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install}. Pro spuštění instalace je potřeba v terminálu spustit příkaz \texttt{\$~phing install} a v  průběhu instalace se provedou následující kroky:
@@ -27,4 +27,4 @@ Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i sku
 Pokud vše proběhlo v pořádku a server je schopen přistupovat ke všem souborům i databázi, je možné na adrese propojené se stránkami navštívit úvodní stránku - typicky se jedná o \emph{http:\\localhost/esf}. Na stránky bylo převedeno veškeré nastavení, ale nebyl zde vytvořen žádný obsah. Ten lze buď migrovat z produkčních stránek, nebo generovat za pomocí modulu Devel. Na adrese \emph{http://localhost/esf/?q=user} se lze přihlásit za pomocí administrátorského účtu (pokud nebyl změněn v konfiguračním souboru, jedná se o admin/admin) a přistoupit k administračnímu rozhraní stránek.
 
 \section{Administrace}
-Správa probíhá za využití klasické administrace v jádře Drupalu, rozšířené o další moduly a vlastní pohledy na data, poskytující 
+Správa probíhá za využití klasické administrace v jádře Drupalu, rozšířené Pracovní stůl a další pohledy vytvořené specificky pro tento projekt. 
