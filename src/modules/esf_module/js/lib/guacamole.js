@@ -75,8 +75,7 @@ Guacamole.CORS = function () {
      * @param url url of the server to be accessed
      * @returns {XMLHttpRequest}
      */
-    this.createRequest = function (method, url, async) {
-        async = (typeof async === "undefined") ? true : async;
+    this.createRequest = function (method, url) {
 
         var xhr = new XMLHttpRequest();
 
@@ -90,7 +89,7 @@ Guacamole.CORS = function () {
             // Check if the XMLHttpRequest object has a "withCredentials" property.
             // "withCredentials" only exists on XMLHTTPRequest2 objects.
             xhr.withCredentials = true;
-            xhr.open(method, url, async);
+            xhr.open(method, url, true);
 
         } else if (typeof XDomainRequest != "undefined") {
 
