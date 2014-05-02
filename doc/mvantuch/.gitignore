@@ -17,3 +17,9 @@ mvantuch.pdf
 *.blg
 *.gz
 *.bbl
+*.acn
+*.acr
+*.gls
+*.glg
+*.ist
+*.alg

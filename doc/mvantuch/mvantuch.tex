@@ -7,6 +7,7 @@
 %% {onecolumn, twocolumn}
 %% sudo yum install texlive texlive-babel-czech texlive-hyphen-czech 
 \documentclass[10pt,final,oneside]{fithesis2}
+\pdfoptionpdfminorversion 7
 
 %% Basic packages
 \usepackage[czech]{babel}
@@ -28,6 +29,10 @@
 \usepackage[all]{hypcap}
 \usepackage{amssymb}
 \usepackage{courier}
+\usepackage{listings}
+
+\lstset{language=PHP}  
+
 %% Fix long URLs in DVIs
 \usepackage{ifpdf}
 
@@ -40,9 +45,10 @@
 \usepackage{makeidx}
 \makeindex
 
-\usepackage[xindy]{glossaries}
-\include{tex/glossary}
+\usepackage[acronym]{glossaries}
 \makeglossaries
+
+\include{tex/glossary}
 
 %% Use STAR and CIRCLE signs for nested
 %% itemized lists
@@ -66,6 +72,7 @@
 \FrontMatter
 \ThesisTitlePage
 
+
 %% Thesis declaration (required)
 \begin{ThesisDeclaration}
   \DeclarationText
@@ -78,7 +85,7 @@
 
 %%TODO Thanks (optional)
 \begin{ThesisThanks}
-Chtěl bych obzvláště poděkovat Ing. Leonardu Walletzkému, Ph.D za příležitost pracovat na tomto projektu. Děkuji všem svým spolupracovníkům za ohleduplnost a trpělivost nutnou s ohledem na ztížené podmínky, které byly způsobeny mou prací ze zahraničí.
+Chtěl bych obzvláště poděkovat Ing. Leonardu Walletzkému, Ph.D za příležitost pracovat na tomto projektu. Děkuji všem svým spolupracovníkům za ohleduplnost a trpělivost nutnou s ohledem na ztížené podmínky, které byly způsobeny mou prací ze zahraničí. Ivaně Haraslínové, Ondřeji Maternovi a Radkovi ... za pomoc 
 \end{ThesisThanks}
 
 %%TODO Abstract (required)
@@ -107,6 +114,7 @@ Guacamole, vzdálená plocha, ASPI, ESF, Drupal, Team City, Drush, Phing, CORS, 
 
 %% Lists of tables and figures, glossary, etc.
 \printindex
+\printglossary[type=\acronymtype,title={Zkratky}]
 \printglossary
 \listoffigures
 \listoftables

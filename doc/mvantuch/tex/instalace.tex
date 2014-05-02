@@ -1,13 +1,23 @@
 \chapter{Instalace, konfigurace a správa portálu}
 \label{chap:instalace}
 
-Díky využití Features~\ref{nic} a instalačních profilů je možné portál nainstalovat na jakýkoliv server bez kopírování souborů, či databáze, pouze za pomocí nástrojů Phing a Drush. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality vzdálené plochy.
+Díky využití Features (viz. sekce \ref{subsec:features}) a instalačních profilů (viz. \ref{subsec:drupal}) je možné portál nainstalovat na jakýkoliv server bez kopírování souborů, či databáze, pouze za pomocí nástrojů Phing a Drush. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality vzdálené plochy.
 
 \section{Požadavky a příprava systému}
 
-Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, atd.) s podporou PHP. MySQL potřebné není, lze využít minimalistickou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu \ref{phing}.
+Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, etc.) s podporou PHP. Systém podporuje MySQL a PostgreSQL, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}, pro niž bylo řešení upraveno. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing (viz. sekce \ref{subsec:phing}).
 
-Volitelně je možné mít nainstalováno: ??
+Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \gls{pear}, tento způsob však byl nahrazen instalací pomocí programu \gls{composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \gls{curl} a příkazu \texttt{curl -sS https://getcomposer.org/installer | php}. Jakmile je composer dostupný, lze již Drush nainstalovat za pomoci příkazu \texttt{\$ composer global require drush/drush:6.*}. Po instalaci je vhodné nastavit prostředí systému a integraci mezi nástroji Drush a \gls{bash}. Do souboru \texttt{.bashrc} v domovském adresáři stačí vložit řádek obsahující cestu k Drushi (typicky \texttt{source ~/.composer/vendor/drush/drush/examples/example.bashrc} a po restartování \gls{session} by měly být přístupné příkazy pod zkrácenými aliasy a zároveň dokončování názvů webů a příkazů. Dále je vhodné v souboru \texttt{~/.drush/aliases.drushrc.php} definovat alias stránky pro usnadnění manipulace. Obsah souboru může vypadat následovně:
+
+\begin{lstlisting}
+<?php
+$aliases['pravo'] = array(
+  'root' => '/srv/www/htdocs/l',
+  'uri' => 'pravo.com',
+);
+\end{lstlisting}
+
+Po tomto nastavení je možné do složky přistoupit jednoduše pomocí příkazu \texttt{\$~cd~@pravo}, pro který zároveň funguje automatické dokončování. Také je možné všechny příkazy Drushe spouštět pro daný alias, což je výhodné v případě více prostředí, například vývojového, testovacího a produkčního.
 
 Obsah repozitáře projektu je vhodné umístit například do domovské složky - typicky příkladem \texttt{git clone git@github.com:kanei/esf-mu-portal.git}. Před samotnou instalací je nutné nastavit základní vlastnosti projektu. Soubor \texttt{phing/default.build.properties} překopírujte do hlavní složky repozitáře (např.\texttt{\~/esf-mu-portal}) a přejmenovat jej na build.properties, nebo spustit příkaz \texttt{\$~phing}, který provede úvodní inicializaci, jejíž součástí je i překopírování souboru v případě, že neexistuje. V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
 

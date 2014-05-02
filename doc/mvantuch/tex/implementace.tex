@@ -4,7 +4,21 @@
 Pro převedení stávajícího řešení na novou verzi bylo nutné vykonat několik kroků. Nejprve byla data z produkčního prostředí přesunuta na testovací server, kde bylo řešení zanalyzováno co se týče implementační stránky, neboť bylo možné k portálu přistupovat s administrátorským účtěm bez jakýchkoliv omezení. Jakmile byly stránky zanalyzovány, byl započat proces jejich aktualizace na novou verzi Drupalu při zachování veškerého obsahu. Tento postup se ukázal jako kontraproduktivní, neboť i když byl obsah stránek převeden vpořádku, bylo potřeba jej převést na kompletně odlišnou strukturu spolu s jinými typy obsahu a jinými cílovými poli. Proto bylo rozhodnuto, že data budou přesunuta ručně.
 
 \section{Aktualizace Drupal 6 na Drupal 7}
-Výhody Drupal 7 nad Drupalem 6
+Sedmá verze Drupalu komplexně přepracovala celý kód redakčního systému a zohlednila v té době relevantní požadavky na moderní \gls{cms}. Mnoho modulů bylo přesunuto přímo do jádra systému - například podpora vytváření vlastních polí obsahu, pro což byl v Drupalu 6 potřeba modul CCK (Content Creation Kit). Množství změn je jednoduše vidět i ve velikosti zdrojových souborů, kdy verze 7 obsahuje 12.8~MB zdrojového kódu oproti 3,7~MB u verze 6.
+
+Kromě funkcionality přidané do jádra, které by bylo možné dosáhnout i za pomocí modulů v předchozí verzi, byly přepracovány i mnohé části funkcionality jádra systému~\cite{website:drupal-comparison}. Pro toto řešení jsou důležitá následující vylepšení:
+
+\begin{itemize}
+  \item podpora kešování za pomocí reverzní proxy (např. Varnish)
+  \item Entity API - vytváření entit bez URL
+  \item možnost přidávat pole ke všem entitám (uživatelé, slovníky, ...)
+  \item podpora různých databází se stejným zdrojovým kódem v PHP (abstrakce nad dotazy do databáze)
+  \item zlepšená podpora AJAX volání
+  \item celkově propracovanější kód (vhodný pro vývoj dalších modulů)
+\end{itemize}
+
+
+V době práce na informačním systému již byl dostupný i Drupal verze 8, ale nebyl ještě plně stabilní. Některé jeho vlastnosti však byly zpětně implementovány jako modul pro Drupal 7 a mou snahou bylo identifikovat jakékoliv takovéto moduly (například NavBar, který poskytuje responsivní administrační panel, filtrace modulů, či administrační téme Ember postavené na SASS). 
 
 \begin{table}
   \caption{Porovnání verzí modulů mezi Drupalem 6 a 7}
@@ -40,42 +54,57 @@ Výhody Drupal 7 nad Drupalem 6
   \end{tabular}
 \end{table}
 
-\subsection{Odebrané moduly}
 Funkcionalita některých z modulů byla v sedmé verzi přesunuta přímo do jádra Drupalu a proto nebylo jejich využití již potřebné - byly využity jejich ekvivalenty z jádra. Kromě těchto byly odebrány i další moduly, kdy některé nejsou pro novou verzi vůbec dostupné. Dále byly odstraněny moduly, jejichž využití již postrádalo smysl. Z důvodu změny a zjednodušení struktury menu již nebylo potřeba mnoho modulů, které umožňovaly složitá menu zobrazovat uživatelům. Zároveň bylo odstraněno několik modulů, které nebyly na stránkách vůbec využity a zbytečně zpomalovaly běh portálu. Následuje seznam těchto modulů s jejich krátkým popisem.
 
-\subsubsection*{Nedostupné moduly}
-\begin{itemize}
-  \item Views Search
-\end{itemize}
+\subsection{Odebrané moduly (nedostupné)}
+Z důvodu převážného vyvíjení Drupalu komunitou nebyly všechny moduly dostupné pro Drupal 6 vyvinuty i pro Drupal 7 - většinou z důvodu nepotřebnosti daných modulů, kdy u většiny užitečných modulů nová verze existuje.
 
-\subsubsection*{Moduly poskytující strukturu předchozího řešení}
-\begin{itemize}
-  \item Front Page - Slouží k nastavení výchozí stránky pro různé uživatelské role. Z důvodu plánování kompletně nové implementace domovské stránky byla tato funkcionalita prozatím odstraněna a může být případně přidána v čase implementace dané části portálu.
-  \item Menu Attributes - Poskytuje %TODO doplnit
-  \item Taxonomy Breadcrumb
-  \item Custom Breadcrumbs
-  \item DHTML Menu
-\end{itemize}
+\subsubsection*{Views Search \hfill \emph{https://drupal.org/project/views\_search}}
+Rozšiřuje funkcionalitu Views a jejich obsahových filtrů.
 
-\subsubsection*{Nepotřebné moduly}
-\begin{itemize}
-  \item jCarousel - Slouží k propojení se stejnojmennou JavaScriptovou knihovnou poskytující zobrazení obrázků v ovladatelném ,,kolotoči''. S ohledem na aktuální absenci jakékoliv grafiky byl modul shledán nepotřebným. 
-  \item Colorbox - Podobně jako jCarousel slouží k propojení s knihovnou určenou ke zobrazování obrázků a ani tento modul nebyl aktivně využíván.
-\end{itemize}
+\subsection{Odebrané moduly (definující strukturu předchozího řešení)}
+Předchozí struktura webu byla v mnohém odlišná a k její implementaci bylo využito několik modulů, které mohly být pro nepotřebnost vypnuty a odinstalovány. 
 
-\subsection{Nově přidané moduly a jejich popis}
+\subsubsection*{Front Page \hfill \emph{https://drupal.org/project/front}}
+Slouží k nastavení výchozí stránky pro různé uživatelské role. Z důvodu plánování kompletně nové implementace domovské stránky byla tato funkcionalita prozatím odstraněna a může být případně přidána v čase implementace dané části portálu.
 
-\subsubsection*{Features} 
+\subsubsection*{Menu Attributes \hfill \emph{https://drupal.org/project/menu\_attributes}}
+Umožňuje přiřazení attributů k položkám menu. Ty pak mohou být použity buď pro stylování, nebo navázány na JavaScript.
+
+\subsubsection*{Taxonomy Breadcrumb \hfill \emph{https://drupal.org/project/taxonomy\_breadcrumb}}
+Generuje drobečkovou navigaci za pomoci slovníků definovaných v systému a jejich hierarchie. Hierarchie tím pádem může být velmi jendoduše upravena - toto však již není po úpravě systému potřeba s ohledem na zjednodušenou strukturu.
+
+\subsubsection*{Custom Breadcrumbs \hfill \emph{https://drupal.org/project/custom\_breadcrumbs}}
+Umožňuje detailní nastavení drobečkové navigace.
+
+\subsubsection*{DHTML Menu \hfill \emph{https://drupal.org/project/dhtml\_menu}}
+Mění funkcionalitu menu - při prvním kliknutí se namísto přesunutí na danou stránku pouze rozbalí menu s potomky daného odkazu a až při druhém kliknutí se přejde na danou stránku - tato funkcionalita zřejmě nebyla využívána.
+
+\subsection{Nevyužité moduly}
+Několik modulů sice bylo povoleno, ale nebyly nikde v systému využity a proto byly odstraněny.
+
+\subsubsection*{jCarousel \hfill \emph{https://drupal.org/project/jcarousel}}
+Slouží k propojení se stejnojmennou JavaScriptovou knihovnou poskytující zobrazení obrázků v ovladatelném ,,kolotoči''. S ohledem na aktuální absenci jakékoliv grafiky byl modul shledán nepotřebným.
+ 
+\subsubsection*{Colorbox \hfill \emph{https://drupal.org/project/colorbox}}
+Podobně jako jCarousel slouží k propojení s knihovnou určenou ke zobrazování obrázků a ani tento modul nebyl aktivně využíván.
+
+\section{Nově přidané moduly}
+
+\subsubsection*{Features \hfill \emph{https://drupal.org/project/features}} 
+\label{subsec:features}
 Jak je popsáno v kapitole~\ref{chap:vyvoj}, Features slouží k ulehčení vývoje a správy nastavení stránek postavených na Drupalu. Základní myšlenkou je třívrstvé rozvržení systému, v první úrovni je jádro a jeho moduly, ve druhé rozšiřující moduly (tzv. Contrib) a ve třetí jsou rysy (Features), které v sobě zapouzdřují samotné nastavení stránek. Ačkoliv se jedná také o moduly, jsou generovány systémem na stránce \texttt{admin/structure/features}. Zde je možné buď vytvořit nový rys, či spravovat ty stávající. Ty mohou být v několika stavech závisejících na aktuálním nastavení systému. Pokud bylo v sytému něco změněno od chvíle, kdy byl rys vygenerován a povolen (případně pouze povolen, pokud byl přenesen z jiného serveru), je možné dané změny buď vrátit ke stavu definovanému v rysu, nebo rys aktualizovat na novou verzi.
 
-\subsubsection*{Features Extra}
+\subsubsection*{Features \hfill \emph{https://drupal.org/project/features\_extra}} 
 Jelikož modul Features v sobě implementuje pouze základní funkcionalitu exportu typů obsahu a poskytuje \gls{api} pro další moduly, některé prvky webu nejsou v základu exportovatelné. Tento modul možnosti exportu rozšiřuje o několik dalších možností, ze kterých pro tento projekt byla důležitá možnost exportovat nastavení umístění bloků.
 
-\subsubsection*{Media}
+\subsubsection*{Media \hfill \emph{https://drupal.org/project/media}}
+\gls{cms} systém Drupal v základu poskytuje pouze jednoduchou funkcionalitu práce s obrázky a zvuk, video i dokumenty jsou v současné době naprosto přehlíženy (platí pro verzi 7.x). Zároveň uživatelé nemají mnoho možností operovat se soubory, které nahráli na server a tím pádem jsou často nuceni obsah opětovně nahrávat, čímž docházi k duplikaci. Tyto a mnohé další problémy se snaží řešit projekt Media, poskytující uživatelům srozumitelné rozhraní a unifikaci práce s různými typy multimediálního obsahu a zároveň správu veškerého obsahu nahraného na server. Pro svůj běh vyžaduje modul File Entity, který poskytuje možnosti práce se soubory jako entitami v systému.
 
+\subsubsection*{Workbench \hfill \emph{https://drupal.org/project/workbench}}
+\label{subsec:workbench}
 
-\subsubsection*{Workbench}
-\subsubsection*{Workbench Media}
+\subsubsection*{Workbench Media \hfill \emph{https://drupal.org/project/workbench\_media}}
 
 \section{Téma vzhledu a jeho rozložení}
 Pro rozvržení stránek bylo využito tématu vzhledu Omega ve verzi 4. Narozdíl od předchozích verzí, které poskytovaly uživatelům komplexní administrační rozhraní pro nastavení rozvržení stránky, byla tato možnost z verze 4 odstraněna a nahrazena využitím knihovny SUSY (viz. sekce~\ref{sec:technologies}). Veškerá rozvržení jsou proto implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. 
@@ -103,7 +132,7 @@ Pro potřeby tohoto projektu však bylo potřeba vždy pouze jediné připojení
 
 Pro nastavení přihlašovacích údajů je potřeba se nejdříve k serveru přihlásit. Pro minimalizaci úkonů potřebných ke každému připojení ke vzdálené ploše a také k zjednodušení celého procesu si musí každý uživatel portálu uložit své přihlašovací údaje do svého profilu, odkud jsou pak použity při přihlášení ke Guacamole Servletu. K tomu je použito dvou služeb - \emph{connect} a {login}. Proces je znázorněn na diagramu \ref{fig:login_process}. 
 
-Komunikace je započata přímo v klientském prohlížeči z JavaScriptu. Po přístupu na stránku /aspi je nejdříve kontaktována pomocí technolie AJAX stránka /aspi/ajax na portálu, která se připojí ke servletu Login. Guacamole Servlet si vytvoří nové \gls{session} a jeho identifikátor odešle zpět PHP kódu. Pokud vše proběhne v pořádku, je identifikátor sezení odeslán pomocí set-cookie hlavičky zpět stránce /aspi, kde si informaci uloží prohlížeč jako cookie pro pozdější komunikaci. V případě jakékoliv chyby je chybové hlášení vypsáno na obrazovce a zalogováno v systému bez jakýchkoliv dalších pokusů o připojení, uživatel je tedy nucen buď stránku obnovit, nebo kontaktovat správce stránek. Pokud však vše proběhne v pořádku, je inicializována smyčka přímých volání služby \emph{tunnel} poskytované Guacamole Servlet kontejnerem za pomocí technologie CORS. Komunikace probíhá za pomocí Guacamole protokolu a ten je poté konvertován na grafický výstup na obrazovce uživatele, který je od této chvíle schopen pomocí myši a klávesnice ovládat vzdálenou plochu a tím i ASPI.
+Komunikace je započata přímo v klientském prohlížeči z JavaScriptu. Po přístupu na stránku /aspi je nejdříve kontaktována pomocí technolie AJAX stránka /aspi/ajax na portálu, která se připojí ke servletu Login. Guacamole Servlet si vytvoří nové \gls{session} a jeho identifikátor odešle zpět PHP kódu. Pokud vše proběhne v pořádku, je identifikátor sezení odeslán pomocí set-cookie hlavičky zpět stránce /aspi, kde si informaci uloží prohlížeč jako cookie pro pozdější komunikaci. V případě jakékoliv chyby je chybové hlášení vypsáno na obrazovce a zalogováno v systému bez jakýchkoliv dalších pokusů o připojení, uživatel je tedy nucen buď stránku obnovit, nebo kontaktovat správce stránek. Pokud však vše proběhne v pořádku, je inicializována smyčka přímých volání služby \emph{tunnel} poskytované Guacamole Servlet kontejnerem za pomocí technologie CORS. Komunikace probíhá za pomocí Guacamole protokolu a ten je poté konvertován na grafický výstup na obrazovce uživatele, který je od této chvíle schopen pomocí myši a klávesnice ovládat vzdálenou plochu a tím i gls{aspi}.
 
 \begin{figure}[]
   \includegraphics[scale=0.85]{img/login-process-crop.pdf}
@@ -122,12 +151,30 @@ Pro možnost komunikace mezi více doménami bylo potřeba implementovat CORS (v
 Druhá část implementace je umožnění cross-domain požadavků v JavaScriptu. Knihovna Guacamole-js musela být lehce přepsána v místech, kde byla použita volání XMLHttpRequest, která jsou v tomto případě volána asynchronně. Použité řešení bohužel nelze aplikovat na \gls{ie}, neboť XDomainRequest nepodporuje asynchronní zpracování a bude nutné toto řešení ještě přepracovat do funkční podoby.
 
 \section{Implementace úpravy nastavení z administrace portálu}
-Guacamole typicky poskytuje nastavení pomocí konfiguračního souboru umístěného buď ve složce instalace, nebo v domácí složce uživatele, který program spouští. Jelikož je ke změně těchto konfiguračních souborů nutné přistupovat přímo k serveru, rozhodl jsem se tuto administrační část přepracovat a zpřístupnit přímo z administrace portálu. Ta nabízí dvě základní stránky. Na stránce Nastavení (/config/esf/settings) je možné upravit základní nastavení projektu jako je URL adresa pro připojení ke Guacamole Servlet službám či právě přístup ke konfiguračnímu souboru. Ten se typicky jmenuje guacamole.properties a nachází se ve složce /srv/guacamole/. Je nutné se ujistit, že jak Guacamole Servlet (TomCat) tak ESF Portál (Apache) mají k souboru přístup a mohou jej upravovat.
+Guacamole typicky poskytuje nastavení pomocí konfiguračního souboru umístěného buď ve složce instalace, nebo v domácí složce uživatele, který program spouští. Jelikož je ke změně těchto konfiguračních souborů nutné přistupovat přímo k serveru, rozhodl jsem se tuto administrační část přepracovat a zpřístupnit přímo z administrace portálu. Ta nabízí dvě základní stránky. Na stránce Nastavení (/config/esf/settings) je možné upravit základní nastavení projektu jako je URL adresa pro připojení ke Guacamole Servlet službám či právě přístup ke konfiguračnímu souboru. Ten se typicky jmenuje guacamole.properties a nachází se ve složce /srv/guacamole/. Je nutné se ujistit, že jak Guacamole Servlet (TomCat) tak \gls{esf} Portál (Apache) mají k souboru přístup a mohou jej upravovat.
 
-Na stránce nastavení Připojení ke vzdálené ploše (config/esf/remote) lze za předpokladu, že je vše správně nastaveno, upravovat nastavení Guacamole samotného a url pro připojení k serveru vzdálené plochy - což je v našem případě ASPI. Dále je nutné nastavit port pro připojení ke Guacd démonovi poskytujícímu proxy pro připojení ke vzdálené ploše, uživatelské jméno a heslo je však převzato z nastavení každého jednotlivého uživatele.
+Na stránce nastavení Připojení ke vzdálené ploše (\texttt{/config/esf/remote}) lze za předpokladu, že je vše správně nastaveno, upravovat nastavení Guacamole samotného a url pro připojení k serveru vzdálené plochy - což je v našem případě ASPI. Dále je nutné nastavit port pro připojení ke Guacd démonovi poskytujícímu proxy pro připojení ke vzdálené ploše, uživatelské jméno a heslo je však převzato z nastavení každého jednotlivého uživatele.
 
 \section{Vývoj tématu vzhledu}
-Instalovat bundler sudo gem install bundler
-\$ bundle install
+Implementace vzhledu probíhá na dvou úrovních. 
+\begin{enumerate}
+  \item Je potřeba generovat vhodný HTML kód. K tomu v Drupalu slouží systém přepisování šablonovacích souborů (přípona .tpl.php) pro jednotlivé prvky webu. V základu poskytuje Drupal stromovou strukturu, začínající u celého dokumentu (html.tpl.php), který obsahuje všechen obsah včetně hlaviček, a pokračující přes stránku (page.tpl.php) až po jednotlivé elementy (např. fieldset.tpl.php). Většina těchto šablon je definována přímo v jádru systému a všechny lze jednoduchým způsobem (na základě jména) přepsat. Zároveň je možné vytvářet úplně nové šablony. Šablonám lze zároveň i upravit data, která do nich budou vložena a to za pomoci implementace funkcí \_preprocess a \_process a jejich vložení do kódu tématu vzhledu. 
+  Další způsob, jak změnit výstup html je přepsání funkcí formátujících jednoduché elementy stránky (například seznam elementů ul). Typicky jsou tyto prvky generovány funkcí theme([jméno elementu], [proměnné]), která může být přepsána buď v modulu, nebo tématu vzhledu, jako [jméno modulu]\_[jméno elementu]() - například \texttt{function omega\_fieldset(\$variables)}. Modul Omega nad tímto rozhraním navíc poskytuje možnosti všechny tyto funkce vkládat do samostatných souborů pojmenovaných dle daných konvencí, čímž dále zpřehledňuje výsledný kód (výše zmíněný kód by byl umístěn v souboru \texttt{theme/container.theme.inc}).
+  \item Na HTML kód se nanášejí \gls{css} styly. Jak je popsáno v sekci \ref{subsec:sass}, je výhodnější využívat nástroj SASS, který je do jazyka \gls{css} kompilován a poskytuje více možností. Vývoj probíhá dle standartů určených v tématu vzhledu Omega (viz. \ref{subsec:omega}) a je definován v rámci několika SASS souborů, kde do každého z nich je seskupena určitá množina nastavení.
+\end{enumerate}
 
-\section{Instalace a konfigurace řešení}
+\begin{figure}[]
+  \includegraphics[scale=0.85]{img/drupal-theme-architecture-crop.pdf}
+  \caption{Architektura vykreslení HTML kódu stránky}
+  \label{fig:theme_architecture}
+\end{figure}  
+
+V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalováno \gls{ruby}, COMPASS (viz sekce \ref{subsec:compass} a \gls{bundler}.
+
+\begin{enumerate}
+  \item \texttt{\$ sudo gem install bundler}
+  \item \texttt{\$ bundle install}
+  \item \texttt{\$ compass watch}
+\end{enumerate}
+
+COMPASS bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné CSS soubory.

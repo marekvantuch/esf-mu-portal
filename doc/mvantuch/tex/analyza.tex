@@ -7,33 +7,77 @@ Při analýze byl velký důraz kladen na jednoduchost administrace celého proj
 \section{Existující řešení}
 Při analýze bylo nutné zohlednit stávající řešení a možnosti jeho rozšíření. Existující portál využíval Drupal v 6. verzi, který byl již v dané době značně zastaralý a jeho rozšiřitelnost byla velmi omezená, či zbytečně komplikovaná. Řešení bylo rozšířeno řadou volně dostupných modulů, které dohromady poskytovaly komplexní strukturu nabídky menu vytvořenou namíru požadavkům fakulty. Tato struktura byla navržena v době, kdy nebylo známo, že systém bude pro zobrazování zákonů využívat externí software ASPI a proto byly tyto zákony také použity. 
 
-[Popsat strukturu menu]
+Autentizace na server probíhala pouze za pomocí hesla měněného ve čtvrtletních cyklech a nebyla tím pádem nijak vázána na jednotlivé uživatele. Tento způsob nedovoloval prakticky žádnou kontrolu nad uživateli přistupujícími k obsahu a po získání hesla byl schopen na server přistupovat prakticky kdokoliv. 
+
+\subsection{Struktura menu}
+
+Menu v levé sekci stránky obsahuje všechny odkazy, které uživatelé využívají k navigaci skrze portál. 
+
+\begin{itemize}
+  \item \textbf{[název předmětu 1]} \hfill \\
+    rozbalí/sbalí menu
+  \begin{itemize}
+    \item \textbf{[název předmětu 1]} \hfill \\
+      odkaz na stránku předmětu, obsahující pouze název a informace o spolufinancování \gls{eu}
+    \item \textbf{Studijní text} \hfill \\
+      rozbalí/sbalí menu
+      \begin{itemize}
+        \item \textbf{Studijní text} \hfill \\
+          odkaz na stránku studijní text, která je typicky prázdná
+        \item \textbf{Úvod} \hfill \\
+          odkaz na stránku obsahující typicky úvodní text k danému předmětu
+        \item \textbf{[studijní text 1]} \hfill \\
+          jeden z odkazů na stránku s obsahem přednášek, či jinak tématicky oddělených informací k předmětu
+        \item \textbf{[studijní text 2]}
+      \end{itemize}
+    \item \textbf{Ostatní studijní materiály} \hfill \\
+      tento a následující již nejsou pevně dané a vyskytují se nepravidelně pouze u některých předmětů
+    \item \textbf{Prezentace}
+    \item \textbf{Právní předpisy}            
+    \item \textbf{Judikáty}
+    \item \textbf{Procvičování}        
+  \end{itemize}
+  \item \textbf{[název předmětu 2]}
+  \item \textbf{[název předmětu 3]}
+\end{itemize}
+
+Z výše popsané struktury menu vyplývá, že její vlastnosti nesplňují požadavky moderních informačních systémů. Odkazy mají nekonzistentní chování - buď se rozbalí pod-menu a nebo prohlížeč přejde na novou stránku a uživatel proto nemůže jednoduše vědět, jaké chování očekávat. Struktura také obsahuje duplicity (název předmětu a odkaz na studijní text se opakují a v obou případech znamená něco jiného). Není také určená společná struktura všech předmětů a tím může lehce dojít ke zmatení uživatelů, kteří musejí pokaždé informace hledat na jiném místě v závislosti na daném předmětu (stránky Ostatní studijní materiály, Prezentace, ...). Některé stránky také místo agregace užitečných informací obsahují buď pouze banner, nebo jsou úplně prázdné (úvodní stránka předmětu) v místech, kde by uživatel očekával obsah.
 
 \section{Použité technologie}
 \label{sec:technologies}
 
-Základními technologiemi jsou Drupal a Guacamole, které prakticky určují, jaké další technologie byly využity. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
+Základními technologiemi jsou Drupal a Guacamole, které prakticky určují potřeby vyžití dalších technologií. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
 
 \subsection{Jádro CMS a přidružené technologie}
 
 \subsubsection*{Drupal \hfill \emph{http://drupal.org}} 
-Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systémů pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
+\label{subsec:drupal}
+Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systém pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
+Drupal také již v základu podporuje využití tzv. instalačních profilů. Jedná se o speciální moduly neposkytující samy o sobě žádnou funkcionalitu, ale sdružující informace o potřebných modulech a jejich iniciálním nastavení. To lze využít pro specifické distribuce, například vícejazyčná instalace, instalace specializovaná na organizace, výkon a podobně.
+
+\subsubsection*{Kerberos (Protocol) \hfill \emph{http://web.mit.edu/kerberos}}
+Vyvinut na Massachusettském technologickém institutu (MIT), protokol Kerberos poskytuje autentizační funkcionalitu za pomocí symetrické kryptografie (jediný klíč je použit pro šifrování i dešifrování). Autentizace je provedena za pomoci důvěryhodného třetího serveru (v tomto případě IS MUNI).
 
 \subsubsection*{Omega (Drupal Theme) \hfill \emph{http://drupal.org/project/omega}}
+\label{subsec:omega}
 Pro Drupal existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů (css). Projekt Omega je zaměřen na \gls{responsive} a poskytuje hotovou implementaci různých stylů pro různá zobrazovací zařízení. Zatímco třetí verze poskytuje komplexní administrační rozhraní, přístup čtvrté verze se spíše zaměřil na implementaci v kódu. Za pomocí SUSY jsou zapsány poměry mezi bloky zobrazenými na stránce a ty se pak při využití knihovny Breakpoints\cite{website:breakpoints} mezi sebou přepínají.
 
 \subsubsection*{SASS - Syntactically Awesome Style Sheets \hfill \emph{http://sass-lang.com/}}
+\label{subsec:sass}
 Při využití tématu vzhledu Omega se automaticky nabídla možnost využití knihovny SASS pro generování kaskádových stylů. Namísto použití klasického CSS je kód napsán ve formátu SCSS a poté zkompilován do CSS. Tento přístup přináší bezproblémovou kompatibilitu se všemi prohlížeči doplněnou o rozšířené možnosti definice pravidel, jako je využití proměnných, vnoření pravidel, in-line import a další. Kromě výrazného vylepšení čitelnosti, možnosti seskupováni pravidel bez zvyšování zátěže na přenos dat tak lehce lze dosáhnout i snížení programátorské náročnosti.
 
 \subsubsection*{COMPASS \hfill \emph{http://compass-style.org/}}
+\label{subsec:compass}
 Soubory SASS musí být kompilovány do CSS pro zobrazení prohlížečem a protože manuální kompilace je časově náročná a náchylná k opomenutí, nabízí se využití programu COMPASS. Přestože poskytuje širokou škálu funkcionality určené pro ulehčení práce designérům, pro potřeby tohoto projektu byla využita pouze automatická konverze z SCSS do CSS dle definovaných pravidel za pomocí compass watch. Po spuštění démona jsou kontrolovány všechny změny ve složce a automaticky regenerovány výstupní CSS soubory pro načtení prohlížečem.
 
 \subsubsection*{SUSY \hfill \emph{http://susy.oddbird.net/}}
+\label{subsec:susy}
 Další technologií využitou v tématu vzhledu je SUSY - implementace responsivní mřížky pro Compass. Za pomocí jednoduchých pravidel lze nadefinovat rozdílné rozvržení stránky závisející na rozlišení zobrazovacího zařízení. Například monitoru počítače s rozlišením vyšším než 1024 bodů můžeme postranní panel zobrazit nalevo, zatímco na mobilním zařízením můžeme text zmenšit a zobrazit v horní části stránky spolu s vypuštěním některých nedůležitých bloků. Celá stránka je může být rozdělena na počet sloupců, které mohou být dynamicky vyplňovány a pravidla lze velmi jednoduše zapisovat bez nutnosti řešení problémů s kompatibilitou mezi prohlížeči.
 
 \subsection{Technologie připojení ke vzdálené ploše}
 
 \subsubsection*{Guacamole \hfill \emph{http://guac-dev.org/}}
+\label{subsec:guacamole}
 Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat. Postup komunikace mezi klientským prohlížečem a vzdálenou plochou je blíže vyobrazen na diagramu \ref{fig:arch_core}.
 
 Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
@@ -52,18 +96,21 @@ Kvůli bezpečnostním rizikům je JavaScriptu běžícímu v prohlížeči zak�
 \subsection{Podpora deploymentu a vývoje}
 
 \subsubsection*{Drush \hfill \emph{http://github.com/drush-ops/drush}}
+\label{subsec:drush}
 Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vyvinut program Drush, poskytující administrační rozhraní nad Drupalem v terminálové konzoli. V základu jsou poskytovány operace nad moduly a tématy vzhledu, kdy každý z modulů může pomocí implementace funkcí v souboru .drush.inc poskytnout vlastní příkazy.
 
 \subsubsection*{Phing \hfill \emph{http://www.phing.info/}}
-Phing je nástroj určený ke kompilaci PHP projektů, fungující na XML konfiguračním souboru. Je založený na technologii Apache ANT poskytující stejný nástroj pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv akcí. 
+\label{subsec:phing}
+Phing je nástroj určený ulehčení práce s instalací a nastavením PHP projektů, fungující na bázi XML konfiguračního souboru. Je založený na podobné myšlence jako Apache ANT, který poskytuje podobnou funkcionalitu pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv dalších akcí, potřebných k správnému chodu webové aplikace. 
 
 \subsubsection*{DrushTask \hfill \emph{https://drupal.org/project/phingdrushtask}}
 
-\subsubsection*{Maven}
+\subsubsection*{Maven \hfill \emph{http://maven.apache.org/}}
 
-\subsubsection*{Team City}
+\subsubsection*{Team City \hfill \emph{http://www.jetbrains.com/teamcity/}}
 
-\subsubsection*{GitHub}
+\subsubsection*{GitHub \hfill \emph{https://github.com/}}
+\label{subsec:github}
 Pro udržování historie kódu a pro spolupráci více autorů byla vybrána technologie Git a online portál GitHub, který pro ni poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
 
 \section{Architektura připojení ke vzdálené ploše}
@@ -96,29 +143,23 @@ Požadavky \cite{omaterna2013} poskytnuté Mgr. Maternou poskytují analýzu ře
 \subsection{Typy polí použitelné pro vlastnosti typů obsahu}
 V drupalu existuje několik základních typů polí, které převážně fungují podobně jako datové typy v typických programovacích jazycích. Narozdíl od jednoduchých datových typů však poskytují navíc html formátování a mohou poskytovat i další nastavení. Formátování jde dále změnit pomocí přepsání základních formátovácích funkcí.
 
-\subsubsection*{Text}
-Poskytuje pole pro text s omezenou délkou bez možnosti vkládání html značek. Jeho obsah je zadáván pouze v jediném řádku a poskytuje pouze limitované možnosti nastavení, kterými je délka vstupního pole, či defaultní hodnota. 
+\begin{description}
+  \item[Text] Poskytuje pole pro text s omezenou délkou bez možnosti vkládání html značek. Jeho obsah je zadáván pouze v jediném řádku a poskytuje pouze limitované možnosti nastavení, kterými je délka vstupního pole, či defaultní hodnota. 
+  
+  \item[Dlouhý text se souhrnem] Narozdíl od typu pole Text může v tomto případě být text neomezeně dlouhý a obsahovat značky html kódu. Ty mohou být vkládány buď ručně a nebo automaticky formátovány pomocí \gls{wysiwyg} editoru. Zároveň je pro text možné vyplnit souhrn, který je ve specifických případech zobrazit, nebo se automaticky zobrazí zkrácená verze textu. Počet znaků je možné určit pro každou instanci pole zvlášť.
+  
+  \item[Hodnota slovníku] V nastavení pole lze vybrat jeden z existujících slovníků. Jeho hodnoty pak jsou vypsány v jednom z dostupných formátů (radio/zaškrtávací tlačítka) a dle nastavení pak lze vybrat jen jedna, nebo více možností.
+  
+  \item[Logická hodnota] Poskytuje pole pro logickou hodnotu - ano nebo ne. Pro hodnoty lze vybrat jednu z typicky použítelných nápisů (ano/ne, pravda/nepravda, checkmark/x), nebo definovat nápisy vlastní. 
 
-\subsubsection*{Dlouhý text se souhrnem}
-Narozdíl od typu pole Text může v tomto případě být text neomezeně dlouhý a obsahovat značky html kódu. Ty mohou být vkládány buď ručně a nebo automaticky formátovány pomocí \gls{wysiwyg} editoru. Zároveň je pro text možné vyplnit souhrn, který je ve specifických případech zobrazit, nebo se automaticky zobrazí zkrácená verze textu. Počet znaků je možné určit pro každou instanci pole zvlášť.
+  \item[URL adresa] Kromě samotné adresy poskytuje možnost uložení dalších parametrů, podobně jako element <a> jazyka html. Mezi tyto parametry patří např. titulek, cíl a podobně.
 
-\subsubsection*{Hodnota slovníku}
-V nastavení pole lze vybrat jeden z existujících slovníků. Jeho hodnoty pak jsou vypsány v jednom z dostupných formátů (radio/zaškrtávací tlačítka) a dle nastavení pak lze vybrat jen jedna, nebo více možností.
-
-\subsubsection*{Logická hodnota}
-Poskytuje pole pro logickou hodnotu - ano nebo ne. Pro hodnoty lze vybrat jednu z typicky použítelných nápisů (ano/ne, pravda/nepravda, checkmark/x), nebo definovat nápisy vlastní. 
-
-\subsubsection*{URL adresa}
-Kromě samotné adresy poskytuje možnost uložení dalších parametrů, podobně jako element <a> jazyka html. Mezi tyto parametry patří např. titulek, cíl a podobně.
-
-\subsubsection*{Média}
-Pro vkládání médií do systému je využit modul Media, který přidává komplexní řešení pro vkládání jakéhokoliv obsahu. Je možné vkládat dokumenty, soubory pdf, zvuk, obraz, či video a všechny tyto typy obsahu jsou uživately poskytovány v jednotném formátu.
-
-\subsubsection*{Váha}
-I když by se pro určení váhy produktu dalo využít jednoduchého číselného pole, jeden z rozšiřujících modulů poskytuje jednak speciálně využitelné pole pro výběr hodnoty a také pohledy na obsah a řadící funkce, které celou implementaci značně ulehčují.
-
-\subsubsection*{Odkaz na entitu}
-Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
+  \item[Média] Pro vkládání médií do systému je využit modul Media, který přidává komplexní řešení pro vkládání jakéhokoliv obsahu. Je možné vkládat dokumenty, soubory pdf, zvuk, obraz, či video a všechny tyto typy obsahu jsou uživately poskytovány v jednotném formátu.
+  
+  \item[Váha] I když by se pro určení váhy produktu dalo využít jednoduchého číselného pole, jeden z rozšiřujících modulů poskytuje jednak speciálně využitelné pole pro výběr hodnoty a také pohledy na obsah a řadící funkce, které celou implementaci značně ulehčují.
+  
+  \item[Odkaz na entitu] Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
+\end{description}
 
 \subsection{Typy obsahu}
 Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
@@ -129,26 +170,21 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
 \label{fig:class-diagram}
 \end{figure}  
 
-\subsubsection*{Předmět \emph{(uzel)}}
-Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
+\begin{description}
+  \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
 
-\subsubsection*{Obor práva \emph{(uzel)}}
-Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
+  \item[Obor práva \emph{(uzel)}] Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
 
-\subsubsection*{Studijní text \emph{(položka)}}
-Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
+  \item[Studijní text \emph{(položka)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
 
-\subsubsection*{Zákon \emph{(položka)}}
+  \item[Zákon \emph{(položka)}]
 
+  \item[Příběh \emph{(uzel)}] Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
 
-\subsubsection*{Příběh \emph{(uzel)}}
-Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
+  \item[Vtip \emph{(uzel)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
 
-\subsubsection*{Vtip \emph{(uzel)}}
-V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. \\
-
-\subsubsection*{Novinka \emph{(uzel)}}
-Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. \\
+  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. \\
+\end{description}
 
 \subsection{Slovníky}
 
