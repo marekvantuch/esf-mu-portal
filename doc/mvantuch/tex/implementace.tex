@@ -99,12 +99,14 @@ Jak je popsáno v kapitole~\ref{chap:vyvoj}, Features slouží k ulehčení výv
 Jelikož modul Features v sobě implementuje pouze základní funkcionalitu exportu typů obsahu a poskytuje \gls{api} pro další moduly, některé prvky webu nejsou v základu exportovatelné. Tento modul možnosti exportu rozšiřuje o několik dalších možností, ze kterých pro tento projekt byla důležitá možnost exportovat nastavení umístění bloků.
 
 \subsubsection*{Media \hfill \emph{https://drupal.org/project/media}}
-\gls{cms} systém Drupal v základu poskytuje pouze jednoduchou funkcionalitu práce s obrázky a zvuk, video i dokumenty jsou v současné době naprosto přehlíženy (platí pro verzi 7.x). Zároveň uživatelé nemají mnoho možností operovat se soubory, které nahráli na server a tím pádem jsou často nuceni obsah opětovně nahrávat, čímž docházi k duplikaci. Tyto a mnohé další problémy se snaží řešit projekt Media, poskytující uživatelům srozumitelné rozhraní a unifikaci práce s různými typy multimediálního obsahu a zároveň správu veškerého obsahu nahraného na server. Pro svůj běh vyžaduje modul File Entity, který poskytuje možnosti práce se soubory jako entitami v systému.
+\gls{cms} systém Drupal v základu poskytuje pouze jednoduchou funkcionalitu práce s obrázky. Zvuk, video i dokumenty nejsou v aktuální verzi (7.x) podporovány vůbec. Zároveň uživatelé nemají mnoho možností operovat se soubory, které nahráli na server a tím pádem jsou často nuceni obsah opětovně nahrávat, čímž docházi k duplikaci. Tyto a mnohé další problémy se snaží řešit projekt Media, poskytující uživatelům srozumitelné rozhraní a unifikaci práce s různými typy multimediálního obsahu a zároveň správu veškerého obsahu nahraného na server. Pro svůj běh vyžaduje modul File Entity, který poskytuje možnosti práce se soubory jako entitami v systému.
 
 \subsubsection*{Workbench \hfill \emph{https://drupal.org/project/workbench}}
 \label{subsec:workbench}
+Administrace Drupalu je mnohdy kritizována pro její nízkou uživatelskou přívětivost a složitost, čemuž se snaží ulehčit modul Workbench. Přihlášenému uživateli s právem administrace, či správy obsahu je umožněno přistoupit ke stránkám postavených na modulu Views a poskytujících přehled obsahu stránek - ať už se jedná o všeobecně nejnovější obsah, nebo o obsah naposledy upravený daným uživatelem. Tato funkcionalita je dále rozšířena, jak je popsáno v kapitole \ref{chap:vyvoj}.
 
 \subsubsection*{Workbench Media \hfill \emph{https://drupal.org/project/workbench\_media}}
+Zatímco modul 
 
 \section{Téma vzhledu a jeho rozložení}
 Pro rozvržení stránek bylo využito tématu vzhledu Omega ve verzi 4. Narozdíl od předchozích verzí, které poskytovaly uživatelům komplexní administrační rozhraní pro nastavení rozvržení stránky, byla tato možnost z verze 4 odstraněna a nahrazena využitím knihovny SUSY (viz. sekce~\ref{sec:technologies}). Veškerá rozvržení jsou proto implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. 

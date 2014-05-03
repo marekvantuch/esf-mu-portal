@@ -41,7 +41,7 @@ Menu v levé sekci stránky obsahuje všechny odkazy, které uživatelé využí
   \item \textbf{[název předmětu 3]}
 \end{itemize}
 
-Z výše popsané struktury menu vyplývá, že její vlastnosti nesplňují požadavky moderních informačních systémů. Odkazy mají nekonzistentní chování - buď se rozbalí pod-menu a nebo prohlížeč přejde na novou stránku a uživatel proto nemůže jednoduše vědět, jaké chování očekávat. Struktura také obsahuje duplicity (název předmětu a odkaz na studijní text se opakují a v obou případech znamená něco jiného). Není také určená společná struktura všech předmětů a tím může lehce dojít ke zmatení uživatelů, kteří musejí pokaždé informace hledat na jiném místě v závislosti na daném předmětu (stránky Ostatní studijní materiály, Prezentace, ...). Některé stránky také místo agregace užitečných informací obsahují buď pouze banner, nebo jsou úplně prázdné (úvodní stránka předmětu) v místech, kde by uživatel očekával obsah.
+Z výše popsané struktury menu vyplývá, že její vlastnosti nesplňují požadavky moderních informačních systémů. Odkazy mají nekonzistentní chování - buď se rozbalí pod-menu a nebo prohlížeč přejde na novou stránku a uživatel proto nemůže jednoduše vědět, jaké chování očekávat. Struktura také obsahuje duplicity (název předmětu a odkaz na studijní text se opakují a v obou případech znamená něco jiného). Není také určená společná struktura všech předmětů a tím může lehce dojít ke zmatení uživatelů, kteří musejí pokaždé informace hledat na jiném místě v závislosti na daném předmětu (stránky Ostatní studijní materiály, Prezentace, \dots). Některé stránky také místo agregace užitečných informací obsahují buď pouze banner, nebo jsou úplně prázdné (úvodní stránka předmětu) v místech, kde by uživatel očekával obsah.
 
 \section{Použité technologie}
 \label{sec:technologies}
@@ -212,3 +212,43 @@ Pro případné budoucí úpravy systému, či filtrování, je vhodné u předm
   \item 2013/14
   \item 2014/15
 \end{list}
+
+\section{Struktura zdrojových souborů}
+
+\begin{itemize}
+  \item \textbf{doc/} \hfill \\
+    dokumentace projektu
+  \begin{itemize}
+    \item \textbf{mvantuch/} \hfill \\
+      zdrojové kóody pro generování dokumentace projektu v 
+    \item \textbf{omaterna/} \hfill \\
+      práce Mgr. Ondřeje Materny určená pro referenci
+  \end{itemize}
+  \item \textbf{phing/} \hfill \\
+    soubory určené k podpoře %% TODO \gls{deployment} 
+    pomocí nástroje Phing
+  \item \textbf{ref/} \hfill \\
+    referenční soubory, design a pod.
+  \item \textbf{src/} \hfill \\
+    zdrojové kódy jednotlivých částí projektu
+    \begin{itemize}
+      \item \textbf{main/} \hfill \\
+        aplikace Guacamole upravená pro potřeby tohoto projektu
+      \item \textbf{modules/} \hfill \\
+        moduly \gls{cms} Drupal vyvinuté speciálně pro tento projekt, nebo exportované za pomoci modulu Features (kapitola~\ref{subsec:features})
+      \item \textbf{profiles/} \hfill \\
+        instalační profil pro Drupal, definující veřejně dostupné moduly, potřebné k chodu
+      \item \textbf{themes/} \hfill \\
+       téma vzhledu projektu
+    \end{itemize}
+  \item \emph{build.xml} \hfill \\
+    xml soubor obsahující instrukce pro nástroj Phing k operacím nad instalací Drupalu
+  \item \emph{pom.xml} \hfill \\
+    xml soubor s projektem Maven, kontrolujícím Guacamole část projektu
+  \item \emph{esf.make} \hfill \\
+    make skript pro příkaz Drush make
+  \item \emph{INSTALL.md} \hfill \\
+    markdown soubor s instalačními instrukcemi
+  \item \emph{README.md} \hfill \\
+    markdown soubor se všeobecnou nápovědou
+\end{itemize}

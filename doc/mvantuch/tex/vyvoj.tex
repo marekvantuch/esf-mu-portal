@@ -21,7 +21,7 @@ Protože Drupal je postaven z velké části na konfiguraci uložené v databáz
 \begin{description}
   \item[ESF Feature (esf\_feature)] základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
 
-  \item[ESF Feature UI (esf\_feature\_ui)] administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. \ref{subsec:workbench})
+  \item[ESF Feature UI (esf\_feature\_ui)] administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
   \item[ESF Permissions (esf\_permissions)] definice uživatelských rolí a jejich práv
 \end{description}
 Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
