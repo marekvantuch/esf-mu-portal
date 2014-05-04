@@ -106,13 +106,45 @@ Jelikož modul Features v sobě implementuje pouze základní funkcionalitu expo
 Administrace Drupalu je mnohdy kritizována pro její nízkou uživatelskou přívětivost a složitost, čemuž se snaží ulehčit modul Workbench. Přihlášenému uživateli s právem administrace, či správy obsahu je umožněno přistoupit ke stránkám postavených na modulu Views a poskytujících přehled obsahu stránek - ať už se jedná o všeobecně nejnovější obsah, nebo o obsah naposledy upravený daným uživatelem. Tato funkcionalita je dále rozšířena, jak je popsáno v kapitole \ref{chap:vyvoj}.
 
 \subsubsection*{Workbench Media \hfill \emph{https://drupal.org/project/workbench\_media}}
-Zatímco modul 
+Zatímco modul Workbench poskytuje pohled na obsah stránek, Workbench Media, jak již název nápovídá, přidává propojení s modulem Media a tím pádem pohled na mediální obsah daného uživatele. 
 
 \section{Téma vzhledu a jeho rozložení}
 Pro rozvržení stránek bylo využito tématu vzhledu Omega ve verzi 4. Narozdíl od předchozích verzí, které poskytovaly uživatelům komplexní administrační rozhraní pro nastavení rozvržení stránky, byla tato možnost z verze 4 odstraněna a nahrazena využitím knihovny SUSY (viz. sekce~\ref{sec:technologies}). Veškerá rozvržení jsou proto implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. 
-Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na ...
 
-\section{Deployment a jeho možnosti}
+\begin{figure}[htp] 
+  \centering{\includegraphics[scale=0.23]{img/page-layout-crop.pdf}}
+  \caption{Rozvržení stránky}
+  \label{fig:rozvrzeni-stranky}
+\end{figure}  
+
+Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na čtyři hlavní bloky - hlavičku, postranní panel, obsah a patičku. Poměr mezi postranním panelem a obsahem byl určen za použití knihovny SUSY a media queries. 
+
+\begin{description}
+  \item[Telefon] (velikost okna do 44em) \hfill \\
+  Postranní panel zabírá celou šířku a za ním následuje obsah.
+  \item[Tablet + standart] (velikost okna mezi 44em a 100em) \hfill \\
+  Postranní panel a obsah jsou zobrazeny v poměru 1 : 3.
+  \item[Širokoúhlý monitor] (velikost okna nad 100em) \hfill \\
+  Postranní panel a obsah jsou zobrazeny v poměru 1 : 4.  
+\end{description}
+
+\section{Nasazení (deployment) a jeho možnosti}
+
+Pro správu % TODO \gls{deployment} 
+je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \texttt{phing/default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
+
+V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se bude portál instalovat (cesty k souborům, nastavení databáze a pod.) - více informací je v samotném souboru.
+
+\begin{description}
+  \item[void] \hfill \\
+  Pouze provede inicializaci konfiguračních souborů a ukončí se.  
+  \item[guacamole] 
+  Vytvoří konfigurační soubory projektu Guacamole ve správných složkách (je zkopírován soubor \texttt{phing/default.guacamole.properties}.
+  \item[deploy]
+  Překopíruje aktuální moduly na správné místo a zajistí správné nastavení portálu dle aktuálního nastavení (převážně využití Features).
+  \item[install]
+  Provede kompletní instalaci portálu dle nastavení v konfiguračních souborech - překopíruje moduly a témata specifická pro toto řešení, stáhne potřebné zdrojové kódy Drupalu z internetu a nainstaluje Drupal, kterému následně nastaví správné téma vzhledu a povolí potřebné moduly.
+\end{description}
 
 \section{Optimalizace řešení a její dopad na uživatelskou zkušenost}
 Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
