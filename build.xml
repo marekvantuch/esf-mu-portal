@@ -3,10 +3,13 @@
 <project name="ESF Portal" default="void"
          description="Build file for Drupal deployment of ESF Portal project.">
 
+    <!-- Void target, does nothing besides initializing the properties file-->
     <target name="void" depends="init" />
 
+    <!-- Prepares the guacamole solution -->
     <target name="guacamole" depends="init, guacamole-properties"/>
 
+    <!-- Deploys the solution using the build.properties file -->
     <target name="deploy" depends="init,
                                    copy-modules,
                                    modules-enable,
