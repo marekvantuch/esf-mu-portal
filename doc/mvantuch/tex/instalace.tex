@@ -7,34 +7,107 @@ Díky využití Features (viz. sekce \ref{subsec:features}) a instalačních pro
 
 Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, etc.) s podporou PHP. Systém podporuje MySQL a PostgreSQL, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}, pro niž bylo řešení upraveno. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing (viz. sekce \ref{subsec:phing}).
 
-Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \gls{pear}, tento způsob však byl nahrazen instalací pomocí programu \gls{composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \gls{curl} a příkazu \texttt{curl -sS https://getcomposer.org/installer | php}. Jakmile je composer dostupný, lze již Drush nainstalovat za pomoci příkazu \texttt{\$ composer global require drush/drush:6.*}. Po instalaci je vhodné nastavit prostředí systému a integraci mezi nástroji Drush a \gls{bash}. Do souboru \texttt{.bashrc} v domovském adresáři stačí vložit řádek obsahující cestu k Drushi (typicky \texttt{source ~/.composer/vendor/drush/drush/examples/example.bashrc} a po restartování \gls{session} by měly být přístupné příkazy pod zkrácenými aliasy a zároveň dokončování názvů webů a příkazů. Dále je vhodné v souboru \texttt{~/.drush/aliases.drushrc.php} definovat alias stránky pro usnadnění manipulace. Obsah souboru může vypadat následovně:
+Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \gls{pear}, tento způsob však byl nahrazen instalací pomocí programu \gls{composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \gls{curl}:
 
-\begin{lstlisting}
-<?php
-$aliases['pravo'] = array(
-  'root' => '/srv/www/htdocs/l',
-  'uri' => 'pravo.com',
-);
+\begin{lstlisting}[language=bash]
+  $ curl -sS https://getcomposer.org/installer | php
+\end{lstlisting}
+
+Jakmile je composer dostupný, lze již Drush nainstalovat za pomoci příkazu \texttt{\$ composer global require drush/drush:6.*}. Po instalaci je vhodné nastavit prostředí systému a integraci mezi nástroji Drush a \gls{bash}. Do souboru \texttt{.bashrc} v domovském adresáři stačí vložit řádek obsahující cestu k Drushi. Toto lze typicky provézt následujícím příkazem:
+
+\begin{lstlisting}[language=bash]
+  $ source ~/.composer/vendor/drush/drush/examples/
+    example.bashrc
+\end{lstlisting} 
+
+Po restartování \gls{session} by měly být přístupné příkazy pod zkrácenými aliasy a zároveň dokončování názvů webů a příkazů. Dále je vhodné v souboru \linebreak\texttt{\$HOME/.drush/aliases.drushrc.php} definovat alias stránky pro usnadnění manipulace. Obsah souboru může vypadat následovně:
+
+\begin{lstlisting}[language=php]
+  <?php
+  $aliases['pravo'] = array(
+    'root' => '/srv/www/htdocs/l',
+    'uri' => 'pravo.com',
+  );
 \end{lstlisting}
 
 Po tomto nastavení je možné do složky přistoupit jednoduše pomocí příkazu \texttt{\$~cd~@pravo}, pro který zároveň funguje automatické dokončování. Také je možné všechny příkazy Drushe spouštět pro daný alias, což je výhodné v případě více prostředí, například vývojového, testovacího a produkčního.
 
-Obsah repozitáře projektu je vhodné umístit například do domovské složky - typicky příkladem \texttt{git clone git@github.com:kanei/esf-mu-portal.git}. Před samotnou instalací je nutné nastavit základní vlastnosti projektu. Soubor \texttt{phing/default.build.properties} překopírujte do hlavní složky repozitáře (např.\texttt{\~/esf-mu-portal}) a přejmenovat jej na build.properties, nebo spustit příkaz \texttt{\$~phing}, který provede úvodní inicializaci, jejíž součástí je i překopírování souboru v případě, že neexistuje. V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
+Obsah repozitáře projektu je vhodné umístit například do domovské složky:
+
+\begin{lstlisting}[language=bash]
+  $ git clone git@github.com:kanei/esf-mu-portal.git  
+\end{lstlisting}
+
+Před samotnou instalací je nutné nastavit základní vlastnosti projektu. Soubor \texttt{phing/default.build.properties} překopírujte do hlavní složky repozitáře (např.\texttt{\$HOME/esf-mu-portal}) a přejmenovat jej na \texttt{build.properties}, nebo spustit úvodní inicializaci, jejíž součástí je i překopírování souboru v případě, že neexistuje:
+
+\begin{lstlisting}[language=bash]
+  $ phing void
+\end{lstlisting}
+
+V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
 
 \section{Postup instalace}
-Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install}. Pro spuštění instalace je potřeba v terminálu spustit příkaz \texttt{\$~phing install} a v  průběhu instalace se provedou následující kroky:
+Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install}. Pro spuštění instalace je potřeba v terminálu spustit následující příkaz:
+
+\begin{lstlisting}[language=bash]
+  $ phing install
+\end{lstlisting}
+
+\subsection*{Průběh instalace}
 
 \begin{enumerate}
   \item Je zkontrolována cílová složka a uživatel je případně upozorněn na nutnost jejího smazání.
-  \item \emph{drush make} - Vytvoří se stuktura stránek, při čemž se ze souboru \texttt{esf.make} (který načte podsoubor \texttt{src/profiles/esf\_profile/esf\_profile.make}) načte seznam všech modulů využívaných v řešení spolu s jejich požadovanou verzí. Tyto se stáhnou do cílové složky, ve které se zároveň připraví konfigurační soubory pro instalaci Drupalu.
+  \item \lstinline[language=bash]{$ drush make} - Vytvoří se stuktura stránek, při čemž se ze souboru \texttt{esf.make} (který načte podsoubor \texttt{src/profiles/esf\_profile/esf\_profile.make}) načte seznam všech modulů využívaných v řešení spolu s jejich požadovanou verzí. Tyto se stáhnou do cílové složky, ve které se zároveň připraví konfigurační soubory pro instalaci Drupalu.
   \item Do projektového adresáře jsou překopírovány moduly, témata a instalační profily projektu, aby s nimi mohl instalační skript pracovat.
   \item Při instalaci nejsou automaticky provedeny všechny úkony a některá nastavení je nutné spustit manuálně po dokončení. Jedná se mimo jiné o nastavení tématu vzhledu.
-  \item \emph{drush site-install} - Spustí se instalace Drupalu z příkazové řádky, při které se povolí základní moduly a vytvoří databázová struktura. Je nainstalován instalační profil \emph{esf\_profile} a s ním jsou povoleny moduly rozšiřující funkcionalitu a také rysy dokončující nstavení stránek. Celý proces trvá až několik minut a v průběhu nijak uživatele neinformuje o průběhu, je tedy důležité vyčkat až do jeho ukončení.
+  \item \lstinline[language=bash]{$ drush site-install} - Spustí se instalace Drupalu z příkazové řádky, při které se povolí základní moduly a vytvoří databázová struktura. Je nainstalován instalační profil \emph{esf\_profile} a s ním jsou povoleny moduly rozšiřující funkcionalitu a také rysy dokončující nstavení stránek. Celý proces trvá až několik minut a v průběhu nijak uživatele neinformuje o průběhu, je tedy důležité vyčkat až do jeho ukončení.
 \end{enumerate}
 
-Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i skupinu na hodnoty daného internetového serveru (apache/lighttpd/...) za pomocí příkazů \texttt{\$~sudo~chown~apache~esf~-R} a \texttt{\$~sudo~chgrp~apache~esf~-R}. Toto je obzvláště důležité v případě použití SQLite databáze, ke které jinak nemá drupal práva zapisovat a tím pádem stránky spadnou s fatální chybou. 
+Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i skupinu na hodnoty daného internetového serveru (apache/lighttpd/...)
 
-Pokud vše proběhlo v pořádku a server je schopen přistupovat ke všem souborům i databázi, je možné na adrese propojené se stránkami navštívit úvodní stránku - typicky se jedná o \emph{http:\\localhost/esf}. Na stránky bylo převedeno veškeré nastavení, ale nebyl zde vytvořen žádný obsah. Ten lze buď migrovat z produkčních stránek, nebo generovat za pomocí modulu Devel. Na adrese \emph{http://localhost/esf/?q=user} se lze přihlásit za pomocí administrátorského účtu (pokud nebyl změněn v konfiguračním souboru, jedná se o admin/admin) a přistoupit k administračnímu rozhraní stránek.
+\begin{lstlisting}[language=bash]
+  $ sudo chown apache esf -R 
+  $ sudo chgrp apache esf -R
+\end{lstlisting}
+
+Toto je obzvláště důležité v případě použití SQLite databáze, ke které jinak nemá drupal práva zapisovat a tím pádem stránky spadnou s fatální chybou. 
+
+Pokud vše proběhlo v pořádku a server je schopen přistupovat ke všem souborům i databázi, je možné na adrese propojené se stránkami navštívit úvodní stránku - typicky se jedná o \emph{http:/localhost/esf}. Na stránky bylo převedeno veškeré nastavení, ale nebyl zde vytvořen žádný obsah. Ten lze buď migrovat z produkčních stránek, nebo generovat za pomocí modulu Devel. Na adrese \emph{http://localhost/esf/?q=user} se lze přihlásit za pomocí administrátorského účtu (pokud nebyl změněn v konfiguračním souboru, jedná se o admin/admin) a přistoupit k administračnímu rozhraní stránek.
 
 \section{Administrace}
-Správa probíhá za využití klasické administrace v jádře Drupalu, rozšířené modulem Workbench. 
+Správa probíhá za využití administrace dodávané v jádře Drupalu, rozšířené modulem Workbench a dalšími úpravami. Pro správu portálu jsou definovány čtyři úrovně uživatelských práv:
+
+\begin{itemize}
+  \item \textbf{anonymní uživatel} \hfill \\
+    Tato role je definována již v základu Drupalu a označuje uživatele, kteří se nepřihlásili do portálu. S ohledem na nutnost autentikace pro přístup k portálu jsou tito uživatelé odstřiženi od přístupu k jakýmkoliv datům a je jim zpřístupněna pouze stránka s přihlášením.
+  \item \textbf{přihlášený uživatel} \hfill \\
+    Po přihlášení uživatelé získávají přístup k veškerému hlavnímu obsahu stránek, uživatelskému nastavení a připojení ke vzdálené ploše. 
+  \item \textbf{moderátor} \hfill \\
+    Moderátor má přístup k základní administraci stránek, obzvláště k úpravám obsahu, základním změnám provázání obsahu a administraci přístupu uživatelů.
+  \item \textbf{administrátor} \hfill \\
+    Pro tohoto uživatele neexistuje speciální role, ale jedná se o uživatele s identifikačním číslem 1, který má právo přístupu ke všem prvkům obsahu a administrace portálu a tato práva nejdou nijak omezit.
+\end{itemize}
+
+Tato práce se zabývá pouze administrací dostupnou roli \emph{moderátor} a nezaobírá se administrací Drupalu, ve které nebyly provedeny změny výraznějšího charakteru a funguje dle standartního přístupu. Po přihlášení má uživatel s rolí moderátora dostupný administrační panel umistitelný buď v horní, nebo levé části okna prohlížeče (obrázek~\ref{fig:workbench}). Administrační panel obsahuje odkazy na administrační stránky a pracovní stůl. 
+
+\subsubsection*{Struktura pracovního stolu}
+\begin{description}
+  \item[Můj obsah] \hfill \\
+  Tato sekce nabízí pohled na stránky vytvořené či upravené právě přihlášeným uživatelem a na nejaktuálnější obsah portálu všeobecně. Všechny pohledy vedou po rozkliknutí na detailnější přehledy obsahu dané sekce.  
+  \item [Vytvořit obsah] \hfill \\
+  V této sekci je možné vytvářet veškerý obsah, ke kterému má uživatel přístup - buď mediální obsah (obrázky, videa, dokumenty), ke kterému lze později přistupovat skrze \gls{wysiwyg} editor, nebo vlastní obsah portálu - nové předměty, stránky, obory práva viz. sekce~\ref{subsec:typy-obsahu}.
+  \item [Seznam souborů] \hfill \\
+  Poskytuje náhled na všechny soubory nahrané na portál, které jsou sledovány systémem a dostupné skrze administrační rozhraní.
+  \item [Obory práva] \hfill \\
+  Pohled na všechny zadané obory práva, jejich základní atributy a předměty, které se k nim vztahují. S obory práva lze manipulovat pomocí rozhraní využívajícího modulu Views Bulk Operations (sekce~\ref{subsec:vbo}) a tím pádem hromadnou úpravu entit.
+  \item [Předměty]
+  Podobně jako předchozí sekce poskytuje pohled na předměty, pouze s tím rozdílem, že neukazuje jejich propojení na obory práva, ale materiály, které jsou k nim přidružené.
+\end{description}
+
+Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. revize obsahu, mezi kterými pak lze zobrazit výčet změn od předchozí verze. K editaci slouží \gls{wysiwyg} editor CKeditor, poskytující uživatelům přívětivé rozhraní s rozšířenými možnostmi úpravy textu a prvky specificky vytvořenými pro použití s \gls{cms} Drupal. Pro prohlížení dat na serveru se využívá modulu IMCE.
+
+\begin{figure}[htp]
+  \includegraphics[width=12cm]{img/workbench-crop.pdf}
+  \caption{Prostředí pracovního stolu pro uživatele s právy moderátora.}
+  \label{fig:workbench}
+\end{figure}  

@@ -1,8 +1,6 @@
 \chapter{Analýza}
 \label{chap:analyza}
-Jak byly požadavky zpracovány a navrženy \\
-Jakým způsobem bylo vytvořeno propojení na vzdálený server \\
-Při analýze byl velký důraz kladen na jednoduchost administrace celého projektu. K tomu bylo využito co největšího omezení možností administrátorů a namísto toho integrace logiky vztahů do nastavení celého projektu.
+Projekt byl od začátku koncipován jako aktualizace stávajícícho řešení, do kterého budou promítnuty zkušenosti a znalosti nabyté za dobu jeho fungování zkombinované s moderními technologiemi, které nebyly v době vývoje předešlé verze ještě dostupné. Návrh klade výraz na minimalizaci možných uživatelských chyb a jednoduchost a názornost vytváření obsahu, čehož dosahuje za pomocí definování vztahů mezi obsahem a omezením možností úprav automatickým generováním prvků webu, jakými jsou například seznamy odkazů a tabulky propojených elementů.
 
 \section{Existující řešení}
 Při analýze bylo nutné zohlednit stávající řešení a možnosti jeho rozšíření. Existující portál využíval Drupal v 6. verzi, který byl již v dané době značně zastaralý a jeho rozšiřitelnost byla velmi omezená, či zbytečně komplikovaná. Řešení bylo rozšířeno řadou volně dostupných modulů, které dohromady poskytovaly komplexní strukturu nabídky menu vytvořenou namíru požadavkům fakulty. Tato struktura byla navržena v době, kdy nebylo známo, že systém bude pro zobrazování zákonů využívat externí software ASPI a proto byly tyto zákony také použity. 
@@ -83,7 +81,7 @@ Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenk
 Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
 
 \begin{figure}[htp] 
-  \centering{\includegraphics[scale=0.77]{img/architecture-core-crop.pdf}}
+  \centering{\includegraphics[width=12cm]{img/architecture-core-crop.pdf}}
   \caption{Základní architektura komunikace se vzdálenou plochou}
   \label{fig:arch_core}
 \end{figure}  
@@ -117,7 +115,7 @@ Pro udržování historie kódu a pro spolupráci více autorů byla vybrána te
 Základně poskytuje Guacamole komplexní řešení na propojení ke vzdálené ploše včetně stránky pro management uživatelů, kde každý z nich si může pro sebe vytvořit své vlastní připojení, u každého z nich se zobrazuje náhled a podobně. Jak je zobrazeno na diagramu \ref{fig:arch_guacamole}, součástí Guacamole je i webová aplikace v jazyce HTML, která implementuje knihovnu Guacamole-js a tím i komunikaci s JAVA Servletem. Pro potřeby tohoto projektu však bylo nutné tyto JavaScriptové knihovny převzít a implementovat do modulu pro Drupal. 
 
 \begin{figure}[htp] 
-  \centering{\includegraphics[scale=0.7]{img/architecture-guacamole-crop.pdf}}
+  \centering{\includegraphics[width=12cm]{img/architecture-guacamole-crop.pdf}}
   \caption{Neupravená architektura a rozčlenění řešení}
   \label{fig:arch_guacamole}
 \end{figure}  
@@ -127,7 +125,7 @@ Díky skutečnosti, že již nutně neběží JAVA Server a JAVA EE Web aplikace
 Uživatel proto pracuje základně pouze s portálem postaveném na Drupalu, do kterého byl přidán modul implementující stránku určenou ke komunikaci s Guacamole Servlet kontejnerem za pomoci upravené JavaScriptové knihovny Guacamole-js, jak je vyobrazeno na diagramu \ref{fig:arch_drupal}.
 
 \begin{figure}[htp] 
-  \centering{\includegraphics[scale=0.7]{img/architecture-drupal-crop.pdf}}
+  \centering{\includegraphics[width=12cm]{img/architecture-drupal-crop.pdf}}
   \caption{Architektura přizpůsobená pro portál ESF}
   \label{fig:arch_drupal}
 \end{figure}  
@@ -161,29 +159,39 @@ V drupalu existuje několik základních typů polí, které převážně funguj
   \item[Odkaz na entitu] Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
 \end{description}
 
+\subsection{Typy entity}
+\label{subsec:typy-entiy}
+Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, adresu a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
+
+\begin{description}
+  \item[Uzel] Stránka mající vlastní \gls{url} a obsah.
+  \item[Položka] Entita s nadpisem použitelná pro další rozšíření.
+  \item[Osoba] Entita použitelná pro osobu, obsahující pole pro vložení jména.
+\end{description}
+
 \subsection{Typy obsahu}
-Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, URL a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
+\label{subsec:typy-obsahu}
 
 \begin{figure}[htp] \centering{
-\includegraphics[scale=0.95]{img/class-diagram-crop.pdf}}
+\includegraphics[width=12cm]{img/class-diagram-crop.pdf}}
 \caption{Diagram tříd CMS systému}
 \label{fig:class-diagram}
 \end{figure}  
 
 \begin{description}
+  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. 
+  
   \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
 
   \item[Obor práva \emph{(uzel)}] Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
 
-  \item[Studijní text \emph{(položka)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
-
-  \item[Zákon \emph{(položka)}]
+  \item[Studijní text \emph{(uzel)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
 
   \item[Příběh \emph{(uzel)}] Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
 
-  \item[Vtip \emph{(uzel)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
+  \item[Vtip \emph{(položka)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
 
-  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. \\
+  \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě.
 \end{description}
 
 \subsection{Slovníky}
@@ -191,10 +199,10 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
 Pro kategorizaci a pro výběr možností bylo v požadavcích identifikováno několik slovníků. Díky vztahu k entitě (slovník také dědí vlastnosti entity) může také pro své hodnoty definovat pole a tím rozšířit jejich funkcionalitu a množství informací.
 
 \subsubsection*{Stupeň obecnosti}
-Pro řazení oborů je potřeba uložit jejich obecnost, která je vyjádřena v několika stupních, které mohou být v případě potřeby rozšířeny. Každé entitě může být přiřazen jeden stupeň obecnosti.\\
+Pro řazení oborů je potřeba uložit jejich obecnost, která je vyjádřena v několika stupních, které mohou být v případě potřeby rozšířeny. Každé entitě může být přiřazen jeden stupeň obecnosti.
 
 \begin{list}{-}{Pole}
-  \item Váha (váha) \\
+  \item Váha (váha) \hfill \\
     číselná hodnota použitelná k řazení
 \end{list}
 
@@ -205,7 +213,7 @@ Pro řazení oborů je potřeba uložit jejich obecnost, která je vyjádřena v
 \end{list}
 
 \subsubsection*{Ročník}
-Pro případné budoucí úpravy systému, či filtrování, je vhodné u předmětu vyplnit i ročník, ve kterém je vyučován. S ohledem na opakování předmětů může každé entitě přiřazeno neomezené množství ročníků (i žádný). \\
+Pro případné budoucí úpravy systému, či filtrování, je vhodné u předmětu vyplnit i ročník, ve kterém je vyučován. S ohledem na opakování předmětů může každé entitě přiřazeno neomezené množství ročníků (i žádný). 
 
 \begin{list}{-}{Hodnoty}
   \item 2012/13

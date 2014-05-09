@@ -1,9 +1,9 @@
 \chapter{Organizace vývojového procesu}
 \label{chap:vyvoj}
 
-Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru Apache nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto MySQL použit MySQL Lite, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
+Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru \emph{Apache} nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto \emph{MySQL} použit \emph{MySQL Lite}, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
 
-Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba Guacamole Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém Windows Server 2008 SP2, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro JAVA aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
+Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba \emph{Guacamole} Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém \emph{Windows Server 2008 SP2}, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro \emph{JAVA} aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
 
 \begin{table}
   \caption{Porovnání technologií použitých na lokálním a produkčním prostředí}
@@ -19,40 +19,59 @@ Pro dostupnost komplexního testování i bez využití internetu byl lokálně 
 
 Protože Drupal je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt Features (sekce \ref{subsec:features}), který exportuje pomocí funkcionality postkytnuté modulem Ctools nastavení drupalu jako jsou typy obsahu a také pomocí modulu Strongarm nastavení systéu samotného. Všechna tato nastavení jsou pak uložena do modulu Drupalu a mohou pak být jednoduše přenesena na jiné prostředí a také aktualizována v průběhu času a s přibývajícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
 \begin{description}
-  \item[ESF Feature (esf\_feature)] základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
+  \item[ESF Feature (esf\_feature)] \hfill \\ 
+  základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
 
-  \item[ESF Feature UI (esf\_feature\_ui)] administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
-  \item[ESF Permissions (esf\_permissions)] definice uživatelských rolí a jejich práv
+  \item[ESF Feature UI (esf\_feature\_ui)] \hfill \\ 
+  administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
+  \item[ESF Permissions (esf\_permissions)] \hfill \\ 
+  definice uživatelských rolí a jejich práv
 \end{description}
 Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
 
 Instalační skript a profil jsou generovány automaticky pomocí modulu Profiler\_Builder. Jeho výstupem je instalační soubor .make a instalační profil. V instalačním souboru .make je vypsán seznam modulů a jejich verzí, určený pro příkaz drush make, který stáhne potřebné projekty z repozitáře Drupalu. Po vytvoření je nutné ručně odstranit moduly esf\_*, které Drush neumí automaticky stáhnout a instalace by selhala. Díky rozdělení na dva hlavní a doplňkový instalační skript je možné definovat url adresy ke knihovnám, které nelze automaticky doplnit a ty zároveň nejsou přepsány opětovným vygenerováním, neboť hlavní instalační soubor je přesunut do kořenové složky a přejmenován na esf.make, který již není nutné aktualizovat. V instalačním profilu esf\_profile jsou obsažena základní nastavení portálu a seznam modulů, které je nutné povolit ke správné funkčnosti stránek. Ke každému modulu lze přiřadit i opravné balíčky (patch), které jsou buď automaticky dohledány na na stránkách Drupalu a jako odkazy přidány do profilu, nebo mohou být přidány dodatečně ručně. Při instalaci jsou automaticky aplikovány na kód. Díky propojení s features se na stránky automaticky dostane i rozšířené nastavení a struktura.
 
 \section{Organizace řízení projektu}
-S ohledem na nízký počet zainteresovaných osob a rozsah projektu jsme neimplementovali žádné pokročilé metody projektového řízení a rozhodli jsme se pro jednoduchý seznam úkolů. Jelikož jsme pro uložení zdrojových kódů projektu využili GitHub, bylo nejjednodušší jej rovněž využít pro správu úkolů. Ačkoliv se nemůže rovnat s platformami, specializujícími se jen daný úkol, poskytuje několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze jednoduše využít pro rozlišení mezi úkolem a chybou a také důležitostí problému. Milníky byly využity pro jednoduché plánování a sledování pokroku.
+S ohledem na nízký počet zainteresovaných osob a rozsah projektu jsme neimplementovali žádné pokročilé metody projektového řízení a rozhodli jsme se pro jednoduchý seznam úkolů. Jelikož jsme pro uložení zdrojových kódů projektu využili \emph{GitHub}, bylo nejjednodušší jej rovněž využít pro správu úkolů. Ačkoliv se nemůže rovnat s platformami, specializujícími se jen daný úkol, poskytuje několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze jednoduše využít pro rozlišení mezi úkolem a chybou a také důležitostí problému. Milníky byly využity pro jednoduché plánování a sledování pokroku.
 
-\subsection{Značky}
-Typy úkolů
-\begin{itemize}
-  \item Úkol \emph{(task)} - úkol, který bylo třeba vykonat na projektu
-  \item Chyba \emph{(bug)} - chyba nalezená na projektu, kterou bylo potřeba opravit
-\end{itemize}
-Priorita
-\begin{itemize}
-	\item Nízká \emph{(0-low)}
-	\item Střední \emph{(1-medium)}
-	\item Vysoká  \emph{(2-high)}
-	\item Kritická \emph{(3-critical)}
-\end{itemize}
+\subsection*{Označení úkolů}
 
-\subsection{Milníky}
-\begin{itemize}
-  \item 0.1 | Inicializace - úvodní výzkum týkající se připojení ke vzdálené ploše a dostupných technologií
-  \item 0.2 | Drupal modul - vytvoření modulu pro drupal a jeho základní funkcionalita
-  \item 0.3 | Struktura a práva - struktura stránek, jejich obsahu a práva uživatelů k jejich použití
-  \item 0.4 | Guacamole Drupal - přesun funkcionality z Guacamole do Drupal modulu a jeho propojení s JAVA server aplikací
-  \item 0.5 | Test v praxi - změny potřebné k umístění řešení na produkční servery a vytvoření skriptů k automatizaci tohoto procesu
-  \item 1.0 | Základní verze - spuštění základní funkční verze
-  \item 1.1 | Produkční verze - vyřešení všech problémů, komunikace se stranou klienta a přípravy na reálné spuštění v produkčním prostředí
-  \item 1.2 | Údržba - první z verzí, ve kterých se bude dodávat údržba řešení
-\end{itemize}
+\subsubsection*{Typ}
+\begin{description}
+  \item[Úkol \emph{(task)}] \hfill \\
+    úkol, který bylo třeba vykonat na projektu
+  \item[Chyba \emph{(bug)}] \hfill \\
+    chyba nalezená na projektu, kterou bylo potřeba opravit
+\end{description}
+
+\subsubsection*{Priorita}
+\begin{description}
+	\item[Nízká \emph{(0-low)}] \hfill \\
+	  není aktuálně důležitá a nijak nebrání správnému běhu portálu (převážně kosmetické problémy)
+	\item[Střední \emph{(1-medium)}] \hfill \\
+	  může bránit v určitých scénářích, existuje však způsob, jak ji obejít
+	\item[Vysoká  \emph{(2-high)}] \hfill \\
+	  brání scénářům a ovlivňuje vice než jednoho uživatele 
+	\item[Kritická \emph{(3-critical)}] \hfill \\
+	  brání v užívání celého portálu, nebo ovliňuje základní funkcionalitu
+\end{description}
+
+\subsection*{Milníky}
+\begin{description}
+  \item[0.1 | Inicializace] \hfill \\
+    úvodní výzkum týkající se připojení ke vzdálené ploše a dostupných technologií
+  \item[0.2 | Drupal modul] \hfill \\
+    vytvoření modulu pro drupal a jeho základní funkcionalita
+  \item[0.3 | Struktura a práva] \hfill \\
+    struktura stránek, jejich obsahu a práva uživatelů k jejich použití
+  \item[0.4 | Guacamole Drupal] \hfill \\
+    přesun funkcionality z Guacamole do Drupal modulu a jeho propojení s \emph{JAVA} serverovou aplikací
+  \item[0.5 | Test v praxi] \hfill \\
+    změny potřebné k umístění řešení na produkční servery a vytvoření skriptů k automatizaci tohoto procesu
+  \item[1.0 | Základní verze] \hfill \\
+    spuštění základní funkční verze
+  \item[1.1 | Produkční verze] \hfill \\
+    vyřešení všech problémů, komunikace se stranou klienta a přípravy na reálné spuštění v produkčním prostředí
+  \item[1.2 | Údržba] \hfill \\
+    první z verzí, ve kterých se bude dodávat údržba řešení
+\end{description}
