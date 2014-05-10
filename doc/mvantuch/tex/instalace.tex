@@ -1,15 +1,13 @@
 \chapter{Instalace, konfigurace a správa portálu}
 \label{chap:instalace}
 
-Díky využití Features (viz. sekce \ref{subsec:features}) a instalačních profilů (viz. \ref{subsec:drupal}) je možné portál nainstalovat na jakýkoliv server bez kopírování souborů, či databáze, pouze za pomocí nástrojů Phing a Drush. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality vzdálené plochy.
+Díky využití Features (sekce \ref{subsec:features}) a instalačních profilů (sekce \ref{subsec:drupal}) je možné portál nainstalovat na jakýkoliv server bez kopírování souborů, či databáze, pouze za pomocí nástrojů Phing a Drush. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality vzdálené plochy.
 
 \section{Požadavky a příprava systému}
 
-Technologie v této sekci jsou popsány v sekci~\ref{sec:technologies}.
+Na stroji je nutné mít nainstalovaný internetový server (\emph{Apache}, \emph{Lighttpd}, etc.)\footnote{Technologie jsou popsány v sekci~\ref{sec:technologies}.}  s podporou \emph{PHP}. Systém podporuje \emph{MySQL} a \emph{PostgreSQL}, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci \emph{SQLite}, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. Drupal dále ke svému chodu vyžaduje knihovny php \emph{php-gd} a {php-pdo}. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing.
 
-Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, etc.) s podporou PHP. Systém podporuje MySQL a PostgreSQL, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}, pro niž bylo řešení upraveno. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing.
-
-Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \gls{pear}, tento způsob však byl nahrazen instalací pomocí programu \gls{composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \gls{curl}:
+Volitelně je možné mít nainstalován \emph{Drush} a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \emph{PEAR}, tento způsob však byl nahrazen instalací pomocí programu \emph{Composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \emph{CURL}:
 
 \begin{lstlisting}[language=bash]
   $ curl -sS https://getcomposer.org/installer | php
