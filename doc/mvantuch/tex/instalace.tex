@@ -5,7 +5,9 @@ Díky využití Features (viz. sekce \ref{subsec:features}) a instalačních pro
 
 \section{Požadavky a příprava systému}
 
-Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, etc.) s podporou PHP. Systém podporuje MySQL a PostgreSQL, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}, pro niž bylo řešení upraveno. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing (viz. sekce \ref{subsec:phing}).
+Technologie v této sekci jsou popsány v sekci~\ref{sec:technologies}.
+
+Na stroji je nutné mít nainstalovaný internetový server (Apache, Lighttpd, etc.) s podporou PHP. Systém podporuje MySQL a PostgreSQL, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci SQLite, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}, pro niž bylo řešení upraveno. Drupal dále ke svému chodu vyžaduje knihovny php php-gd a php-pdo. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing.
 
 Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \gls{pear}, tento způsob však byl nahrazen instalací pomocí programu \gls{composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \gls{curl}:
 
@@ -13,7 +15,7 @@ Volitelně je možné mít nainstalován Drush (viz. \ref{subsec:drush}) a s ní
   $ curl -sS https://getcomposer.org/installer | php
 \end{lstlisting}
 
-Jakmile je composer dostupný, lze již Drush nainstalovat za pomoci příkazu \texttt{\$ composer global require drush/drush:6.*}. Po instalaci je vhodné nastavit prostředí systému a integraci mezi nástroji Drush a \gls{bash}. Do souboru \texttt{.bashrc} v domovském adresáři stačí vložit řádek obsahující cestu k Drushi. Toto lze typicky provézt následujícím příkazem:
+Jakmile je composer dostupný, lze již Drush nainstalovat za pomoci příkazu \texttt{\$ composer global require drush/drush:6.*}. Po instalaci je vhodné nastavit prostředí systému a integraci mezi nástroji Drush a BASH. Do souboru \texttt{.bashrc} v domovském adresáři stačí vložit řádek obsahující cestu k Drushi. Toto lze typicky provézt následujícím příkazem:
 
 \begin{lstlisting}[language=bash]
   $ source ~/.composer/vendor/drush/drush/examples/
