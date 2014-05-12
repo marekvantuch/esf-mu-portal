@@ -125,6 +125,7 @@
             // Calculate optimal width/height for display
             var optimal_width = window.innerWidth;
             var optimal_height = window.innerHeight;
+            var query_string = this.getQueryString();
 
             // Scale width/height to be at least 600x600
             if (optimal_width < 600 || optimal_height < 600) {
@@ -146,7 +147,37 @@
                 connect_string += "&video=" + encodeURIComponent(mimetype);
             });
 
+            for (var connect_param in query_string) {
+                if (connect_param == 'q') {
+                    continue;
+                }
+                if(query_string.hasOwnProperty(connect_param)){
+                    connect_string += "&" + connect_param + "=" + decodeURI(query_string[connect_param]);
+                }
+            }
+
             return connect_string;
+        },
+
+        getQueryString: function () {
+            var query_string = {};
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                // If first entry with this name
+                if (typeof query_string[pair[0]] === "undefined") {
+                    query_string[pair[0]] = pair[1];
+                    // If second entry with this name
+                } else if (typeof query_string[pair[0]] === "string") {
+                    var arr = [ query_string[pair[0]], pair[1] ];
+                    query_string[pair[0]] = arr;
+                    // If third or later entry with this name
+                } else {
+                    query_string[pair[0]].push(pair[1]);
+                }
+            }
+            return query_string;
         }
     }
 

@@ -86,12 +86,13 @@ Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí
   \label{fig:arch_core}
 \end{figure}  
 
-\subsubsection*{CORS} 
+\subsubsection*{CORS \hfill \emph{http://www.w3.org/TR/cors/}} 
 Kvůli bezpečnostním rizikům je JavaScriptu běžícímu v prohlížeči zakázáno přistupovat k jiným doménám, tento přístup se nazývá Same-origin policy a slouží k zamezení podvodných stránek a zvýšení internetové bezpečnosti. Veškeré požadavky směřující na jinou doménu tak musejí být vykonávány přímo ze serveru, což je často zbytečně náročné a v dnešní době je občas nutné tato omezení obejít. K tomu slouží \gls{cors}, kdy za pomocí HTML hlaviček přidaných do komumnikace mezi serverem a prohlížečem je umožněna komunikace s jinými doménami. Pokud server odešle zpět hlavičku Access-Control-Allow-Origin: [doména], prohlížeč ji zanalyzuje a případně umožní komunikaci. K tomuto je nutné využít XMLHttpRequest (XDomainRequest v případě \gls{ie}) s attributem WithCredentials, o zbytek se postará prohlížeč se serverem a komunikace funguje stejně jako v případě klasických požadavků.
 
 \subsubsection*{ASPI \hfill \emph{http://www.systemaspi.cz/}}
+Systém aspi poskytuje jeho uživatelům komplexní právní informace z prostředí České republiky. Velký důraz je kladen na možnost jednoduchého vyhledávání a verzování obsahu, stejně jako dostupnost skrze většinu operačních systémů. ASPI funguje jako aplikace instalovaná na klientském prostředí, ale nabízí také možnost vytvoření serverů dostupných k připojení skrze vzdálenou plochu, čehož je využito v případě tohoto projektu.
 
-\subsection{Podpora deploymentu a vývoje}
+\subsection{Podpora nasazení a vývoje projektu}
 
 \subsubsection*{Drush \hfill \emph{http://github.com/drush-ops/drush}}
 \label{subsec:drush}
@@ -99,13 +100,16 @@ Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vy
 
 \subsubsection*{Phing \hfill \emph{http://www.phing.info/}}
 \label{subsec:phing}
-Phing je nástroj určený ulehčení práce s instalací a nastavením PHP projektů, fungující na bázi XML konfiguračního souboru. Je založený na podobné myšlence jako Apache ANT, který poskytuje podobnou funkcionalitu pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv dalších akcí, potřebných k správnému chodu webové aplikace. 
+Phing je nástroj určený ulehčení \gls{deployment} a nastavení PHP projektů, fungující na bázi XML konfiguračního souboru. Je založený na podobné myšlence jako Apache ANT, který poskytuje podobnou funkcionalitu pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv dalších akcí, potřebných k správnému chodu webové aplikace. 
 
 \subsubsection*{DrushTask \hfill \emph{https://drupal.org/project/phingdrushtask}}
+Phing povoluje vývoj vlastních operací (task), čehož tento projekt využívá. Za pomoci příkazu TaskdefTask~\cite{website:phing-taskdef} je definovaná operace <drush> poskytující rozhraní k programu Drush. Tím je umožněno automatizovat většinu administrátorských operací nad projektem a případně implementovat automatickou analýzu kódu a testování pomocí \gls{ci}.
 
 \subsubsection*{Maven \hfill \emph{http://maven.apache.org/}}
+Podobně jako Phing pro PHP, Maven poskytuje automatizaci \gls{deployment} JAVA projektů (převážně). Jako základ také používá Apache ANT, který rozšiřuje a specializuje se na možnost znovuvyužití skriptů pro více projektů. 
 
 \subsubsection*{Team City \hfill \emph{http://www.jetbrains.com/teamcity/}}
+Podobně jako komunitou často využívaný Jenkins či Hudson, Teamcity je implementaci \gls{ci} serveru. V tomto případě však jde o čistě komerční produkt, který je ale pro malé projekty dostupný zcela zdarma (je omezen na počet projektů). Team City umožňuje komplexní nastavení projektů a jednotlivých úkonů, kontrolujících zdrojový kód, nebo provádějících operace \gls{deployment} na produkční prostředí. Je také poskytována integrace s většinou moderních \gls{cvs}.
 
 \subsubsection*{GitHub \hfill \emph{https://github.com/}}
 \label{subsec:github}

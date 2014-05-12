@@ -469,24 +469,30 @@ Guacamole.HTTPTunnel = function (tunnelURL) {
         var CORS = new Guacamole.CORS();
 
         // Start tunnel and connect synchronously
-        var connect_xmlhttprequest = CORS.createRequest("POST", TUNNEL_CONNECT, false);
+        var connect_xmlhttprequest = CORS.createRequest("POST", TUNNEL_CONNECT);
+        connect_xmlhttprequest.onreadystatechange = this.onConnect;
         connect_xmlhttprequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
         connect_xmlhttprequest.send(data);
+    };
 
+    this.onConnect = function() {
+        // Wait until ready
+        if (this.readyState != 4) {
+            return;
+        }
         // If failure, throw error
-        if (connect_xmlhttprequest.status != 200) {
-            var message = getHTTPTunnelErrorMessage(connect_xmlhttprequest);
+        if (this.status != 200) {
+            var message = getHTTPTunnelErrorMessage(this);
             throw new Error(message);
         }
 
         // Get UUID from response
-        tunnel_uuid = connect_xmlhttprequest.responseText;
+        tunnel_uuid = this.responseText;
 
         // Start reading data
         currentState = STATE_CONNECTED;
         handleResponse(makeRequest());
-
-    };
+    }
 
     this.disconnect = function () {
         currentState = STATE_DISCONNECTED;

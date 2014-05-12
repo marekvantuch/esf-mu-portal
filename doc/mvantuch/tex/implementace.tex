@@ -239,3 +239,27 @@ Druhá část implementace je umožnění cross-domain požadavků v JavaScriptu
 Guacamole typicky poskytuje nastavení pomocí konfiguračního souboru umístěného buď ve složce instalace, nebo v domácí složce uživatele, který program spouští. Jelikož je ke změně těchto konfiguračních souborů nutné přistupovat přímo k serveru, rozhodl jsem se tuto administrační část přepracovat a zpřístupnit přímo z administrace portálu. Ta nabízí dvě základní stránky. Na stránce Nastavení (/config/esf/settings) je možné upravit základní nastavení projektu jako je URL adresa pro připojení ke Guacamole Servlet službám či právě přístup ke konfiguračnímu souboru. Ten se typicky jmenuje guacamole.properties a nachází se ve složce /srv/guacamole/. Je nutné se ujistit, že jak Guacamole Servlet (TomCat) tak \gls{esf} Portál (Apache) mají k souboru přístup a mohou jej upravovat.
 
 Na stránce nastavení Připojení ke vzdálené ploše (\texttt{/config/esf/remote}) lze za předpokladu, že je vše správně nastaveno, upravovat nastavení Guacamole samotného a url pro připojení k serveru vzdálené plochy - což je v našem případě ASPI. Dále je nutné nastavit port pro připojení ke Guacd démonovi poskytujícímu proxy pro připojení ke vzdálené ploše, uživatelské jméno a heslo je však převzato z nastavení každého jednotlivého uživatele.
+
+\section{Vývoj tématu vzhledu}
+Implementace vzhledu probíhá na dvou úrovních. 
+\begin{enumerate}
+  \item Je potřeba generovat vhodný HTML kód. K tomu v Drupalu slouží systém přepisování šablonovacích souborů (přípona .tpl.php) pro jednotlivé prvky webu. V základu poskytuje Drupal stromovou strukturu, začínající u celého dokumentu (html.tpl.php), který obsahuje všechen obsah včetně hlaviček, a pokračující přes stránku (page.tpl.php) až po jednotlivé elementy (např. fieldset.tpl.php). Většina těchto šablon je definována přímo v jádru systému a všechny lze jednoduchým způsobem (na základě jména) přepsat. Zároveň je možné vytvářet úplně nové šablony. Šablonám lze zároveň i upravit data, která do nich budou vložena a to za pomoci implementace funkcí \_preprocess a \_process a jejich vložení do kódu tématu vzhledu. 
+  Další způsob, jak změnit výstup html je přepsání funkcí formátujících jednoduché elementy stránky (například seznam elementů ul). Typicky jsou tyto prvky generovány funkcí theme([jméno elementu], [proměnné]), která může být přepsána buď v modulu, nebo tématu vzhledu, jako [jméno modulu]\_[jméno elementu]() - například \texttt{function omega\_fieldset(\$variables)}. Modul Omega nad tímto rozhraním navíc poskytuje možnosti všechny tyto funkce vkládat do samostatných souborů pojmenovaných dle daných konvencí, čímž dále zpřehledňuje výsledný kód (výše zmíněný kód by byl umístěn v souboru \texttt{theme/container.theme.inc}).
+  \item Na HTML kód se nanášejí \gls{css} styly. Jak je popsáno v sekci \ref{subsec:sass}, je výhodnější využívat nástroj SASS, který je do jazyka \gls{css} kompilován a poskytuje více možností. Vývoj probíhá dle standartů určených v tématu vzhledu Omega (viz. \ref{subsec:omega}) a je definován v rámci několika SASS souborů, kde do každého z nich je seskupena určitá množina nastavení.
+\end{enumerate}
+
+\begin{figure}[]
+  \includegraphics[scale=0.85]{img/drupal-theme-architecture-crop.pdf}
+  \caption{Architektura vykreslení HTML kódu stránky}
+  \label{fig:theme_architecture}
+\end{figure}  
+
+V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalováno \gls{ruby}, COMPASS (viz sekce \ref{subsec:compass}) a \gls{bundler}.
+
+\begin{enumerate}
+  \item \texttt{\$ sudo gem install bundler}
+  \item \texttt{\$ bundle install}
+  \item \texttt{\$ compass watch}
+\end{enumerate}
+
+COMPASS bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné CSS soubory.
