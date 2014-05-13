@@ -10,7 +10,7 @@ Kromě funkcionality přidané do jádra, které by bylo možné dosáhnout i za
 
 \begin{itemize}
   \item podpora kešování za pomocí reverzní proxy (např. Varnish)
-  \item Entity API - vytváření entit bez URL
+  \item Entity API - unifikace elementů stránek a API ulehčující vytváření nových typů obsahu, třídy pro ulehčení práce~\cite{drupal-entities}
   \item možnost přidávat pole ke všem entitám (uživatelé, slovníky, ...)
   \item podpora různých databází se stejným zdrojovým kódem v PHP (abstrakce nad dotazy do databáze)
   \item zlepšená podpora AJAX volání
@@ -138,7 +138,7 @@ Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4. 
   \label{fig:rozvrzeni-stranky}
 \end{figure}  
 
-Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na čtyři hlavní segmenty - hlavičku, postranní panel, obsah a patičku. Pro možnosti budoucího rozšíření je navíc definován segment Postskript, který se nachází ve spodní části obsahové části stránky. Zatímco hlavička i patička zabírají celou dostupnou šíři stránky (960px), centrální segment je rozdělen mezi postranní panel a obsah - poměr mezi těmito segmenty je určen za použití knihovny \emph{SUSY} a media queries a mění se v závislosti na šíři okna prohlížeče. 
+Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na čtyři hlavní segmenty - hlavičku, postranní panel, obsah a patičku. Pro možnosti budoucího rozšíření je navíc definován segment Postskript, který se nachází ve spodní části obsahové části stránky. Zatímco hlavička i patička zabírají celou dostupnou šíři stránky (960px), centrální segment je rozdělen mezi postranní panel a obsah - poměr mezi těmito segmenty je určen za použití knihovny \emph{SUSY} a media queries a mění se v závislosti na šíři okna prohlížeče~\cite{responsible-drupal}. 
 
 \begin{description}
   \item[Telefon] (velikost okna do 44em) \hfill \\
@@ -178,8 +178,7 @@ V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v p�
 
 \section{Nasazení (deployment) a jeho možnosti}
 
-Pro správu % TODO \gls{deployment} 
-je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
+Pro správu \gls{deployment} je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
 
 V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se bude portál instalovat (cesty k souborům, nastavení databáze a pod.) - více informací je v samotném souboru.
 
@@ -254,7 +253,7 @@ Implementace vzhledu probíhá na dvou úrovních.
   \label{fig:theme_architecture}
 \end{figure}  
 
-V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalováno \gls{ruby}, COMPASS (viz sekce \ref{subsec:compass}) a \gls{bundler}.
+V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalován programovací jazyk Ruby a nástroje COMPASS (sekce \ref{subsec:compass}) a \gls{bundler}.
 
 \begin{enumerate}
   \item \texttt{\$ sudo gem install bundler}

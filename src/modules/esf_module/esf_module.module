@@ -68,6 +68,7 @@ function esf_module_init() {
 
     $message .= t('If you don\'t have credentials yet, please go <a href="#">here</a>.');
 
+    drupal_get_messages(NULL, TRUE);
     drupal_set_message($message, 'warning');
   }
 }

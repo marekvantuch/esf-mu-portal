@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Kerberos_authentication module installation and upgrade code.
+ */
+/**
+ * Implements hook_uninstall().
+ */
+function kerberos_authentication_uninstall() {
+  // Remove variables
+  variable_del('kerberos_authentication_login_process');
+  variable_del('kerberos_authentication_login_conflict');
+  variable_del('kerberos_authentication_realms');
+  variable_del('kerberos_authentication_sync_passwords');
+  variable_del('kerberos_authentication_default_role');
+}

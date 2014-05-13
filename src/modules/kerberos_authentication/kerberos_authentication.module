@@ -1,0 +1,278 @@
+<?php
+
+  if(!extension_loaded('krb5')) {
+    drupal_set_message('KRB5 Extension not installed');
+  }
+
+  /**
+   * @file
+   * kerberos_authentication provides authentication against a Kerberos server.
+   */
+  define( 'KERBEROS_AUTHENTICATION_AUTH_MIXED', 0 );
+  define( 'KERBEROS_AUTHENTICATION_AUTH_EXCLUSIVE', 1 );
+  define( 'KERBEROS_AUTHENTICATION_CONFLICT_LOG', 0 );
+  define( 'KERBEROS_AUTHENTICATION_CONFLICT_RESOLVE', 1 );
+  define( 'KERBEROS_AUTHENTICATION_LOGIN_PROCESS_SETTING', variable_get('kerberos_authentication_login_process', KERBEROS_AUTHENTICATION_AUTH_MIXED) );
+  define( 'KERBEROS_AUTHENTICATION_LOGIN_CONFLICT_SETTING', variable_get('kerberos_authentication_login_conflict', KERBEROS_AUTHENTICATION_CONFLICT_LOG) );
+  define( 'KERBEROS_AUTHENTICATION_FORGET_PASSWORDS_SETTING', variable_get('kerberos_authentication_forget_passwords', TRUE) );
+  define( 'KERBEROS_AUTHENTICATION_SYNC_PASSWORDS_SETTING', variable_get('kerberos_authentication_sync_passwords', FALSE) );
+  define( 'KERBEROS_AUTHENTICATION_DEFAULT_ROLE_SETTING', variable_get('kerberos_authentication_default_role', NULL) );
+  /**
+   * Implements hook_menu().
+   */
+  function kerberos_authentication_menu() {
+    return array(
+      'admin/config/people/accounts/kerberos' => array(
+        'title'            => 'Kerberos Authentication',
+        'description'      => 'Configure Kerberos authentication settings.',
+        'page callback'    => 'drupal_get_form',
+        'page arguments'   => array( 'kerberos_authentication_admin_settings' ),
+        'access arguments' => array( 'administer kerberos authentication' ),
+        'file'             => 'kerberos_authentication.admin.inc',
+        'weight'           => 10,
+      ),
+    );
+  }
+
+  /**
+   * Implements hook_user_update().
+   *
+   * @param $edit     array The array of form values submitted by the user.
+   * @param $account  stdClass The user object on which the operation is performed.
+   * @param $category string The active category of user information being edited.
+   */
+  function kerberos_authentication_user_update(&$edit, $account, $category) {
+    if ( $category == 'account' ) {
+      // If authentication is being done in "KERBEROS only" mode, passwords
+      // should not be written to the database, or users would be able
+      // to log in even after removing their KERBEROS entry.
+      if ( isset( $account->data['kerberos_authentication']['krb_auth'] ) && ( KERBEROS_AUTHENTICATION_LOGIN_PROCESS_SETTING == KERBEROS_AUTHENTICATION_AUTH_EXCLUSIVE || !KERBEROS_AUTHENTICATION_SYNC_PASSWORDS_SETTING ) ) {
+        $edit['pass'] = NULL;
+      }
+    }
+  }
+
+  /**
+   * Implements hook_user_view_alter().
+   */
+  function kerberos_authentication_user_view_alter(&$build) {
+    $account = $build['#account'];
+    if ( user_access('administer users') && user_access('administer kerberos authentication') && isset( $account->data['kerberos_authentication']['krb_auth'] ) ) {
+      $build['summary']['kerberos_authentication'] = array(
+        '#type'   => 'user_profile_category',
+        '#title'  => t("Kerberos Authentication"),
+        '#weight' => 10,
+      );
+      $build['summary']['kerberos_authentication']['kerberos_realm'] = array(
+        '#type'    => 'user_profile_item',
+        '#title'   => t('Kerberos Realm'),
+        '#markup'  => isset( $account->data['kerberos_authentication']['krb_realm'] ) ? check_plain($account->data['kerberos_authentication']['krb_realm']) : '',
+        '#weight'  => 0
+      );
+      $build['summary']['kerberos_authentication']['kerberos_principal'] = array(
+        '#type'    => 'user_profile_item',
+        '#title'   => t('Kerberos Principle'),
+        '#markup'  => isset( $account->data['kerberos_authentication']['krb_principal'] ) ? check_plain($account->data['kerberos_authentication']['krb_principal']) : '',
+        '#weight'  => 1
+      );
+    }
+  }
+
+  /**
+   * Implements hook_menu_alter().
+   */
+  function kerberos_authentication_menu_alter(&$path) {
+    //TODO: support password resets in the future
+    //Disallow password resets since we're kerberos
+    unset( $path['user/password'] );
+  }
+
+  /**
+   * Implements hook_permission().
+   */
+  function kerberos_authentication_permission() {
+    return array(
+      'administer kerberos authentication' => array(
+        'title'           => t('Administer Kerberos Authentication'),
+        'description'     => t('Modify settings related to Kerberos Authentication.'),
+        'restrict access' => TRUE,
+      ),
+    );
+  }
+
+  /**
+   * Implements hook_form_alter().
+   */
+  function kerberos_authentication_form_alter(&$form, $form_state, $form_id) {
+    // Replace the drupal authenticate function is it's used as validation.
+    if ( isset( $form['#validate'] ) && is_array($form['#validate']) && ( $key = array_search('user_login_authenticate_validate', $form['#validate']) ) ) {
+      $form['#validate'][$key] = 'kerberos_authentication_login_validate';
+    }
+    switch ( $form_id ) {
+      case 'user_login_block':
+        //TODO: support forgot password & new account
+        //Disable forgot password and new account links
+        unset( $form['links'] );
+        break;
+      case 'user_profile_form':
+        $account = $form["#user"];
+        if ( isset( $account->data['kerberos_authentication']['krb_auth'] ) && $account->data['kerberos_authentication']['krb_auth'] ) { //check it exists, and is true
+          unset( $form['account']['pass'] ); //disallow password changes if user is kerberos authenticated
+          $form['account']['name']['#disabled'] = TRUE;
+        }
+        break;
+    }
+  }
+
+  /**
+   * Implements hook_form_alter().
+   * Change the normal form login form behaviour.
+   */
+  function kerberos_authentication_form_user_login_alter(&$form, $form_state) {
+    $form['#validate'] = array( 'user_login_name_validate', 'kerberos_authentication_login_validate', 'user_login_final_validate' );
+  }
+
+  /**
+   * Implements hook_exit().
+   */
+  function kerberos_authentication_exit() {
+    // We delete the login info here, instead of just not storing it at
+    if ( KERBEROS_AUTHENTICATION_FORGET_PASSWORDS_SETTING && isset( $_SESSION['kerberos_login'] ) ) {
+      unset( $_SESSION['kerberos_login'] );
+    }
+  }
+
+  /**
+   * Helper function to check users credentials.  Only deals with kerberos users.
+   *
+   * @param $principal string Kerberos Principle to Check.
+   * @param $password  string Password to use to get Kerberos ticket.
+   *
+   * @return mixed Realm name that succeeded if getting ticket was successful, FALSE on failure
+   */
+  function kerberos_authentication_check_kerberos_user($principal, $password) {
+    $realms = variable_get('kerberos_authentication_realms', array());
+    if ( !empty( $principal ) && !empty( $password ) && !empty( $realms ) ) {
+      foreach ($realms as $realm) :
+        // Initialize KerberosInterface
+        try {
+          $kerberos_interface = new KerberosInterface( $realm );
+          $check = $kerberos_interface->checkPrinciple($principal, $password);
+          if ( $check === TRUE ) {
+            return $kerberos_interface->getRealm();
+          }
+        }
+        catch ( Exception $e ) {
+          return FALSE;
+        }
+      endforeach;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Main user authentication function.
+   * If successful, sets the global $user object.
+   */
+  function kerberos_authentication_login_validate($form, &$form_state) {
+    require_once( 'includes/password.inc' );
+    $new_values = array();
+    $form_values = $form_state['values'];
+    $name = $form_values['name']; //Drupal's default user_login_authenticate_validate doesn't trim username
+    $pass = trim($form_values['pass']);
+    if ( !empty( $name ) && !empty( $pass ) ) {
+      // (Design decision) uid=1 (admin user) must always authenticate to local database
+      // this user is critical for all drupal admin and upgrade operations so it is best
+      // left with drupal's native authentication.
+      $admin_user = user_load(1);
+      if ( $admin_user->name == $name ) { //if they're using the admin user's username...try and auth them locally
+        user_authenticate($name, $pass);
+        return;
+      }
+      if ( !flood_is_allowed('failed_login_attempt_ip', variable_get('user_failed_login_ip_limit', 50), variable_get('user_failed_login_ip_window', 3600)) ) {
+        $form_state['flood_control_triggered'] = 'ip';
+        return;
+      }
+      //If we allow both kerberos and Drupal users...
+      if ( KERBEROS_AUTHENTICATION_LOGIN_PROCESS_SETTING == KERBEROS_AUTHENTICATION_AUTH_MIXED ) {
+        // Authenticate local users first.
+        if ( $uid = user_authenticate($name, $pass) ) {
+          $user_obj = user_load($uid);
+          if ( $user_obj->status == 1 ) { //only set if user isn't blocked
+            $form_state['uid'] = $uid;
+          }
+          return;
+        }
+      }
+      //if we get here, either we don't care about drupal users, or drupal auth failed...
+      if ( $realm = kerberos_authentication_check_kerberos_user($name, $pass) ) {
+        if ( $existing_user = user_load_by_name($name) ) { //Drupal user with same name may exist (or it's ourselves)...
+          if ( !$existing_user->data['kerberos_authentication']['krb_auth'] ) { //existing user isn't a kerberos user
+            if ( KERBEROS_AUTHENTICATION_LOGIN_CONFLICT_SETTING == KERBEROS_AUTHENTICATION_CONFLICT_LOG ) { //disallow login and log the conflict
+              watchdog('kerberos_authentication', 'A kerberos principal "%principal" has a naming conflict with a local drupal user.', array( '%principal'   => $name, ), WATCHDOG_ERROR);
+              drupal_set_message(t('Login Failed.'), 'error');
+              return;
+            }
+            else { //update existing user
+              if ( $existing_user->status == 1 ) {
+                $new_values['data']['kerberos_authentication'] = array(
+                  'krb_auth'      => TRUE,
+                  'krb_principal' => $name,
+                  'krb_realm'     => $realm,
+                );
+                if ( KERBEROS_AUTHENTICATION_FORGET_PASSWORDS_SETTING ) { //update password on drupal record
+                  $new_values['pass'] = user_hash_password($pass);
+                }
+                user_save($existing_user, $new_values);
+                $form_state['uid'] = $existing_user->uid;
+              }
+              return;
+            }
+          }
+          else {
+            //user is valid kerberos, and already has a matching drupal account
+            if ( $existing_user->status == 1 ) {
+              $form_state['uid'] = $existing_user->uid;
+              if ( KERBEROS_AUTHENTICATION_FORGET_PASSWORDS_SETTING ) { //update password on drupal record
+                $new_values['pass'] = user_hash_password($pass);
+              }
+              user_save($existing_user, $new_values);
+            }
+            return;
+          }
+        }
+        else {
+          //Valid kerberos account, but no drupal account...let's make one!
+          user_external_login_register($name, 'kerberos_authentication');
+          $new_user = user_external_load($name);
+          $new_values['data']['kerberos_authentication'] = array(
+            'krb_auth'      => TRUE,
+            'krb_principal' => $name,
+            'krb_realm'     => $realm,
+          );
+          if ( strpos('@', $name) === FALSE ) { //No @ in the username
+            $new_values['mail'] = drupal_strtolower($name . '@' . $realm);
+            $new_values['init'] = drupal_strtolower($name . '@' . $realm);
+            $new_values['name'] = drupal_strtolower($name);
+          }
+          else {
+            $new_values['mail'] = drupal_strtolower($name);
+            $new_values['init'] = drupal_strtolower($name);
+            $new_values['name'] = drupal_strtolower($name);
+          }
+          if ( KERBEROS_AUTHENTICATION_FORGET_PASSWORDS_SETTING ) { //update password on drupal record
+            $new_values['pass'] = user_hash_password($pass);
+          }
+          $new_values['roles'] = array( DRUPAL_AUTHENTICATED_RID => TRUE );
+          if ( !is_null(KERBEROS_AUTHENTICATION_DEFAULT_ROLE_SETTING) ) {
+            $new_values['roles'][KERBEROS_AUTHENTICATION_DEFAULT_ROLE_SETTING] = TRUE;
+          }
+          user_save($new_user, $new_values);
+          watchdog('kerberos_authentication', 'New external user %name created from the Kerberos realm %realm.', array('%name' => $name, '%realm' => $realm), WATCHDOG_NOTICE, l(t('edit'), 'user/' . $new_user->uid . '/edit'));
+        }
+        $form_state['uid'] = $new_user->uid;
+      }
+      $_SESSION['kerberos_login']['principal'] = $name;
+      $_SESSION['kerberos_login']['pass'] = $pass;
+    }
+  }
