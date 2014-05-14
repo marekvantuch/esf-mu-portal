@@ -55,37 +55,31 @@ V době práce na informačním systému již byl dostupný i Drupal verze 8, al
 
 Funkcionalita některých z modulů byla v sedmé verzi přesunuta přímo do jádra Drupalu a proto nebylo jejich využití již potřebné - byly využity jejich ekvivalenty z jádra. Kromě těchto byly odebrány i další moduly, kdy některé nejsou pro novou verzi vůbec dostupné. Dále byly odstraněny moduly, jejichž využití již postrádalo smysl. Z důvodu změny a zjednodušení struktury menu již nebylo potřeba mnoho modulů, které umožňovaly složitá menu zobrazovat uživatelům. Zároveň bylo odstraněno několik modulů, které nebyly na stránkách vůbec využity a zbytečně zpomalovaly běh portálu. Následuje seznam těchto modulů s jejich krátkým popisem.
 
-\subsection{Odebrané moduly (nedostupné)}
-Z důvodu převážného vyvíjení Drupalu komunitou nebyly všechny moduly dostupné pro Drupal 6 vyvinuty i pro Drupal 7 - většinou z důvodu nepotřebnosti daných modulů, kdy u většiny užitečných modulů nová verze existuje.
+\section{Odebrané moduly}
+Z důvodu převážného vyvíjení Drupalu komunitou nebyly všechny moduly dostupné pro Drupal 6 vyvinuty i pro Drupal 7 - většinou z důvodu nepotřebnosti daných modulů, kdy u většiny užitečných modulů nová verze existuje. Předchozí struktura webu byla v mnohém odlišná a k její implementaci bylo využito několik modulů, které mohly být pro nepotřebnost vypnuty a odinstalovány. Několik modulů sice bylo povoleno, ale nebyly nikde v systému využity a proto byly odstraněny.
 
-\subsubsection*{Views Search \hfill \emph{https://drupal.org/project/views\_search}}
-Rozšiřuje funkcionalitu Views a jejich obsahových filtrů.
+\subsubsection*{\textbf{Views Search} \hfill \emph{https://drupal.org/project/views\_search}}
+Rozšiřuje funkcionalitu Views a jejich obsahových filtrů, pro novou verzi již není modul dostupný.
 
-\subsection{Odebrané moduly (definující strukturu předchozího řešení)}
-Předchozí struktura webu byla v mnohém odlišná a k její implementaci bylo využito několik modulů, které mohly být pro nepotřebnost vypnuty a odinstalovány. 
-
-\subsubsection*{Front Page \hfill \emph{https://drupal.org/project/front}}
+\subsubsection*{\textbf{Front Page} \hfill \emph{https://drupal.org/project/front}}
 Slouží k nastavení výchozí stránky pro různé uživatelské role. Z důvodu plánování kompletně nové implementace domovské stránky byla tato funkcionalita prozatím odstraněna a může být případně přidána v čase implementace dané části portálu.
 
-\subsubsection*{Menu Attributes \hfill \emph{https://drupal.org/project/menu\_attributes}}
+\subsubsection*{\textbf{Menu Attributes} \hfill \emph{https://drupal.org/project/menu\_attributes}}
 Umožňuje přiřazení attributů k položkám menu. Ty pak mohou být použity buď pro stylování, nebo navázány na JavaScript.
 
-\subsubsection*{Taxonomy Breadcrumb \hfill \emph{https://drupal.org/project/taxonomy\_breadcrumb}}
+\subsubsection*{\textbf{Taxonomy Breadcrumb} \hfill \emph{https://drupal.org/project/taxonomy\_breadcrumb}}
 Generuje drobečkovou navigaci za pomoci slovníků definovaných v systému a jejich hierarchie. Hierarchie tím pádem může být velmi jendoduše upravena - toto však již není po úpravě systému potřeba s ohledem na zjednodušenou strukturu.
 
-\subsubsection*{Custom Breadcrumbs \hfill \emph{https://drupal.org/project/custom\_breadcrumbs}}
-Umožňuje detailní nastavení drobečkové navigace.
+\subsubsection*{\textbf{Custom Breadcrumbs} \hfill \emph{https://drupal.org/project/custom\_breadcrumbs}}
+Umožňuje detailní nastavení drobečkové navigace, která již není potřebná.
 
-\subsubsection*{DHTML Menu \hfill \emph{https://drupal.org/project/dhtml\_menu}}
+\subsubsection*{\textbf{DHTML Menu} \hfill \emph{https://drupal.org/project/dhtml\_menu}}
 Mění funkcionalitu menu - při prvním kliknutí se namísto přesunutí na danou stránku pouze rozbalí menu s potomky daného odkazu a až při druhém kliknutí se přejde na danou stránku - tato funkcionalita zřejmě nebyla využívána.
 
-\subsection{Nevyužité moduly}
-Několik modulů sice bylo povoleno, ale nebyly nikde v systému využity a proto byly odstraněny.
-
-\subsubsection*{jCarousel \hfill \emph{https://drupal.org/project/jcarousel}}
+\subsubsection*{\textbf{jCarousel} \hfill \emph{https://drupal.org/project/jcarousel}}
 Slouží k propojení se stejnojmennou JavaScriptovou knihovnou poskytující zobrazení obrázků v ovladatelném ,,kolotoči''. S ohledem na aktuální absenci jakékoliv grafiky byl modul shledán nepotřebným.
  
-\subsubsection*{Colorbox \hfill \emph{https://drupal.org/project/colorbox}}
+\subsubsection*{\textbf{Colorbox} \hfill \emph{https://drupal.org/project/colorbox}}
 Podobně jako jCarousel slouží k propojení s knihovnou určenou ke zobrazování obrázků a ani tento modul nebyl aktivně využíván.
 
 \section{Nově přidané moduly}
@@ -130,6 +124,7 @@ Administrace Drupalu je mnohdy kritizována pro její nízkou uživatelskou př�
 Zatímco modul Workbench poskytuje pohled na obsah stránek, Workbench Media, jak již název nápovídá, přidává propojení s modulem Media a tím pádem pohled na mediální obsah daného uživatele. 
 
 \section{Téma vzhledu a jeho rozložení}
+\label{sec:tema-vzhledu}
 Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4. Narozdíl od předchozích verzí, které poskytovaly uživatelům komplexní administrační rozhraní pro nastavení rozvržení stránky, byla tato možnost z verze 4 odstraněna a nahrazena využitím knihovny \emph{SUSY} (sekce~\ref{sec:technologies}). Veškerá rozvržení jsou proto implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. Každé téma vzhledu v prostředí Drupalu definuje množinu dostupných segmentů stránky, do kterých lze vkládat bloky s vlastním obsahem portálu. 
 
 \begin{figure}[htp] 
@@ -176,31 +171,6 @@ V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v p�
 
 \emph{COMPASS} bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné \emph{CSS} soubory.
 
-\section{Nasazení (deployment) a jeho možnosti}
-
-Pro správu \gls{deployment} je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
-
-V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se bude portál instalovat (cesty k souborům, nastavení databáze a pod.) - více informací je v samotném souboru.
-
-\begin{description}
-  \item[void] \hfill \\
-  Pouze provede inicializaci konfiguračních souborů a ukončí se.  
-  \item[guacamole] 
-  Vytvoří konfigurační soubory projektu Guacamole ve správných složkách (je zkopírován soubor \texttt{phing/default.guacamole.properties}.
-  \item[deploy]
-  Překopíruje aktuální moduly na správné místo a zajistí správné nastavení portálu dle aktuálního nastavení (převážně využití Features).
-  \item[install]
-  Provede kompletní instalaci portálu dle nastavení v konfiguračních souborech - překopíruje moduly a témata specifická pro toto řešení, stáhne potřebné zdrojové kódy Drupalu z internetu a nainstaluje Drupal, kterému následně nastaví správné téma vzhledu a povolí potřebné moduly.
-\end{description}
-
-\section{Výkonové optimalizace}
-Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
-
-\cite{high-performance-drupal}
-
-Popsat agregaci JS, CSS a podobne 
-\cite{website:drupal:optimizing}
-
 \chapter{Implementace připojení ke vzdálené ploše}
 \label{chap:implementace-guacamole}
 Implementace připojení ke vzdálené ploše probíhala v několika fázích. Nejdříve bylo potřeba spustit řešení \emph{Guacamole} lokálně a ujistit se, že je použitelné pro naše potřeby. Bylo také nutné analyzovat, jaké všechny možnosti poskytuje a které vlastnosti jsou potřebné a které přebytečné. Jako přebytečné byly idnetifikovány vlastnosti poskytující správu uživatelů, připojení a jejich skupin. Dále je implementována podpora klávesnici na obrazovce, ukládání snímků obrazovky a mnoho dalších rozšířených možností, které nebyly do základní verze vyžadovány a byly spíše kontraproduktivní s ohledem na zvýšení komplexnosti kódu a debugování celého řešení. 
@@ -208,6 +178,26 @@ Implementace připojení ke vzdálené ploše probíhala v několika fázích. N
 Jakmile byla funkčnost ověřena, bylo nutné celou klientskou část řešení přesunout do modulu v Drupalu a upravit pro tamější podmínky. Bylo nutné změnit HTML výstup, kdy Drupal si v základu buduje strukturu pomocí několika šablonových souborů pro stránku, tělo a pod. Bylo nutné přidat JavaScriptové knihovny z \emph{Guacamole}, odstranit nepotřebný kód a upravit vše k funkčnosti v prostředí s použitím \gls{cors}. 
 
 Nástroj \emph{Guacamole} poskytuje mnohá nastavení a pro ulehčení byla do modulu přidána administrační stránka, která přímo zapisuje do konfiguračního souboru a tím eliminuje potřebu uživatelského připojení na server a manuální konfigurace. 
+
+
+\section{Architektura připojení ke vzdálené ploše}
+Základně poskytuje Guacamole komplexní řešení na propojení ke vzdálené ploše včetně stránky pro management uživatelů, kde každý z nich si může pro sebe vytvořit své vlastní připojení, u každého z nich se zobrazuje náhled a podobně. Jak je zobrazeno na diagramu \ref{fig:arch_guacamole}, součástí Guacamole je i webová aplikace v jazyce HTML, která implementuje knihovnu Guacamole-js a tím i komunikaci s JAVA Servletem. Pro potřeby tohoto projektu však bylo nutné tyto JavaScriptové knihovny převzít a implementovat do modulu pro Drupal. 
+
+\begin{figure}[htp] 
+  \centering{\includegraphics[width=12cm]{img/architecture-guacamole-crop.pdf}}
+  \caption{Neupravená architektura a rozčlenění řešení}
+  \label{fig:arch_guacamole}
+\end{figure}  
+
+Díky skutečnosti, že již nutně neběží JAVA Server a JAVA EE Web aplikace na stejném serveru, či url, bylo nutné změnit architekturu AJAXových požadavků. Ty totiž musejí v typickém případě být zasílány pouze na stejnou doménu kvůli prevenci \gls{xss}. Pro vyřešení tohoto problému byla změněna implementace na CORS požadavky, k čemuž musel být uzpůsoben i JAVA Servlet kontejner, u kterého musely být povoleny požadavky z dané domény. 
+
+Uživatel proto pracuje základně pouze s portálem postaveném na Drupalu, do kterého byl přidán modul implementující stránku určenou ke komunikaci s Guacamole Servlet kontejnerem za pomoci upravené JavaScriptové knihovny Guacamole-js, jak je vyobrazeno na diagramu \ref{fig:arch_drupal}.
+
+\begin{figure}[htp] 
+  \centering{\includegraphics[width=12cm]{img/architecture-drupal-crop.pdf}}
+  \caption{Architektura přizpůsobená pro portál ESF}
+  \label{fig:arch_drupal}
+\end{figure}  
 
 \section{Ostranění autentizace uživatelů a vytvoření vlastní autorizace}
 \emph{Guacamole} v základu poskytuje API pro správu uživatelských účtů a jejich připojení. Jsou implementovány dvě metody, jedna spoléhá na uložení dat do konfiguračního souboru, zatímco druhá pracuje s MySQL databází. Obě rozšiřují třídu \emph{SimpleAuthenticationProvider}, ke které přidávají potřebnou funkcionalitu. 
@@ -238,27 +228,3 @@ Druhá část implementace je umožnění cross-domain požadavků v JavaScriptu
 Guacamole typicky poskytuje nastavení pomocí konfiguračního souboru umístěného buď ve složce instalace, nebo v domácí složce uživatele, který program spouští. Jelikož je ke změně těchto konfiguračních souborů nutné přistupovat přímo k serveru, rozhodl jsem se tuto administrační část přepracovat a zpřístupnit přímo z administrace portálu. Ta nabízí dvě základní stránky. Na stránce Nastavení (/config/esf/settings) je možné upravit základní nastavení projektu jako je URL adresa pro připojení ke Guacamole Servlet službám či právě přístup ke konfiguračnímu souboru. Ten se typicky jmenuje guacamole.properties a nachází se ve složce /srv/guacamole/. Je nutné se ujistit, že jak Guacamole Servlet (TomCat) tak \gls{esf} Portál (Apache) mají k souboru přístup a mohou jej upravovat.
 
 Na stránce nastavení Připojení ke vzdálené ploše (\texttt{/config/esf/remote}) lze za předpokladu, že je vše správně nastaveno, upravovat nastavení Guacamole samotného a url pro připojení k serveru vzdálené plochy - což je v našem případě ASPI. Dále je nutné nastavit port pro připojení ke Guacd démonovi poskytujícímu proxy pro připojení ke vzdálené ploše, uživatelské jméno a heslo je však převzato z nastavení každého jednotlivého uživatele.
-
-\section{Vývoj tématu vzhledu}
-Implementace vzhledu probíhá na dvou úrovních. 
-\begin{enumerate}
-  \item Je potřeba generovat vhodný HTML kód. K tomu v Drupalu slouží systém přepisování šablonovacích souborů (přípona .tpl.php) pro jednotlivé prvky webu. V základu poskytuje Drupal stromovou strukturu, začínající u celého dokumentu (html.tpl.php), který obsahuje všechen obsah včetně hlaviček, a pokračující přes stránku (page.tpl.php) až po jednotlivé elementy (např. fieldset.tpl.php). Většina těchto šablon je definována přímo v jádru systému a všechny lze jednoduchým způsobem (na základě jména) přepsat. Zároveň je možné vytvářet úplně nové šablony. Šablonám lze zároveň i upravit data, která do nich budou vložena a to za pomoci implementace funkcí \_preprocess a \_process a jejich vložení do kódu tématu vzhledu. 
-  Další způsob, jak změnit výstup html je přepsání funkcí formátujících jednoduché elementy stránky (například seznam elementů ul). Typicky jsou tyto prvky generovány funkcí theme([jméno elementu], [proměnné]), která může být přepsána buď v modulu, nebo tématu vzhledu, jako [jméno modulu]\_[jméno elementu]() - například \texttt{function omega\_fieldset(\$variables)}. Modul Omega nad tímto rozhraním navíc poskytuje možnosti všechny tyto funkce vkládat do samostatných souborů pojmenovaných dle daných konvencí, čímž dále zpřehledňuje výsledný kód (výše zmíněný kód by byl umístěn v souboru \texttt{theme/container.theme.inc}).
-  \item Na HTML kód se nanášejí \gls{css} styly. Jak je popsáno v sekci \ref{subsec:sass}, je výhodnější využívat nástroj SASS, který je do jazyka \gls{css} kompilován a poskytuje více možností. Vývoj probíhá dle standartů určených v tématu vzhledu Omega (viz. \ref{subsec:omega}) a je definován v rámci několika SASS souborů, kde do každého z nich je seskupena určitá množina nastavení.
-\end{enumerate}
-
-\begin{figure}[]
-  \includegraphics[scale=0.85]{img/drupal-theme-architecture-crop.pdf}
-  \caption{Architektura vykreslení HTML kódu stránky}
-  \label{fig:theme_architecture}
-\end{figure}  
-
-V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalován programovací jazyk Ruby a nástroje COMPASS (sekce \ref{subsec:compass}) a \gls{bundler}.
-
-\begin{enumerate}
-  \item \texttt{\$ sudo gem install bundler}
-  \item \texttt{\$ bundle install}
-  \item \texttt{\$ compass watch}
-\end{enumerate}
-
-COMPASS bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné CSS soubory.

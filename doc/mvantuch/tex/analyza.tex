@@ -1,15 +1,15 @@
 \chapter{Analýza}
 \label{chap:analyza}
-Projekt byl od začátku koncipován jako aktualizace stávajícícho řešení, do kterého budou promítnuty zkušenosti a znalosti nabyté za dobu jeho fungování zkombinované s moderními technologiemi, které nebyly v době vývoje předešlé verze ještě dostupné. Návrh klade výraz na minimalizaci možných uživatelských chyb a jednoduchost a názornost vytváření obsahu, čehož dosahuje za pomocí definování vztahů mezi obsahem a omezením možností úprav automatickým generováním prvků webu, jakými jsou například seznamy odkazů a tabulky propojených elementů.
+Projekt byl od začátku koncipován jako aktualizace stávajícícho řešení, do kterého budou promítnuty zkušenosti a znalosti nabyté za dobu jeho fungování, zkombinované s moderními technologiemi, které nebyly v době vývoje předešlé verze dostupné. Návrh klade důraz na minimalizaci možných uživatelských chyb a jednoduchost a názornost vytváření obsahu. Těchto cílů dosahuje za pomoci definování vztahů mezi obsahem a omezením možností úprav automatickým generováním prvků webu, jakými jsou například seznamy a tabulky zobrazující propojení elementů.
 
 \section{Existující řešení}
-Při analýze bylo nutné zohlednit stávající řešení a možnosti jeho rozšíření. Existující portál využíval Drupal v 6. verzi, který byl již v dané době značně zastaralý a jeho rozšiřitelnost byla velmi omezená, či zbytečně komplikovaná. Řešení bylo rozšířeno řadou volně dostupných modulů, které dohromady poskytovaly komplexní strukturu nabídky menu vytvořenou namíru požadavkům fakulty. Tato struktura byla navržena v době, kdy nebylo známo, že systém bude pro zobrazování zákonů využívat externí software ASPI a proto byly tyto zákony také použity. 
+Při analýze bylo nutné zohlednit stávající řešení a možnosti jeho rozšíření. Existující portál využíval \emph{Drupal} v 6. verzi, který je již značně zastaralý a jeho rozšiřitelnost omezená, či neadekvátně komplikovaná. Řešení bylo rozšířeno řadou volně dostupných modulů, které dohromady poskytovaly komplexní strukturu nabídky menu vytvořenou namíru požadavkům fakulty. Struktura byla navržena v době, kdy nebylo známo, že systém bude pro zobrazování zákonů využívat externí software ASPI, proto bylo počítáno s možností zobrazení zákonů přímo v systému. 
 
-Autentizace na server probíhala pouze za pomocí hesla měněného ve čtvrtletních cyklech a nebyla tím pádem nijak vázána na jednotlivé uživatele. Tento způsob nedovoloval prakticky žádnou kontrolu nad uživateli přistupujícími k obsahu a po získání hesla byl schopen na server přistupovat prakticky kdokoliv. 
+Autentizace na server probíhala pouze za pomocí jednotného hesla, které bylo měněno ve čtvrtletních cyklech. Heslo nebylo nijak vázáno na jednotlivé uživatele a tento způsob nedovoloval téměř žádnou kontrolu nad uživateli přistupujícími k obsahu - po získání hesla byl schopen na server přistupovat kdokoliv a zabránění přístupu bylo možné pouze na bázi IP adresy uživatele. 
 
-\subsection{Struktura menu}
+\subsection*{Struktura menu}
 
-Menu v levé sekci stránky obsahuje všechny odkazy, které uživatelé využívají k navigaci skrze portál. 
+Navigace systému se nachází v levé části stránky a obsahuje v jediné stromové struktuře veškeré odkazy na obsah portálu.
 
 \begin{itemize}
   \item \textbf{[název předmětu 1]} \hfill \\
@@ -39,101 +39,84 @@ Menu v levé sekci stránky obsahuje všechny odkazy, které uživatelé využí
   \item \textbf{[název předmětu 3]}
 \end{itemize}
 
-Z výše popsané struktury menu vyplývá, že její vlastnosti nesplňují požadavky moderních informačních systémů. Odkazy mají nekonzistentní chování - buď se rozbalí pod-menu a nebo prohlížeč přejde na novou stránku a uživatel proto nemůže jednoduše vědět, jaké chování očekávat. Struktura také obsahuje duplicity (název předmětu a odkaz na studijní text se opakují a v obou případech znamená něco jiného). Není také určená společná struktura všech předmětů a tím může lehce dojít ke zmatení uživatelů, kteří musejí pokaždé informace hledat na jiném místě v závislosti na daném předmětu (stránky Ostatní studijní materiály, Prezentace, \dots). Některé stránky také místo agregace užitečných informací obsahují buď pouze banner, nebo jsou úplně prázdné (úvodní stránka předmětu) v místech, kde by uživatel očekával obsah.
+Z výše popsané struktury vyplývá, že její vlastnosti nesplňují požadavky moderních informačních systémů. Odkazy mají nekonzistentní chování - buď se rozbalí pod-menu s dalšími odkazy, nebo prohlížeč přejde na novou stránku. Uživatel proto nemůže jednoduše vědět, jaké chování od své akce očekávat. Struktura obsahuje duplicity (název předmětu a odkaz na studijní text se opakují a v obou případech mají jiný význam). Dále není určená společná struktura všech předmětů a tím může lehce dojít ke zmatení uživatelů, kteří musejí pokaždé informace hledat na jiném místě (stránky \emph{Ostatní studijní materiály}, \emph{Prezentace}, \dots). Některé stránky také místo agregace užitečných informací obsahují buď pouze banner, nebo jsou úplně prázdné (úvodní stránka předmětu) v místech.
 
 \section{Použité technologie}
 \label{sec:technologies}
 
-Základními technologiemi jsou Drupal a Guacamole, které prakticky určují potřeby vyžití dalších technologií. Základem proto jsou programovaí jazyky PHP, JAVA a JavaScript a výstup je realizován pomocí HTML (v.4 a v.5) a CSS (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, rozhodl jsem se zmínit pouze ty, které měly zásadní vliv buď na funkcionalitu, nebo na proces vývoje.
+Základními technologiemi jsou \emph{Drupal} a \emph{Guacamole}, které definují vyžití dalších technologií. Základem jsou programovaí jazyky \emph{PHP}, \emph{JAVA} a \emph{JavaScript} a výstup je realizován pomocí \emph{HTML} (v.4 a v.5) a \emph{CSS} (v.2 a v.3). Ačkoliv bylo využito velké množství modulů, zmíněny budou pouze pouze ty, které měly zásadní vliv na funkcionalitu nebo proces vývoje.
 
 \subsection{Jádro CMS a přidružené technologie}
 
-\subsubsection*{Drupal \hfill \emph{http://drupal.org}} 
+\subsubsection*{\textbf{Drupal} \hfill \emph{http://drupal.org}} 
 \label{subsec:drupal}
-Aktuálně světově třetí nejrozšířenější\cite{website:cms-market-share} systém pro správu obsahu (CMS), Drupal je založený na jazyce PHP klade důraz obzvláště na vývojáře a na možnosti úpravy stránek. Zatímco WordPress cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, Drupal je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje jednoduché možnosti úprav. Systém je postavený na PHP, minimálně verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládá funkcionální přístup s množstvím propriétárních principů. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím jednoduchou rozšiřitelnost, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu.
-Drupal také již v základu podporuje využití tzv. instalačních profilů. Jedná se o speciální moduly neposkytující samy o sobě žádnou funkcionalitu, ale sdružující informace o potřebných modulech a jejich iniciálním nastavení. To lze využít pro specifické distribuce, například vícejazyčná instalace, instalace specializovaná na organizace, výkon a podobně.
+V době psaní této práce byl \emph{Drupal} světově třetím nejrozšířenějším \gls{cms}\cite{website:cms-market-share}. Založený na jazyce PHP, klade důraz na vývojáře a na možnosti úpravy stránek, proto často bývá označován za \gls{framework}. Konkurenční \gls{cms} \emph{WordPress} cílí na uživatelskou jednoduchost a většina stránek na něm postavných je lehce rozpoznatelná, zatímco \emph{Drupal} je možné změnit od základu a jeho \gls{api} pro tvorbu modulů poskytuje komplexní možnost úpravy. Minimálním požadavkem pro spuštění je \emph{PHP} verze 5.3 a i když některé jeho části jsou již implementovány objektově, celkově převládají čísté funkce s množstvím propriétárních principů řešení. Mezi ty patří například hook\_api, poskytující přípojné body pro další moduly a tím rozšiřitelnost částí systému, nebo systém vzorů (templates), které pomocí speciální jmenné konvence umožňují měnit výpis html kódu prvků webu (viz. kapitola \ref{sec:tema-vzhledu}).
 
-\subsubsection*{Kerberos (Protocol) \hfill \emph{http://web.mit.edu/kerberos}}
-Vyvinut na Massachusettském technologickém institutu (MIT), protokol Kerberos poskytuje autentizační funkcionalitu za pomocí symetrické kryptografie (jediný klíč je použit pro šifrování i dešifrování). Autentizace je provedena za pomoci důvěryhodného třetího serveru (v tomto případě IS MUNI).
+\emph{Drupal} podporuje využití tzv. instalačních profilů. Jedná se o speciální moduly neposkytující samy o sobě žádnou funkcionalitu, ale sdružující informace o potřebných modulech a jejich iniciálním nastavení. To lze využít pro specifické distribuce, například vícejazyčná instalace, řešení pro blog, řešení orientované na výkon a podobně.
 
-\subsubsection*{Omega (Drupal Theme) \hfill \emph{http://drupal.org/project/omega}}
+\subsubsection*{\textbf{Kerberos} (Protocol) \hfill \emph{http://web.mit.edu/kerberos}}
+Vyvinut na \emph{Massachusettském technologickém institutu (MIT)}, protokol \emph{Kerberos} poskytuje autentizační funkcionalitu za pomocí symetrické kryptografie (jediný klíč je použit pro šifrování i dešifrování). Autentizace je provedena za pomoci důvěryhodného třetího serveru (v tomto případě \gls{is} \gls{muni}). %TODO Opravit na Masarykovy Univerzity
+
+\subsubsection*{\textbf{Omega} (Drupal Theme) \hfill \emph{http://drupal.org/project/omega}}
 \label{subsec:omega}
-Pro Drupal existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů (css). Projekt Omega je zaměřen na \gls{responsive} a poskytuje hotovou implementaci různých stylů pro různá zobrazovací zařízení. Zatímco třetí verze poskytuje komplexní administrační rozhraní, přístup čtvrté verze se spíše zaměřil na implementaci v kódu. Za pomocí SUSY jsou zapsány poměry mezi bloky zobrazenými na stránce a ty se pak při využití knihovny Breakpoints\cite{website:breakpoints} mezi sebou přepínají.
+Pro \emph{Drupal} existuje nespočet témat vzhledu, které se starají o formátování výstupu html kódu a s ním spojených kaskádových stylů \gls{css}. Projekt \emph{Omega} je zaměřen na \gls{responsive} a poskytuje implementaci stylů pro různá zobrazovací zařízení. Zatímco třetí verze obsahuje komplexní administrační rozhraní, ve kterém lze nastavit rozmístění a poměry mezi bloky stránky, přístup čtvrté verze se zaměřil na implementaci v kódu. Poměry mezi jednotlivými bloky jsou zapsány pomocí nástroje \emph{SUSY} a pomocí knihovny \emph{Breakpoints}\footnote{http://xoxco.com/projects/code/breakpoints/} a vlastnosti \gls{mediaqueries} se mezi sebou přepínají.
 
-\subsubsection*{SASS - Syntactically Awesome Style Sheets \hfill \emph{http://sass-lang.com/}}
+\subsubsection*{\textbf{SASS} (Syntactically Awesome Style Sheets) \hfill \emph{http://sass-lang.com/}}
 \label{subsec:sass}
-Při využití tématu vzhledu Omega se automaticky nabídla možnost využití knihovny SASS pro generování kaskádových stylů. Namísto použití klasického CSS je kód napsán ve formátu SCSS a poté zkompilován do CSS. Tento přístup přináší bezproblémovou kompatibilitu se všemi prohlížeči doplněnou o rozšířené možnosti definice pravidel, jako je využití proměnných, vnoření pravidel, in-line import a další. Kromě výrazného vylepšení čitelnosti, možnosti seskupováni pravidel bez zvyšování zátěže na přenos dat tak lehce lze dosáhnout i snížení programátorské náročnosti.
+Díky tématu vzhledu \emph{Omega} se nabídla možnost využití nástroje \emph{SASS} pro generování popis vzhledu \emph{HTML} elementů. Namísto přímého použití \gls{css} je kód napsán ve formátu \emph{SASS} a poté zkompilován do \gls{css}. Tento přístup přináší bezproblémovou kompatibilitu se všemi prohlížeči doplněnou o rozšířené možnosti definice pravidel, jako je využití proměnných, vnoření pravidel, in-line import a další. Kromě výrazného vylepšení čitelnosti a možnosti seskupováni pravidel bez zvyšování zátěže na přenos dat tak lehce lze dosáhnout i snížení programátorské náročnosti a zvýšení efektivity.
 
-\subsubsection*{COMPASS \hfill \emph{http://compass-style.org/}}
+\subsubsection*{\textbf{COMPASS} \hfill \emph{http://compass-style.org/}}
 \label{subsec:compass}
-Soubory SASS musí být kompilovány do CSS pro zobrazení prohlížečem a protože manuální kompilace je časově náročná a náchylná k opomenutí, nabízí se využití programu COMPASS. Přestože poskytuje širokou škálu funkcionality určené pro ulehčení práce designérům, pro potřeby tohoto projektu byla využita pouze automatická konverze z SCSS do CSS dle definovaných pravidel za pomocí compass watch. Po spuštění démona jsou kontrolovány všechny změny ve složce a automaticky regenerovány výstupní CSS soubory pro načtení prohlížečem.
+Soubory \emph{SASS} musí být kompilovány do \gls{css} pro zobrazení prohlížečem a protože manuální kompilace vyžaduje opakované spouštění příkazů a je tím pádem náchylná k opomenutí, nabízí se využití programu \emph{COMPASS}. Přestože poskytuje širokou škálu funkcionality určené pro ulehčení práce designérům, pro potřeby tohoto projektu byla využita pouze automatická konverze z \emph{SASS} do \gls{css} dle definovaných pravidel za pomocí příkazu \texttt{\$ compass watch}. Po spuštění démona jsou kontrolovány všechny v souborech ve složce a automaticky regenerovány výstupní \gls{css} soubory pro načtení prohlížečem.
 
-\subsubsection*{SUSY \hfill \emph{http://susy.oddbird.net/}}
+\subsubsection*{\textbf{SUSY} \hfill \emph{http://susy.oddbird.net/}}
 \label{subsec:susy}
-Další technologií využitou v tématu vzhledu je SUSY - implementace responsivní mřížky pro Compass. Za pomocí jednoduchých pravidel lze nadefinovat rozdílné rozvržení stránky závisející na rozlišení zobrazovacího zařízení. Například monitoru počítače s rozlišením vyšším než 1024 bodů můžeme postranní panel zobrazit nalevo, zatímco na mobilním zařízením můžeme text zmenšit a zobrazit v horní části stránky spolu s vypuštěním některých nedůležitých bloků. Celá stránka je může být rozdělena na počet sloupců, které mohou být dynamicky vyplňovány a pravidla lze velmi jednoduše zapisovat bez nutnosti řešení problémů s kompatibilitou mezi prohlížeči.
+Další technologií využitou v tématu vzhledu je \emph{SUSY} - implementace responsivní mřížky pro \emph{COMPASS}. Za pomocí jednoduchých pravidel lze nadefinovat rozdílné rozvržení stránky v závislosti na rozlišení zobrazovacího zařízení. Například monitoru počítače s rozlišením vyšším než 1024 bodů můžeme postranní panel zobrazit nalevo, zatímco na mobilním zařízením můžeme text zmenšit a zobrazit v horní části stránky spolu s vypuštěním některých nedůležitých bloků. Celá stránka je může být rozdělena na počet sloupců, které mohou být dynamicky vyplňovány a pravidla lze velmi jednoduše zapisovat bez nutnosti řešení problémů s kompatibilitou mezi prohlížeči.
 
 \subsection{Technologie připojení ke vzdálené ploše}
 
-\subsubsection*{Guacamole \hfill \emph{http://guac-dev.org/}}
+\subsubsection*{\textbf{Guacamole} \hfill \emph{http://guac-dev.org/}}
 \label{subsec:guacamole}
-Jak je popsáno na stránkách této knihovny, jedná se o implementaci myšlenky o připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta, či využití existujícího systémového klienta, je možné používat jakýkoliv prohlížeč podporující některé z technologií HTML5, jako je canvas. Připojení probíhá skrze proxy server implementovaný v jazyce C, který zprostředkovává vlastní připojení. Ke klientovi putují již jen obrazová data a povely, obojí je zakódováno v proprietárním protokolu umožňujícím snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat. Postup komunikace mezi klientským prohlížečem a vzdálenou plochou je blíže vyobrazen na diagramu \ref{fig:arch_core}.
-
-Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí standatních AJAX požadavků v jazyce JavaScript, zatímco propojení z proxy dále podporuje protokoly SSH, VNC a RDP.
+Jak je popsáno na stránkách této knihovny, jedná se o potvrzení myšlenky připojení ke vzdálené ploše skrze webový prohlížeč. Namísto potřeby instalace speciálního klienta je možné používat jakýkoliv prohlížeč podporující některé z technologií \emph{HTML5} (např. canvas). Připojení probíhá skrze proxy server implementovaný v jazyce \emph{C}, který zprostředkovává připojení a komunikaci. Ke klientovi putují již jen obrazová data a povely, obojí zakódováno v proprietárním protokolu, který umožňuje snížit odezvu obrazu a dekódovat jej v průběhu přijímání dat. Postup komunikace mezi klientským prohlížečem a vzdálenou plochou je blíže vyobrazen na diagramu \ref{fig:arch_core}.
 
 \begin{figure}[htp] 
   \centering{\includegraphics[width=12cm]{img/architecture-core-crop.pdf}}
-  \caption{Základní architektura komunikace se vzdálenou plochou}
+  \caption{Architektura komunikace nástroje Guacamole skrze vzdálenou plochu}
   \label{fig:arch_core}
 \end{figure}  
 
-\subsubsection*{CORS \hfill \emph{http://www.w3.org/TR/cors/}} 
-Kvůli bezpečnostním rizikům je JavaScriptu běžícímu v prohlížeči zakázáno přistupovat k jiným doménám, tento přístup se nazývá Same-origin policy a slouží k zamezení podvodných stránek a zvýšení internetové bezpečnosti. Veškeré požadavky směřující na jinou doménu tak musejí být vykonávány přímo ze serveru, což je často zbytečně náročné a v dnešní době je občas nutné tato omezení obejít. K tomu slouží \gls{cors}~\cite{cors}, kdy za pomocí HTML hlaviček přidaných do komumnikace mezi serverem a prohlížečem je umožněna komunikace s jinými doménami. Pokud server odešle zpět hlavičku Access-Control-Allow-Origin: [doména], prohlížeč ji zanalyzuje a případně umožní komunikaci. K tomuto je nutné využít XMLHttpRequest (XDomainRequest v případě \gls{ie}) s attributem WithCredentials, o zbytek se postará prohlížeč se serverem a komunikace funguje stejně jako v případě klasických požadavků.
+Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí \gls{ajax} požadavků v čistém jazyce \emph{JavaScript}, zatímco propojení z proxy dále podporuje protokoly \emph{SSH}, \emph{VNC} a \emph{RDP}.
 
-\subsubsection*{ASPI \hfill \emph{http://www.systemaspi.cz/}}
-Systém aspi poskytuje jeho uživatelům komplexní právní informace z prostředí České republiky. Velký důraz je kladen na možnost jednoduchého vyhledávání a verzování obsahu, stejně jako dostupnost skrze většinu operačních systémů. ASPI funguje jako aplikace instalovaná na klientském prostředí, ale nabízí také možnost vytvoření serverů dostupných k připojení skrze vzdálenou plochu, čehož je využito v případě tohoto projektu.
+\subsubsection*{\textbf{CORS} \hfill \emph{http://www.w3.org/TR/cors/}} 
+Kvůli bezpečnostním rizikům je \emph{JavaScriptu} běžícímu v prohlížeči zakázáno přistupovat k jiným doménám, tento přístup se nazývá \emph{Same-origin policy} a slouží k zamezení podvodných stránek a zvýšení internetové bezpečnosti. Veškeré požadavky směřující na jinou doménu tak musejí být vykonávány přímo ze serveru a prohlížeči zasílány pomocí protokolu \gls{ajax}. Tento přístup je často zbytečně náročný a v dnešní době bývá nutné tato omezení obejít. K tomu slouží \gls{cors}~\cite{website:cors}, kdy za pomocí \emph{HTML} hlaviček přidaných do komumnikace mezi serverem a prohlížečem a nastavení serveru je umožněna komunikace s jinými doménami. Pokud server odešle zpět hlavičku \texttt{Access-Control-Allow-Origin: [doména]}, prohlížeč ji zanalyzuje a případně umožní komunikaci. K tomuto je nutné využít \emph{XMLHttpRequest} (\emph{XDomainRequest} v případě \gls{ie}) s attributem \texttt{WithCredentials}, o zbytek se postará prohlížeč se serverem a komunikace funguje stejně jako v případě klasických požadavků.
+
+\subsubsection*{\textbf{ASPI} \hfill \emph{http://www.systemaspi.cz/}}
+Systém \emph{ASPI} poskytuje jeho uživatelům komplexní právní informace z prostředí České republiky. Velký důraz je kladen na možnost jednoduchého vyhledávání a verzování obsahu, stejně jako dostupnost skrze hlavní operační systémy. \emph{ASPI} funguje jako aplikace instalovaná na klientském prostředí, ale nabízí také možnost vytvoření serverů dostupných k připojení skrze vzdálenou plochu, čehož je využito v případě tohoto projektu.
 
 \subsection{Podpora nasazení a vývoje projektu}
 
-\subsubsection*{Drush \hfill \emph{http://github.com/drush-ops/drush}}
+\subsubsection*{\textbf{Drush} \hfill \emph{http://github.com/drush-ops/drush}}
 \label{subsec:drush}
-Pro ulehčení administračních úkonů nad instalací Drupalu byl komunitou vyvinut program Drush, poskytující administrační rozhraní nad Drupalem v terminálové konzoli. V základu jsou poskytovány operace nad moduly a tématy vzhledu, kdy každý z modulů může pomocí implementace funkcí v souboru .drush.inc poskytnout vlastní příkazy.
+Pro ulehčení administračních úkonů nad instalací \emph{Drupalu} byl komunitou vyvinut program \emph{Drush}, poskytující textové administrační rozhraní nad Drupalem v terminálové konzoli. V základu jsou umožněny operace nad moduly a tématy vzhledu a každý z modulů může pomocí implementace funkcí v souboru \texttt{[název].drush.inc} zoršířit rozhraní vlastními příkazy.
 
-\subsubsection*{Phing \hfill \emph{http://www.phing.info/}}
+\subsubsection*{\textbf{Phing} \hfill \emph{http://www.phing.info/}}
 \label{subsec:phing}
-Phing je nástroj určený ulehčení \gls{deployment} a nastavení PHP projektů, fungující na bázi XML konfiguračního souboru. Je založený na podobné myšlence jako Apache ANT, který poskytuje podobnou funkcionalitu pro jazyk JAVA. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k doručení projektu, jeho kontrolám, či automatizaci jakýchkoliv dalších akcí, potřebných k správnému chodu webové aplikace.
+\emph{Phing} je nástroj určený ulehčení \gls{deployment} a nastavení \emph{PHP} projektů, fungující na bázi \emph{XML} konfiguračního souboru. Je založený na podobné myšlence jako \emph{Apache ANT}, který poskytuje podobnou funkcionalitu pro jazyk \emph{JAVA}. V konfiguračním souboru lze definovat pravidla, proměnné a závislosti vedoucí k \gls{deployment} projektu, kontrolám kódu, či automatizaci jakýchkoliv dalších akcí, potřebných k správnému chodu aplikace.
 
-\subsubsection*{DrushTask \hfill \emph{https://drupal.org/project/phingdrushtask}}
-Phing povoluje vývoj vlastních operací (task), čehož tento projekt využívá. Za pomoci příkazu TaskdefTask~\cite{website:phing-user-guide} je definovaná operace <drush> poskytující rozhraní k programu Drush. Tím je umožněno automatizovat většinu administrátorských operací nad projektem a případně implementovat automatickou analýzu kódu a testování pomocí \gls{ci}.
+\subsubsection*{\textbf{DrushTask} \hfill \emph{https://drupal.org/project/phingdrushtask}}
+Tento projekt využívá možnosti vývoje vlastních operací (task) v nástroji \emph{Phing}. Za pomoci příkazu \texttt{TaskdefTask}\cite{website:phing-user-guide} je definovaná operace \texttt{<drush>}, poskytující rozhraní k programu \emph{Drush}. Tím je umožněno automatizovat většinu administrátorských činností nad projektem a případně implementovat automatickou analýzu kódu a testování pomocí \gls{ci}.
 
-\subsubsection*{Maven \hfill \emph{http://maven.apache.org/}}
-Podobně jako Phing pro PHP, Maven poskytuje automatizaci \gls{deployment} JAVA projektů (převážně). Jako základ také používá Apache ANT, který rozšiřuje a specializuje se na možnost znovuvyužití skriptů pro více projektů. 
+\subsubsection*{\textbf{Maven} \hfill \emph{http://maven.apache.org/}}
+Podobně jako \emph{Phing} pro {PHP}, \emph{Maven} poskytuje automatizaci \gls{deployment} \emph{JAVA} projektů (převážně). Jako základ také používá \emph{Apache ANT}, který rozšiřuje a specializuje se na možnost znovuvyužití skriptů pro více projektů. 
 
-\subsubsection*{Team City \hfill \emph{http://www.jetbrains.com/teamcity/}}
-Podobně jako komunitou často využívaný Jenkins či Hudson, Teamcity je implementaci \gls{ci} serveru. V tomto případě však jde o čistě komerční produkt, který je ale pro malé projekty dostupný zcela zdarma (je omezen na počet projektů). Team City umožňuje komplexní nastavení projektů a jednotlivých úkonů, kontrolujících zdrojový kód, nebo provádějících operace \gls{deployment} na produkční prostředí. Je také poskytována integrace s většinou moderních \gls{cvs}.
+\subsubsection*{\textbf{Team City} \hfill \emph{http://www.jetbrains.com/teamcity/}}
+Podobně jako \gls{opensource} komunitou často využívaný \emph{Jenkins} či \emph{Hudson}, \emph{Team City} je implementaci \gls{ci} serveru. V případě tohoto řešení jde o čistě komerční produkt, který je ale pro malé projekty dostupný zcela zdarma (je omezen na počet projektů). \emph{Team City} umožňuje komplexní nastavení projektů a jednotlivých úkonů, kontrolujících zdrojový kód, nebo provádějících operace \gls{deployment} na produkční prostředí. Je také poskytována integrace s většinou moderních \gls{cvs}.
 
-\subsubsection*{GitHub \hfill \emph{https://github.com/}}
+\subsubsection*{\textbf{GitHub} \hfill \emph{https://github.com/}}
 \label{subsec:github}
-Pro udržování historie kódu a pro spolupráci více autorů byla vybrána technologie Git a online portál GitHub, který pro ni poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
+Pro udržování historie kódu a pro spolupráci více autorů byla vybrána \gls{cvs} technologie \emph{Git} a online portál \emph{GitHub}, který poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
 
-\section{Architektura připojení ke vzdálené ploše}
-Základně poskytuje Guacamole komplexní řešení na propojení ke vzdálené ploše včetně stránky pro management uživatelů, kde každý z nich si může pro sebe vytvořit své vlastní připojení, u každého z nich se zobrazuje náhled a podobně. Jak je zobrazeno na diagramu \ref{fig:arch_guacamole}, součástí Guacamole je i webová aplikace v jazyce HTML, která implementuje knihovnu Guacamole-js a tím i komunikaci s JAVA Servletem. Pro potřeby tohoto projektu však bylo nutné tyto JavaScriptové knihovny převzít a implementovat do modulu pro Drupal. 
-
-\begin{figure}[htp] 
-  \centering{\includegraphics[width=12cm]{img/architecture-guacamole-crop.pdf}}
-  \caption{Neupravená architektura a rozčlenění řešení}
-  \label{fig:arch_guacamole}
-\end{figure}  
-
-Díky skutečnosti, že již nutně neběží JAVA Server a JAVA EE Web aplikace na stejném serveru, či url, bylo nutné změnit architekturu AJAXových požadavků. Ty totiž musejí v typickém případě být zasílány pouze na stejnou doménu kvůli prevenci \gls{xss}. Pro vyřešení tohoto problému byla změněna implementace na CORS požadavky, k čemuž musel být uzpůsoben i JAVA Servlet kontejner, u kterého musely být povoleny požadavky z dané domény. 
-
-Uživatel proto pracuje základně pouze s portálem postaveném na Drupalu, do kterého byl přidán modul implementující stránku určenou ke komunikaci s Guacamole Servlet kontejnerem za pomoci upravené JavaScriptové knihovny Guacamole-js, jak je vyobrazeno na diagramu \ref{fig:arch_drupal}.
-
-\begin{figure}[htp] 
-  \centering{\includegraphics[width=12cm]{img/architecture-drupal-crop.pdf}}
-  \caption{Architektura přizpůsobená pro portál ESF}
-  \label{fig:arch_drupal}
-\end{figure}  
-
+% TODO Continue korekci here TODO
 \section{Struktura portálu v prostředí Drupalu}
 
 V Drupalu je využíváno několika základních ,,stavebních kamenů'', každý z nich může dle svého typu hluboce modifikován a přizpůsoben každému řešení. Základem jsou entity, uložené v databázi poskytují možnosti přidávání polí, podobně jako sloupců v databázi. Entity jsou několika moduly jádra Drupalu rozšířeny a poskytují funkcionalitu potřebnou k vytvoření webových stránek. Jmenovitě se jedná o uzly (node), které nám poskytují jednotlivé stránky a mají svou unikátní url adresu, a slovníky (taxonomy), které slouží ke kategorizaci obsahu a vytváření polí založených na výběru z dostupných prvků. Uzly i slovníky mohou být konfigurovány ve formě druhů obsahu, každý z nich s vlastními polemi nezávislými na ostatních entitách. Pole se stejným obsahem však mohou být sdílena pro ulehčení databázové struktury, do ktére se data reálně ukládají. Instance dostupných typů obsahu pak dostanou přidělené unikátní číslo v rámci všech entit, které určuje její data v databázi. Ne všechna pole musejí být zobrazena na stránce entity, nebo může pro jejich zobrazení být využito speciálních formátovacích technik, jako tabulek, či jiných výpisů.
@@ -178,7 +161,7 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
 
 \begin{figure}[htp] \centering{
 \includegraphics[width=12cm]{img/class-diagram-crop.pdf}}
-\caption{Diagram tříd CMS systému}
+\caption{Diagram tříd popisující vztahy mezi typy obsahu}
 \label{fig:class-diagram}
 \end{figure}  
 
@@ -195,7 +178,7 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
 
   \item[Vtip \emph{(položka)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
 
-  \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě.
+  \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě. Ke každému vyučujícímu je možné doplnit akademické tituly, které jsou při výstupu správně formátovány.
 \end{description}
 
 \subsection{Slovníky}

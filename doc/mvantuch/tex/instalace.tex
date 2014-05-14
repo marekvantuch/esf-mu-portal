@@ -71,6 +71,24 @@ Druhou možností je spuštění úvodní inicializace, jejíž součástí je i
 
 V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
 
+
+\section{Nasazení (deployment) a jeho možnosti}
+
+Pro správu \gls{deployment} je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
+
+V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se bude portál instalovat (cesty k souborům, nastavení databáze a pod.) - více informací je v samotném souboru.
+
+\begin{description}
+  \item[void] \hfill \\
+  Pouze provede inicializaci konfiguračních souborů a ukončí se.  
+  \item[guacamole] 
+  Vytvoří konfigurační soubory projektu Guacamole ve správných složkách (je zkopírován soubor \texttt{phing/default.guacamole.properties}.
+  \item[deploy]
+  Překopíruje aktuální moduly na správné místo a zajistí správné nastavení portálu dle aktuálního nastavení (převážně využití Features).
+  \item[install]
+  Provede kompletní instalaci portálu dle nastavení v konfiguračních souborech - překopíruje moduly a témata specifická pro toto řešení, stáhne potřebné zdrojové kódy Drupalu z internetu a nainstaluje Drupal, kterému následně nastaví správné téma vzhledu a povolí potřebné moduly.
+\end{description}
+
 \section{Instalace informačního systému (Drupal)}
 Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install}. Pro spuštění instalace je potřeba v terminálu spustit následující příkaz:
 
@@ -170,3 +188,11 @@ Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. reviz
   \caption{Prostředí pracovního stolu pro uživatele s právy moderátora.}
   \label{fig:workbench}
 \end{figure}  
+
+\section{Výkonové optimalizace}
+Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
+
+\cite{high-performance-drupal}
+
+Popsat agregaci JS, CSS a podobne 
+\cite{website:drupal:optimizing}
