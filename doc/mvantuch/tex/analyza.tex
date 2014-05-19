@@ -116,17 +116,29 @@ Podobně jako \gls{opensource} komunitou často využívaný \emph{Jenkins} či 
 \label{subsec:github}
 Pro udržování historie kódu a pro spolupráci více autorů byla vybrána \gls{cvs} technologie \emph{Git} a online portál \emph{GitHub}, který poskytuje jednoduchou instalaci a online správu uložiště. Všechny úpravy mohou být jednoduše zobrazeny přímo v prohlížečí a provázány s úkoly vytvořenými v úkolovém managementu na stejném internetovém portálu. 
 
-% TODO Continue korekci here TODO
 \section{Struktura portálu v prostředí Drupalu}
 
-V Drupalu je využíváno několika základních ,,stavebních kamenů'', každý z nich může dle svého typu hluboce modifikován a přizpůsoben každému řešení. Základem jsou entity, uložené v databázi poskytují možnosti přidávání polí, podobně jako sloupců v databázi. Entity jsou několika moduly jádra Drupalu rozšířeny a poskytují funkcionalitu potřebnou k vytvoření webových stránek. Jmenovitě se jedná o uzly (node), které nám poskytují jednotlivé stránky a mají svou unikátní url adresu, a slovníky (taxonomy), které slouží ke kategorizaci obsahu a vytváření polí založených na výběru z dostupných prvků. Uzly i slovníky mohou být konfigurovány ve formě druhů obsahu, každý z nich s vlastními polemi nezávislými na ostatních entitách. Pole se stejným obsahem však mohou být sdílena pro ulehčení databázové struktury, do ktére se data reálně ukládají. Instance dostupných typů obsahu pak dostanou přidělené unikátní číslo v rámci všech entit, které určuje její data v databázi. Ne všechna pole musejí být zobrazena na stránce entity, nebo může pro jejich zobrazení být využito speciálních formátovacích technik, jako tabulek, či jiných výpisů.
+Při vývoji informačních systémů jsou typicky data ukládány v databázi. To stejné platí i pro Drupal, pouze s tím rozdílem, že poskytuje administrační rozhraní schopné dynamicky vytvářet úložiště pro data. Namísto vytváření nové tabulky jsou uživatelé schopni definovat typ obsahu, který navíc může dědit určité společné rysy dle jeho předka. Základním typem je Entita, poskytující možnost ukládání základních informací. Entita je však pouze abstraktní pohled na data a nemůže být instancializována, namísto toho musí nejdříve být definován typ entity, na jehož základě až pak může být vytvořen typ obsahu. Pro ilustraci, v jádře drupalu existuje typ entity Uzel (Node), definující obsah s vlastní \gls{url} adresou a titulkem. Ten však nemůže být vytvořen přímo a administrátor musí definovat typ obsahu (Bundle), například Stránka (Page), ke které je již možné přistupovat. Stránka je tedy uzlem a entitou. Toto však neplatí pro všechny typy obsahu, kdy soubory (File) a slovníky (Vocabulary) lze vytvářet přímo a nelze definovat jejich potomky\cite{drupal-entities}. Seznam všech základních entit je zobrazen v tabulce~\ref{tab:typy-entit}.
 
-Pro umístění obsahu na stránkách se využívají bloky (block), které lze přímo v UI umístit do předdefinovaných segmentů stránek (ty jsou definované v konfiguračních souborech tématu vzhledu viz. kapitola \ref{chap:implementace-drupal}).
+\begin{table}
+  \caption{Základní typy entit v Drupalu}
+  \label{tab:typy-entit}
+  \begin{tabular}{ | p{3cm} | l | c | c | }
+    \hline 
+    Typ entity & Strojový název & Dostupnost polí & Rozšiřitelnost \\ \hline 
+    Komentář & comment & \checkmark & \checkmark \\ \hline 
+    Soubor & file &  & \\ \hline 
+    Slovník & vocabulary &  & \\ \hline 
+    Uzel & node & \checkmark & \checkmark \\ \hline 
+    Uživatel & user & \checkmark & \checkmark \\ \hline 
+    Záznam slovníku & term & \checkmark & \checkmark \\ \hline             
+  \end{tabular}
+\end{table}
 
-Požadavky \cite{omaterna2013} poskytnuté Mgr. Maternou poskytují analýzu řešení, kterou však bylo potřeba aplikovat přímo na možnosti Drupalu a co nejvíce využít jeho možností - jednak pro samotnou implementaci řešení, ale také pro maximální ulehčení administrace a poskytnutí co nejvyšší míry soudržnosti skrze finální řešení projektu. Toho je dosáhnuto omezením vstupu a poskytnutím výběru z předdefinovaných možností (pokud je tento způsob řešení možný).
+Pokud daný typ entity poskytuje možnost ukládání polí, je možné mu přiřadit pole, které si lze předststavit v analogyi databáze jako sloupce tabulky. Tato pole jsou však reprezentována jako tabulky v databázi a tak je při přístupu k jedné entitě v Drupalu ve skutečnosti nutno přistoupit do tolika tabulek, kolik má daná entita přiřazených polí. Zároveň jdou pole využívat skrze více typů entit a tak mohou být pole sdílena skrze celý systém, například typ obsahu \emph{Stránka} a typ obsahu \emph{Novinka} mohou oba poskytovat pole \emph{Obrázek}, které bude v databázi ukládáno do jediné tabulky \emph{field\_obrazek}. Instance obou typů obsahu dostanou přiděleno unikátní číslo v rámci všech entit, které určuje její data v databázi. Ne všechna pole musejí být zobrazena na stránce entity, nebo může pro jejich zobrazení být využito speciálních formátovacích technik, jako tabulek, či jiných výpisů. Všechna tato nastavení lze opět definovat buď v kódu, nebo skrze administrační rozhraní \emph{Drupalu}.
 
 \subsection{Typy polí použitelné pro vlastnosti typů obsahu}
-V drupalu existuje několik základních typů polí, které převážně fungují podobně jako datové typy v typických programovacích jazycích. Narozdíl od jednoduchých datových typů však poskytují navíc html formátování a mohou poskytovat i další nastavení. Formátování jde dále změnit pomocí přepsání základních formátovácích funkcí.
+V drupalu existuje několik základních typů polí, které fungují podobně jako datové typy v typických programovacích jazycích. Narozdíl od jednoduchých datových typů je ke každému navíc přiřazeno jedno či více formátování výsledného \emph{HTML} kódu a zpravidla poskytují rozšiřující nastavení. Formátování jde dále změnit pomocí přepsání základních formátovácích funkcí, či vytvoření nových.
 
 \begin{description}
   \item[Text] Poskytuje pole pro text s omezenou délkou bez možnosti vkládání html značek. Jeho obsah je zadáván pouze v jediném řádku a poskytuje pouze limitované možnosti nastavení, kterými je délka vstupního pole, či defaultní hodnota. 
@@ -145,104 +157,3 @@ V drupalu existuje několik základních typů polí, které převážně funguj
   
   \item[Odkaz na entitu] Důležitou vlastností většiny systémů je možnost propojení entit. Pro modelování těchto vztahů zde existuje typ pole odkaz na entitu, u kterého je možné vybrat typy entity, na které je daný typ obsahu navázán a způsob propojení. Za pomocí extra modulů lze také možné modelovat místo jednoduché asociace kompozici. V tom případě při smazání nadentity jsou smazány i všechny podentity. Lze také definovat, zda je možné pouze vytvářet nové podentity, či přidávat ty již existující.
 \end{description}
-
-\subsection{Typy entity}
-\label{subsec:typy-entiy}
-Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, adresu a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
-
-\begin{description}
-  \item[Uzel] Stránka mající vlastní \gls{url} a obsah.
-  \item[Položka] Entita s nadpisem použitelná pro další rozšíření.
-  \item[Osoba] Entita použitelná pro osobu, obsahující pole pro vložení jména.
-\end{description}
-
-\subsection{Typy obsahu}
-\label{subsec:typy-obsahu}
-
-\begin{figure}[htp] \centering{
-\includegraphics[width=12cm]{img/class-diagram-crop.pdf}}
-\caption{Diagram tříd popisující vztahy mezi typy obsahu}
-\label{fig:class-diagram}
-\end{figure}  
-
-\begin{description}
-  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. 
-  
-  \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
-
-  \item[Obor práva \emph{(uzel)}] Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
-
-  \item[Studijní text \emph{(uzel)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
-
-  \item[Příběh \emph{(uzel)}] Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
-
-  \item[Vtip \emph{(položka)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
-
-  \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě. Ke každému vyučujícímu je možné doplnit akademické tituly, které jsou při výstupu správně formátovány.
-\end{description}
-
-\subsection{Slovníky}
-
-Pro kategorizaci a pro výběr možností bylo v požadavcích identifikováno několik slovníků. Díky vztahu k entitě (slovník také dědí vlastnosti entity) může také pro své hodnoty definovat pole a tím rozšířit jejich funkcionalitu a množství informací.
-
-\subsubsection*{Stupeň obecnosti}
-Pro řazení oborů je potřeba uložit jejich obecnost, která je vyjádřena v několika stupních, které mohou být v případě potřeby rozšířeny. Každé entitě může být přiřazen jeden stupeň obecnosti.
-
-\begin{list}{-}{Pole}
-  \item Váha (váha) \hfill \\
-    číselná hodnota použitelná k řazení
-\end{list}
-
-\begin{list}{-}{Hodnoty}
-  \item Velmi obecný \emph{(váha = 0)} 
-  \item Středně obecný \emph{(váha = 1)}
-  \item Málo obecný \emph{(váha = 2)}
-\end{list}
-
-\subsubsection*{Ročník}
-Pro případné budoucí úpravy systému, či filtrování, je vhodné u předmětu vyplnit i ročník, ve kterém je vyučován. S ohledem na opakování předmětů může každé entitě přiřazeno neomezené množství ročníků (i žádný). 
-
-\begin{list}{-}{Hodnoty}
-  \item 2012/13
-  \item 2013/14
-  \item 2014/15
-\end{list}
-
-\section{Struktura zdrojových souborů}
-
-\begin{itemize}
-  \item \textbf{doc/} \hfill \\
-    dokumentace projektu
-  \begin{itemize}
-    \item \textbf{mvantuch/} \hfill \\
-      zdrojové kóody pro generování dokumentace projektu v 
-    \item \textbf{omaterna/} \hfill \\
-      práce Mgr. Ondřeje Materny určená pro referenci
-  \end{itemize}
-  \item \textbf{phing/} \hfill \\
-    soubory určené k podpoře \gls{deployment} pomocí nástroje Phing
-  \item \textbf{ref/} \hfill \\
-    referenční soubory, design a pod.
-  \item \textbf{src/} \hfill \\
-    zdrojové kódy jednotlivých částí projektu
-    \begin{itemize}
-      \item \textbf{main/} \hfill \\
-        aplikace Guacamole upravená pro potřeby tohoto projektu
-      \item \textbf{modules/} \hfill \\
-        moduly \gls{cms} Drupal vyvinuté speciálně pro tento projekt, nebo exportované za pomoci modulu Features (kapitola~\ref{subsec:features})
-      \item \textbf{profiles/} \hfill \\
-        instalační profil pro Drupal, definující veřejně dostupné moduly, potřebné k chodu
-      \item \textbf{themes/} \hfill \\
-       téma vzhledu projektu
-    \end{itemize}
-  \item \emph{build.xml} \hfill \\
-    xml soubor obsahující instrukce pro nástroj Phing k operacím nad instalací Drupalu
-  \item \emph{pom.xml} \hfill \\
-    xml soubor s projektem Maven, kontrolujícím Guacamole část projektu
-  \item \emph{esf.make} \hfill \\
-    make skript pro příkaz Drush make
-  \item \emph{INSTALL.md} \hfill \\
-    markdown soubor s instalačními instrukcemi
-  \item \emph{README.md} \hfill \\
-    markdown soubor se všeobecnou nápovědou
-\end{itemize}

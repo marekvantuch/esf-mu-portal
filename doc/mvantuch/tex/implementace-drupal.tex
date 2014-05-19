@@ -123,9 +123,71 @@ Administrace Drupalu je mnohdy kritizována pro její nízkou uživatelskou př�
 \subsubsection*{Workbench Media \hfill \emph{https://drupal.org/project/workbench\_media}}
 Zatímco modul Workbench poskytuje pohled na obsah stránek, Workbench Media, jak již název nápovídá, přidává propojení s modulem Media a tím pádem pohled na mediální obsah daného uživatele. 
 
+
+\subsection{Typy obsahu}
+\label{subsec:typy-obsahu}
+
+Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších důležitých pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, adresu a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. Přímý předek typu obsahu je vždy zapsán v závorce za jeho názvem.
+
+\begin{description}
+  \item[Uzel] Stránka mající vlastní \gls{url} a obsah.
+  \item[Položka] Entita s nadpisem použitelná pro další rozšíření.
+  \item[Osoba] Entita použitelná pro osobu, obsahující pole pro vložení jména.
+\end{description}
+
+
+\begin{figure}[htp] \centering{
+\includegraphics[width=12cm]{img/class-diagram-crop.pdf}}
+\caption{Diagram tříd popisující vztahy mezi typy obsahu}
+\label{fig:class-diagram}
+\end{figure}  
+
+\begin{description}
+  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Novinky jsou zobrazovány na úvodní stránce. 
+  
+  \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim vztahujících se materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů, které se k danému předmětu vztahují.
+
+  \item[Obor práva \emph{(uzel)}] Předměty se mohou vztahovat k určitým oborům práva. Zatímco některé z nich se mohou dotýkat pouze jednoho z nich, jiné se mohou dotýkat všech. Proto je důležité tento vztah být vymodelovat a uživatelům poskytnout možnost se v tomto jednoduše orientovat a přecházet mezi obsahem, který jej právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
+
+  \item[Studijní text \emph{(uzel)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
+
+  \item[Příběh \emph{(uzel)}] Pro odreagování studentů je v jednom ze segmentů stránek zobrazován příběh z právního prostředí. 
+
+  \item[Vtip \emph{(položka)}] V postranním panelu lze zobrazit vždy aktuální vtip z právního prostředí, který také slouží k odreagování studentů. 
+
+  \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě. Ke každému vyučujícímu je možné doplnit akademické tituly, které jsou při výstupu správně formátovány.
+\end{description}
+
+\subsection{Slovníky}
+
+Pro kategorizaci a pro výběr možností bylo v požadavcích identifikováno několik slovníků. Díky vztahu k entitě (slovník také dědí vlastnosti entity) může také pro své hodnoty definovat pole a tím rozšířit jejich funkcionalitu a množství informací.
+
+\subsubsection*{Stupeň obecnosti}
+Pro řazení oborů je potřeba uložit jejich obecnost, která je vyjádřena v několika stupních, které mohou být v případě potřeby rozšířeny. Každé entitě může být přiřazen jeden stupeň obecnosti.
+
+\begin{list}{-}{Pole}
+  \item Váha (váha) \hfill \\
+    číselná hodnota použitelná k řazení
+\end{list}
+
+\begin{list}{-}{Hodnoty}
+  \item Velmi obecný \emph{(váha = 0)} 
+  \item Středně obecný \emph{(váha = 1)}
+  \item Málo obecný \emph{(váha = 2)}
+\end{list}
+
+\subsubsection*{Ročník}
+Pro případné budoucí úpravy systému, či filtrování, je vhodné u předmětu vyplnit i ročník, ve kterém je vyučován. S ohledem na opakování předmětů může každé entitě přiřazeno neomezené množství ročníků (i žádný). 
+
+\begin{list}{-}{Hodnoty}
+  \item 2012/13
+  \item 2013/14
+  \item 2014/15
+\end{list}
+
 \section{Téma vzhledu a jeho rozložení}
 \label{sec:tema-vzhledu}
-Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4. Narozdíl od předchozích verzí, které poskytovaly uživatelům komplexní administrační rozhraní pro nastavení rozvržení stránky, byla tato možnost z verze 4 odstraněna a nahrazena využitím knihovny \emph{SUSY} (sekce~\ref{sec:technologies}). Veškerá rozvržení jsou proto implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. Každé téma vzhledu v prostředí Drupalu definuje množinu dostupných segmentů stránky, do kterých lze vkládat bloky s vlastním obsahem portálu. 
+Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4 (kapitola \ref{sec:omega}). Díky využití \emph{SUSY} je rozvržení stránky implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků Drupalu. Každé téma vzhledu v prostředí Drupalu definuje množinu dostupných segmentů stránky, do kterých lze vkládat bloky s vlastním obsahem portálu. 
 
 \begin{figure}[htp] 
   \centering{\includegraphics[width=12cm]{img/page-layout-crop.pdf}}
@@ -171,60 +233,41 @@ V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v p�
 
 \emph{COMPASS} bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné \emph{CSS} soubory.
 
-\chapter{Implementace připojení ke vzdálené ploše}
-\label{chap:implementace-guacamole}
-Implementace připojení ke vzdálené ploše probíhala v několika fázích. Nejdříve bylo potřeba spustit řešení \emph{Guacamole} lokálně a ujistit se, že je použitelné pro naše potřeby. Bylo také nutné analyzovat, jaké všechny možnosti poskytuje a které vlastnosti jsou potřebné a které přebytečné. Jako přebytečné byly idnetifikovány vlastnosti poskytující správu uživatelů, připojení a jejich skupin. Dále je implementována podpora klávesnici na obrazovce, ukládání snímků obrazovky a mnoho dalších rozšířených možností, které nebyly do základní verze vyžadovány a byly spíše kontraproduktivní s ohledem na zvýšení komplexnosti kódu a debugování celého řešení. 
+\section{Struktura zdrojových souborů}
 
-Jakmile byla funkčnost ověřena, bylo nutné celou klientskou část řešení přesunout do modulu v Drupalu a upravit pro tamější podmínky. Bylo nutné změnit HTML výstup, kdy Drupal si v základu buduje strukturu pomocí několika šablonových souborů pro stránku, tělo a pod. Bylo nutné přidat JavaScriptové knihovny z \emph{Guacamole}, odstranit nepotřebný kód a upravit vše k funkčnosti v prostředí s použitím \gls{cors}. 
-
-Nástroj \emph{Guacamole} poskytuje mnohá nastavení a pro ulehčení byla do modulu přidána administrační stránka, která přímo zapisuje do konfiguračního souboru a tím eliminuje potřebu uživatelského připojení na server a manuální konfigurace. 
-
-
-\section{Architektura připojení ke vzdálené ploše}
-Základně poskytuje Guacamole komplexní řešení na propojení ke vzdálené ploše včetně stránky pro management uživatelů, kde každý z nich si může pro sebe vytvořit své vlastní připojení, u každého z nich se zobrazuje náhled a podobně. Jak je zobrazeno na diagramu \ref{fig:arch_guacamole}, součástí Guacamole je i webová aplikace v jazyce HTML, která implementuje knihovnu Guacamole-js a tím i komunikaci s JAVA Servletem. Pro potřeby tohoto projektu však bylo nutné tyto JavaScriptové knihovny převzít a implementovat do modulu pro Drupal. 
-
-\begin{figure}[htp] 
-  \centering{\includegraphics[width=12cm]{img/architecture-guacamole-crop.pdf}}
-  \caption{Neupravená architektura a rozčlenění řešení}
-  \label{fig:arch_guacamole}
-\end{figure}  
-
-Díky skutečnosti, že již nutně neběží JAVA Server a JAVA EE Web aplikace na stejném serveru, či url, bylo nutné změnit architekturu AJAXových požadavků. Ty totiž musejí v typickém případě být zasílány pouze na stejnou doménu kvůli prevenci \gls{xss}. Pro vyřešení tohoto problému byla změněna implementace na CORS požadavky, k čemuž musel být uzpůsoben i JAVA Servlet kontejner, u kterého musely být povoleny požadavky z dané domény. 
-
-Uživatel proto pracuje základně pouze s portálem postaveném na Drupalu, do kterého byl přidán modul implementující stránku určenou ke komunikaci s Guacamole Servlet kontejnerem za pomoci upravené JavaScriptové knihovny Guacamole-js, jak je vyobrazeno na diagramu \ref{fig:arch_drupal}.
-
-\begin{figure}[htp] 
-  \centering{\includegraphics[width=12cm]{img/architecture-drupal-crop.pdf}}
-  \caption{Architektura přizpůsobená pro portál ESF}
-  \label{fig:arch_drupal}
-\end{figure}  
-
-\section{Ostranění autentizace uživatelů a vytvoření vlastní autorizace}
-\emph{Guacamole} v základu poskytuje API pro správu uživatelských účtů a jejich připojení. Jsou implementovány dvě metody, jedna spoléhá na uložení dat do konfiguračního souboru, zatímco druhá pracuje s MySQL databází. Obě rozšiřují třídu \emph{SimpleAuthenticationProvider}, ke které přidávají potřebnou funkcionalitu. 
-
-Pro potřeby tohoto projektu však bylo potřeba vždy pouze jediné připojení, pro jednotlivé uživatele se měnilo pouze jejich přihlašovací jméno. Byla vytvořena nová třída \emph{DrupalAuthenticationProvider}, která načítá adresu serveru a port přímo z konfiguračního souboru pro všechna připojení a vrací je Guacamole k dalšímu zpracování. 
-
-Pro nastavení přihlašovacích údajů je potřeba se nejdříve k serveru přihlásit. Pro minimalizaci úkonů potřebných ke každému připojení ke vzdálené ploše a také k zjednodušení celého procesu si musí každý uživatel portálu uložit své přihlašovací údaje do svého profilu, odkud jsou pak použity při přihlášení ke Guacamole Servletu. K tomu je použito dvou služeb - \emph{connect} a {login}. Proces je znázorněn na diagramu \ref{fig:login_process}. 
-
-Komunikace je započata přímo v klientském prohlížeči z JavaScriptu. Po přístupu na stránku /aspi je nejdříve kontaktována pomocí technolie AJAX stránka /aspi/ajax na portálu, která se připojí ke servletu Login. Guacamole Servlet si vytvoří nové \gls{session} a jeho identifikátor odešle zpět PHP kódu. Pokud vše proběhne v pořádku, je identifikátor sezení odeslán pomocí set-cookie hlavičky zpět stránce /aspi, kde si informaci uloží prohlížeč jako cookie pro pozdější komunikaci. V případě jakékoliv chyby je chybové hlášení vypsáno na obrazovce a zalogováno v systému bez jakýchkoliv dalších pokusů o připojení, uživatel je tedy nucen buď stránku obnovit, nebo kontaktovat správce stránek. Pokud však vše proběhne v pořádku, je inicializována smyčka přímých volání služby \emph{tunnel} poskytované Guacamole Servlet kontejnerem za pomocí technologie \gls{cors}. Komunikace probíhá za pomocí Guacamole protokolu a ten je poté konvertován na grafický výstup na obrazovce uživatele, který je od této chvíle schopen pomocí myši a klávesnice ovládat vzdálenou plochu a tím i gls{aspi}.
-
-\begin{figure}[]
-  \includegraphics[width=12cm]{img/login-process-crop.pdf}
-  \caption{Proces připojení ke vzdálené ploše}
-  \label{fig:login_process}
-\end{figure}  
-
-\section{Přesun JavaScript kódu a CSS stylů do modulu Drupalu}
-Pro ulehčení správy \gls{session}, které by jinak muselo být synchronizováno mezi dvěma stránkami, byl veškerý kód stránky z Guacamole JAVA projektu přesunut do modulu v drupalu. Do složky js/lib byly přesunuty všechny zdrojové kódy z knihovny Guacamole-js a byla vytvořena nová stránka /aspi poskytující stejnou funkcionalitu jako JAVA modul. Spolu s javascriptem bylo nutné přesunout i základní css styly pro zachování formátu vykreslování okna vzdálené plochy. Jak knihovny, tak styly jsou importovány pouze na stránce /aspi pro snížení náročnosti běhu celé platformy, která by jinak byla nucena načítat nepotřebné soubory. 
-
-Drupal v základu vytváří komplexní html výstup včetně loga, základní struktury a podobně, kdežto guacamole vyžaduje pro vykreslení vzdálené plochy velmi jednoduchou strukturu obsahující prakticky jen plátno pro vykreslování výstupu a nastavení v hlavičce. Zatímco údaje do hlavičky lze přidat jednoduše pomocí implementace hook\_api drupalu (viz. sekce \ref{sec:technologies}), změnu výstupu bylo nutné implementovat pomocí kombinace několika technik. Téma vzhledu \emph{Omega} ve verzi 4.x poskytuje funkcionalitu rozdílných rozvržení (layouts) dostupných pro různé části stránky. Tato možnost lze skombinovat s modulem \emph{Context} a jeho podmodulem \emph{Context Omega}, který poskytuje přemostění mezi modulem a tématem vzhledu a tím i možnost změny rozvržení podle definovaných pravidel. V případě tohoto projektu stačilo nadefinovat pravidlo změny pro url /aspi na které se automaticky přepne rozvržení na minimalistické rozvržení nazvané \emph{Guacamole}. Toto nastavení je i exportováno do konfiguračního modulu esf\_feature.
-
-\section{Implementace CORS}
-Pro možnost komunikace mezi více doménami bylo potřeba implementovat \gls{cors} (viz. sekce \ref{sec:technologies}). Hlavní změna je u zpracování požadavků na straně serveru, k čemuž musela být do projektu přidána a nastavena knihovna k jeho zpracování. Pro JAVA EE byla využita knihovna CORS filter od [d]zhuvinov  [s]oftware\cite{website:cors-filter}, která tuto implementaci poskytuje ve formě knihovny. Na stránkách je i detailně popsáno nastavení a použití, kdy v připadě tohoto serveru bylo nutno omezit zdroj \gls{cors} požadavků na jedinou doménu a více nebylo nutno se o bezpečnost obávat.
-
-Druhá část implementace je umožnění cross-domain požadavků v JavaScriptu. Knihovna Guacamole-js musela být lehce přepsána v místech, kde byla použita volání XMLHttpRequest, která jsou v tomto případě volána asynchronně. Použité řešení bohužel nelze aplikovat na \gls{ie}, neboť XDomainRequest nepodporuje asynchronní zpracování a bude nutné toto řešení ještě přepracovat do funkční podoby.
-
-\section{Implementace úpravy nastavení z administrace portálu}
-Guacamole typicky poskytuje nastavení pomocí konfiguračního souboru umístěného buď ve složce instalace, nebo v domácí složce uživatele, který program spouští. Jelikož je ke změně těchto konfiguračních souborů nutné přistupovat přímo k serveru, rozhodl jsem se tuto administrační část přepracovat a zpřístupnit přímo z administrace portálu. Ta nabízí dvě základní stránky. Na stránce Nastavení (/config/esf/settings) je možné upravit základní nastavení projektu jako je URL adresa pro připojení ke Guacamole Servlet službám či právě přístup ke konfiguračnímu souboru. Ten se typicky jmenuje guacamole.properties a nachází se ve složce /srv/guacamole/. Je nutné se ujistit, že jak Guacamole Servlet (TomCat) tak \gls{esf} Portál (Apache) mají k souboru přístup a mohou jej upravovat.
-
-Na stránce nastavení Připojení ke vzdálené ploše (\texttt{/config/esf/remote}) lze za předpokladu, že je vše správně nastaveno, upravovat nastavení Guacamole samotného a url pro připojení k serveru vzdálené plochy - což je v našem případě ASPI. Dále je nutné nastavit port pro připojení ke Guacd démonovi poskytujícímu proxy pro připojení ke vzdálené ploše, uživatelské jméno a heslo je však převzato z nastavení každého jednotlivého uživatele.
+\begin{itemize}
+  \item \textbf{doc/} \hfill \\
+    dokumentace projektu
+  \begin{itemize}
+    \item \textbf{mvantuch/} \hfill \\
+      zdrojové kóody pro generování dokumentace projektu v 
+    \item \textbf{omaterna/} \hfill \\
+      práce Mgr. Ondřeje Materny určená pro referenci
+  \end{itemize}
+  \item \textbf{phing/} \hfill \\
+    soubory určené k podpoře \gls{deployment} pomocí nástroje Phing
+  \item \textbf{ref/} \hfill \\
+    referenční soubory, design a pod.
+  \item \textbf{src/} \hfill \\
+    zdrojové kódy jednotlivých částí projektu
+    \begin{itemize}
+      \item \textbf{main/} \hfill \\
+        aplikace Guacamole upravená pro potřeby tohoto projektu
+      \item \textbf{modules/} \hfill \\
+        moduly \gls{cms} Drupal vyvinuté speciálně pro tento projekt, nebo exportované za pomoci modulu Features (kapitola~\ref{subsec:features})
+      \item \textbf{profiles/} \hfill \\
+        instalační profil pro Drupal, definující veřejně dostupné moduly, potřebné k chodu
+      \item \textbf{themes/} \hfill \\
+       téma vzhledu projektu
+    \end{itemize}
+  \item \emph{build.xml} \hfill \\
+    xml soubor obsahující instrukce pro nástroj Phing k operacím nad instalací Drupalu
+  \item \emph{pom.xml} \hfill \\
+    xml soubor s projektem Maven, kontrolujícím Guacamole část projektu
+  \item \emph{esf.make} \hfill \\
+    make skript pro příkaz Drush make
+  \item \emph{INSTALL.md} \hfill \\
+    markdown soubor s instalačními instrukcemi
+  \item \emph{README.md} \hfill \\
+    markdown soubor se všeobecnou nápovědou
+\end{itemize}
