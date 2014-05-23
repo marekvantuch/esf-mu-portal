@@ -1,20 +1,20 @@
 \chapter{Instalace, konfigurace a správa portálu}
 \label{chap:instalace}
 
-Díky využití Features (sekce \ref{subsec:features}) a instalačních profilů (sekce \ref{subsec:drupal}) je možné portál nainstalovat na jakýkoliv server bez kopírování souborů, či databáze, pouze za pomocí nástrojů Phing a Drush. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality vzdálené plochy.
+Díky využití Features (sekce \ref{subsec:features}) a instalačních profilů (sekce \ref{subsec:drupal}) je možné portál nainstalovat na jakýkoliv server bez kopírování souborů či databáze, pouze za pomocí nástrojů \emph{Phing} a \emph{Drush}. Je vytvořena kompletní struktura obsahu, nastaven odpovídající vzhled a vytvořeny uživatelské role. Obsah však přenášen není a je nutné jej buď importovat, nebo vytvořit znovu. Tento přístup se nejvíce hodí v případě vývoje nových prvků, či správy funkcionality připojení ke vzdálené ploše.
 
 \section{Požadavky a příprava systému}
 \label{sec:priprava-systemu}
 
-Na stroji je nutné mít nainstalovaný internetový server (\emph{Apache}, \emph{Lighttpd}, etc.)\footnote{Technologie jsou popsány v sekci~\ref{sec:technologies}.}  s podporou \emph{PHP} a \emph{JAVA Servlet} kontejner \emph{Apache Tomcat}. Systém podporuje \emph{MySQL} a \emph{PostgreSQL}, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci \emph{SQLite}, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. \emph{Drupal} dále ke svému chodu vyžaduje knihovny php \emph{php-gd}, {php-pdo} a {php-krb5\footnote{https://github.com/ashishtilara/php\_krb5}}. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu phing. Pro zkompilování systémového démona je potřeba mít nainstalovány nástroje \emph{gcc}, \emph{make}, \emph{Phing}, \emph{Maven} a \emph{JRE} a knihovny \emph{libpng-devel}, \emph{cairo-devel} a \emph{freerdp-devel}. 
+Na stroji je nutné mít nainstalovaný internetový server (\emph{Apache}, \emph{Lighttpd}, etc.)\footnote{Technologie jsou popsány v sekci~\ref{sec:technologies}.} s podporou \emph{PHP} a \emph{JAVA} \gls{servlet} kontejner \emph{Apache Tomcat}. Systém podporuje \emph{MySQL} a \emph{PostgreSQL}, pro ulehčení instalace lze však využít i minimalisticky orientovanou implementaci \emph{SQLite}, která data ukládá do jediného souboru ve složce \texttt{sites/default/files}. \emph{Drupal} dále ke svému chodu vyžaduje knihovny php \emph{php-gd}, {php-pdo} a {php-krb5\footnote{https://github.com/ashishtilara/php\_krb5}}. Pro usnadnění instalace je nutné mít nainstalovánu knihovnu \emph{Phing}. Pro zkompilování systémového démona je potřeba mít nainstalovány nástroje \emph{gcc}, \emph{make}, \emph{Maven} a \emph{JRE} a knihovny \emph{libpng-devel}, \emph{cairo-devel} a \emph{freerdp-devel}. 
 
-Volitelně je možné mít nainstalován \emph{Drush} a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se Drush instaloval jako knihovna pro \emph{PEAR}, tento způsob však byl nahrazen instalací pomocí programu \emph{Composer}, který je tím pádem nutný k započetí samotné instalace. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \emph{CURL}:
+Volitelně je možné mít nainstalován \emph{Drush} a s ním spojená nastavení prostředí systému, určená k urychlení manuálních operací. Ještě donedávna se \emph{Drush} instaloval jako knihovna pro \emph{PEAR}, tento způsob však byl nahrazen instalací pomocí programu \emph{Composer}, který je tím pádem potřeba před instalací. Nejjednodušší způsob, jak jej nainstalovat, je pomocí \emph{CURL}:
 
 \begin{lstlisting}[language=bash]
   $ curl -sS https://getcomposer.org/installer | php
 \end{lstlisting}
 
-Jakmile je composer dostupný, lze již Drush nainstalovat:
+Jakmile je composer dostupný, lze již Drush nainstalovat v jeho 6. verzi:
 
 \begin{lstlisting}[language=bash]
   $ composer global require drush/drush:6.*
@@ -37,7 +37,7 @@ Je vhodné aktualizovat bashrc soubor:
     example.bashrc
 \end{lstlisting} 
 
-Po restartování \gls{session} by měly být přístupné příkazy pod zkrácenými aliasy - například \texttt{dr} místo \texttt{drush} a \texttt{cc} namísto \texttt{drush cache-clear}. Je možné i povolit automatické doplňování příkazů, dle instrukcí na stránkách vývojového týmu. Dále je vhodné v souboru \linebreak\texttt{\$HOME/.drush/aliases.drushrc.php} definovat alias stránky pro usnadnění manipulace. Obsah souboru může vypadat následovně:
+Nyní by měly být přístupné příkazy pod zkrácenými aliasy - například \texttt{dr} místo \texttt{drush} a \texttt{cc} namísto \texttt{drush cache-clear}. Je možné i povolit automatické doplňování příkazů, dle instrukcí na stránkách vývojového týmu. Dále je vhodné v souboru \linebreak\texttt{\$HOME/.drush/aliases.drushrc.php} definovat alias stránky pro usnadnění manipulace. Obsah souboru může vypadat následovně:
 
 \begin{lstlisting}[language=php]
   <?php
@@ -47,7 +47,7 @@ Po restartování \gls{session} by měly být přístupné příkazy pod zkráce
   );
 \end{lstlisting}
 
-Po tomto nastavení je možné do složky přistoupit jednoduše pomocí příkazu \texttt{\$~cddl~@pravo} (případně \texttt{\$~cd~@pravo} pokud je nastavený alias pro příkaz \texttt{cd}). Všechny příkazy nástroje \emph{Drush} je možné spouštět pro daný alias, což je výhodné v případě více existujících prostředí (vývojové vs. produkční).
+Po tomto nastavení je možné do složky přistoupit jednoduše pomocí příkazu \texttt{\$~cddl~@pravo} (případně \texttt{\$~cd~@pravo} pokud je nastavený alias pro příkaz \texttt{cd}). Všechny příkazy nástroje \emph{Drush} je možné spouštět pro daný alias, což je výhodné v případě více prostředí (vývojové vs. produkční).
 
 Obsah repozitáře projektu může být umístěn kdekoliv, například v domovské složce uživatele:
 
@@ -69,12 +69,12 @@ Druhou možností je spuštění úvodní inicializace, jejíž součástí je i
   $ phing void
 \end{lstlisting}
 
-V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak Drush není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
+V konfiguračním souboru je nutné v proměnné \texttt{project.dir} nastavit cílovou složku pro instalaci. Složka však nesmí existovat a uživatel spouštějící skript musí mít práva k jejímu vytvoření, protože jinak \emph{Drush} není schopen s instalací pokračovat a skončí s chybovou hláškou. V konfiguračním souboru lze změnit další nastavení, jakými jsou administrátorský účet, url databáze a pod, ale pro základní funkcionalitu je možné tyto hodnoty ponechat nezměněné.
 
 
 \section{Nasazení (deployment) a jeho možnosti}
 
-Pro správu \gls{deployment} je využíván nástroj Phing (kapitola ..), umožňující definování pravidel v souboru build.xml. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (target) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný soubor obsahující výchozí hodnoty. Pokud soubor není dostupný a není potřeba vytvářet instalaci, je vhodné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
+Pro správu \gls{deployment} je využíván nástroj \emph{Phing}, umožňující definování pravidel v souboru \texttt{build.xml}. Kromě tohoto souboru je také dostupný soubor \linebreak \texttt{phing/\-default.build.properties} obsahující výchozí nastavení projektu. Při první inicializaci jakéhokoliv cíle (\texttt{<target>}) se zkontroluje přítomnost souboru \linebreak \texttt{build.properties} a v případě jeho absence se na jeho místo zkopíruje výše zmíněný výchozí soubor. Je také možné spustit příkaz \texttt{phing void} který pouze připraví tento konfigurační soubor. 
 
 V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se bude portál instalovat (cesty k souborům, nastavení databáze a pod.) - více informací je v samotném souboru.
 
@@ -90,7 +90,7 @@ V konfiguračním souboru je vhodné zadat nastavení prostředí, na kterém se
 \end{description}
 
 \section{Instalace informačního systému (Drupal)}
-Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install}. Pro spuštění instalace je potřeba v terminálu spustit následující příkaz:
+Instalace probíhá za využití dávkového instalačního souboru \texttt{build.xml}, ve kterém je krom jiného popsán instalační cíl \emph{install} (viz předchozí kapitola). Pro spuštění instalace je potřeba v terminálu spustit následující příkaz:
 
 \begin{lstlisting}[language=bash]
   $ phing install
@@ -113,12 +113,12 @@ Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i sku
   $ sudo chgrp apache esf -R
 \end{lstlisting}
 
-Toto je obzvláště důležité v případě použití SQLite databáze, ke které jinak nemá drupal práva zapisovat a tím pádem stránky spadnou s fatální chybou. 
+Toto je obzvláště důležité v případě použití \emph{SQLite} databáze, ke které jinak nemá drupal práva zapisovat a tím pádem stránky spadnou s fatální chybou. 
 
-Pokud vše proběhlo v pořádku a server je schopen přistupovat ke všem souborům i databázi, je možné na adrese propojené se stránkami navštívit úvodní stránku (např. \emph{http:/localhost/esf}). Na stránky bylo převedeno veškeré nastavení, ale nebyl zde vytvořen žádný obsah. Ten lze buď migrovat z produkčních stránek, nebo generovat za pomocí modulu Devel. Na adrese \emph{http://localhost/esf/?q=user} se lze přihlásit za pomocí administrátorského účtu (pokud nebyl změněn v konfiguračním souboru, jedná se o admin/admin) a přistoupit k administračnímu rozhraní stránek.
+Pokud vše proběhlo v pořádku a server je schopen přistupovat ke všem souborům i databázi, je možné na adrese propojené se stránkami navštívit úvodní stránku (např. \emph{http:/localhost/esf}). Na stránky bylo převedeno veškeré nastavení, ale nebyl zde vytvořen žádný obsah. Ten lze buď migrovat z produkčních stránek, nebo generovat za pomocí modulu \emph{Devel}. Na adrese \emph{http://localhost/esf/?q=user} se lze přihlásit za pomocí administrátorského účtu (pokud nebyl změněn v konfiguračním souboru, jedná se o účet admin a heslo admin) a přistoupit k administračnímu rozhraní stránek.
 
 \section{Instalace Guacamole}
-Guacamole vyžaduje na straně serveru dvě komponenty: \emph{JAVA} Servletovou aplikaci a démona \emph{Guacd}. Druhý jmenovaný není nijak upraven a lze tedy stáhnout aktuální verzi ze stránek projektu\footnote{V době sepsání tohoto textu byla aktuální verze 0.9, na které byl i celý projekt testován. Projekt je dostupný na adrese http://guac-dev.org/release/release-notes-0-9-0}. Po stažení stačí zkompilovat a nainstalovat projekt (za předpokladu, že jsou v systémy dostupný všechny knihovny a nástroje zmíněné v kapitole~\ref{sec:priprava-systemu}):
+Guacamole vyžaduje na straně serveru dvě komponenty: \emph{JAVA} \gls{servlet} aplikaci a démona \emph{Guacd}. Druhý jmenovaný není nijak upraven a lze tedy stáhnout aktuální verzi ze stránek projektu\footnote{V době sepsání tohoto textu byla aktuální verze 0.9, na které byl i celý projekt testován. Projekt je dostupný na adrese http://guac-dev.org/release/release-notes-0-9-0}. Po stažení stačí zkompilovat a nainstalovat projekt (za předpokladu, že jsou v systémy dostupný všechny knihovny a nástroje zmíněné v kapitole~\ref{sec:priprava-systemu}):
 
 \begin{lstlisting}[language=bash]
   $ cd guacamole-server-0.9.0
@@ -132,13 +132,13 @@ V této chvíli by již měl jít spustit příkaz \texttt{guacd}, který spust�
 
 \begin{lstlisting}[language=bash]
   $ cp ~/esf-mu-portal/phing/default.guacamole.properties /srv/guacamole/guacamole.properties
-  $ chown wwwrun guacamole.properties 
-  $ chgrp www guacamole.properties 
+  $ chown apache guacamole.properties 
+  $ chgrp apache guacamole.properties 
 \end{lstlisting}
 
 Jméno a uživatelská skupina závisí na použitém operačním systému. V souboru guacamole.properties je nutno nastavit parametry připojení ke vzdálené ploše \gls{aspi} a informace o démonu Guacd, což lze udělat buď přímo v souboru, nebo za pomocí Drupalu na adrese \texttt{admin/config/esf/remote}. 
 
-Tím je dokončeno nastavení démona a lze přikročit k instalaci \emph{JAVA} Servletu. Ten je potřeba zkompilovat a nahrát jako Servlet do kontejneru \emph{Apache Tomcat}.
+Tím je dokončeno nastavení démona a lze přikročit k instalaci \emph{JAVA} \gls{servlet}. Ten je potřeba zkompilovat a nahrát jako do \emph{Apache Tomcat}.
 
 \begin{lstlisting}[language=bash]
   $ cd ~/esf-mu-portal/
@@ -148,15 +148,15 @@ Tím je dokončeno nastavení démona a lze přikročit k instalaci \emph{JAVA} 
 
 \end{lstlisting}
 
-Po dokončení kompilace by měla být aplikace automaticky dostupná na adrese \texttt{localhost:8080/guacamole-esf-[číslo verze]/}. Tuto adresu je nutné zadat do políčka \emph{Guacamole Servlet path} v portálu na adrese \texttt{admin/config/esf/settings}.
-
+Po dokončení kompilace by měla být aplikace automaticky dostupná na adrese \texttt{localhost:8080/guacamole-esf-[číslo verze]/}. Tuto adresu je nutné zadat do políčka \emph{Guacamole Servlet path} v portálu na adrese \texttt{admin/config/esf/settings}. Poté by se již uživatelé měli být schopni přihlásit ke vzdálené ploše na adrese \texttt{/aspi}.
 
 \section{Administrace}
+\label{sec:administrace}
 Správa probíhá za využití administrace dodávané v jádře Drupalu, rozšířené modulem Workbench a dalšími úpravami. Pro správu portálu jsou definovány čtyři úrovně uživatelských práv:
 
 \begin{itemize}
   \item \textbf{anonymní uživatel} \hfill \\
-    Tato role je definována již v základu Drupalu a označuje uživatele, kteří se nepřihlásili do portálu. S ohledem na nutnost autentikace pro přístup k portálu jsou tito uživatelé odstřiženi od přístupu k jakýmkoliv datům a je jim zpřístupněna pouze stránka s přihlášením.
+    Tato role je spolu s rolí \emph{přihlášeného uživatele} definována v jádře \gls{cms} a nelze tedy měnit. Označuje uživatele, kteří se nepřihlásili do portálu. S ohledem na nutnost autentikace jsou tito uživatelé odstřiženi od přístupu k jakýmkoliv datům a je jim zpřístupněna pouze stránka s přihlášením.
   \item \textbf{přihlášený uživatel} \hfill \\
     Po přihlášení uživatelé získávají přístup k veškerému hlavnímu obsahu stránek, uživatelskému nastavení a připojení ke vzdálené ploše. 
   \item \textbf{moderátor} \hfill \\
@@ -165,7 +165,7 @@ Správa probíhá za využití administrace dodávané v jádře Drupalu, rozš�
     Pro tohoto uživatele neexistuje speciální role, ale jedná se o uživatele s identifikačním číslem 1, který má právo přístupu ke všem prvkům obsahu a administrace portálu a tato práva nejdou nijak omezit.
 \end{itemize}
 
-Tato práce se zabývá pouze administrací dostupnou roli \emph{moderátor} a nezaobírá se administrací Drupalu, ve které nebyly provedeny změny výraznějšího charakteru a funguje dle standartního přístupu. Po přihlášení má uživatel s rolí moderátora dostupný administrační panel umistitelný buď v horní, nebo levé části okna prohlížeče (obrázek~\ref{fig:workbench}). Administrační panel obsahuje odkazy na administrační stránky a pracovní stůl. 
+Tato práce se zabývá pouze specifickou administrací a nezaobírá se administrací Drupalu, ve které nebyly provedeny změny výraznějšího charakteru a funguje dle standartního přístupu. Po přihlášení má uživatel s rolí moderátora dostupný administrační panel umistitelný buď v horní, nebo levé části okna prohlížeče (obrázek~\ref{fig:workbench}). Administrační panel obsahuje odkazy na administrační stránky a pracovní stůl. 
 
 \subsubsection*{Struktura pracovního stolu}
 \begin{description}
