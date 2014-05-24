@@ -106,7 +106,7 @@ Instalace probíhá za využití dávkového instalačního souboru \texttt{buil
   \item \lstinline[language=bash]{$ drush site-install} - Spustí se instalace Drupalu z příkazové řádky, při které se povolí základní moduly a vytvoří databázová struktura. Je nainstalován instalační profil \emph{esf\_profile} a s ním jsou povoleny moduly rozšiřující funkcionalitu a také rysy dokončující nstavení stránek. Celý proces trvá až několik minut a v průběhu nijak uživatele neinformuje o průběhu, je tedy důležité vyčkat až do jeho ukončení.
 \end{enumerate}
 
-Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i skupinu na hodnoty daného internetového serveru (apache/lighttpd/...)
+Po instalaci je vhodné zkontrolovat práva souborů a nastavit uživatele i skupinu na hodnoty daného internetového serveru (apache/lighttpd/\dots)
 
 \begin{lstlisting}[language=bash]
   $ sudo chown apache esf -R 
@@ -148,7 +148,7 @@ Tím je dokončeno nastavení démona a lze přikročit k instalaci \emph{JAVA} 
 
 \end{lstlisting}
 
-Po dokončení kompilace by měla být aplikace automaticky dostupná na adrese \texttt{localhost:8080/guacamole-esf-[číslo verze]/}. Tuto adresu je nutné zadat do políčka \emph{Guacamole Servlet path} v portálu na adrese \texttt{admin/config/esf/settings}. Poté by se již uživatelé měli být schopni přihlásit ke vzdálené ploše na adrese \texttt{/aspi}.
+Po dokončení kompilace by měla být aplikace automaticky dostupná na adrese \texttt{localhost:8080/guacamole-esf-[číslo verze]/}. Tuto adresu je nutné zadat do políčka \emph{Guacamole Servlet path} v portálu na adrese \\ \texttt{admin/config/esf/settings}. Poté by se již uživatelé měli být schopni přihlásit ke vzdálené ploše na adrese \texttt{/aspi}.
 
 \section{Administrace}
 \label{sec:administrace}
@@ -167,7 +167,7 @@ Správa probíhá za využití administrace dodávané v jádře Drupalu, rozš�
 
 Tato práce se zabývá pouze specifickou administrací a nezaobírá se administrací Drupalu, ve které nebyly provedeny změny výraznějšího charakteru a funguje dle standartního přístupu. Po přihlášení má uživatel s rolí moderátora dostupný administrační panel umistitelný buď v horní, nebo levé části okna prohlížeče (obrázek~\ref{fig:workbench}). Administrační panel obsahuje odkazy na administrační stránky a pracovní stůl. 
 
-\subsubsection*{Struktura pracovního stolu}
+\subsection*{Struktura pracovního stolu}
 \begin{description}
   \item[Můj obsah] \hfill \\
   Tato sekce nabízí pohled na stránky vytvořené či upravené právě přihlášeným uživatelem a na nejaktuálnější obsah portálu všeobecně. Všechny pohledy vedou po rozkliknutí na detailnější přehledy obsahu dané sekce.  
@@ -177,11 +177,11 @@ Tato práce se zabývá pouze specifickou administrací a nezaobírá se adminis
   Poskytuje náhled na všechny soubory nahrané na portál, které jsou sledovány systémem a dostupné skrze administrační rozhraní.
   \item [Obory práva] \hfill \\
   Pohled na všechny zadané obory práva, jejich základní atributy a předměty, které se k nim vztahují. S obory práva lze manipulovat pomocí rozhraní využívajícího modulu Views Bulk Operations (sekce~\ref{subsec:vbo}) a tím pádem hromadnou úpravu entit.
-  \item [Předměty]
+  \item [Předměty] \hfill \\
   Podobně jako předchozí sekce poskytuje pohled na předměty, pouze s tím rozdílem, že neukazuje jejich propojení na obory práva, ale materiály, které jsou k nim přidružené.
 \end{description}
 
-Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. revize obsahu, mezi kterými pak lze zobrazit výčet změn od předchozí verze. K editaci slouží \gls{wysiwyg} editor CKeditor, poskytující uživatelům přívětivé rozhraní s rozšířenými možnostmi úpravy textu a prvky specificky vytvořenými pro použití s \gls{cms} Drupal. Pro prohlížení dat na serveru se využívá modulu IMCE.
+Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. revize obsahu, mezi kterými pak lze zobrazit výčet změn od předchozí verze. K editaci slouží \gls{wysiwyg} editor \emph{CKeditor}, poskytující uživatelům přívětivé rozhraní s rozšířenými možnostmi úpravy textu a prvky specificky vytvořenými pro použití s \gls{cms} Drupal. Pro prohlížení souborů uložených na serveru ve specifické složce se využívá modulu \emph{IMCE}.
 
 \begin{figure}[htp]
   \includegraphics[width=12cm]{img/workbench-crop.pdf}
@@ -190,9 +190,15 @@ Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. reviz
 \end{figure}  
 
 \section{Výkonové optimalizace}
-Ideálně si projít nějaké výzkumy Googlu ohledně odezvy a jejího dopadu na uživatele
+\emph{Drupal} je všeobecně znám pro svou vysokou náročnost na výpočetní výkon serveru, což je způsobeno jeho rozšiřitelností. Z tohoto důvodu je nutné používat pokročilé techniky ukládání a načítání z vyrovnávací paměti\cite{high-performance-drupal}. Od verze 7 je v jádru implementováno hned několik přístupů ke zvýšení výkonu:
 
-\cite{high-performance-drupal}
-
-Popsat agregaci JS, CSS a podobne 
-\cite{website:drupal:optimizing}
+\begin{description}
+  \item[Registry] \hfill \\
+  Protože mnoho částí systému umožňuje přepisování výstupu za pomocí jmenných konvencí, jsou soubory prohledávány pouze jednou a informace o dostupných funkcích jsou uloženy v databázi. Kvůli tomuto přístupu je nutné přebudovat registry pokaždé, když je přidán nový soubor, například typu \texttt{.tpl.php}. K této operaci slouží modul \emph{Registry Rebuild}\footnote{https://drupal.org/project/registry\_rebuild}. Inicializace registrů nejde vypnout a pouze v nastavení některých témat vzhledu a za pomoci modulu \emph{Devel} lze nastavit, aby se přebudovávaly při každém načtení stránky. S tím však značně klesá výkon.
+  \item[Vyrovnávací paměť] \hfill \\
+  Za pomocí Cache \gls{api} je možné využívat vyrovnávací paměti typicky uložené v databázi. V jádru je definováno několik tabulek pro ukládání a moduly mohou jednoduše definovat další (například modul \emph{Views} a tabulka \emph{cache\_views}). Data z této vyrovnávací paměti jsou načítáná pouze v případě, kdy je povolena nastavení výkonu systému. V konfiguračním souboru je možné definovat umístění jednotlivých vyrovnávacích pamětí - další umístění mohou být přidávána rozšiřujícími moduly (například Memcache, APC, \dots).
+  \item[Agregace] \hfill \\
+  Při načítání obsahu stránek je pro každý soubor vytvořen nový požadavek, který je zaslán serveru. Pro snížení náročnosti komunikace je vhodné snížit počet souborů, čehož je typicky dosáhnuto agregací JavaScriptových a \gls{css} souborů (v případě, že je obsah poskytován z více domén, je vhodné ponechat alespoň několik výsledných souborů, které mohou být stahovány paralelně)\cite{website:drupal:optimizing}. Základní funkcionalita je rozšířena modulem \emph{Advanced Aggregation}\footnote{https://drupal.org/project/advagg}.
+  \item[Statická vyrovnávací paměť] \hfill \\
+  Nepřihlášeným uživatelům, pro které stránky vypadají vždy stejně, je možné posílat výsledný \emph{HTML} kód z vyrovnávací paměti. Stránka však nemůže obsahovat žádný dynamický obsah. Tento problém, zároveň se servírováním stránek přihlášeným uživatelům, řeší modul \emph{Authenticated Cache}\footnote{https://drupal.org/project/authcache}, který namísto dynamicky generované části stránky vytvoří pouze kontejner, do kterého je výsledný obsah přidán za pomoci \emph{AJAX} volání. Uživateli je stránka zobrazena prakticky okamžitě a dynamické prvky se objeví řádově rychleji, neboť pro tento způsob volání je využit okleštěný inicializační skript \emph{Drupalu}.
+\end{description}

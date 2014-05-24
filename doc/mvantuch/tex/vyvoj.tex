@@ -1,9 +1,9 @@
 \chapter{Organizace vývojového procesu}
 \label{chap:vyvoj}
 
-Veškerý vývoj probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného http serveru \emph{Apache} nainstalován Lighttpd poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto \emph{MySQL} použit \emph{MySQL Lite}, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě Drupalu mezi daty dané stránky. 
+Vývoj řešení probíhal na lokálně běžícím serveru. Pro minimalizaci nároků na výkon zařízení byl namísto typicky využívaného \emph{HTTP} serveru \emph{Apache} nainstalován \emph{Lighttpd} poskytující dostačující funkcionalitu při mnohem nižších požadavcích na výkon. Pro databázi byl namísto \emph{MySQL} použit \emph{SQLite}, který nepotřebuje k běhu instalaci, ale celá implementace běží pouze nad jedním souborem uloženém na disku – v případě \emph{Drupalu} ve složce s daty dané stránky. 
 
-Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba \emph{Guacamole} Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém \emph{Windows Server 2008 SP2}, na kterém byla povolena vzdálená plocha pomocí protokolu RDP. Pro \emph{JAVA} aplikaci byl použit server Apache Tomcat, stejně jako na produkčním serveru.
+Pro dostupnost komplexního testování i bez využití internetu byl lokálně nainstalována služba \emph{Guacamole} Proxy (Guacd) a místo připojení ke vzdálenému zařízeni byl virtuálně spuštěn systém \emph{Windows Server 2008 SP2}, na kterém byla povolena vzdálená plocha pomocí protokolu \gls{rdp}. Pro \emph{JAVA} aplikaci byl použit server \emph{Apache Tomcat}, stejně jako na produkčním serveru.
 
 \begin{table}
   \caption{Porovnání technologií použitých na lokálním a produkčním prostředí}
@@ -11,28 +11,30 @@ Pro dostupnost komplexního testování i bez využití internetu byl lokálně 
     \hline  
     & Vývojové prostředí & Produkční prostředí \\ \hline
     HTTP Server & Lighttpd & Apache \\ \hline
-    SQL databáze & SQLite [OPRAVIT???] & MySQL \\ \hline
+    SQL databáze & SQLite & MySQL \\ \hline
     JAVA Servlet Container & Apache Tomcat 7 & Apache Tomcat 7 \\ \hline
-    Vzdálená plocha & Windows Server 2008 SP2 (Oracle VM VirtualBox) & ASPI [PŘIDAT VÍCE DETAILŮ] \\ \hline
+    Vzdálená plocha & Windows Server 2008 SP2 (Oracle VM VirtualBox) & ASPI \\ \hline
   \end{tabular}
 \end{table}
 
-Protože Drupal je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt Features (sekce \ref{subsec:features}), který exportuje pomocí funkcionality postkytnuté modulem Ctools nastavení drupalu jako jsou typy obsahu a také pomocí modulu Strongarm nastavení systéu samotného. Všechna tato nastavení jsou pak uložena do modulu Drupalu a mohou pak být jednoduše přenesena na jiné prostředí a také aktualizována v průběhu času a s přibývajícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
+Protože \emph{Drupal} je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt \emph{Features} (sekce \ref{subsec:features}), který exportuje pomocí funkcionality postkytnuté modulem \emph{CTools}\footnote{https://drupal.org/project/ctools} nastavení (typy obsahu a pod.) a také pomocí modulu \emph{Strongarm}\footnote{https://drupal.org/project/strongarm} nastavení systému samotného. Všechna tato nastavení jsou pak uložena do modulu a mohou pak být jednoduše přenesena na jiné prostředí a aktualizována v průběhu času a s pokračujícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
+
 \begin{description}
   \item[ESF Feature (esf\_feature)] \hfill \\ 
   základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
 
   \item[ESF Feature UI (esf\_feature\_ui)] \hfill \\ 
-  administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
+  administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. sekce \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
   \item[ESF Permissions (esf\_permissions)] \hfill \\ 
   definice uživatelských rolí a jejich práv
 \end{description}
-Moduly pak byly uloženy v repozitáři a tím zajištěno jejich správné verzování. V případě potřeby je možné je jednoduše doručit do produkčního prostředí a nastavení je pak možno načíst z daných modulů, kdy v případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá aktualizovat daný modul.
 
-Instalační skript a profil jsou generovány automaticky pomocí modulu Profiler\_Builder. Jeho výstupem je instalační soubor .make a instalační profil. V instalačním souboru .make je vypsán seznam modulů a jejich verzí, určený pro příkaz drush make, který stáhne potřebné projekty z repozitáře Drupalu. Po vytvoření je nutné ručně odstranit moduly esf\_*, které Drush neumí automaticky stáhnout a instalace by selhala. Díky rozdělení na dva hlavní a doplňkový instalační skript je možné definovat url adresy ke knihovnám, které nelze automaticky doplnit a ty zároveň nejsou přepsány opětovným vygenerováním, neboť hlavní instalační soubor je přesunut do kořenové složky a přejmenován na esf.make, který již není nutné aktualizovat. V instalačním profilu esf\_profile jsou obsažena základní nastavení portálu a seznam modulů, které je nutné povolit ke správné funkčnosti stránek. Ke každému modulu lze přiřadit i opravné balíčky (patch), které jsou buď automaticky dohledány na na stránkách Drupalu a jako odkazy přidány do profilu, nebo mohou být přidány dodatečně ručně. Při instalaci jsou automaticky aplikovány na kód. Díky propojení s features se na stránky automaticky dostane i rozšířené nastavení a struktura.
+Moduly jsou uloženy v \emph{GIT} repozitáři a tím je zajištěno jejich verzování. V případě potřeby je možné je doručit do produkčního prostředí a nastavení systému aktualizovat. V případě bezproblémové aktualizace (v komponentech popsaných v daném modulu nebyly manuálně provedeny žádné změny) se změny provedou automaticky – jinak musí být přes rozhraní či drush manuálně určeno, která změna se má využít a zda se případně nemá přepsat daný modul.
+
+Instalační skript a profil jsou generovány automaticky pomocí modulu \emph{Profile Builder}\footnote{https://drupal.org/project/profile\_builder}. Jeho výstupem je dávkový soubor \texttt{.make} a instalační profil. V dávkovém souboru je vypsán seznam modulů a jejich verzí, určený pro příkaz \texttt{\$ drush make}, který stáhne potřebné projekty z repozitáře \emph{Drupalu}. Po vytvoření je nutné ručně odstranit moduly esf\_*, které \emph{Drush} neumí automaticky stáhnout a instalace by selhala. Díky rozdělení na hlavní a doplňkový instalační skript je možné definovat url adresy ke knihovnám, které nelze automaticky doplnit a ty zároveň nejsou přepsány opětovným vygenerováním - hlavní instalační soubor je přesunut do kořenové složky a přejmenován na esf.make. V instalačním profilu esf\_profile jsou obsažena základní nastavení portálu a seznam modulů, které je nutné povolit ke správné funkčnosti stránek. Ke každému modulu lze přiřadit i opravné balíčky (patch), které jsou buď automaticky dohledány a jako odkazy přidány do profilu, nebo mohou být přidány dodatečně ručně. Při instalaci jsou automaticky aplikovány na kód. Díky propojení s features se na stránky dostane i definované nastavení a struktura.
 
 \section{Organizace řízení projektu}
-S ohledem na nízký počet zainteresovaných osob a rozsah projektu jsme neimplementovali žádné pokročilé metody projektového řízení a rozhodli jsme se pro jednoduchý seznam úkolů. Jelikož jsme pro uložení zdrojových kódů projektu využili \emph{GitHub}, bylo nejjednodušší jej rovněž využít pro správu úkolů. Ačkoliv se nemůže rovnat s platformami, specializujícími se jen daný úkol, poskytuje několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze jednoduše využít pro rozlišení mezi úkolem a chybou a také důležitostí problému. Milníky byly využity pro jednoduché plánování a sledování pokroku.
+S ohledem na nízký počet zainteresovaných osob a rozsah projektu nebyly implementovány pokročilé metody projektového řízení a byl využit jednoduchý seznam úkolů. Zdrojový kód projektu  byl uložen na serveru \emph{GitHub} a jeho funkcionalita byla použita i k tomuto účelu. Ačkoliv se nemůže rovnat s platformami specializujícími se na správu úkolů, poskytuje \emph{GitHub} několik základních prvků - problém (issue), milník (milestone) a značku (tag). Značky lze využít pro rozlišení mezi úkolem a chybou a také důležitosti. Milníky byly využity pro jednoduché plánování a sledování pokroku.
 
 \subsection*{Označení úkolů}
 

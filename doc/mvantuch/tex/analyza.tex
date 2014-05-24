@@ -55,7 +55,7 @@ V době psaní této práce byl \emph{Drupal} světově třetím nejrozšířen�
 \emph{Drupal} podporuje využití tzv. instalačních profilů. Jedná se o speciální moduly neposkytující samy o sobě žádnou funkcionalitu, ale sdružující informace o potřebných modulech a jejich iniciálním nastavení. To lze využít pro specifické distribuce, například vícejazyčná instalace, řešení pro blog, řešení orientované na výkon a podobně.
 
 \subsubsection*{\textbf{Kerberos} (Protocol) \hfill \emph{http://web.mit.edu/kerberos}}
-Vyvinut na \emph{Massachusettském technologickém institutu (MIT)}, protokol \emph{Kerberos} poskytuje autentizační funkcionalitu za pomocí symetrické kryptografie (jediný klíč je použit pro šifrování i dešifrování). Autentizace je provedena za pomoci důvěryhodného třetího serveru (v tomto případě \gls{is} \gls{muni}). %TODO Opravit na Masarykovy Univerzity
+Vyvinut na \emph{Massachusettském technologickém institutu (MIT)}, protokol \emph{Kerberos} poskytuje autentizační funkcionalitu za pomocí symetrické kryptografie (jediný klíč je použit pro šifrování i dešifrování). Autentizace je provedena za pomoci důvěryhodného třetího serveru (v tomto případě \gls{is} Masarykovy Univerzity).
 
 \subsubsection*{\textbf{Omega} (Drupal Theme) \hfill \emph{http://drupal.org/project/omega}}
 \label{subsec:omega}
@@ -85,7 +85,7 @@ Jak je popsáno na stránkách této knihovny, jedná se o potvrzení myšlenky 
   \label{fig:arch_core}
 \end{figure}  
 
-Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí \gls{ajax} požadavků v čistém jazyce \emph{JavaScript}, zatímco propojení z proxy dále podporuje protokoly \emph{SSH}, \emph{VNC} a \emph{RDP}.
+Propojení mezi webovým prohlížečem a proxy serverem je provedeno za pomocí \gls{ajax} požadavků v čistém jazyce \emph{JavaScript}, zatímco propojení z proxy dále podporuje protokoly \emph{SSH}, \emph{VNC} a \gls{rdp}.
 
 \subsubsection*{\textbf{CORS} \hfill \emph{http://www.w3.org/TR/cors/}} 
 Kvůli bezpečnostním rizikům je \emph{JavaScriptu} běžícímu v prohlížeči zakázáno přistupovat k jiným doménám, tento přístup se nazývá \emph{Same-origin policy} a slouží k zamezení podvodných stránek a zvýšení internetové bezpečnosti. Veškeré požadavky směřující na jinou doménu tak musejí být vykonávány přímo ze serveru a prohlížeči zasílány pomocí protokolu \gls{ajax}. Tento přístup je často zbytečně náročný a v dnešní době bývá nutné tato omezení obejít. K tomu slouží \gls{cors}~\cite{website:cors}, kdy za pomocí \emph{HTML} hlaviček přidaných do komumnikace mezi serverem a prohlížečem a nastavení serveru je umožněna komunikace s jinými doménami. Pokud server odešle zpět hlavičku \texttt{Access-Control-Allow-Origin: [doména]}, prohlížeč ji zanalyzuje a případně umožní komunikaci. K tomuto je nutné využít \emph{XMLHttpRequest} (\emph{XDomainRequest} v případě \gls{ie}) s attributem \texttt{WithCredentials}, o zbytek se postará prohlížeč se serverem a komunikace funguje stejně jako v případě klasických požadavků.

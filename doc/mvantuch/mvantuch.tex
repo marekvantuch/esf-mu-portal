@@ -7,7 +7,6 @@
 %% {onecolumn, twocolumn}
 %% sudo yum install texlive texlive-babel-czech texlive-hyphen-czech 
 
-%% TODO přepsat všechny ... na \dots
 \documentclass[10pt,final,oneside]{fithesis2}
 \pdfoptionpdfminorversion 7
 
@@ -83,19 +82,12 @@
 %%\chapter*{Zadání práce}
 %%Na základě analýzy možných Open Source klientů, podporujících připojení ke vzdálené ploše (Remonte Desktop) vyberte nejvhodnější a ten dále upravte tak, aby sloužil ke spuštění vzdálené aplikace po kliknutí na speciální odkaz v prohlížeči (aplikace ASPI). V případě nutnosti vytvořte obslužný plug-in do prohlížeče, sloužící pro předávání parametrů vzdálené aplikaci. Dále připravte obslužný systém pro vkládání textů, obsahujících odkazy do aplikace ASPI a jejich editaci.
 
-%%TODO include the PDF only if for printing
-%%\includepdf{attachments/prohlaseni_autora_skolniho_dila_v3.pdf}
-
-%%TODO Thanks (optional)
 \begin{ThesisThanks}
-Chtěl bych obzvláště poděkovat Ing. Leonardu Walletzkému, Ph.D za příležitost pracovat na tomto projektu a za maximální podporu při jeho vypracování. %TODO doplnit
-Šedové za konzultace a podporu při vývoji. Děkuji všem svým spolupracovníkům za ohleduplnost a trpělivost nutnou s ohledem na ztížené podmínky, které byly způsobeny mou prací ze zahraničí. Speciálně Ondrovi Maternovi za návrh celého řešení, Ivaně Haraslínové za design a jeho aplikaci a Radkovi %TODO doplnit
-za všeobecnou koordinaci projektu.
+Chtěl bych obzvláště poděkovat Ing. Leonardu Walletzkému, Ph.D za příležitost pracovat na tomto projektu a za maximální podporu při jeho vypracování. Dále JUDr. Jindřišce Šedové, CSc. za konzultace a podporu při vývoji. Děkuji také všem svým spolupracovníkům za ohleduplnost a trpělivost nutnou s ohledem na ztížené podmínky, které byly způsobeny mou prací ze zahraničí. Speciálně Mgr. Ondrovi Maternovi za návrh celého řešení, Bc. Ivaně Haraslínové za design a jeho aplikaci a Mgr. Radkovi Foltýnovi za všeobecnou koordinaci projektu.
 \end{ThesisThanks}
 
-%%TODO Abstract (required)
 \begin{ThesisAbstract}
-Tato práce popisuje implementaci internetového portálu pro fakultu Ekonomicko-správní Masarykovy Univerzity. Jsou zahrnuty dvě hlavní části, popis úprav existujícího řešení postaveného na open-source CMS systému Drupal a jeho propojení pomocí vzdálené plochy na servery ASPI. Při vývoji byl kladen důraz na udržitelnost řešení, jeho strukturalizaci. Ačkoliv Drupal typicky udržuje všechna nastavení v databázi, pomocí dostupných nástrojů byla tato exportována do PHP kódu a byl nastaven proces jejich přenesení do testovacího či produkčního prostředí. Pro ulehčení tohoto procesu byly vytvořeny skripty a ty byly propojeny s ,,Continous Integration'' serverem. Důležitá byla i uživatelská přívětivost a jednoduchost, kterých bylo dosaženo sjednocením platformy postavené na Drupalu a existující implementace vzdálené plochy využívající HTML5 a JavaScriptu.
+Tato práce popisuje implementaci internetového portálu pro fakultu Ekonomicko-správní Masarykovy Univerzity. Jsou zahrnuty dvě hlavní části, popis úprav existujícího řešení postaveného na open-source CMS systému Drupal a jeho propojení pomocí vzdálené plochy na servery ASPI. Při vývoji byl kladen důraz na udržitelnost a strukturalizaci řešení. Ačkoliv Drupal typicky ukládá nastavení v databázi, pomocí dostupných nástrojů byla tato data exportována do PHP kódu a byl nastaven proces jejich přenesení do testovacího či produkčního prostředí. Pro ulehčení byly vytvořeny skripty, které byly propojeny s ,,Continous Integration'' serverem. Důraz byl kladen i na uživatelskou přívětivost a jednoduchost, kterých bylo dosaženo sjednocením platformy postavené na Drupalu a existující implementace vzdálené plochy využívající HTML5 a JavaScriptu a implementací přihlašování autorizací skrze Informační systém Masarykovy Univerzity.
 \end{ThesisAbstract}
 
 %% Keywords (required)git
