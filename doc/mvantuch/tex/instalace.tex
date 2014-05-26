@@ -152,11 +152,11 @@ Po dokončení kompilace by měla být aplikace automaticky dostupná na adrese 
 
 \section{Administrace}
 \label{sec:administrace}
-Správa probíhá za využití administrace dodávané v jádře Drupalu, rozšířené modulem Workbench a dalšími úpravami. Pro správu portálu jsou definovány čtyři úrovně uživatelských práv:
+Správa probíhá za využití administrace dodávané v jádře \emph{Drupalu}, rozšířené modulem \emph{Workbench} a dalšími úpravami. Pro správu portálu jsou definovány čtyři úrovně uživatelských práv:
 
 \begin{itemize}
   \item \textbf{anonymní uživatel} \hfill \\
-    Tato role je spolu s rolí \emph{přihlášeného uživatele} definována v jádře \gls{cms} a nelze tedy měnit. Označuje uživatele, kteří se nepřihlásili do portálu. S ohledem na nutnost autentikace jsou tito uživatelé odstřiženi od přístupu k jakýmkoliv datům a je jim zpřístupněna pouze stránka s přihlášením.
+    Tato role je spolu s rolí \emph{přihlášeného uživatele} definována v jádře \gls{cms} a nelze ji tedy měnit. Označuje uživatele, kteří se nepřihlásili do portálu. S ohledem na nutnost autentikace jsou tito uživatelé odstřiženi od přístupu k jakýmkoliv datům a je jim zpřístupněna pouze stránka s přihlášením.
   \item \textbf{přihlášený uživatel} \hfill \\
     Po přihlášení uživatelé získávají přístup k veškerému hlavnímu obsahu stránek, uživatelskému nastavení a připojení ke vzdálené ploše. 
   \item \textbf{moderátor} \hfill \\
@@ -176,12 +176,12 @@ Tato práce se zabývá pouze specifickou administrací a nezaobírá se adminis
   \item [Seznam souborů] \hfill \\
   Poskytuje náhled na všechny soubory nahrané na portál, které jsou sledovány systémem a dostupné skrze administrační rozhraní.
   \item [Obory práva] \hfill \\
-  Pohled na všechny zadané obory práva, jejich základní atributy a předměty, které se k nim vztahují. S obory práva lze manipulovat pomocí rozhraní využívajícího modulu Views Bulk Operations (sekce~\ref{subsec:vbo}) a tím pádem hromadnou úpravu entit.
+  Pohled na všechny zadané obory práva, jejich základní atributy a předměty, které se k nim vztahují. S obory práva lze manipulovat pomocí rozhraní využívajícího modulu \emph{Views Bulk Operations} (sekce~\ref{subsec:vbo}) a tím pádem hromadnou úpravu entit.
   \item [Předměty] \hfill \\
-  Podobně jako předchozí sekce poskytuje pohled na předměty, pouze s tím rozdílem, že neukazuje jejich propojení na obory práva, ale materiály, které jsou k nim přidružené.
+  Poskytuje, podobně jako sekce předchozí, pohled na předměty, pouze s tím rozdílem, že neukazuje jejich propojení na obory práva, ale materiály, které jsou k nim přidružené.
 \end{description}
 
-Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. revize obsahu, mezi kterými pak lze zobrazit výčet změn od předchozí verze. K editaci slouží \gls{wysiwyg} editor \emph{CKeditor}, poskytující uživatelům přívětivé rozhraní s rozšířenými možnostmi úpravy textu a prvky specificky vytvořenými pro použití s \gls{cms} Drupal. Pro prohlížení souborů uložených na serveru ve specifické složce se využívá modulu \emph{IMCE}.
+Veškerý obsah stránek je pokryt verzováním a je možné ukládat tzv. revize obsahu, mezi kterými lze zobrazit výčet změn od předchozí verze. K editaci slouží \gls{wysiwyg} editor \emph{CKeditor}, poskytující uživatelům přívětivé rozhraní s rozšířenými možnostmi úpravy textu a prvky specificky vytvořenými pro použití s \gls{cms} Drupal. Pro prohlížení souborů uložených na serveru ve specifické složce se využívá modulu \emph{IMCE}.
 
 \begin{figure}[htp]
   \includegraphics[width=12cm]{img/workbench-crop.pdf}

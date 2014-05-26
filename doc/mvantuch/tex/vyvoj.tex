@@ -17,12 +17,11 @@ Pro dostupnost komplexního testování i bez využití internetu byl lokálně 
   \end{tabular}
 \end{table}
 
-Protože \emph{Drupal} je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt \emph{Features} (sekce \ref{subsec:features}), který exportuje pomocí funkcionality postkytnuté modulem \emph{CTools}\footnote{https://drupal.org/project/ctools} nastavení (typy obsahu a pod.) a také pomocí modulu \emph{Strongarm}\footnote{https://drupal.org/project/strongarm} nastavení systému samotného. Všechna tato nastavení jsou pak uložena do modulu a mohou pak být jednoduše přenesena na jiné prostředí a aktualizována v průběhu času a s pokračujícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
+Protože \emph{Drupal} je postaven z velké části na konfiguraci uložené v databázi, bylo potřeba vymyslet způsob, jak změny prováděné na lokálním stroji efektivně přenášet do produkčního prostředí. Pro uložení nastavení do konfiguračních souborů byl použit projekt \emph{Features} (sekce \ref{subsec:features}), který exportuje pomocí funkcionality poskytnuté modulem \emph{CTools}\footnote{https://drupal.org/project/ctools} nastavení (typy obsahu a pod.) a také pomocí modulu \emph{Strongarm}\footnote{https://drupal.org/project/strongarm} nastavení systému samotného. Všechna tato nastavení jsou pak uložena do modulu a mohou pak být jednoduše přenesena na jiné prostředí a aktualizována v průběhu času a s pokračujícím vývojem. Pro udržení přehlednosti byla konfigurace rozdělena na tři části:
 
 \begin{description}
   \item[ESF Feature (esf\_feature)] \hfill \\ 
   základní nastavení systému včetně typů obsahů, vztahů mezi nimi, metody zadávání obsahu (WYSIWYG) a základní prvky zobrazené na stránkách
-
   \item[ESF Feature UI (esf\_feature\_ui)] \hfill \\ 
   administrační rozhraní pro správu obsahu a nádstavba nad modulem Workbench (viz. sekce \ref{subsec:workbench}), poskytující náhled na jednotlivé typy obsahu stránek
   \item[ESF Permissions (esf\_permissions)] \hfill \\ 

@@ -1,7 +1,7 @@
 \chapter{Implementace portálu v Drupalu}
 \label{chap:implementace-drupal}
 
-Pro převedení stávajícího řešení na novou verzi \emph{Drupalu} bylo nutné vykonat několik kroků. Nejprve byla data z produkčního prostředí přesunuta na testovací server, kde bylo řešení zanalyzováno co se týče implementační stránky (k běžícímu portálu nebylo možné přistupovat s administrátorským účtěm). Jakmile byly stránky zanalyzovány, byl započat proces jejich aktualizace na novou verzi Drupalu při zachování veškerého obsahu. Tento postup se ukázal jako kontraproduktivní, neboť i když byl obsah stránek převeden, bylo potřeba kompletně změnit jeho strukturu spolu s konverzí na jiné typy obsahu a jiná cílovýmá pole. Všechna data tak nakonec byla přesunuta ručně.
+Pro převedení stávajícího řešení na novou verzi \emph{Drupalu} bylo nutné vykonat několik kroků. Nejprve byla data z produkčního prostředí přesunuta na testovací server, kde bylo řešení zanalyzováno co se týče implementační stránky (k běžícímu portálu nebylo možné přistupovat s administrátorským účtem). Jakmile byly stránky zanalyzovány, byl započat proces jejich aktualizace na novou verzi Drupalu při zachování veškerého obsahu. Tento postup se ukázal jako kontraproduktivní, neboť i když byl obsah stránek převeden, bylo potřeba kompletně změnit jeho strukturu spolu s konverzí na jiné typy obsahu s jinými cílovými polemi. Všechna data tak nakonec byla přesunuta ručně.
 
 \section{Aktualizace Drupal 6 na Drupal 7}
 \label{sec:aktualizace}
@@ -18,7 +18,7 @@ Kromě funkcionality přidané do jádra, které by bylo možné dosáhnout i za
   \item celkově propracovanější kód (vhodný pro vývoj dalších modulů)
 \end{itemize}
 
-V době práce na informačním systému již byl dostupný i \emph{Drupal} verze 8, ale nebyl ještě plně stabilní. Některé jeho vlastnosti však byly zpětně implementovány jako moduly pro \emph{Drupal} 7 a jakožto implementace moderních technologií byly zahrnuty i v tomto projektu (například NavBar\footnote{https://drupal.org/project/navbar}, který poskytuje responsivní administrační panel, filtrace modulů, či administrační téma Ember\footnote{https://drupal.org/project/ember} postavené na SASS). 
+V době práce na informačním systému již byl dostupný i \emph{Drupal} verze 8, který však nebyl stabilní. Některé jeho vlastnosti byly zpětně implementovány jako moduly pro \emph{Drupal} 7 a jakožto implementace moderních technologií byly zahrnuty i v tomto projektu (například NavBar\footnote{https://drupal.org/project/navbar} poskytující responsivní administrační panel, filtrace modulů, či administrační téma Ember\footnote{https://drupal.org/project/ember} postavené na SASS). 
 
 \begin{table}
   \caption{Porovnání verzí modulů mezi Drupalem 6 a 7}
@@ -55,13 +55,13 @@ V době práce na informačním systému již byl dostupný i \emph{Drupal} verz
 \end{table}
 
 \section{Odebrané moduly}
-Funkcionalita některých z modulů byla v sedmé verzi přesunuta přímo do jádra Drupalu a proto nebylo jejich využití již potřebné - byly využity jejich ekvivalenty z jádra. Kromě těchto byly odebrány i další moduly, kdy některé nejsou pro novou verzi vůbec dostupné. Dále byly odstraněny moduly, jejichž využití již postrádalo smysl. Z důvodu změny a zjednodušení struktury menu již nebylo potřeba mnoho modulů, které umožňovaly složitá menu předchozí implementace. Bylo odstraněno několik modulů, které nebyly na stránkách vůbec využity a zbytečně zpomalovaly běh portálu. 
+Funkcionalita některých z modulů byla v sedmé verzi přesunuta přímo do jádra a proto nebylo jejich využití již potřebné - byly využity jejich ekvivalenty z jádra. Kromě těchto byly odebrány i další moduly, kdy některé nejsou pro novou verzi vůbec dostupné. Dále byly odstraněny moduly, jejichž využití již postrádalo smysl - z důvodu změny a zjednodušení struktury menu předchozí implementace. Několik dalších modulů bylo odstraněno, neboť nebyly na stránkách vůbec využity a zpomalovaly běh portálu. 
 
 \subsubsection*{\textbf{Views Search} \hfill \emph{https://drupal.org/project/views\_search}}
-Rozšiřuje funkcionalitu Views a jejich obsahových filtrů, pro novou verzi již není modul dostupný a funkcionalita není ani vyžadována.
+Rozšiřuje funkcionalitu modulu \emph{Views} a jejich obsahových filtrů, pro novou verzi již není modul dostupný a funkcionalita není ani vyžadována.
 
 \subsubsection*{\textbf{Front Page} \hfill \emph{https://drupal.org/project/front}}
-Slouží k nastavení výchozí stránky pro různé uživatelské role. Z důvodu plánování kompletně nové implementace domovské stránky byla tato funkcionalita prozatím odstraněna s možností opětovného zapnutí v budoucnosti dle požadavků.
+Slouží k nastavení výchozí stránky pro různé uživatelské role. Z důvodu plánování kompletně nové implementace domovské stránky byla tato funkcionalita prozatím odstraněna s možností opětovného zapnutí v budoucnosti.
 
 \subsubsection*{\textbf{Menu Attributes} \hfill \emph{https://drupal.org/project/menu\_attributes}}
 Umožňuje přiřazení attributů k položkám menu. Ty pak mohou být použity buď pro stylování, nebo navázány na JavaScript. Tato funkcionalita opět nebyla vyžadována.
@@ -83,41 +83,41 @@ Podobně jako jCarousel slouží k propojení s knihovnou určenou ke zobrazová
 
 \section{Nově přidané moduly}
 \label{sec:nove-moduly}
-Do projektu byly zahrnuty další moduly, některé z nich rozšiřující funkcionalitu řešení, jiné za účelem zjednodušení vývoje a údržby. Další byly přidaný z kvůli kompatibility s propojením se vzdálenou plochou za pomocí nástroje \emph{Guacamole}.
+Do projektu byly zahrnuty další moduly, některé z nich rozšiřující funkcionalitu řešení, jiné za účelem zjednodušení vývoje a údržby. Další byly přidány kvůli kompatibilitě s propojením se vzdálenou plochou za pomocí nástroje \emph{Guacamole}.
 
 \subsubsection*{\textbf{Context} \hfill \emph{https://drupal.org/project/context}} 
 \label{subsec:context}
-Modul Context umožňuje definovat reakce v závislosti na splněných podmínkách prostředí portálu. Pro každou podmínku, kterou může být například přihlášená role uživatele, aktuální stránka či jazyk, lze nadefinovat změny v portálu. Ať se jedná o nastavení drobečkové navigace, změnu obsahu bloku a podobně. Podmínky lze mezi sebou vzájemně kombinovat a uzavírat do logických výrazů, stejně jako lze pro jeden logický výraz provézt více operací. Pro potřeby tohoto projektu je využíván hlavně podmodul Context Layouts a další modul Context Omega\footnote{https://drupal.org/project/conext\_omega}, které dohromady umožňují změnu rozložení stránek.
+Modul Context umožňuje definovat reakce v závislosti na splněných podmínkách prostředí portálu. Pro každou podmínku, kterou může být například role přihlášeného uživatele, aktuální stránka či jazyk, lze nadefinovat změny v portálu. Mezi dostupné akce patří nastavení drobečkové navigace, změna obsahu bloku a podobně. Podmínky lze mezi sebou vzájemně kombinovat a uzavírat do logických výrazů, stejně jako lze pro jeden logický výraz provézt více operací. Pro potřeby tohoto projektu je využíván hlavně podmodul \emph{Context Layouts} a modul \emph{Context Omega}\footnote{https://drupal.org/project/conext\_omega}, které dohromady umožňují změnu rozložení stránek.
 
 \subsubsection*{\textbf{Kerberos Authentication} \hfill \emph{https://drupal.org/project/kerberos\_authentication}} 
-Modul využívá protokol Kerberos k autentizaci uživatelů - v tomto případě za pomoci serveru \gls{muni}. Uživatelům, kteří ke připojení použijí své \gls{uco}, je automaticky vytvořen účet se stejným uživatelským jménem a mohou si poté změnit heslo speicficky pro tento portál. Modul dále povoluje vypnutí autentizace pomocí účtů pouze v portálu, tato vlastnost však není pro tento projekt potřebná.
+Modul využívá protokol Kerberos k autentizaci uživatelů - v tomto případě za pomoci serveru Masarykovy Univerzity. Uživatelům, kteří ke připojení použijí své \gls{uco}, je automaticky vytvořen účet se stejným uživatelským jménem a mohou si poté změnit heslo speicficky pro tento portál. Modul dále povoluje vypnutí autentizace pomocí účtů pouze v portálu, tato vlastnost však není pro tento projekt potřebná.
 
 \subsubsection*{\textbf{Features} \hfill \emph{https://drupal.org/project/features}} 
 \label{subsec:features}
-Jak je popsáno v kapitole~\ref{chap:vyvoj}, modul Features slouží k ulehčení vývoje a správy nastavení stránek. Základní myšlenkou je třívrstvé rozvržení systému, v první úrovni je jádro a jeho moduly, ve druhé rozšiřující moduly (tzv. Contrib) a ve třetí jsou rysy (Features), které v sobě zapouzdřují finální nastavení stránek. Ačkoliv se jedná také o moduly, jsou generovány systémem na stránce \texttt{admin/structure/features}. Zde je možné buď vytvořit nový rys, či spravovat ty stávající. Ty mohou být v několika stavech v závislosti na aktuálním nastavení systému. Pokud bylo v sytému něco změněno od chvíle, kdy byl rys vygenerován a povolen (případně pouze povolen, pokud byl přenesen z jiného serveru), je možné dané změny buď vrátit ke stavu definovanému v rysu, nebo rys aktualizovat na novou verzi.
+Jak je popsáno v kapitole~\ref{chap:vyvoj}, modul Features slouží k ulehčení vývoje a správy nastavení stránek. Základní myšlenkou je třívrstvé rozvržení systému, v první úrovni je jádro a jeho moduly, ve druhé rozšiřující moduly (tzv. Contrib) a ve třetí jsou rysy (Features), které v sobě zapouzdřují finální nastavení stránek. Ačkoliv se jedná také o moduly, jsou generovány systémem na stránce \texttt{admin/structure/features}. Zde je možné vytvořit nový rys a spravovat ty stávající. Ty mohou být v několika stavech v závislosti na aktuálním nastavení systému. Pokud bylo v sytému něco změněno od chvíle, kdy byl rys vygenerován a povolen (případně pouze povolen, pokud byl přenesen z jiného serveru), je možné dané změny buď vrátit ke stavu definovanému v rysu, nebo rys aktualizovat na novou verzi.
 
 \subsubsection*{\textbf{Features Extra}\hfill \emph{https://drupal.org/project/features\_extra}} 
-Jelikož modul Features v sobě implementuje pouze základní funkcionalitu exportu typů obsahu a poskytuje \gls{api} pro další moduly, některé prvky webu nejsou exportovatelné. Tento modul možnosti exportu rozšiřuje o další možnosti, ze kterých pro tento projekt je relevantní export nastavení umístění bloků.
+Jelikož modul \emph{Features} v sobě implementuje pouze základní funkcionalitu exportu typů obsahu a poskytuje \gls{api} pro další moduly, některé prvky webu nejsou exportovatelné. Tento modul možnosti exportu rozšiřuje o další možnosti, ze kterých je pro tento projekt relevantní export nastavení umístění bloků.
 
 \subsubsection*{\textbf{@font-your-face}\hfill \emph{https://drupal.org/project/fontyourface}} 
 Pro využití řezů písem třetích stran je možné postupovat několika způsoby - buď nahrát soubor obsahující písmo přímo na server, nebo se odkazovat na server třetí strany, který daný font poskytuje (např. Google Fonts API). Modul @font-your-face unifikuje tyto přístupy a poskytuje jednoduché rozhraní pro výběr typů a řezů písma a jejich použití na stránkách. Buď lze vše nastavit v administračním rozhraní, nebo lze poskytnutý kód jednoduše vložit do souboru definujícího téma vzhledu - například řádek \texttt{fonts[google\_fonts\_api][] = "BenchNine\&subset=latin-ext\#300"} automaticky načte z Google Fonts API font se jménem BenchNine v řezu 300.
 
 \subsubsection*{\textbf{Entity API}\hfill \emph{https://drupal.org/project/entity}}
-Jak je popsáno v kapitole \ref{sec:aktualizace}, v předchozí verzi \emph{Drupalu} bylo možné vytvářet pouze uzly (node), které s sebou nesou nezanedbatelnou složitost v podobě vlastní \gls{url}, revizí a dalších informací. Ve verzi 7 je již možné vytvořit i čistou entitu, u které lze nastavit všechny vlastnosti, například zda ukládá informace o autorovi a podobně. V základu je tato implementace poněkud komplikovaná a není nijak lehce dostupná administrátorům, ani vývojářům a proto byl vyvinut modul \emph{Entity API}, poskytující unifikované rozhraní, umožňující jednoduchou definici entity na bázi zdrojového kódu (viz. \cite{drupal-entities}. 
+Jak je popsáno v sekci \ref{sec:aktualizace}, v předchozí verzi \emph{Drupalu} bylo možné vytvářet pouze uzly (node), které s sebou nesou nezanedbatelnou složitost v podobě vlastní \gls{url}, revizí a dalších informací. Ve verzi 7 je již možné vytvořit i čistou entitu, u které lze nastavit všechny vlastnosti, například zda ukládá informace o autorovi a podobně. V základu je tato implementace poněkud komplikovaná a není nijak lehce dostupná administrátorům, ani vývojářům. Modul \emph{Entity API} poskytuje unifikované rozhraní, umožňující jednoduchou definici entity na bázi zdrojového kódu\cite{drupal-entities}. 
 
 \subsubsection*{\textbf{Entity Creation Kit} (ECK)\hfill \emph{https://drupal.org/project/eck}} 
 Zatímco modul \emph{Entity API} poskytuje možnost definovat entity ve zdrojovém kódu, za pomoci modulu \emph{ECK} je možno je definovat z administračního rozhraní, čímž je celý proces tvorby značně zjednodušen. Definované entity lze exportovat za pomocí modulu \emph{Features} do kódu modulu a tím zabezpečit jejich verzování.
 
 \subsubsection*{\textbf{Entity Reference}\hfill \emph{https://drupal.org/project/entity\_reference}}
-Spolu s modulem Inline Entity Form\footnote{https://drupal.org/project/inline\_entity\_form} poskytuje modul \emph{Entity Reference} uživatelsky přívětivou možnost ke vzájemnému propojení entit. Každá entita (takže i všechny uzly) může odkazovat na jednu či více entit jiného, či stejného typu, které mohou být pomocí tohoto modulu přímo vytvářeny na stránce úpravy rodičovské entity. 
+Spolu s modulem \emph{Inline Entity Form}\footnote{https://drupal.org/project/inline\_entity\_form} poskytuje modul \emph{Entity Reference} uživatelsky přívětivou možnost ke vzájemnému propojení entit. Každá entita (takže i všechny uzly) může odkazovat na jednu či více entit jiného, či stejného typu. Propojené entity mohou být vytvářeny přímo na stránce, na které je upravována entita původní.
 
 \subsubsection*{\textbf{Media} \hfill \emph{https://drupal.org/project/media}}
 \label{subsec:media}
-\gls{cms} systém \emph{Drupal} v základu poskytuje pouze jednoduchou funkcionalitu práce s obrázky. Zvuk, video ani dokumenty nejsou v aktuální verzi (7.x) podporovány vůbec. Zároveň uživatelé nemají mnoho možností operovat se soubory, které nahráli na server a tím pádem jsou často nuceni obsah opětovně nahrávat, čímž docházi k jeho duplikaci. Tyto a mnohé další problémy se snaží řešit projekt \emph{Media}, poskytující uživatelům srozumitelné rozhraní a unifikaci práce s různými typy multimediálního obsahu a zároveň správu veškerého obsahu nahraného na server. Pro svůj běh vyžaduje modul File Entity\footnote{https://drupal.org/project/file\_entity}, který poskytuje možnosti práce se soubory jako entitami v systému.
+\gls{cms} systém \emph{Drupal} v základu poskytuje pouze jednoduchou funkcionalitu práce s obrázky. Zvuk, video ani dokumenty nejsou v aktuální verzi (7.x) podporovány vůbec. Zároveň uživatelé nemají mnoho možností operovat se soubory, které nahráli na server a tím pádem jsou často nuceni obsah nahrávat opakovaně, čímž docházi k jeho duplikaci. Tyto a mnohé další problémy se snaží řešit projekt \emph{Media}, poskytující uživatelům srozumitelné rozhraní a unifikaci práce s různými typy multimediálního obsahu. Pro svůj běh vyžaduje modul \emph{File Entity}\footnote{https://drupal.org/project/file\_entity}, který poskytuje možnosti práce se soubory jako entitami v systému.
 
 \subsubsection*{\textbf{Views Bulk Operations} (VBO) \hfill \emph{https://drupal.org/project/views\_bulk\_operations}}
 \label{subsec:vbo}
-Modul \emph{Views} (\emph{https://drupal.org/project/views}) rozšiřuje funkcionalitu o uživatelsky definovatelné pohledy na data (podobně jako views v databázi) a v dnešní době je nainstalován téměř na každé instalaci \emph{Drupalu} (ve verzi 8 je již obsažen v jádru). Tento modul však není sám schopen poskytovat operace nad více řádky najednou, s čímž pomáhá modul \emph{Views Bulk Operations} - ke každému řádku je přiřazeno zaškrtávací tlačítko a nad formulářem je zobrazen seznam operací, které lze nad elementy provádět.
+Modul \emph{Views}\footnote{https://drupal.org/project/views} rozšiřuje funkcionalitu o uživatelsky definovatelné pohledy na data (podobně jako views v databázi) a v dnešní době je nainstalován téměř na každé instalaci \emph{Drupalu} (ve verzi 8 je již obsažen v jádru). Tento modul však není sám schopen poskytovat operace nad více řádky najednou, s čímž pomáhá modul \emph{Views Bulk Operations} - ke každému řádku je přiřazeno zaškrtávací tlačítko a nad formulářem je zobrazen seznam operací, které lze nad elementy provádět.
 
 \subsubsection*{\textbf{Workbench} \hfill \emph{https://drupal.org/project/workbench}}
 \label{subsec:workbench}
@@ -126,10 +126,12 @@ Administrace \emph{Drupalu} je mnohdy kritizována pro její nízkou uživatelsk
 \subsubsection*{\textbf{Workbench Media} \hfill \emph{https://drupal.org/project/workbench\_media}}
 Zatímco modul \emph{Workbench} poskytuje pohled na obsah stránek, \emph{Workbench Media}, jak již název nápovídá, přidává propojení s modulem \emph{Media} a tím pádem pohled na mediální obsah daného uživatele a celého portálu. 
 
-\subsection{Typy obsahu}
+\section{Struktura typů obsahu}
 \label{subsec:typy-obsahu}
 
 Kdybychom si představili typy obsahu ve světě objektově orientovaného programování, všechny by dědily vlastnosti ze základní třídy \emph{Entita}. Těmito vlastnostmi jsou typ, ID a několik dalších, relevantních pouze pro interní fungování redakčního systému. Z \emph{Entity} dědí třída \emph{Uzel}, která ji rozšiřuje o nadpis, adresu a stav. Pro lepší představu jsou vztahy popsány na diagramu \ref{fig:class-diagram}. 
+
+\subsection*{Typy entit}
 
 \begin{description}
   \item[Uzel] Stránka mající vlastní \gls{url} a obsah.
@@ -145,12 +147,14 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
 \label{fig:class-diagram}
 \end{figure}  
 
-\begin{description}
-  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality) týkající se buď portálu samotného, fakulty ESF, či jakýchkoliv dalších relevantních událostí. Tyto novinky jsou zobrazeny ve vysouvacím postranním panelu.
-  
-  \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty ESF a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim se vztahujících materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů které s daným předmětem souvisejí.
+\subsection*{Typy obsahu}
 
-  \item[Obor práva \emph{(uzel)}] Zatímco některé předměty mohou souviset pouze s jedním oborem práva, jiné se mohou dotýkat téměř všech všech. Proto je důležité tento vztah vymodelovat a uživatelům poskytnout možnost se v něm jednoduše orientovat a přecházet mezi obsahem, který je právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
+\begin{description}
+  \item[Novinka \emph{(uzel)}] Na stránkách jsou publikovány novinky (aktuality). Z typických témat lze zmínit \gls{esf}, portál samotný či jakékoliv dalších relevantní události. Tyto novinky jsou zobrazeny ve vysouvacím postranním panelu.
+  
+  \item[Předmět \emph{(uzel)}] Popisuje předmět vyučovaný v rámci fakulty \gls{esf} a tím vyjadřuje základní rozdělení celého portálu a slučuje hlavní část informací, o které se návštěvníci zajímají. Na stránce detailu předmětu je zobrazen ktátký popis, za kterým následuje tabulka se seznamem studijních textů a k nim se vztahujících materiálů. Materiály, které se vztahují přímo k předmětu jsou zobrazeny samostatně a celá stránka je uzavřana seznamem oborů které s daným předmětem souvisejí.
+
+  \item[Obor práva \emph{(uzel)}] Zatímco některé předměty mohou souviset pouze s jedním oborem práva, jiné se mohou dotýkat téměř všech. Proto je důležité tento vztah vymodelovat a uživatelům poskytnout možnost se v něm jednoduše orientovat a přecházet mezi obsahem, který je právě zajímá. Na stránce oboru práva je zobrazen popis oboru a tabulka se seznamem předmětů, které se k němu vztahují.
 
   \item[Studijní text \emph{(uzel)}] Studijní text obsahuje informace vztahující se k jednomu celku výuky, typicky k jedné přednášce. Lze definovat zkrácený cíl přednášky, přidat k ní materiály a určit její pořadové číslo. U všech materiálů je vhodné zadat název pro správné zobrazení v tabulce detailu předmětu, na kterém se zobrazuje seznam těchto entit.
 
@@ -161,7 +165,7 @@ Kdybychom si představili typy obsahu ve světě objektově orientovaného progr
   \item[Vyučující \emph{(osoba)}] Entita popisující vyučujícího působícího na fakultě. Ke každému vyučujícímu je možné doplnit akademické tituly, které jsou při výstupu správně formátovány.
 \end{description}
 
-\subsection{Slovníky}
+\section{Slovníky}
 \label{sec:slovniky}
 
 Pro kategorizaci a pro výběr možností bylo v požadavcích identifikováno několik slovníků. Díky vztahu k entitě (ze které záznamy slovníku dědí) může také pro své hodnoty definovat pole a tím rozšířit jejich funkcionalitu a množství informací.
@@ -191,7 +195,7 @@ Pro případné budoucí úpravy systému, či filtrování, je vhodné u předm
 
 \section{Téma vzhledu a jeho rozložení}
 \label{sec:tema-vzhledu}
-Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4 (kapitola \ref{subsec:omega}). Díky využití \emph{SUSY} je rozvržení stránky implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků \emph{Drupalu} - každé téma vzhledu definuje množinu dostupných segmentů stránky, do kterých lze vkládat bloky s vlastním obsahem portálu. 
+Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4 (sekce \ref{subsec:omega}). Díky využití \emph{SUSY} je rozvržení stránky implementována přímo v kódu a v administračním rozhraní jsou určovány až pozice jednotlivých bloků \emph{Drupalu} - každé téma vzhledu definuje množinu dostupných segmentů stránky, do kterých lze vkládat bloky s vlastním obsahem portálu. 
 
 \begin{figure}[htp] 
   \centering{\includegraphics[width=12cm]{img/page-layout-crop.pdf}}
@@ -199,7 +203,7 @@ Pro rozvržení stránek bylo využito tématu vzhledu \emph{Omega} ve verzi 4 (
   \label{fig:rozvrzeni-stranky}
 \end{figure}  
 
-Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na čtyři hlavní segmenty - hlavičku, postranní panel, obsah a patičku. Pro možnosti budoucího rozšíření je navíc definován segment Postskript, který se nachází ve spodní části obsahové části stránky. Zatímco hlavička i patička zabírají celou dostupnou šíři stránky (960px), centrální segment je rozdělen mezi postranní panel a obsah - poměr mezi těmito segmenty je určen za použití knihovny \emph{SUSY} a media queries a mění se v závislosti na šíři okna prohlížeče~\cite{responsible-drupal}. 
+Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena na čtyři hlavní segmenty - hlavičku, postranní panel, obsah a patičku. Pro možnosti budoucího rozšíření je navíc definován segment Postskript, který se nachází ve spodní části obsahové části stránky. Zatímco hlavička i patička zabírají celou dostupnou šíři stránky (960px), centrální segment je rozdělen mezi postranní panel a obsah - poměr mezi těmito segmenty je určen za použití knihovny \emph{SUSY} a \gls{mediaqueries} a mění se v závislosti na šíři okna prohlížeče\cite{responsible-drupal}. 
 
 \begin{description}
   \item[Telefon] (velikost okna do 44em) \hfill \\
@@ -210,14 +214,14 @@ Jak lze vidět na obrázku \ref{fig:rozvrzeni-stranky}, je stránka rozdělena n
   Postranní panel a obsah jsou zobrazeny v poměru 1 : 4.  
 \end{description}
 
-Toto rozložení je vhodné pro využití při klasickém procházení stránkou. S ohledem na využítí \emph{Guacamole} a připojení se na vzdálenou pracovní plochu přímo z portálu bylo potřeba zajistit vhodnou strukturu html kódu stránky, který by typicky obsahoval veškerý generovaný kód. Pro oddělení těchto dvou nesourodých prostředí je využito \emph{Layouts} - rozložení stránky za pomoci tématu \emph{Omega}. Každé z těchto rozložení implementuje vlastní šablony (viz. dále) pro generování html kódu a tím umožňuje kompletně změnit výsledný vygenerovaný kód. Při vývoji je potřeba respektovat určitá pravidla, jako je počet a pojmenování segmentů, které musí odpovídat tématu vzhledu, ve kterém budou využita. Přepínání mezi rozloženími stránky se definují za pomocí modulu \emph{Context} a jeho podmodulu \emph{Context Layouts} (sekce \ref{subsec:context}). Zatímco pro všechny stránky portálu je využito rozložení s názvem Blue (podle barvy vzhledu stránek), v případě že se jedná o stránku implementující připojení ke vzdálené ploše (identifikace probíhá na základě \gls{url}), systém přepne na rozložení Guacamole (dle využité technologie).
+Tento způsob změn rozložení je vhodný pro využití při klasickém procházení stránkou. S ohledem na využítí \emph{Guacamole} a připojení se na vzdálenou pracovní plochu přímo z portálu bylo potřeba zajistit vhodnou strukturu html kódu stránky, který by typicky obsahoval veškerý generovaný kód. Pro oddělení těchto dvou nesourodých prostředí je využito \emph{Layouts} - různá rozložení stránky obsažená v tématu \emph{Omega}. Každé z těchto rozložení implementuje vlastní šablony (viz. dále) pro generování html kódu a tím umožňuje kompletně změnit výsledný kód. Při vývoji je potřeba respektovat určitá pravidla, jako je počet a pojmenování segmentů, které musí odpovídat tématu vzhledu, ve kterém budou využita. Přepínání mezi rozloženími stránky se definují za pomocí modulu \emph{Context} a jeho podmodulu \emph{Context Layouts} (sekce \ref{subsec:context}). Zatímco pro všechny stránky portálu je využito rozložení s názvem Blue (podle barvy vzhledu stránek), v případě že se jedná o stránku implementující připojení ke vzdálené ploše (identifikace probíhá na základě \gls{url}), systém přepne na rozložení Guacamole (název dle využité technologie).
 
 Při vlastním vývoji vzhledu portálu byly využity technologie a rozhraní dostupné v \gls{cms} \emph{Drupal}, ve kterých probíhá vývoj ve třech úrovních.
 
 \begin{enumerate}
-  \item Je potřeba generovat vhodný HTML kód. K tomu slouží systém přepisování šablonovacích souborů (přípona .tpl.php) pro jednotlivé prvky webu. V základu je dostupná stromová struktura, začínající u celého dokumentu (html.tpl.php), který obsahuje veškerý obsah včetně hlavičky <head>, a pokračující přes stránku (page.tpl.php) až po jednotlivé elementy (např. fieldset.tpl.php). Většina těchto šablon je definována přímo v jádru systému a všechny lze jednoduchým způsobem (na základě jména souboru) přepsat. Zároveň je možné vytvářet úplně nové šablony, které lze následovně volat při vytváření nových elementů. Šablonám lze i upravit data, která do nich budou vložena a to implementací funkcí s příponami \_preprocess a \_process a jejich vložení do kódu tématu vzhledu. 
+  \item Je potřeba generovat vhodný HTML kód. K tomu slouží systém přepisování šablonovacích souborů (přípona .tpl.php) pro jednotlivé prvky webu. V základu je dostupná stromová struktura, začínající u celého dokumentu (html.tpl.php), který obsahuje veškerý obsah včetně hlavičky <head>, a pokračující přes stránku (page.tpl.php) až po jednotlivé elementy (např. fieldset.tpl.php). Většina těchto šablon je definována přímo v jádru systému a všechny lze jednoduchým způsobem (na základě jména souboru) přepsat. Zároveň je možné vytvářet úplně nové šablony, které lze následovně volat při vytváření nových elementů. Šablonám lze i upravit data, která do nich budou zaslána a to implementací funkcí s příponami \_preprocess a \_process a jejich vložením do zdrojového kódu. 
   
-  \item Výstup html lze měnit přepsáním funkcí formátujících jednoduché elementy stránky (například seznam elementů ul). Typicky jsou tyto prvky generovány funkcí theme([jméno elementu], [proměnné hodnoty]), která může být přepsána v modulu nebo tématu vzhledu, jako [jméno modulu]\_[jméno elementu]() - například \texttt{function omega\_fieldset(\$variables)}. Téma vzhledu \emph{Omega} nad tímto rozhraním navíc poskytuje možnosti všechny tyto funkce vkládat do samostatných souborů pojmenovaných dle specifických konvencí, čímž dále zpřehledňuje výsledný kód (kód výše zmíněného příkladu by byl umístěn v souboru \texttt{theme/container.theme.inc}).
+  \item Výstup html lze měnit přepsáním funkcí formátujících jednoduché elementy stránky (například seznam elementů ul). Typicky jsou tyto prvky generovány funkcí \texttt{theme([jméno elementu], [proměnné hodnoty])}, která může být přepsána v modulu nebo tématu vzhledu, jako [jméno modulu]\_[jméno elementu]() - například \texttt{function omega\_fieldset(\$variables)}. Téma vzhledu \emph{Omega} nad tímto rozhraním navíc umožňuje všechny tyto funkce vkládat do samostatných souborů pojmenovaných dle specifických konvencí, čímž dále zpřehledňuje výsledný kód (kód výše zmíněného příkladu by byl umístěn v souboru \texttt{theme/container.theme.inc}).
   \item Na HTML kód se nanášejí \gls{css} styly. Jak je popsáno v sekci \ref{subsec:sass}, je výhodnější využívat nástroj \emph{SASS}, který je do jazyka \gls{css} kompilován a poskytuje více možností. Vývoj probíhá dle standartů určených v tématu vzhledu \emph{Omega} (viz. \ref{subsec:omega}) a je definován v rámci několika \emph{SASS} souborů, každý z nichž obsahuje určitou skupinu nastavení.
 \end{enumerate}
 
@@ -229,17 +233,17 @@ Při vlastním vývoji vzhledu portálu byly využity technologie a rozhraní do
 
 V repozitáři je již dostupná kompilovaná verze \gls{css} souborů, ale v případě nutnosti je možné je znovu vygenerovat. K tomu je nutno mít nainstalován programovací jazyk \emph{Ruby}, \emph{COMPASS} (sekce \ref{subsec:compass}) a \gls{bundler}. Kompilace se spustí následujícími příkazy:
 
-\begin{enumerate}
-  \item \texttt{\$ sudo gem install bundler}
-  \item \texttt{\$ bundle install}
-  \item \texttt{\$ compass watch}
-\end{enumerate}
+\begin{lstlisting}[language=bash]
+  $ sudo gem install bundler
+  $ bundle install
+  $ compass watch
+\end{lstlisting}
 
 \emph{COMPASS} bude od této chvíle sledovat obsah složky a v případě jakýchkoliv změn automaticky aktualizovat výsledné \emph{CSS} soubory.
 
 \section{Proces přihlášení uživatelů}
 
-Každý \gls{is} vytvořený v prostředí \gls{cms} \emph{Drupal} má automaticky vytvořeného uživatele s ID 1, který má všechna administrační práva. Kromě tohoto uživatele mohou být v systému vytvořy další uživatelské účty a každý z nich může být přiřazen k určité uživatelské roli (více o rolích v sekci \ref{sec:administrace}). Jelikož má být portál dostupný širší skupině uživatelů, jmenovitě studentům \gls{muni}, je vhodné využít pro autentizaci externí službu, v tomto případě se jedná o autentizaci skrze protokol Kerberos a server \gls{muni}. 
+Každý \gls{is} vytvořený v prostředí \gls{cms} \emph{Drupal} má automaticky vytvořeného uživatele s ID 1, který má všechna administrační práva. Kromě tohoto uživatele mohou být v systému vytvořy další uživatelské účty a každý z nich může být přiřazen k určité uživatelské roli (více o rolích v sekci \ref{sec:administrace}). Jelikož má být portál dostupný širší skupině uživatelů, jmenovitě studentům Masarykovy Univerzity, je vhodné využít pro autentizaci externí službu, v tomto případě se jedná o autentizaci skrze protokol Kerberos a server Masarykovy Univerzity. 
 
 Uživatelé mohou pro své přihlášení využít své \gls{uco} a ihned mají přístup do systému. Je jim zobrazena nápověda, že pro přístup do \gls{aspi} je nutné zadat uživatelské jméno a heslo a zároveň jim je nabídnuta adresa \gls{url}, na které si o dané údaje mohou požádat. 
 
