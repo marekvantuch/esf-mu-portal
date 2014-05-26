@@ -22,5 +22,4 @@ public class LoginServlet extends AuthenticatingHttpServlet {
   protected void authenticatedService(UserContext context, HttpServletRequest request, HttpServletResponse response) throws GuacamoleException {
     logger.log(Level.INFO, "Login was successful.");
   }
-  
 }

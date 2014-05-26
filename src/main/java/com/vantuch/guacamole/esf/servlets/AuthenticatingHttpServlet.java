@@ -299,7 +299,7 @@ public abstract class AuthenticatingHttpServlet extends HttpServlet {
     } catch (GuacamoleException e) {
       logger.log(Level.SEVERE, "Internal server error.", e);
       sendError(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-              "Internal server error.");
+              "Internal server error: " + e.getMessage());
     }
 
   }
