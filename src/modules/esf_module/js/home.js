@@ -32,7 +32,7 @@
     })
 
     function get_related_subjects(nid) {
-        return Drupal.settings.subject_map[nid];
+        return Drupal.settings.esf.subject_map[nid];
     }
 
     function get_nid(object) {

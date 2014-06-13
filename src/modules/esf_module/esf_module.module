@@ -5,6 +5,8 @@ use Esf\Settings;
 
 module_load_include('inc', 'esf_module', 'includes/esf_module');
 
+module_load_include('inc', 'esf_module', 'includes/ebt_code_complete.class');
+
 define('ESF_MODULE_GUACAMOLE_SERVER_DOMAIN', 'guacamole_server_domain');
 define('ESF_MODULE_GUACAMOLE_SERVER_PORT', 'guacamole_server_port');
 define('ESF_MODULE_GUACAMOLE_SERVER_PATH', 'guacamole_server_path');
@@ -24,37 +26,8 @@ function esf_module_init() {
       'server_domain' => Server::getDomain(),
       'server_port' => Server::getPort(),
       'server_path' => Server::getPath(),
+      'subject_map' => esf_module_get_subject_map()
     ),
-    'subject_map' => array(
-      // Evropske pravo
-      '951' => array('obchodni-spolecnosti', 'obchodni-pravo'),
-      // Financni trhy
-      '965' => array('hospodarska-soutez'),
-      // Financni ucetnictvi I
-      '952' => array('obchodni-pravo', 'cenne-papiry' ),
-      // Financni ucetnictvi II
-      '953' => array('dusevni-vlastnictvi'),
-      // Obcacnsky zakonik
-      '1101' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
-      // Obchodni pravo I (old)
-      '1105' => array('cenne-papiry' ),
-      // Obchodni pravo I (new)
-      '954' => array('hospodarska-soutez'),
-      // Osobni finance
-      '966' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
-      // Pracovni pravo
-      '967' => array('hospodarska-soutez'),
-      // Pravo a finance
-      '968' => array('obchodni-pravo', 'cenne-papiry' ),
-      // Regulace a dohled nad financnim trhem
-      '971' => array('hospodarska-soutez'),
-      // Soutezni pravo
-      '969' => array('obchodni-spolecnosti', 'obchodni-pravo'),
-      // Spravni proces
-      '970' => array('dusevni-vlastnictvi', 'hospodarska-soutez'),
-      // Zaklady prava
-      '950' => array('cenne-papiry'),
-    )
   );
 
   drupal_add_js($settings, 'setting');
@@ -199,4 +172,25 @@ function theme_map_area($variables) {
   $output .= "</map>";
 
   return $output;
+}
+
+function esf_module_get_subject_map() {
+  $nodes = node_load_multiple(array(), array('type' => 'legal_subject'));
+
+  $mapping = array();
+
+  foreach ($nodes as $node) {
+    $wrapper = EbtWrapperNodeLegalSubject::factory($node);
+
+    $label = preg_replace('/[^a-z0-9]+/', '-', strtolower(transliteration_get($wrapper->label())));
+    /**
+     * @var $subject EbtWrapperNodeSchoolSubject
+     */
+    foreach ($wrapper->field_school_subjects->getIterator() as $subject) {
+
+      $mapping[$subject->getIdentifier()][] = $label;
+    }
+  }
+
+  return $mapping;
 }
