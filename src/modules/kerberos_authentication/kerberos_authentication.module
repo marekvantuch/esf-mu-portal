@@ -186,7 +186,7 @@
       // left with drupal's native authentication.
       $admin_user = user_load(1);
       if ( $admin_user->name == $name ) { //if they're using the admin user's username...try and auth them locally
-        user_authenticate($name, $pass);
+        $form_state['uid'] = user_authenticate($name, $pass);
         return;
       }
       if ( !flood_is_allowed('failed_login_attempt_ip', variable_get('user_failed_login_ip_limit', 50), variable_get('user_failed_login_ip_window', 3600)) ) {
