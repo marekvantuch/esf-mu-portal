@@ -22,6 +22,6 @@
 
 <!-- Images which should be preloaded -->
 <div id="preload">
-  <img src="<?php echo drupal_get_path('theme', 'omega_esf')?>/images/action-icons/guac-close.png"/>
-  <img src="<?php echo drupal_get_path('theme', 'omega_esf')?>/images/progress.png"/>
+  <img src="<?php echo drupal_get_path('theme', 'omega_esf_v2')?>/images/guac-close.png"/>
+  <img src="<?php echo drupal_get_path('theme', 'omega_esf_v2')?>/images/progress.png"/>
 </div>
