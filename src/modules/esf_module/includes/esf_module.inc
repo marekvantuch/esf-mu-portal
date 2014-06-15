@@ -21,7 +21,9 @@ class Settings {
   public static function username() {
     global $user;
 
-    return user_load($user->uid)->field_aspi_username[LANGUAGE_NONE][0]['value'];
+    $user = user_load($user->uid);
+    $wrapper = \EbtWrapperUser::factory($user);
+    return $wrapper->field_aspi_username->value();
   }
 
   /**

@@ -148,7 +148,7 @@ function theme_map_area($variables) {
     $id = 'map-' . $id;
     $shape = $item['shape'];
     $coords = $item['coords'];
-    $title = $item['title'];
+    $title = array_key_exists('title', $item) ? $item['title'] : '';
 
     $maphilight_params = array();
 
