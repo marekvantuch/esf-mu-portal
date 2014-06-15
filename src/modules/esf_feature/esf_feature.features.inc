@@ -27,54 +27,54 @@ function esf_feature_views_api($module = NULL, $api = NULL) {
  * Implements hook_eck_entity_type_info().
  */
 function esf_feature_eck_entity_type_info() {
-$items = array(
-       'item' => array(
-  'name' => 'item',
-  'label' => 'Položka',
-  'properties' => array(
-    'title' => array(
-      'label' => 'Title',
-      'type' => 'text',
-      'behavior' => 'title',
+  $items = array(
+    'item' => array(
+      'name' => 'item',
+      'label' => 'Položka',
+      'properties' => array(
+        'title' => array(
+          'label' => 'Title',
+          'type' => 'text',
+          'behavior' => 'title',
+        ),
+        'created' => array(
+          'label' => 'Created',
+          'type' => 'integer',
+          'behavior' => 'created',
+        ),
+        'changed' => array(
+          'label' => 'Changed',
+          'type' => 'integer',
+          'behavior' => 'changed',
+        ),
+        'language' => array(
+          'label' => 'Entity language',
+          'type' => 'language',
+          'behavior' => 'language',
+        ),
+      ),
     ),
-    'created' => array(
-      'label' => 'Created',
-      'type' => 'integer',
-      'behavior' => 'created',
+    'person' => array(
+      'name' => 'person',
+      'label' => 'Osoba',
+      'properties' => array(
+        'created' => array(
+          'label' => 'Created',
+          'type' => 'integer',
+          'behavior' => 'created',
+        ),
+        'changed' => array(
+          'label' => 'Changed',
+          'type' => 'integer',
+          'behavior' => 'changed',
+        ),
+        'full_name' => array(
+          'label' => 'Jméno a příjmení',
+          'type' => 'text',
+          'behavior' => 'title',
+        ),
+      ),
     ),
-    'changed' => array(
-      'label' => 'Changed',
-      'type' => 'integer',
-      'behavior' => 'changed',
-    ),
-    'language' => array(
-      'label' => 'Entity language',
-      'type' => 'language',
-      'behavior' => 'language',
-    ),
-  ),
-),
-       'person' => array(
-  'name' => 'person',
-  'label' => 'Osoba',
-  'properties' => array(
-    'created' => array(
-      'label' => 'Created',
-      'type' => 'integer',
-      'behavior' => 'created',
-    ),
-    'changed' => array(
-      'label' => 'Changed',
-      'type' => 'integer',
-      'behavior' => 'changed',
-    ),
-    'full_name' => array(
-      'label' => 'Jméno a příjmení',
-      'type' => 'text',
-      'behavior' => 'title',
-    ),
-  ),
-),
   );
   return $items;
 }

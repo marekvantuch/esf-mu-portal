@@ -63,9 +63,15 @@ function esf_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'readmore',
+        'settings' => array(
+          'readmore_ellipsis' => TRUE,
+          'readmore_show_readless' => FALSE,
+          'readmore_trim_length' => 500,
+          'readmore_trim_on_break' => TRUE,
+          'readmore_wordsafe' => FALSE,
+        ),
+        'type' => 'readmore',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -146,13 +152,9 @@ function esf_feature_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference_views_formatter',
-        'settings' => array(
-          'view_display' => 'default',
-          'view_name' => 'reference_school_subject_to_legal_subject',
-        ),
-        'type' => 'entityreference_views_formatter',
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'teaser' => array(
@@ -341,7 +343,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -382,10 +384,9 @@ function esf_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -516,7 +517,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'viewfield',
         'settings' => array(),
         'type' => 'viewfield_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -577,7 +578,7 @@ function esf_feature_field_default_field_instances() {
           'file_view_mode' => 'default',
         ),
         'type' => 'media',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -632,7 +633,7 @@ function esf_feature_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -674,7 +675,7 @@ function esf_feature_field_default_field_instances() {
           'view_name' => 'reference_study_texts_to_legal_subject',
         ),
         'type' => 'entityreference_views_formatter',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -717,7 +718,7 @@ function esf_feature_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -998,7 +999,7 @@ function esf_feature_field_default_field_instances() {
       'module' => 'password_field',
       'settings' => array(),
       'type' => 'password_field',
-      'weight' => 8,
+      'weight' => 6,
     ),
   );
 
@@ -1032,7 +1033,44 @@ function esf_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'user-user-field_use_aspi_client'
+  $field_instances['user-user-field_use_aspi_client'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Pro připojení k ASPI bude využit interní nástroj využívající pouze webový prohlížeč.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_use_aspi_client',
+    'label' => 'Použít interní ASPI klient',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 0,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 4,
     ),
   );
 
@@ -1049,6 +1087,8 @@ function esf_feature_field_default_field_instances() {
   t('Materiály');
   t('Obory práva');
   t('Obsah');
+  t('Použít interní ASPI klient');
+  t('Pro připojení k ASPI bude využit interní nástroj využívající pouze webový prohlížeč.');
   t('Předměty');
   t('Studijní texty');
   t('Vyučující');

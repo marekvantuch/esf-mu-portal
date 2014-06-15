@@ -360,6 +360,7 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_school_subjects_node';
+  $handler->display->display_options['fields']['title']['label'] = 'Název';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -369,6 +370,7 @@ function esf_feature_views_default_views() {
   $handler->display->display_options['fields']['field_code']['field'] = 'field_code';
   $handler->display->display_options['fields']['field_code']['relationship'] = 'reverse_field_school_subjects_node';
   $handler->display->display_options['fields']['field_code']['label'] = 'Kód';
+  $handler->display->display_options['fields']['field_code']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_code']['element_label_colon'] = FALSE;
   /* Kontextový filtr: Obsah: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -411,7 +413,7 @@ function esf_feature_views_default_views() {
     t('poslední »'),
     t('K tomuto předmětu se nevztahují žadné obory práva.'),
     t('Legal Subject'),
-    t('Nadpis'),
+    t('Název'),
     t('Kód'),
     t('Vše'),
   );
