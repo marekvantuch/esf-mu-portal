@@ -1,9 +1,11 @@
 @media all and (max-width: 800px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/omega-esf-v2\.hacks\.scss}line{font-family:\000033}}
+  /* line 3, ../sass/omega-esf-v2.hacks.scss */
   #toolbar, #admin-menu {
     display: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/mvantuch\/Repos\/esf-mu-portal\/src\/themes\/omega_esf_v2\/sass\/omega-esf-v2\.hacks\.scss}line{font-family:\000038}}
+  /* line 8, ../sass/omega-esf-v2.hacks.scss */
   html body.toolbar, html body.admin-menu {
     padding-top: 0 !important;
     margin-top: 0 !important; } }
+
+/*# sourceMappingURL=omega-esf-v2.hacks.css.map */

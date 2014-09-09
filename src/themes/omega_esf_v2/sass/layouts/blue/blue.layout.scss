@@ -8,7 +8,17 @@
 @import "singularitygs";
 
 // Globbing from within sub-folders only works with relative paths.
-@import "../../variables/**/*";
+@import "../../variables/colors";
+@import "../../variables/grid";
+@import "../../variables/legacy";
+@import "../../variables/typography";
+
+
+@include add-grid(1);
+@include add-grid(3 9 at $tab);
+@include add-grid(2 8 at $wide);
+
+@include add-gutter(.25);
 
 .l-footer-wrapper {
   position: fixed;
