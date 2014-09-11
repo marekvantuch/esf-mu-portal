@@ -6,7 +6,13 @@ html {
   font-weight: $base-font-weight;
 }
 
-a {
+a,
+.l-content table a {
   text-decoration: none;
   color: $black;
+}
+
+.l-content a {
+  text-decoration: underline;
+  color: $blue;
 }

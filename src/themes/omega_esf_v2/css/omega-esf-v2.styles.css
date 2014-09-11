@@ -183,7 +183,7 @@ ul {
 
 /* line 5, ../sass/base/_lists.scss */
 .l-content ul {
-  list-style: circle; }
+  list-style: disc; }
 
 /* line 9, ../sass/base/_lists.scss */
 ul li {
@@ -233,9 +233,15 @@ html {
   font-weight: 300; }
 
 /* line 9, ../sass/base/_typography.scss */
-a {
+a,
+.l-content table a {
   text-decoration: none;
   color: #000000; }
+
+/* line 15, ../sass/base/_typography.scss */
+.l-content a {
+  text-decoration: underline;
+  color: #003399; }
 
 /*--------------------------------jokes--------------------------------*/
 /* line 3, ../sass/components/_blocks.scss */
