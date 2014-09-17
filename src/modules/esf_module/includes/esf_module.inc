@@ -47,6 +47,20 @@ class Settings {
 
     return password_field_decrypt($value);
   }
+
+  public static function prefers_guacamole() {
+    global $user;
+
+    $user_object = user_load($user->uid);
+
+    $field_use_aspi_client = $user_object->field_use_aspi_client;
+
+    if (array_key_exists(LANGUAGE_NONE, $field_use_aspi_client)) {
+      return $field_use_aspi_client[LANGUAGE_NONE][0]['value'];
+    }
+
+    return false;
+  }
 }
 
 /**

@@ -7,11 +7,14 @@ module_load_include('inc', 'esf_module', 'includes/esf_module');
 
 module_load_include('inc', 'esf_module', 'includes/ebt_code_complete.class');
 
+define('ESF_MODULE_GUACAMOLE_ENABLED', 'guacamole_enabled');
 define('ESF_MODULE_GUACAMOLE_SERVER_DOMAIN', 'guacamole_server_domain');
 define('ESF_MODULE_GUACAMOLE_SERVER_PORT', 'guacamole_server_port');
 define('ESF_MODULE_GUACAMOLE_SERVER_PATH', 'guacamole_server_path');
 define('ESF_MODULE_GUACAMOLE_HOME', 'guacamole_home');
 define('ESF_MODULE_GUACAMOLE_PROPERTIES_FILE', 'guacamole_properties_file');
+
+define('ESF_MODULE_ASPI_PROTOCOL', 'aspi_protocol');
 
 /**
  * Implements hook_init().
@@ -19,9 +22,15 @@ define('ESF_MODULE_GUACAMOLE_PROPERTIES_FILE', 'guacamole_properties_file');
 function esf_module_init() {
   global $user;
 
+  $guacamole_enabled_global = variable_get_value(ESF_MODULE_GUACAMOLE_ENABLED);
+  $guacamole_enabled_user = Settings::prefers_guacamole();
+
+  $guacamole_enabled = $guacamole_enabled_global && $guacamole_enabled_user;
+
   $settings = array(
     'esf' => array(
-      'protocol' => variable_get_value('aspi_protocol'),
+      'is_guacamole_enabled' => $guacamole_enabled,
+      'protocol' => variable_get_value(ESF_MODULE_ASPI_PROTOCOL),
       'server_url' => Server::getUrl(),
       'server_domain' => Server::getDomain(),
       'server_port' => Server::getPort(),
@@ -34,7 +43,8 @@ function esf_module_init() {
 
   $username = Settings::username();
 
-  if (user_is_logged_in() && strlen($username) == 0 && strpos(current_path(), 'user/') === FALSE) {
+  if ($guacamole_enabled && user_is_logged_in()
+    && strlen($username) == 0 && strpos(current_path(), 'user/') === FALSE) {
 
     $message = t('Please fill in your ASPI credentials <a href="!url">here</a>.',
       array('!url' => url("user/$user->uid/edit")));

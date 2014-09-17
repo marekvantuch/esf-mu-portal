@@ -5,6 +5,14 @@
  */
 function esf_module_variable_info($options) {
 
+  $variables[ESF_MODULE_GUACAMOLE_ENABLED] = array(
+    'type' => 'boolean',
+    'title' => t('Enable Guacamole Remote Desktop'),
+    'description' => t('If enabled, users are able to connect to remote desktop through their browsers.'),
+    'default' => FALSE,
+    'localize' => FALSE,
+    'group' => 'esf');
+
   $variables[ESF_MODULE_GUACAMOLE_SERVER_DOMAIN] = array(
     'type' => 'string',
     'title' => t('Guacamole TomCat Servlet domain'),
@@ -55,7 +63,7 @@ function esf_module_variable_info($options) {
     'group' => 'esf',
   );
 
-  $variables['aspi_protocol'] = array(
+  $variables[ESF_MODULE_ASPI_PROTOCOL] = array(
     'type' => 'string',
     'title' => t('ASPI protocol'),
     'description' => t('The URL protocol prefix ([protocol]://) used in the links to ASPI'),
