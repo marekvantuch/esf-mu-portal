@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\esf\Data\Role;
+use Drupal\esf\Data\Route;
 use \Esf\Server;
 use Esf\Settings;
 
@@ -77,27 +79,37 @@ function esf_module_permission() {
  */
 function esf_module_menu() {
   return array(
-    'home' => array(
+    Route::HOME => array(
       'title' => 'Home',
       'page callback' => 'esf_module_page_home',
       'access arguments' => array('access content'),
       'file' => 'includes/esf_module.pages.inc',
       'type' => MENU_CALLBACK,
     ),
-    'aspi' => array(
+    Route::ASPI => array(
       'title' => 'ASPI Portal',
       'page callback' => 'esf_module_page_aspi',
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.pages.inc',
       'type' => MENU_CALLBACK,
     ),
-    'aspi/ajax/login' => array(
+    Route::ASPI_AJAX_LOGIN => array(
       'page callback' => 'esf_module_ajax_login',
       'access arguments' => array('access aspi'),
       'file' => 'includes/esf_module.ajax.inc',
       'type' => MENU_CALLBACK,
     ),
   );
+}
+
+function esf_user_login(&$edit, $account) {
+  $roles = $account->roles;
+
+  if(in_array(Role::MODERATOR, $roles)) {
+    $edit['redirect'] = Route::WORKBENCH;
+  } else {
+    $edit['redirect'] = Route::HOME;
+  }
 }
 
 /**

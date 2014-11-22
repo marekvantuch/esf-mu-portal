@@ -80,7 +80,10 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+      'moderator' => 'moderator',
+    ),
     'module' => 'user',
   );
 
@@ -236,9 +239,7 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'administer themes'.
   $permissions['administer themes'] = array(
     'name' => 'administer themes',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
+    'roles' => array(),
     'module' => 'system',
   );
 
@@ -298,7 +299,10 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'cancel account'.
   $permissions['cancel account'] = array(
     'name' => 'cancel account',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+      'moderator' => 'moderator',
+    ),
     'module' => 'user',
   );
 
@@ -434,9 +438,7 @@ function esf_permissions_user_default_permissions() {
   // Exported permission: 'delete any school_subject content'.
   $permissions['delete any school_subject content'] = array(
     'name' => 'delete any school_subject content',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -842,15 +844,6 @@ function esf_permissions_user_default_permissions() {
     'module' => 'features',
   );
 
-  // Exported permission: 'import media'.
-  $permissions['import media'] = array(
-    'name' => 'import media',
-    'roles' => array(
-      'moderator' => 'moderator',
-    ),
-    'module' => 'media',
-  );
-
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -903,8 +896,7 @@ function esf_permissions_user_default_permissions() {
   $permissions['view files'] = array(
     'name' => 'view files',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'moderator' => 'moderator',
     ),
     'module' => 'file_entity',
   );
