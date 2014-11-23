@@ -43,13 +43,13 @@ function esf_module_page_home() {
   $module_path = drupal_get_path('module', 'esf_module');
 
   drupal_add_css($module_path . '/css/home.css');
-  drupal_add_js($module_path . '/js/lib/jquery.maphilight.min.js', array('group' => JS_LIBRARY));
+  drupal_add_js($module_path . '/js/lib/jquery.maphilight.js', array('group' => JS_LIBRARY));
   drupal_add_js($module_path . '/js/home.js', array('scope' => 'footer'));
 
   $variables = array(
-    'path' => $module_path . '/images/system_prava_cb.png',
-    'width' => 750,
-    'height' => 605,
+    'path' => $module_path . '/images/system_prava_752.png',
+    'width' => 752,
+    'height' => 601,
     'title' => t('Law system'),
     'attributes' => array(
       'class' => 'map',
@@ -59,39 +59,76 @@ function esf_module_page_home() {
   $output = theme('image', $variables);
 
   $items = array(
-    'obchodni-spolecnosti' => array(
-      'shape' => 'circle',
-      'coords' => '172, 101, 60',
-      'fillcolor' => 'b4ee2b',
-      'fillopacity' => '0.7',
-      'title' => 'Obchodní společnosti a družstva'
-    ),
-    'hospodarska-soutez' => array(
-      'shape' => 'circle',
-      'coords' => '110, 228, 47',
-      'fillcolor' => 'b4ee2b',
-      'fillopacity' => '0.7',
-      'title' => 'Obchodní společnosti a družstva'
-    ),
     'obchodni-pravo' => array(
       'shape' => 'circle',
-      'coords' => '172, 178, 145',
-      'fillcolor' => 'b4ee2b',
+      'coords' => '106,164,102',
+      'fillcolor' => 'aee733',
       'fillopacity' => '0.7',
-      'title' => 'Obchodní společnosti a družstva'
+      'title' => 'Obchodní právo'
     ),
-    'dusevni-vlastnictvi' => array(
+    'financni-pravo' => array(
       'shape' => 'circle',
-      'coords' => '319, 89, 76',
-      'fillcolor' => '07f2ce',
+      'coords' => '567,354,101',
+      'fillcolor' => 'aee733',
       'fillopacity' => '0.7',
-      'title' => 'Duševní vlastnictví'
+      'title' => 'Finanční právo'
     ),
-    'cenne-papiry' => array(
+    'mezinarodni-pravo' => array(
       'shape' => 'circle',
-      'coords' => '114,379,101',
-      'fillcolor' => 'f2079c'
-    )
+      'coords' => '199,400,50',
+      'fillcolor' => 'f028a7',
+      'fillopacity' => '0.7',
+      'title' => 'Mezinárodní právo soukromé'
+    ),
+//    'mezinarodni-pravo' => array(
+//      'shape' => 'circle',
+//      'coords' => '654,92,49',
+//      'fillcolor' => 'f028a7',
+//      'fillopacity' => '0.7',
+//      'title' => 'Mezinárodní právo veřejné'
+//    ),
+    'obcanske-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '232,248,136',
+      'fillcolor' => '2298fc',
+      'fillopacity' => '0.7',
+      'title' => 'Občanské právo hmotné'
+    ),
+    'pracovni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '75,349,74',
+      'fillcolor' => 'f0ac29',
+      'fillopacity' => '0.7',
+      'title' => 'Pracovní právo'
+    ),
+    'pravo-dusevniho-vlastnictvi' => array(
+      'shape' => 'circle',
+      'coords' => '217,107,54',
+      'fillcolor' => '28f0d2',
+      'fillopacity' => '0.7',
+      'title' => 'Pracovní právo'
+    ),
+    'trestni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '680,214,71',
+      'fillcolor' => '28f0d2',
+      'fillopacity' => '0.7',
+      'title' => 'Pracovní právo'
+    ),
+    'spravni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '482,217,101',
+      'fillcolor' => '2298fc',
+      'fillopacity' => '0.7',
+      'title' => 'Pracovní právo'
+    ),
+    'ustavni-pravo' => array(
+      'shape' => 'circle',
+      'coords' => '544,24,74',
+      'fillcolor' => 'f0ac29',
+      'fillopacity' => '0.7',
+      'title' => 'Pracovní právo'
+    ),
 
   );
 

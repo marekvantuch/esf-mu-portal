@@ -1,11 +1,9 @@
 <?php
 
-use Drupal\esf\Data\Role;
-use Drupal\esf\Data\Route;
-use \Esf\Server;
-use Esf\Settings;
-
-module_load_include('inc', 'esf_module', 'includes/esf_module');
+use Drupal\esf_module\Data\Role;
+use Drupal\esf_module\Data\Route;
+use Drupal\esf_module\Server;
+use Drupal\esf_module\Settings;
 
 module_load_include('inc', 'esf_module', 'includes/ebt_code_complete.class');
 
@@ -204,7 +202,13 @@ function esf_module_get_subject_map() {
   foreach ($nodes as $node) {
     $wrapper = EbtWrapperNodeLegalSubject::factory($node);
 
-    $label = preg_replace('/[^a-z0-9]+/', '-', strtolower(transliteration_get($wrapper->label())));
+    if (function_exists('transliteration_get')) {
+      $label_raw = transliteration_get($wrapper->label());
+    } else {
+      $label_raw = $wrapper->label();
+    }
+
+    $label = preg_replace('/[^a-z0-9]+/', '-', strtolower($label_raw));
     /**
      * @var $subject EbtWrapperNodeSchoolSubject
      */

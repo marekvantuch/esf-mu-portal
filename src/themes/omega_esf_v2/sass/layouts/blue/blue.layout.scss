@@ -69,7 +69,7 @@
 /************* DESKTOP ***************/
 @include breakpoint($desk, true) {
   .l-constrained {
-    width:960px;
+    width:1024px;
   }
 
   .has-sidebar .l-region--sidebar {

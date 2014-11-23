@@ -6,7 +6,7 @@
  * Time: 10:08 AM
  */
 
-namespace Drupal\esf\Data;
+namespace Drupal\esf_module\Data;
 
 
 class Role {

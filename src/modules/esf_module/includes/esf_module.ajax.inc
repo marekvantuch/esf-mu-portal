@@ -5,12 +5,11 @@
  * Ajax related functions.
  */
 
-use Esf\LoginServlet;
-use Esf\ServletException;
-use Esf\ServletStatus;
-use Esf\Settings;
+use Drupal\esf_module\Servlets\LoginServlet;
+use Drupal\esf_module\Servlets\ServletException;
+use Drupal\esf_module\Servlets\ServletStatus;
+use Drupal\esf_module\Settings;
 
-module_load_include('inc', 'esf_module', 'includes/esf_module.servlets');
 module_load_include('inc', 'esf_module', 'lib/cookie_parser');
 
 /**

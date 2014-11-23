@@ -170,8 +170,7 @@
                     query_string[pair[0]] = pair[1];
                     // If second entry with this name
                 } else if (typeof query_string[pair[0]] === "string") {
-                    var arr = [ query_string[pair[0]], pair[1] ];
-                    query_string[pair[0]] = arr;
+                    query_string[pair[0]] = [query_string[pair[0]], pair[1]];
                     // If third or later entry with this name
                 } else {
                     query_string[pair[0]].push(pair[1]);

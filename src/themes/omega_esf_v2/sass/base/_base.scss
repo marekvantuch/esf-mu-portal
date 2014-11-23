@@ -44,48 +44,77 @@ body{
 /*--------------------------------login--------------------------------*/
 
 
-.block--user-login{
-  float: right;
-  font-size: 80%;
-  margin-top: -20px;
+body.not-logged-in {
 
-  .form-item{
-    font-size: smaller;
+  .l-content {
+    margin-top: 80px;
+    background: rgb(0,51,153); /* Old browsers */
+    background: -moz-linear-gradient(left, rgb(0,51,153) 0%, rgb(0,94,196) 50%, rgb(0,51,153) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(0,51,153)), color-stop(50%,rgb(0,94,196)), color-stop(100%,rgb(0,51,153))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgb(0,51,153) 0%,rgb(0,94,196) 50%,rgb(0,51,153) 100%); /* W3C */
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+
+  h1 {
+    display: none;
+  }
+
+  form {
     color: $white;
-    float: left;
-    display: inline;
-    margin-top: 0;
-  }
 
-  .form-required{
-    color: $white;
-  }
+    input {
+      color: $black;
+      padding: 8px;
+      margin-top: 10px;
+    }
 
-  .form-item-name{
-    padding-right: 20px;
-  }
+    .form-item {
+      font-size: smaller;
+      float: left;
+      display: inline;
+      margin-top: 0;
 
-  .form-text.required{
-    width: 120px;
-    border: none;
-    background: $white;
-  }
+      .description {
+        margin-top: 10px;
+      }
 
-  .user-login-form div ul li a{
-    color: $white;
-    float: left;
-    text-decoration: underline;
-    font-size: 80%;
-  }
+    }
 
-  .form-submit{
-    float: right;
-    background: $white;
-    padding: 2px;
-    border: none;
-    font-size: smaller;
-    margin-top: -3px;
-    @include rounded-corners;
+    .form-item-name {
+      padding-right: 20px;
+    }
+
+    .form-text.required {
+      width: 120px;
+      border: none;
+      background: $white;
+    }
+
+    .user-login-form div ul li a {
+      float: left;
+      text-decoration: underline;
+      font-size: 80%;
+    }
+
+    .form-actions {
+      clear: both;
+      float: left;
+    }
+
+    .form-submit {
+      float: right;
+      background: $white;
+      border: none;
+      font-size: smaller;
+      margin-top: -3px;
+      @include rounded-corners;
+    }
   }
 }
 
@@ -110,7 +139,7 @@ body{
 .l-main{
 
   .messages{
-    height: 40px;
+    min-height: 40px;
     text-align: center;
 
     a{

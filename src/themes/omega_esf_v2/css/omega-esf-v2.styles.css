@@ -39,40 +39,68 @@ body {
     height: 80%; }
 
 /*--------------------------------login--------------------------------*/
-/* line 47, ../sass/base/_base.scss */
-.block--user-login {
-  float: right;
-  font-size: 80%;
-  margin-top: -20px; }
-  /* line 52, ../sass/base/_base.scss */
-  .block--user-login .form-item {
+/* line 49, ../sass/base/_base.scss */
+body.not-logged-in .l-content {
+  margin-top: 80px;
+  background: #003399;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #003399 0%, #005ec4 50%, #003399 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #003399), color-stop(50%, #005ec4), color-stop(100%, #003399));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #003399 0%, #005ec4 50%, #003399 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #003399 0%, #005ec4 50%, #003399 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #003399 0%, #005ec4 50%, #003399 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #003399 0%, #005ec4 50%, #003399 100%);
+  /* W3C */
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  float: none; }
+/* line 64, ../sass/base/_base.scss */
+body.not-logged-in h1 {
+  display: none; }
+/* line 68, ../sass/base/_base.scss */
+body.not-logged-in form {
+  color: #FFFFFF; }
+  /* line 71, ../sass/base/_base.scss */
+  body.not-logged-in form input {
+    color: #000000;
+    padding: 8px;
+    margin-top: 10px; }
+  /* line 77, ../sass/base/_base.scss */
+  body.not-logged-in form .form-item {
     font-size: smaller;
-    color: #FFFFFF;
     float: left;
     display: inline;
     margin-top: 0; }
-  /* line 60, ../sass/base/_base.scss */
-  .block--user-login .form-required {
-    color: #FFFFFF; }
-  /* line 64, ../sass/base/_base.scss */
-  .block--user-login .form-item-name {
+    /* line 83, ../sass/base/_base.scss */
+    body.not-logged-in form .form-item .description {
+      margin-top: 10px; }
+  /* line 89, ../sass/base/_base.scss */
+  body.not-logged-in form .form-item-name {
     padding-right: 20px; }
-  /* line 68, ../sass/base/_base.scss */
-  .block--user-login .form-text.required {
+  /* line 93, ../sass/base/_base.scss */
+  body.not-logged-in form .form-text.required {
     width: 120px;
     border: none;
     background: #FFFFFF; }
-  /* line 74, ../sass/base/_base.scss */
-  .block--user-login .user-login-form div ul li a {
-    color: #FFFFFF;
+  /* line 99, ../sass/base/_base.scss */
+  body.not-logged-in form .user-login-form div ul li a {
     float: left;
     text-decoration: underline;
     font-size: 80%; }
-  /* line 81, ../sass/base/_base.scss */
-  .block--user-login .form-submit {
+  /* line 105, ../sass/base/_base.scss */
+  body.not-logged-in form .form-actions {
+    clear: both;
+    float: left; }
+  /* line 110, ../sass/base/_base.scss */
+  body.not-logged-in form .form-submit {
     float: right;
     background: #FFFFFF;
-    padding: 2px;
     border: none;
     font-size: smaller;
     margin-top: -3px;
@@ -80,28 +108,28 @@ body {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px; }
 
-/* line 92, ../sass/base/_base.scss */
+/* line 121, ../sass/base/_base.scss */
 .block--system {
   float: right;
   font-size: 80%; }
-  /* line 96, ../sass/base/_base.scss */
+  /* line 125, ../sass/base/_base.scss */
   .block--system li.first.last.leaf {
     list-style: none; }
-  /* line 100, ../sass/base/_base.scss */
+  /* line 129, ../sass/base/_base.scss */
   .block--system a {
     color: #ffffff; }
 
 /*--------------------------------content--------------------------------*/
-/* line 112, ../sass/base/_base.scss */
+/* line 141, ../sass/base/_base.scss */
 .l-main .messages {
-  height: 40px;
+  min-height: 40px;
   text-align: center; }
-  /* line 116, ../sass/base/_base.scss */
+  /* line 145, ../sass/base/_base.scss */
   .l-main .messages a {
     text-decoration: underline;
     padding: 3px; }
 
-/* line 123, ../sass/base/_base.scss */
+/* line 152, ../sass/base/_base.scss */
 .l-content {
   margin-bottom: 50px;
   background: #ffffff;
@@ -109,40 +137,40 @@ body {
   padding-bottom: 20px;
   padding-left: 30px;
   padding-right: 30px; }
-  /* line 131, ../sass/base/_base.scss */
+  /* line 160, ../sass/base/_base.scss */
   .l-content h1 {
     margin-bottom: 0;
     padding-bottom: 0.5em;
     font-family: BenchNine, sans-serif;
     border-bottom: 1px solid #b4b4b4; }
-  /* line 140, ../sass/base/_base.scss */
+  /* line 169, ../sass/base/_base.scss */
   .l-content article {
     font-size: 15px; }
-  /* line 144, ../sass/base/_base.scss */
+  /* line 173, ../sass/base/_base.scss */
   .l-content .field--name-field-lecturers {
     font-size: smaller; }
-  /* line 148, ../sass/base/_base.scss */
+  /* line 177, ../sass/base/_base.scss */
   .l-content .field__label {
     padding-bottom: 5px; }
-  /* line 152, ../sass/base/_base.scss */
+  /* line 181, ../sass/base/_base.scss */
   .l-content .field {
     padding-top: 1.5em; }
-  /* line 156, ../sass/base/_base.scss */
+  /* line 185, ../sass/base/_base.scss */
   .l-content .field--name-body {
     padding: 0; }
-  /* line 165, ../sass/base/_base.scss */
+  /* line 194, ../sass/base/_base.scss */
   .l-content .node .node__content h1 {
     border: none; }
-  /* line 169, ../sass/base/_base.scss */
+  /* line 198, ../sass/base/_base.scss */
   .l-content .node .field__item.even em {
     font-style: italic;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     border: none; }
-  /* line 177, ../sass/base/_base.scss */
+  /* line 206, ../sass/base/_base.scss */
   .l-content .user-pass {
     padding-top: 1.5em; }
-  /* line 181, ../sass/base/_base.scss */
+  /* line 210, ../sass/base/_base.scss */
   .l-content input {
     border: 1px solid #000000;
     background: #ffffff;
@@ -150,30 +178,30 @@ body {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px; }
-  /* line 188, ../sass/base/_base.scss */
+  /* line 217, ../sass/base/_base.scss */
   .l-content .user-login {
     padding-top: 1.5em; }
 
 /*--------------------------------footer--------------------------------*/
-/* line 198, ../sass/base/_base.scss */
+/* line 227, ../sass/base/_base.scss */
 footer {
   font-family: BenchNine, sans-serif;
   background: #444444;
   font-size: 16px;
   height: 30px; }
-  /* line 204, ../sass/base/_base.scss */
+  /* line 233, ../sass/base/_base.scss */
   footer ul.menu {
     text-align: center;
     margin: 0;
     padding-top: 5px; }
-  /* line 210, ../sass/base/_base.scss */
+  /* line 239, ../sass/base/_base.scss */
   footer li {
     display: inline;
     padding: 0px 1.5em; }
-  /* line 215, ../sass/base/_base.scss */
+  /* line 244, ../sass/base/_base.scss */
   footer a {
     color: #ffffff; }
-  /* line 219, ../sass/base/_base.scss */
+  /* line 248, ../sass/base/_base.scss */
   footer a.jokes.active {
     color: #ffffff; }
 

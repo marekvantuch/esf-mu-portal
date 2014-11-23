@@ -1,33 +1,11 @@
 <?php
-
 /**
- * @file
- * Guacamole properties file related classes
+ * Created by PhpStorm.
+ * User: Marek Vantuch
+ * Date: 11/23/2014
+ * Time: 9:10 PM
  */
-
-namespace Esf;
-
-/**
- * Class PropertiesFactory
- * @package Esf
- */
-class PropertiesFactory {
-  /**
-   * Builds the \Esf\Properties object.
-   *
-   * Object needs filename passed into it's constructor. In our case that is
-   * a properties file and we load it's filename from the variables.
-   *
-   * For list of all the properties see define statements:
-   * @see esf_module.inc
-   *
-   * @return Properties
-   *   Newly created \Esf\Properties object.
-   */
-  public static function build() {
-    return (new Properties(new \SplFileObject(variable_get(ESF_MODULE_GUACAMOLE_HOME) . variable_get(ESF_MODULE_GUACAMOLE_PROPERTIES_FILE), 'r+')));
-  }
-}
+namespace Drupal\esf_module\Properties;
 
 /**
  * Class Properties
@@ -62,7 +40,7 @@ class Properties {
   /**
    * Stores all the properties
    *
-   * @var \Esf\PropertyInterface[]
+   * @var \Drupal\esf_module\Interfaces\PropertyInterface[]
    */
   protected $properties;
 
@@ -182,7 +160,7 @@ class Properties {
   /**
    * Builds an array in Drupal Forms API for a single property.
    *
-   * @param PropertyInterface $property
+   * @param \Drupal\esf_module\Interfaces\PropertyInterface $property
    *   property to be used
    *
    * @return array
@@ -257,7 +235,7 @@ class Properties {
   /**
    * Adds a property into the internal properties object.
    *
-   * @param PropertyInterface $property
+   * @param \Drupal\esf_module\Interfaces\PropertyInterface $property
    *   property to be added
    */
   protected function add($property) {
@@ -284,183 +262,5 @@ class Properties {
     }
 
     return $result;
-  }
-}
-
-abstract class Property implements PropertyInterface {
-  const TYPE_TEXT = 'textfield';
-  const TYPE_RADIOS = 'radios';
-  const TYPE_CHECKBOXES = 'checkboxes';
-  const TYPE_SUBMIT = 'submit';
-  const TYPE_MARKUP = 'markup';
-
-  protected  $id;
-  protected $title;
-  protected $description;
-
-  /**
-   * Creates a new Property object with typical parameters.
-   *
-   * @param string $id
-   *   id of the property
-   * @param string $title
-   *   title to be displayed on the configuration page
-   * @param string $description
-   *   description to be displayed on the configuration page
-   */
-  public function __construct($id, $title, $description) {
-    $this->id = $id;
-    $this->title = $title;
-    $this->description = $description;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getId() {
-    return $this->id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getTitle() {
-    return $this->title;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDescription() {
-    return $this->description;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExtraParameters() {
-    return array();
-  }
-}
-
-/**
- * Class TextProperty
- *
- * Can capture text only and provides only validation not to be empty.
- *
- * @package Esf
- */
-class TextProperty extends Property {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getType() {
-    return Property::TYPE_TEXT;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExtraParameters() {
-    return array('#size' => 20);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function validate($element, &$form_state) {
-    if (empty($element['#value'])) {
-      form_error($element, t('The "!name" option must not be empty.',
-        array('!name' => t($element['#title']))));
-    }
-  }
-}
-
-/**
- * Class NumberProperty
- *
- * Captures number and therefore validates the result for it.
- *
- * @package Esf
- */
-class NumberProperty extends TextProperty {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function validate($element, &$form_state) {
-    parent::validate($element, $form_state);
-
-    if (!is_numeric($element['#value'])) {
-      form_error($element, t('The "!name" option must be a number.',
-        array('!name' => t($element['#title']))));
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExtraParameters() {
-    return array('#size' => 10);
-  }
-}
-
-/**
- * Class RadioProperty
- *
- * Displays options to be chosen from. Those options are captured from the
- * constructor.
- *
- * @package Esf
- */
-class RadioProperty extends Property {
-  protected $options;
-
-  /**
-   * Builds the object with options.
-   *
-   * Parent is created in the same way, but options for the
-   * radio buttons are included in this constructor.
-   *
-   * @param string $id
-   *   id of the property
-   * @param string $title
-   *   title of the property
-   * @param string $description
-   *   description of the property
-   * @param array $options
-   *   options defining the values of the radio buttons
-   */
-  public function __construct($id, $title, $description, $options) {
-    parent::__construct($id, $title, $description);
-    $this->options = array();
-
-    foreach ($options as $option) {
-      $this->options[strtolower($option)] = t($option);
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getType() {
-    return Property::TYPE_RADIOS;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExtraParameters() {
-    return array(
-      '#options' => $this->options,
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function validate($element, &$form_state) {
-
   }
 }

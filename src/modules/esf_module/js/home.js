@@ -6,12 +6,13 @@
 
     Drupal.behaviors.esf_home = {
         attach: function (context) {
-            $('.map').maphilight();
+            var $map = $('.map');
+            $map.maphilight();
         }
-    }
+    };
 
 
-    $("#quicktabs-navigation .field-content a").mouseover(function(e) {
+    $("#quicktabs-navigation").find(".field-content a").mouseover(function(e) {
         var nid = get_nid($(this).parent());
         var subjects = get_related_subjects(nid);
 
@@ -29,7 +30,7 @@
                 $("#map-" + subjects[key]).mouseout();
             }
         }
-    })
+    });
 
     function get_related_subjects(nid) {
         return Drupal.settings.esf.subject_map[nid];

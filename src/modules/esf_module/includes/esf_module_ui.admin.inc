@@ -1,8 +1,6 @@
 <?php
 
-module_load_include('inc', 'esf_module', 'includes/esf_module.properties');
-
-use Esf\PropertiesFactory;
+use Drupal\esf_module\Properties\PropertiesFactory;
 
 /**
  * Page callback for the remote configuration page.

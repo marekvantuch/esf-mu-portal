@@ -17,6 +17,7 @@ files[] = includes/esf_module.servlets.inc
 dependencies[] = variable
 ; dependencies[] = pdm
 dependencies[] = password_field
+dependencies[] = transliteration
 dependencies[] = xautoload (>= 7.x-5.0)
 
 scripts[] = js/esf-common.js

@@ -8,8 +8,6 @@
 
 # Idea Solution Files #
 *.idea/
-*.iml
-
 target
 nbproject
 

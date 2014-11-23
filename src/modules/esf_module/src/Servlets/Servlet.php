@@ -8,50 +8,14 @@
  * handled in these classes.
  */
 
-namespace Esf;
+namespace Drupal\esf_module\Servlets;
 
-define('JSESSIONID', 'JSESSIONID');
-
-class ServletStatus {
-  /**
-   * Successful response
-   * @var int
-   */
-  const SUCCESS = 0;
-
-  /**
-   * Failure of authentication
-   * @var int
-   */
-  const AUTH_FAIL = 1;
-}
-
-/**
- * Class ServletException is to be raised during the execution of servlets
- */
-class ServletException extends \Exception {
-
-  /**
-   * Creates a new ServletException.
-   *
-   * The parameter is then used to form a standardized exception string.
-   *
-   * @param Servlet $servlet
-   *   servlet this exception relates to
-   */
-  public function __construct($servlet) {
-    parent::__construct($servlet->statusMessage(), $servlet->statusCode());
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __toString() {
-    return '[' . $this->code . '] ' . $this->message;
-  }
-}
+use Drupal\esf_module\Server;
+use Drupal\esf_module\Session;
 
 abstract class Servlet {
+  const JSESSIONID = 'JSESSIONID';
+
   const METHOD_POST = 'POST';
   const METHOD_GET = 'GET';
   const METHOD_PUT = 'PUT';
@@ -61,7 +25,7 @@ abstract class Servlet {
   /**
    * Executes a service login call.
    *
-   * @return \Esf\Servlet
+   * @return Servlet
    *   the same object
    */
   public function execute() {
@@ -78,8 +42,8 @@ abstract class Servlet {
   /**
    * Check the return code to be 200.
    *
-   * @throws ServletException
-   * @return \Esf\ServletStatus
+   * @throws \Drupal\esf_module\Servlets\ServletException
+   * @return ServletStatus
    *   state of the servlet object
    */
   public function state() {
@@ -195,7 +159,7 @@ abstract class Servlet {
       'timeout' => 15,
       'headers' => array(
         'Content-Type' => 'application/json',
-        'Cookie' => JSESSIONID . '=' . Session::get(JSESSIONID),
+        'Cookie' => Servlet::JSESSIONID . '=' . Session::get(Servlet::JSESSIONID),
       ),
     );
   }
@@ -265,95 +229,4 @@ abstract class Servlet {
    *   result of the processing
    */
   public abstract function processResponse();
-}
-
-/**
- * Servlet for connecting to the Guacamole system
- */
-class LoginServlet extends Servlet {
-  protected $username;
-  protected $password;
-
-  /**
-   * Creates new LoginServlet with it's required parameters.
-   *
-   * We need to supply username and password to be able to login
-   * to the Guacamole system.
-   *
-   * @param string $username
-   *   username
-   * @param string $password
-   *   password
-   */
-  public function __construct($username, $password) {
-    $this->username = $username;
-    $this->password = $password;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function urlParameters() {
-    return array(
-      'username' => $this->username,
-      'password' => $this->password,
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function method() {
-    return Servlet::METHOD_POST;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function endPoint() {
-    return 'login';
-  }
-
-  /**
-   * Returns the state of the Login Servlet.
-   *
-   * Login servlet must not get an AUTH_FAIL status and therefore must
-   * throw an exception in case that happens
-   *
-   * @throws ServletException
-   * @return ServletStatus
-   *   status of the response from servlet
-   */
-  public function state() {
-    $state = parent::state();
-
-    if ($state == ServletStatus::AUTH_FAIL) {
-      throw new ServletException($this);
-    }
-
-    return $state;
-  }
-
-
-  /**
-   * Store the java login cookie in the session.
-   *notificationArea
-   * @return \Esf\LoginServlet
-   *   the same object
-   */
-  public function processResponse() {
-    $cookie_value = $this->getCookie(JSESSIONID)->value;
-
-    // If session already exists, we don't get any cookie.
-    if ($cookie_value != NULL) {
-
-      Session::set(JSESSIONID, $cookie_value);
-
-      $server_domain = Server::getDomain() != 'localhost' ? Server::getDomain() : FALSE;
-      $server_path = Server::getPath();
-
-      setcookie(JSESSIONID, $cookie_value, 0, $server_path, $server_domain);
-    }
-    return $this;
-  }
 }

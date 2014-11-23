@@ -6,7 +6,7 @@
  * Time: 10:16 AM
  */
 
-namespace Drupal\esf\Data;
+namespace Drupal\esf_module\Data;
 
 
 class Route {

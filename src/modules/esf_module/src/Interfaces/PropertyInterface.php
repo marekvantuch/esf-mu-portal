@@ -5,7 +5,7 @@
  * Interfaces for classes for the module.
  */
 
-namespace Esf;
+namespace Drupal\esf_module\Interfaces;
 
 /**
  * Interface IProperty
@@ -59,7 +59,7 @@ interface PropertyInterface {
   public function getType();
 
   /**
-   * Get any extra parameters to be passed to the DRupal Form API.
+   * Get any extra parameters to be passed to the Drupal Form API.
    *
    * @return array
    *   extra parameters to be passed into the Drupal Form API

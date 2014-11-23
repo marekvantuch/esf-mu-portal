@@ -63,7 +63,7 @@
 @media (min-width: 70em) {
   /* line 71, ../../../sass/layouts/blue/blue.layout.scss */
   .l-constrained {
-    width: 960px; }
+    width: 1024px; }
 
   /* line 75, ../../../sass/layouts/blue/blue.layout.scss */
   .has-sidebar .l-region--sidebar {
