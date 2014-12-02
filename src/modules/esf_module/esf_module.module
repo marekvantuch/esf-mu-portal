@@ -99,7 +99,7 @@ function esf_module_menu() {
     ),
     Route::ACCESS_DENIED => array(
       'page callback' => 'esf_module_access_denied',
-      'access arguments' => true,
+      'access callback' => true,
       'file' => 'includes/esf_module.pages.inc',
       'type' => MENU_CALLBACK
     )

@@ -144,8 +144,9 @@ function esf_module_page_home() {
 
 function esf_module_access_denied() {
   global $user;
+  print_r($user);
   if ($user->uid) { // this user is already logged in
-    print "Nemáte právo přistupovat na tuto stránku.";
+    return t('You are not authorized to access this page.');
   } else {
     $dest = drupal_get_destination();
     drupal_goto('user/login', $dest); // this remembers where the user is coming from
