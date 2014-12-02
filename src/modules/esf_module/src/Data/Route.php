@@ -14,4 +14,5 @@ class Route {
   const WORKBENCH = 'admin/workbench';
   const ASPI = 'aspi';
   const ASPI_AJAX_LOGIN = 'aspi/ajax/login';
+  const ACCESS_DENIED = 'access_denied';
 } 

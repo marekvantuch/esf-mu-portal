@@ -97,6 +97,12 @@ function esf_module_menu() {
       'file' => 'includes/esf_module.ajax.inc',
       'type' => MENU_CALLBACK,
     ),
+    Route::ACCESS_DENIED => array(
+      'page callback' => 'esf_module_access_denied',
+      'access arguments' => true,
+      'file' => 'includes/esf_module.pages.inc',
+      'type' => MENU_CALLBACK
+    )
   );
 }
 

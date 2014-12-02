@@ -142,6 +142,16 @@ function esf_module_page_home() {
   return $output;
 }
 
+function esf_module_access_denied() {
+  global $user;
+  if ($user->uid) { // this user is already logged in
+    print "Nemáte právo přistupovat na tuto stránku.";
+  } else {
+    $dest = drupal_get_destination();
+    drupal_goto('user/login', $dest); // this remembers where the user is coming from
+  }
+}
+
 function esf_module_get_related_subjects($subject) {
 
 }
